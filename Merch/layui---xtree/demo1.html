@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <!--引入你自己的layui文件-->
+    <link href="../layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <form class="layui-form" action="">
+        <div id="layui-xtree-demo1" style="width:300px;height:500px; border:1px solid black; margin:20px;"></div>
+
+        <input type="button" value="获取全部选中的checkbox" id="btn_getCk" />
+
+
+    </form>
+</body>
+</html>
+<!--引入你自己的layui文件-->
+<script src="../layui/layui.js"></script>
+<!--xtree的js文件-->
+<script src="layui-xtree.js"></script>
+<script type="text/javascript">
+
+    //tree数据结构
+    var json = [
+            {
+                title: "节点1", value: "jd1", data: [
+                    { title: "节点1.1", value: "jd1.1", data: [] }
+                , { title: "节点1.2", value: "jd1.2", data: [] }
+                , { title: "节点1.3", value: "jd1.3", data: [] }
+                , { title: "节点1.4", value: "jd1.4", data: [] }
+                ]
+            }
+            , {
+                title: "节点2", value: "jd2", data: [
+                    { title: "节点2.1", value: "jd2.1", data: [] }
+                , {
+                    title: "节点2.2", value: "jd2.2", data: [
+                        { title: "节点2.2.1", value: "jd2.2.1", data: [] }
+                        , { title: "节点2.2.2", value: "jd2.2.2", data: [] }
+                        , { title: "节点2.2.3", value: "jd2.2.3", data: [] }
+                        , { title: "节点2.2.4", value: "jd2.2.4", data: [] }
+                    ]
+                }
+                , { title: "节点2.3", value: "jd2.3", data: [] }
+                , { title: "节点2.4", value: "jd2.4", data: [] }
+                ]
+            }
+            , { title: "节点3", value: "jd3", data: [] }
+            , { title: "节点4", value: "jd4", data: [] }
+    ];
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //创建tree
+        var xtree = new layuiXtree({
+            elem: 'layui-xtree-demo1' //放xtree的容器（必填）
+             , form: form              //layui form对象 （必填）
+             , data: json              //数据，结构请参照下面 （必填）
+             , isopen: false            //初次加载时全部展开，默认true （选填）
+             , color: "#000"           //图标颜色 （选填）
+             , icon: {                 //图标样式 （选填）
+                 open: "&#xe7a0;"      //节点打开的图标
+                 , close: "&#xe622;"   //节点关闭的图标
+                 , end: "&#xe621;"     //末尾节点的图标
+             }
+        });
+
+        document.getElementById('btn_getCk').onclick = function () {
+
+            var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+
+            for (var i = 0; i < oCks.length; i++) {
+                console.log(oCks[i].value);
+            }
+        }
+
+
+    });
+
+
+</script>

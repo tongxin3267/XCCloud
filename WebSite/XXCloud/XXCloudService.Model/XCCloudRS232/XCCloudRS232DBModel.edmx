@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XCCloudRS232Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Base_DeviceInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="DeviceName" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceType" Type="int" />
+          <Property Name="SN" Type="varchar" MaxLength="20" />
+          <Property Name="Token" Type="varchar" MaxLength="64" />
+          <Property Name="QRURL" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+          <Property Name="motor1" Type="int" />
+          <Property Name="motor2" Type="int" />
+          <Property Name="nixie_tube_type" Type="int" />
+          <Property Name="motor2_coin" Type="int" />
+          <Property Name="motor1_coin" Type="int" />
+          <Property Name="FromDevice" Type="int" />
+          <Property Name="ToCard" Type="int" />
+          <Property Name="SSR" Type="int" />
+          <Property Name="alert_value" Type="int" />
+        </EntityType>
+        <EntityType Name="Base_MerchInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchName" Type="varchar" MaxLength="50" />
+          <Property Name="OPName" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="Token" Type="varchar" MaxLength="64" />
+          <Property Name="StorePassword" Type="varchar" MaxLength="12" />
+          <Property Name="State" Type="int" />
+        </EntityType>
+        <EntityType Name="Data_GameInfo">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" />
+          <Property Name="GroupType" Type="int" />
+          <Property Name="ReturnCheck" Type="int" />
+          <Property Name="OutsideAlertCheck" Type="int" />
+          <Property Name="ICTicketOperation" Type="int" />
+          <Property Name="NotGiveBack" Type="int" />
+          <Property Name="LotteryMode" Type="int" />
+          <Property Name="OnlyExitLottery" Type="int" />
+          <Property Name="chkCheckGift" Type="int" />
+          <Property Name="AllowElecPush" Type="int" />
+          <Property Name="AllowDecuplePush" Type="int" />
+          <Property Name="GuardConvertCard" Type="int" />
+          <Property Name="ReadCat" Type="int" />
+          <Property Name="AllowRealPush" Type="int" />
+          <Property Name="BanOccupy" Type="int" />
+          <Property Name="StrongGuardConvertCard" Type="int" />
+          <Property Name="AllowElecOut" Type="int" />
+          <Property Name="NowExit" Type="int" />
+          <Property Name="BOPulse" Type="int" />
+          <Property Name="BOLock" Type="int" />
+          <Property Name="AllowRealOut" Type="int" />
+          <Property Name="BOKeep" Type="int" />
+          <Property Name="PushReduceFromCard" Type="int" />
+          <Property Name="PushAddToGame" Type="int" />
+          <Property Name="PushSpeed" Type="int" />
+          <Property Name="PushPulse" Type="int" />
+          <Property Name="PushLevel" Type="int" />
+          <Property Name="PushStartInterval" Type="int" />
+          <Property Name="UseSecondPush" Type="int" />
+          <Property Name="SecondReduceFromCard" Type="int" />
+          <Property Name="SecondAddToGame" Type="int" />
+          <Property Name="SecondSpeed" Type="int" />
+          <Property Name="SecondPulse" Type="int" />
+          <Property Name="SecondLevel" Type="int" />
+          <Property Name="SecondStartInterval" Type="int" />
+          <Property Name="OutSpeed" Type="int" />
+          <Property Name="OutPulse" Type="int" />
+          <Property Name="CountLevel" Type="int" />
+          <Property Name="OutLevel" Type="int" />
+          <Property Name="OutReduceFromGame" Type="int" />
+          <Property Name="OutAddToCard" Type="int" />
+          <Property Name="OnceOutLimit" Type="int" />
+          <Property Name="OncePureOutLimit" Type="int" />
+          <Property Name="SSRTimeOut" Type="int" />
+          <Property Name="ExceptOutTest" Type="int" />
+          <Property Name="ExceptOutSpeed" Type="int" />
+          <Property Name="Frequency" Type="int" />
+          <Property Name="OneDayPureOutLimit" Type="int" />
+        </EntityType>
+        <EntityType Name="Data_MerchDevice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="Data_MerchSegment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="flw_485_coin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="CoinType" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="flw_485_savecoin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="flw_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="32" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="FlowType" Type="int" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="FoodID" Type="int" />
+          <Property Name="CoinQuantity" Type="int" />
+          <Property Name="TotalMoney" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="PayType" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="PayState" Type="int" />
+          <Property Name="PayTime" Type="datetime" />
+          <Property Name="PayTotal" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="t_Enum">
+          <Key>
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="t_foods">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="DeviceID" Type="int" />
+          <Property Name="FoodName" Type="varchar" MaxLength="30" />
+          <Property Name="FoodPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CoinQuantity" Type="int" />
+          <Property Name="IsQuickFood" Type="int" />
+          <Property Name="FoodState" Type="int" />
+        </EntityType>
+        <EntityType Name="t_member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="MerchID" Type="int" />
+          <Property Name="Uid" Type="bigint" />
+          <Property Name="Type" Type="int" />
+          <Property Name="OpenID" Type="varchar" MaxLength="64" />
+          <Property Name="MemberName" Type="varchar" MaxLength="20" />
+          <Property Name="Birthday" Type="varchar" MaxLength="10" />
+          <Property Name="CertificalID" Type="varchar" MaxLength="18" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Lottery" Type="int" />
+          <Property Name="Point" Type="int" />
+          <Property Name="JoinTime" Type="datetime" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="MemberPassword" Type="varchar" MaxLength="50" />
+          <Property Name="RepeatCode" Type="int" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="Lock" Type="int" />
+          <Property Name="LockDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="XCCloudRS232ModelStoreContainer">
+          <EntitySet Name="Base_DeviceInfo" EntityType="Self.Base_DeviceInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Base_MerchInfo" EntityType="Self.Base_MerchInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Data_GameInfo" EntityType="Self.Data_GameInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Data_MerchDevice" EntityType="Self.Data_MerchDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Data_MerchSegment" EntityType="Self.Data_MerchSegment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_485_coin" EntityType="Self.flw_485_coin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_485_savecoin" EntityType="Self.flw_485_savecoin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_food_sale" EntityType="Self.flw_food_sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Enum" EntityType="Self.t_Enum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_foods" EntityType="Self.t_foods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_member" EntityType="Self.t_member" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XCCloudRS232Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Base_DeviceInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchID" Type="Int32" />
+          <Property Name="DeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceType" Type="Int32" />
+          <Property Name="SN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="QRURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="motor1" Type="Int32" />
+          <Property Name="motor2" Type="Int32" />
+          <Property Name="nixie_tube_type" Type="Int32" />
+          <Property Name="motor2_coin" Type="Int32" />
+          <Property Name="motor1_coin" Type="Int32" />
+          <Property Name="FromDevice" Type="Int32" />
+          <Property Name="ToCard" Type="Int32" />
+          <Property Name="SSR" Type="Int32" />
+          <Property Name="alert_value" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Base_MerchInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OPName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="StorePassword" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Data_MerchDevice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="HeadAddress" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Data_MerchSegment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="HeadAddress" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_485_coin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="CoinType" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="MerchID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_485_savecoin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="MerchID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_foods">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="FoodName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FoodPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CoinQuantity" Type="Int32" />
+          <Property Name="IsQuickFood" Type="Int32" />
+          <Property Name="FoodState" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="XCCloudRS232Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Base_DeviceInfo" EntityType="Self.Base_DeviceInfo" />
+          <EntitySet Name="Base_MerchInfo" EntityType="Self.Base_MerchInfo" />
+          <EntitySet Name="Data_MerchDevice" EntityType="Self.Data_MerchDevice" />
+          <EntitySet Name="Data_MerchSegment" EntityType="Self.Data_MerchSegment" />
+          <EntitySet Name="flw_485_coin" EntityType="Self.flw_485_coin" />
+          <EntitySet Name="flw_485_savecoin" EntityType="Self.flw_485_savecoin" />
+          <EntitySet Name="t_foods" EntityType="Self.t_foods" />
+          <EntitySet Name="t_Enum" EntityType="XCCloudRS232Model.t_Enum" />
+          <EntitySet Name="flw_food_sale" EntityType="XCCloudRS232Model.flw_food_sale" />
+          <EntitySet Name="t_member" EntityType="XCCloudRS232Model.t_member" />
+          <EntitySet Name="Data_GameInfo" EntityType="XCCloudRS232Model.Data_GameInfo" />
+        </EntityContainer>
+        <EntityType Name="t_Enum">
+          <Key>
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="MerchID" Type="Int32" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="FlowType" Type="Int32" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="FoodID" Type="Int32" />
+          <Property Name="CoinQuantity" Type="Int32" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PayType" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="PayState" Type="Int32" />
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
+          <Property Name="PayTotal" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="t_member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="MerchID" Type="Int32" />
+          <Property Name="Uid" Type="Int64" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="OpenID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MemberName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CertificalID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Lottery" Type="Int32" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="JoinTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="MemberPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RepeatCode" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Lock" Type="Int32" />
+          <Property Name="LockDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Data_GameInfo">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GroupType" Type="Int32" />
+          <Property Name="ReturnCheck" Type="Int32" />
+          <Property Name="OutsideAlertCheck" Type="Int32" />
+          <Property Name="ICTicketOperation" Type="Int32" />
+          <Property Name="NotGiveBack" Type="Int32" />
+          <Property Name="LotteryMode" Type="Int32" />
+          <Property Name="OnlyExitLottery" Type="Int32" />
+          <Property Name="chkCheckGift" Type="Int32" />
+          <Property Name="AllowElecPush" Type="Int32" />
+          <Property Name="AllowDecuplePush" Type="Int32" />
+          <Property Name="GuardConvertCard" Type="Int32" />
+          <Property Name="ReadCat" Type="Int32" />
+          <Property Name="AllowRealPush" Type="Int32" />
+          <Property Name="BanOccupy" Type="Int32" />
+          <Property Name="StrongGuardConvertCard" Type="Int32" />
+          <Property Name="AllowElecOut" Type="Int32" />
+          <Property Name="NowExit" Type="Int32" />
+          <Property Name="BOPulse" Type="Int32" />
+          <Property Name="BOLock" Type="Int32" />
+          <Property Name="AllowRealOut" Type="Int32" />
+          <Property Name="BOKeep" Type="Int32" />
+          <Property Name="PushReduceFromCard" Type="Int32" />
+          <Property Name="PushAddToGame" Type="Int32" />
+          <Property Name="PushSpeed" Type="Int32" />
+          <Property Name="PushPulse" Type="Int32" />
+          <Property Name="PushLevel" Type="Int32" />
+          <Property Name="PushStartInterval" Type="Int32" />
+          <Property Name="UseSecondPush" Type="Int32" />
+          <Property Name="SecondReduceFromCard" Type="Int32" />
+          <Property Name="SecondAddToGame" Type="Int32" />
+          <Property Name="SecondSpeed" Type="Int32" />
+          <Property Name="SecondPulse" Type="Int32" />
+          <Property Name="SecondLevel" Type="Int32" />
+          <Property Name="SecondStartInterval" Type="Int32" />
+          <Property Name="OutSpeed" Type="Int32" />
+          <Property Name="OutPulse" Type="Int32" />
+          <Property Name="CountLevel" Type="Int32" />
+          <Property Name="OutLevel" Type="Int32" />
+          <Property Name="OutReduceFromGame" Type="Int32" />
+          <Property Name="OutAddToCard" Type="Int32" />
+          <Property Name="OnceOutLimit" Type="Int32" />
+          <Property Name="OncePureOutLimit" Type="Int32" />
+          <Property Name="SSRTimeOut" Type="Int32" />
+          <Property Name="ExceptOutTest" Type="Int32" />
+          <Property Name="ExceptOutSpeed" Type="Int32" />
+          <Property Name="Frequency" Type="Int32" />
+          <Property Name="OneDayPureOutLimit" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XCCloudRS232ModelStoreContainer" CdmEntityContainer="XCCloudRS232Entities">
+          <EntitySetMapping Name="Base_DeviceInfo">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.Base_DeviceInfo">
+              <MappingFragment StoreEntitySet="Base_DeviceInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="QRURL" ColumnName="QRURL" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="motor1" ColumnName="motor1" />
+                <ScalarProperty Name="motor2" ColumnName="motor2" />
+                <ScalarProperty Name="nixie_tube_type" ColumnName="nixie_tube_type" />
+                <ScalarProperty Name="motor2_coin" ColumnName="motor2_coin" />
+                <ScalarProperty Name="motor1_coin" ColumnName="motor1_coin" />
+                <ScalarProperty Name="FromDevice" ColumnName="FromDevice" />
+                <ScalarProperty Name="ToCard" ColumnName="ToCard" />
+                <ScalarProperty Name="SSR" ColumnName="SSR" />
+                <ScalarProperty Name="alert_value" ColumnName="alert_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Base_MerchInfo">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.Base_MerchInfo">
+              <MappingFragment StoreEntitySet="Base_MerchInfo">
+                <ScalarProperty Name="StorePassword" ColumnName="StorePassword" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MerchName" ColumnName="MerchName" />
+                <ScalarProperty Name="OPName" ColumnName="OPName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Data_MerchDevice">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.Data_MerchDevice">
+              <MappingFragment StoreEntitySet="Data_MerchDevice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Data_MerchSegment">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.Data_MerchSegment">
+              <MappingFragment StoreEntitySet="Data_MerchSegment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_485_coin">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.flw_485_coin">
+              <MappingFragment StoreEntitySet="flw_485_coin">
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="CoinType" ColumnName="CoinType" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_485_savecoin">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.flw_485_savecoin">
+              <MappingFragment StoreEntitySet="flw_485_savecoin">
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_foods">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.t_foods">
+              <MappingFragment StoreEntitySet="t_foods">
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+                <ScalarProperty Name="FoodPrice" ColumnName="FoodPrice" />
+                <ScalarProperty Name="CoinQuantity" ColumnName="CoinQuantity" />
+                <ScalarProperty Name="IsQuickFood" ColumnName="IsQuickFood" />
+                <ScalarProperty Name="FoodState" ColumnName="FoodState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Enum">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.t_Enum">
+              <MappingFragment StoreEntitySet="t_Enum">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_food_sale">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.flw_food_sale">
+              <MappingFragment StoreEntitySet="flw_food_sale">
+                <ScalarProperty Name="PayTotal" ColumnName="PayTotal" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="PayState" ColumnName="PayState" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="CoinQuantity" ColumnName="CoinQuantity" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="FlowType" ColumnName="FlowType" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_member">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.t_member">
+              <MappingFragment StoreEntitySet="t_member">
+                <ScalarProperty Name="LockDate" ColumnName="LockDate" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="RepeatCode" ColumnName="RepeatCode" />
+                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="JoinTime" ColumnName="JoinTime" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Lottery" ColumnName="Lottery" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CertificalID" ColumnName="CertificalID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Data_GameInfo">
+            <EntityTypeMapping TypeName="XCCloudRS232Model.Data_GameInfo">
+              <MappingFragment StoreEntitySet="Data_GameInfo">
+                <ScalarProperty Name="OneDayPureOutLimit" ColumnName="OneDayPureOutLimit" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="ExceptOutSpeed" ColumnName="ExceptOutSpeed" />
+                <ScalarProperty Name="ExceptOutTest" ColumnName="ExceptOutTest" />
+                <ScalarProperty Name="SSRTimeOut" ColumnName="SSRTimeOut" />
+                <ScalarProperty Name="OncePureOutLimit" ColumnName="OncePureOutLimit" />
+                <ScalarProperty Name="OnceOutLimit" ColumnName="OnceOutLimit" />
+                <ScalarProperty Name="OutAddToCard" ColumnName="OutAddToCard" />
+                <ScalarProperty Name="OutReduceFromGame" ColumnName="OutReduceFromGame" />
+                <ScalarProperty Name="OutLevel" ColumnName="OutLevel" />
+                <ScalarProperty Name="CountLevel" ColumnName="CountLevel" />
+                <ScalarProperty Name="OutPulse" ColumnName="OutPulse" />
+                <ScalarProperty Name="OutSpeed" ColumnName="OutSpeed" />
+                <ScalarProperty Name="SecondStartInterval" ColumnName="SecondStartInterval" />
+                <ScalarProperty Name="SecondLevel" ColumnName="SecondLevel" />
+                <ScalarProperty Name="SecondPulse" ColumnName="SecondPulse" />
+                <ScalarProperty Name="SecondSpeed" ColumnName="SecondSpeed" />
+                <ScalarProperty Name="SecondAddToGame" ColumnName="SecondAddToGame" />
+                <ScalarProperty Name="SecondReduceFromCard" ColumnName="SecondReduceFromCard" />
+                <ScalarProperty Name="UseSecondPush" ColumnName="UseSecondPush" />
+                <ScalarProperty Name="PushStartInterval" ColumnName="PushStartInterval" />
+                <ScalarProperty Name="PushLevel" ColumnName="PushLevel" />
+                <ScalarProperty Name="PushPulse" ColumnName="PushPulse" />
+                <ScalarProperty Name="PushSpeed" ColumnName="PushSpeed" />
+                <ScalarProperty Name="PushAddToGame" ColumnName="PushAddToGame" />
+                <ScalarProperty Name="PushReduceFromCard" ColumnName="PushReduceFromCard" />
+                <ScalarProperty Name="BOKeep" ColumnName="BOKeep" />
+                <ScalarProperty Name="AllowRealOut" ColumnName="AllowRealOut" />
+                <ScalarProperty Name="BOLock" ColumnName="BOLock" />
+                <ScalarProperty Name="BOPulse" ColumnName="BOPulse" />
+                <ScalarProperty Name="NowExit" ColumnName="NowExit" />
+                <ScalarProperty Name="AllowElecOut" ColumnName="AllowElecOut" />
+                <ScalarProperty Name="StrongGuardConvertCard" ColumnName="StrongGuardConvertCard" />
+                <ScalarProperty Name="BanOccupy" ColumnName="BanOccupy" />
+                <ScalarProperty Name="AllowRealPush" ColumnName="AllowRealPush" />
+                <ScalarProperty Name="ReadCat" ColumnName="ReadCat" />
+                <ScalarProperty Name="GuardConvertCard" ColumnName="GuardConvertCard" />
+                <ScalarProperty Name="AllowDecuplePush" ColumnName="AllowDecuplePush" />
+                <ScalarProperty Name="AllowElecPush" ColumnName="AllowElecPush" />
+                <ScalarProperty Name="chkCheckGift" ColumnName="chkCheckGift" />
+                <ScalarProperty Name="OnlyExitLottery" ColumnName="OnlyExitLottery" />
+                <ScalarProperty Name="LotteryMode" ColumnName="LotteryMode" />
+                <ScalarProperty Name="NotGiveBack" ColumnName="NotGiveBack" />
+                <ScalarProperty Name="ICTicketOperation" ColumnName="ICTicketOperation" />
+                <ScalarProperty Name="OutsideAlertCheck" ColumnName="OutsideAlertCheck" />
+                <ScalarProperty Name="ReturnCheck" ColumnName="ReturnCheck" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

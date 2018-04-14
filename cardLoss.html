@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>会员卡挂失</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="Operation">
+	<div class="container-fluid">
+		<div class="row">
+			<h3 class="hStyle titleSty">用户信息</h3>
+			<div class="McText">
+				<div class="col-md-4 col-xs-12"><span class="col-md-4 col-xs-4">手机号码：</span><label class="col-md-8 col-xs-8"><input type="text" class="form-control" /></label></div>
+				<div class="col-md-4 col-xs-12"><span class="col-md-4 col-xs-4">会员姓名：</span><label class="col-md-8 col-xs-8"><input type="text" class="form-control"/></label></div>
+				<div class="col-md-3 col-xs-9"><span class="col-md-3 col-xs-6">生日：</span><label class="col-md-9 col-xs-6"><input type="text"  class="form-control"/></label></div>
+				<div class="col-md-1 col-xs-3 pad_0"><span class="col-md-6 col-xs-6 pad_0">性别：</span>
+					<div class="col-md-6 col-xs-6 text-left pad_0">
+						<select  name="select">
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+			<div class="McText">
+				<div class="col-md-4 col-xs-12" ><span class="col-md-4 col-xs-4">验证码：</span><label class="col-md-4 col-xs-4"><input type="text" class="form-control" /></label><label class="col-md-4 col-xs-4"><input class="form-control" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()"/></label></div>
+				<div class="col-md-8 col-xs-12" ><span class="col-md-2 col-xs-4 margin_5">证件号码：</span><label class="col-md-9 col-xs-7"><input type="text" class="form-control"/></label><label class="col-md-1 col-xs-1"><button type="button" class="btn btn-primary">读取</button></label></div>
+			</div>
+			<div class="col-md-12 McTarea col-xs-12">
+				<span class="col-md-1 col-xs-4">备注:</span>
+				<label class="col-md-10 col-xs-12 col-marL_2" ><textarea class="form-control"></textarea></label>
+
+			</div>
+			<div class="col-md-10 col-xs-8" ></div>
+			<div class="col-md-12  cardL">
+				<strong class="col-md-4 col-xs-6">会员卡号：</strong>
+				<span class="col-md-3 col-xs-6">代币：</span>
+				<span class="col-md-3 col-xs-6">积分：</span>
+				<span class="col-md-2 col-xs-6">彩票：</span>
+			</div>
+
+
+
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-xs-6 McSty" ><span  class="col-md-4 col-xs-4">允许投退币：</span>
+				<div class="col-md-8 col-xs-8 pd_5">
+					<div class="switchZdy col-md-12 col-xs-12">
+						<div class="col-md-6 col-xs-6 onSwitch">允许</div>
+						<div class="col-md-6 col-xs-6">不允许</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-4 col-xs-6 McSty" ><span  class="col-md-4 col-xs-4">允许兑币：</span>
+				<div class="col-md-8 col-xs-8 pd_5">
+					<div class="switchZdy col-md-12 col-xs-12">
+						<div class="col-md-6 col-xs-6 onSwitch">允许</div>
+						<div class="col-md-6 col-xs-6">不允许</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-6 McSty" ><span  class="col-md-4 col-xs-4">允许购买实物币：</span>
+				<div class="col-md-8 col-xs-8 pd_5">
+					<div class="switchZdy col-md-12 col-xs-12">
+						<div class="col-md-6 col-xs-6 onSwitch">允许</div>
+						<div class="col-md-6 col-xs-6">不允许</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-6 McSty" ><span  class="col-md-4 col-xs-4">允许手工存币：</span>
+				<div class="col-md-8 col-xs-8 pd_5">
+					<div class="switchZdy col-md-12 col-xs-12">
+						<div class="col-md-6 col-xs-6 onSwitch">允许</div>
+						<div class="col-md-6 col-xs-6">不允许</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-6 McSty"><span  class="col-md-4 col-xs-4">允许手工送币：</span>
+				<div class="col-md-8 col-xs-8 pd_5">
+					<div class="switchZdy col-md-12 col-xs-12">
+						<div class="col-md-6 col-xs-6 onSwitch">允许</div>
+						<div class="col-md-6 col-xs-6">不允许</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row cardMTop">
+			<div class="col-md-7 col-xs-5" ></div>
+			<div class="col-md-2 col-xs-3 text-center" ><button type="button" class="btn btn-success">换卡</button></div>
+			<div class="col-md-2 col-xs-3 text-center" ><button type="button" class="btn btn-success">挂失</button></div>
+			<div class="col-md-1 col-xs-1" ></div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/yx.js"></script>
+<script src="js/ocheck.js"></script>
+
+
+</body>
+</html>

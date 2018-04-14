@@ -1,0 +1,43 @@
+/* bookMall.wxss */
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0rpx;
+ 
+}
+.mine-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0rpx;
+  background-color: #eee;
+}
+
+.Currency{width: 70%;margin-top: 50rpx;}
+.section{border-bottom: 1px solid #666;padding-left: 10rpx;margin-top: 20rpx;}
+.fl{float: left;padding-left: 30rpx;}
+.fr{float:right;padding-right: 30rpx;}
+
+
+.hidden{display: none;}
+.show{display: block;}
+
+.memberTP{
+  width: 50rpx;height: 50rpx;
+}
+.memberText{height: 60rpx;display: block;text-align: center;}
+
+
+ .bg1{background: url('http://pic35.photophoto.cn/20150613/0020032913806900_b.jpg') no-repeat center;background-size: 100% 100%;color: black;width: 100%;padding: 50rpx;}
+
+.bg2{background: url('http://pic35.photophoto.cn/20150608/0020032985571190_b.jpg') no-repeat center;background-size: 100% 100%;min-height: 250rpx;width: 100%;padding-top: 100rpx;margin-top: 50rpx;} 
+.show{display: block;}
+
+.Save-money{margin-top: 50rpx;}
+.memberTr{height: 60rpx;text-align: left;padding-left: 50rpx;margin-top: 20px;}
+.memberColor{padding-left: 10rpx;color: #ff3030;}
+

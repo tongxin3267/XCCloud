@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>frontDesk</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/iconfont.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/swiper.min.css">
+
+	<!-- Demo styles -->
+	<style>
+		.form{
+			width:408px;
+			height:200px;
+			background:red;
+			position:relative;
+			overflow:hidden;
+			margin:30px auto;
+		}
+		.corner{
+			background:-webkit-linear-gradient(45deg, #2e2e2e 24%, #5F5F5F 40%,#6f6f6f 43%,#5F5F5F 46%,#2F2F2F 46%,#fff 46%,#fff);
+			background:-moz-linear-gradient(45deg, #2e2e2e 24%, #5F5F5F 40%,#6f6f6f 43%,#5F5F5F 46%,#2F2F2F 46%,#fff 46%,#fff);
+			background:-o-linear-gradient(45deg, #2e2e2e 24%, #5F5F5F 40%,#6f6f6f 43%,#5F5F5F 46%,#2F2F2F 46%,#fff 46%,#fff);
+			background:-ms-linear-gradient(45deg, #2e2e2e 24%, #5F5F5F 40%,#6f6f6f 43%,#5F5F5F 46%,#2F2F2F 46%,#fff 46%,#fff);
+			background:linear-gradient(45deg, #2e2e2e 24%, #5F5F5F 40%,#6f6f6f 43%,#5F5F5F 46%,#2F2F2F 46%,#fff 46%,#fff);
+			width:60px;
+			height:60px;
+			border-radius:0 0 0px 60px / 0 0 0 30px;
+			-webkit-transform:rotate(0deg);
+			-moz-transform:rotate(0deg);
+			-o-transform:rotate(0deg);
+			-ms-transform:rotate(0deg);
+			transform:rotate(0deg);
+			position:absolute;
+			right:-4px;
+			top:-4px;
+			box-shadow:5px 2px 8px black;
+			overflow:hidden;
+		}
+		/*.corner:after{*/
+			/*height:100%;*/
+			/*width:100%;*/
+			/*position:absolute;*/
+			/*content:"";*/
+			/*top:-15px;*/
+			/*right:-82px;*/
+			/*border-radius:90px 90px 0px 0 / 40px 40px 0 0;*/
+			/*z-index:1;*/
+			/*background:#2F2F2F;*/
+			/*-webkit-transform:rotate(77deg);*/
+			/*-moz-transform:rotate(77deg);*/
+			/*-o-transform:rotate(77deg);*/
+			/*-ms-transform:rotate(77deg);*/
+			/*transform:rotate(-77deg);*/
+			/*box-shadow:0px 0px 8px black inset;*/
+
+		/*}*/
+
+	</style>
+</head>
+<body>
+<!--顶部导航-->
+<div class="form">
+	<div class="corner"></div>
+
+</div>
+
+<!--页面内容-->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/yx.js"></script>
+
+<script>
+    function showTime(){
+
+        var oDiv = document.all('oDiv');
+        var oDate = new Date();
+        var strTime = oDate.getFullYear() + '-' + eval(oDate.getMonth()+1) + '-' + oDate.getDate() + ' 星期' + '日一二三四五六'.substr(oDate.getDay(),1) + '  ' + oDate.getHours() + ':' + oDate.getMinutes() + ':' + oDate.getSeconds();
+        oDiv.innerHTML = strTime;
+        window.setTimeout('showTime()', 1000);
+    }
+    window.onload = showTime;
+    $(document).ready(function(){
+        $(".c3").animate({
+            height: "60%"
+        },1000);
+        $(".layerCancel").on("click",function () {
+            $(".boxBg").addClass("hidden");
+            $(".FastSell").addClass("hidden");
+            $(".CheckoutMB").addClass("hidden");
+        });
+
+
+        $(".payList").find("li").click(function () {
+            var pay_index =$(this).index();
+            $(".payment").find("li").eq(pay_index).removeClass("hidden").siblings().addClass("hidden");
+
+        })
+
+    });
+
+    function inpDiv1(){
+        var inputNt1= $(".inputNt").text()[0];
+        var inputNt2= $(".inputNt").text()[2];
+        var inputD1=$("#inputD1").val();
+        var inputDc=inputD1*inputNt2/inputNt1;
+        if(isNaN(inputDc)){
+            inputDc="";
+            $("#inputD1").val("请输入数字");
+            $("#inputD1").css("color","red");
+            setTimeout(function () {
+                $("#inputD1").val("");
+                $("#inputD1").css("color","#555");
+            }, 1000);
+        } else {
+            $("#inputD2").val(inputDc.toFixed(0));
+        }
+    }
+    function inpDiv2(){
+        var inputNt1= $(".inputNt").text()[0];
+        var inputNt2= $(".inputNt").text()[2];
+        var inputD1=$("#inputD2").val();
+        var inputDc=inputD1*inputNt1/inputNt2;
+        if(isNaN(inputDc)){
+            inputDc="";
+            $("#inputD2").val("请输入数字");
+            $("#inputD2").css("color","red");
+            setTimeout(function () {
+                $("#inputD2").val("");
+                $("#inputD2").css("color","#555");
+            }, 1000);
+        } else {
+            $("#inputD1").val(inputDc.toFixed(2));
+        }
+
+
+    }
+    function sumPrice() {
+        var inputIN= $(".sumPrice").html().split("￥")[1];
+        var inputIN2= $("#input1").val() - inputIN;
+
+        $("#input2").val(inputIN2)
+    }
+    $(function(){
+        $(".inputNm").find("input").focus(function(){
+
+            var valId =$(this).attr("id");
+
+            var idVal =$("[id='"+valId +"']");
+//            console.log(valId);
+            $(".formNum .num").off("click");
+            $(".remove").off("click");
+            $(".removeAll").off("click");
+            $('.formNum .num').on("click",function(){
+                var valNem =idVal.val();
+                valNem += this.innerHTML;
+                idVal.val(valNem);
+                sumPrice();
+                if(valId ==="inputD1"){
+                    inpDiv1();
+                }
+                if(valId ==="inputD2"){
+                    inpDiv2();
+                }
+//
+            });
+            $('.remove').on("click",function(){
+                var valNem =idVal.val();
+                var valNum =valNem.substring(0,valNem.length-1);
+                idVal.val(valNum);
+
+            });
+            $('.removeAll').on("click",function(){
+
+                idVal.val("");
+            });
+
+
+
+
+        });
+
+
+        $(".majorMenu").on("click","li",function () {
+            $(this).addClass("cur").siblings().removeClass("cur");
+            var menuIndex = $(this).index();
+            var idN =$("[id='iFrame"+menuIndex+"']");
+//            console.log(idN);
+            idN.removeClass("hidden").siblings().addClass("hidden");
+//			$(".salesAll").addClass("hidden")
+        });
+
+
+
+    });
+    $(document).ready(function(){
+//        console.log(objPie.series[0].data);
+        var lis=$("<ul></ul>");
+        for(var i=0;i<objPie.series[0].data.length;i++){
+            lis.append("<li><span>"+objPie.series[0].data[i][0]+"</span><em>"+objPie.series[0].data[i][1]+"</em></li>")
+        }
+        $(".crashDetials").append(lis)
+    });
+
+    var objPie={
+        id:"#crash",
+        titleText:"",
+
+        series:[{
+            type:'pie',
+            name: '收银',
+            colorByPoint: true,
+            data: [ [  '套餐销售', 20],
+                [  '售数字币', 0],
+                [  '入会押金', 50],
+                [  '商品销售', 0],
+                [  '会员退钱', -10],
+                [  '退卡押金', -10],
+                [  '条码退去', 0]
+
+            ]
+        }],
+        function:function aa(){}
+    };
+    function drawPieChart(objPie){
+        Highcharts.setOptions({
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+        });
+        $(objPie.id).highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                options3d: {//3D效果
+                    enabled: true,
+                    alpha: 45,
+                    beta:0
+                }
+            },
+            //版权信息
+            credits:{
+                enabled:false
+            },
+            title: {
+                text:objPie.titleText,
+                align: 'left',
+                style:{ "color": "#333333", "fontSize": "24px","fontWeight":"bold" }
+            },
+            legend: {
+                align: 'right',
+                verticalAlign: 'center',
+                layout:"vertical",
+                labelFormat:name,
+                //x: 0,
+                //y: 100,
+                squareSymbol:false,
+                symbolWidth:30,
+                symbolHeight:18,
+                lineHeight:18
+            },
+
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size: 150,
+                    /*   dataLabels: {
+                           enabled: true,
+                           format:'<b>{point.name}</b>: {point.y}'
+                       },*/
+                    slicedOffset:50, //偏移距离
+                    //innerSize: '80%',//设置环，内环占比
+                    depth:35,//显示3d效果
+                    showInLegend: true,
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    point:{
+                        events: {
+                            select: function() {
+                                var text = this.name;
+                                console.log(text);
+                                switch (text){
+                                    case text:
+                                        console.log(1);
+                                        break;
+                                    case text:
+                                        console.log(2);
+                                        break;
+                                    case text:
+                                        console.log(3);
+                                        break;
+                                    case text:
+                                        console.log(4);
+                                        break;
+                                }
+                            }
+                        }
+                    },
+                    series : {
+                        events : {
+                            legendItemClick: function(event) {
+                                alert("点击了："+this.name)
+                            }
+                        }
+                    }
+                }
+            },
+            series: objPie.series
+        });
+    }
+    drawPieChart(objPie);
+
+
+
+
+</script>
+<!-- Initialize Swiper -->
+<script>
+
+
+
+</script>
+
+
+</body>
+</html>

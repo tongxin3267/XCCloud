@@ -1,0 +1,425 @@
+{"list1":
+[{
+  "ProID": 1,
+  "name": "北京市",
+  "ProSort": 1,
+  "ProRemark": "直辖市"
+}, {
+  "ProID": 2,
+  "name": "天津市",
+  "ProSort": 2,
+  "ProRemark": "直辖市"
+}, {
+  "ProID": 3,
+  "name": "河北省",
+  "ProSort": 5,
+  "ProRemark": "省份"
+}, {
+  "ProID": 4,
+  "name": "山西省",
+  "ProSort": 6,
+  "ProRemark": "省份"
+}, {
+  "ProID": 5,
+  "name": "内蒙古自治区",
+  "ProSort": 32,
+  "ProRemark": "自治区"
+}, {
+  "ProID": 6,
+  "name": "辽宁省",
+  "ProSort": 8,
+  "ProRemark": "省份"
+}, {
+  "ProID": 7,
+  "name": "吉林省",
+  "ProSort": 9,
+  "ProRemark": "省份"
+}, {
+  "ProID": 8,
+  "name": "黑龙江省",
+  "ProSort": 10,
+  "ProRemark": "省份"
+}, {
+  "ProID": 9,
+  "name": "上海市",
+  "ProSort": 3,
+  "ProRemark": "直辖市"
+}, {
+  "ProID": 10,
+  "name": "江苏省",
+  "ProSort": 11,
+  "ProRemark": "省份"
+}],
+  "list2":
+
+[{
+  "CityID": 1,
+  "name": "北京市",
+  "ProID": 1,
+  "CitySort": 1
+}, {
+  "CityID": 2,
+  "name": "天津市",
+  "ProID": 2,
+  "CitySort": 2
+}, {
+  "CityID": 3,
+  "name": "上海市",
+  "ProID": 9,
+  "CitySort": 3
+}, {
+  "CityID": 4,
+  "name": "重庆市",
+  "ProID": 27,
+  "CitySort": 4
+}, {
+  "CityID": 5,
+  "name": "邯郸市",
+  "ProID": 3,
+  "CitySort": 5
+}, {
+  "CityID": 6,
+  "name": "石家庄市",
+  "ProID": 3,
+  "CitySort": 6
+}, {
+  "CityID": 7,
+  "name": "保定市",
+  "ProID": 3,
+  "CitySort": 7
+}, {
+  "CityID": 8,
+  "name": "张家口市",
+  "ProID": 3,
+  "CitySort": 8
+}, {
+  "CityID": 9,
+  "name": "承德市",
+  "ProID": 3,
+  "CitySort": 9
+}, {
+  "CityID": 10,
+  "name": "唐山市",
+  "ProID": 3,
+  "CitySort": 10
+}, {
+  "CityID": 11,
+  "name": "廊坊市",
+  "ProID": 3,
+  "CitySort": 11
+}, {
+  "CityID": 12,
+  "name": "沧州市",
+  "ProID": 3,
+  "CitySort": 12
+}, {
+  "CityID": 13,
+  "name": "衡水市",
+  "ProID": 3,
+  "CitySort": 13
+}, {
+  "CityID": 14,
+  "name": "邢台市",
+  "ProID": 3,
+  "CitySort": 14
+}, {
+  "CityID": 16,
+  "name": "朔州市",
+  "ProID": 4,
+  "CitySort": 16
+}, {
+  "CityID": 17,
+  "name": "忻州市",
+  "ProID": 4,
+  "CitySort": 17
+}, {
+  "CityID": 18,
+  "name": "太原市",
+  "ProID": 4,
+  "CitySort": 18
+}, {
+  "CityID": 19,
+  "name": "大同市",
+  "ProID": 4,
+  "CitySort": 19
+}, {
+  "CityID": 20,
+  "name": "阳泉市",
+  "ProID": 4,
+  "CitySort": 20
+}, {
+  "CityID": 21,
+  "name": "晋中市",
+  "ProID": 4,
+  "CitySort": 21
+}, {
+  "CityID": 22,
+  "name": "长治市",
+  "ProID": 4,
+  "CitySort": 22
+}, {
+  "CityID": 23,
+  "name": "晋城市",
+  "ProID": 4,
+  "CitySort": 23
+}, {
+  "CityID": 24,
+  "name": "临汾市",
+  "ProID": 4,
+  "CitySort": 24
+}, {
+  "CityID": 25,
+  "name": "吕梁市",
+  "ProID": 4,
+  "CitySort": 25
+}, {
+  "CityID": 26,
+  "name": "运城市",
+  "ProID": 4,
+  "CitySort": 26
+}, {
+  "CityID": 27,
+  "name": "沈阳市",
+  "ProID": 6,
+  "CitySort": 27
+}, {
+  "CityID": 28,
+  "name": "铁岭市",
+  "ProID": 6,
+  "CitySort": 28
+}, {
+  "CityID": 29,
+  "name": "大连市",
+  "ProID": 6,
+  "CitySort": 29
+}, {
+  "CityID": 30,
+  "name": "鞍山市",
+  "ProID": 6,
+  "CitySort": 30
+}, {
+  "CityID": 31,
+  "name": "抚顺市",
+  "ProID": 6,
+  "CitySort": 31
+}, {
+  "CityID": 32,
+  "name": "本溪市",
+  "ProID": 6,
+  "CitySort": 32
+}, {
+  "CityID": 33,
+  "name": "丹东市",
+  "ProID": 6,
+  "CitySort": 33
+}, {
+  "CityID": 34,
+  "name": "锦州市",
+  "ProID": 6,
+  "CitySort": 34
+}, {
+  "CityID": 35,
+  "name": "营口市",
+  "ProID": 6,
+  "CitySort": 35
+}, {
+  "CityID": 36,
+  "name": "阜新市",
+  "ProID": 6,
+  "CitySort": 36
+}, {
+  "CityID": 37,
+  "name": "辽阳市",
+  "ProID": 6,
+  "CitySort": 37
+}, {
+  "CityID": 38,
+  "name": "朝阳市",
+  "ProID": 6,
+  "CitySort": 38
+}, {
+  "CityID": 39,
+  "name": "盘锦市",
+  "ProID": 6,
+  "CitySort": 39
+}, {
+  "CityID": 40,
+  "name": "葫芦岛市",
+  "ProID": 6,
+  "CitySort": 40
+}, {
+  "CityID": 41,
+  "name": "长春市",
+  "ProID": 7,
+  "CitySort": 41
+}, {
+  "CityID": 42,
+  "name": "吉林市",
+  "ProID": 7,
+  "CitySort": 42
+}, {
+  "CityID": 43,
+  "name": "延边朝鲜族自治州",
+  "ProID": 7,
+  "CitySort": 43
+}, {
+  "CityID": 44,
+  "name": "四平市",
+  "ProID": 7,
+  "CitySort": 44
+}, {
+  "CityID": 45,
+  "name": "通化市",
+  "ProID": 7,
+  "CitySort": 45
+}, {
+  "CityID": 46,
+  "name": "白城市",
+  "ProID": 7,
+  "CitySort": 46
+}, {
+  "CityID": 47,
+  "name": "辽源市",
+  "ProID": 7,
+  "CitySort": 47
+}, {
+  "CityID": 48,
+  "name": "松原市",
+  "ProID": 7,
+  "CitySort": 48
+}, {
+  "CityID": 49,
+  "name": "白山市",
+  "ProID": 7,
+  "CitySort": 49
+}, {
+  "CityID": 50,
+  "name": "哈尔滨市",
+  "ProID": 8,
+  "CitySort": 50
+}, {
+  "CityID": 51,
+  "name": "齐齐哈尔市",
+  "ProID": 8,
+  "CitySort": 51
+}, {
+  "CityID": 52,
+  "name": "鸡西市",
+  "ProID": 8,
+  "CitySort": 52
+}, {
+  "CityID": 53,
+  "name": "牡丹江市",
+  "ProID": 8,
+  "CitySort": 53
+}, {
+  "CityID": 54,
+  "name": "七台河市",
+  "ProID": 8,
+  "CitySort": 54
+}, {
+  "CityID": 55,
+  "name": "佳木斯市",
+  "ProID": 8,
+  "CitySort": 55
+}, {
+  "CityID": 56,
+  "name": "鹤岗市",
+  "ProID": 8,
+  "CitySort": 56
+}, {
+  "CityID": 57,
+  "name": "双鸭山市",
+  "ProID": 8,
+  "CitySort": 57
+}, {
+  "CityID": 58,
+  "name": "绥化市",
+  "ProID": 8,
+  "CitySort": 58
+}, {
+  "CityID": 59,
+  "name": "黑河市",
+  "ProID": 8,
+  "CitySort": 59
+}, {
+  "CityID": 60,
+  "name": "大兴安岭地区",
+  "ProID": 8,
+  "CitySort": 60
+}, {
+  "CityID": 61,
+  "name": "伊春市",
+  "ProID": 8,
+  "CitySort": 61
+}, {
+  "CityID": 62,
+  "name": "大庆市",
+  "ProID": 8,
+  "CitySort": 62
+}, {
+  "CityID": 63,
+  "name": "南京市",
+  "ProID": 10,
+  "CitySort": 63
+}, {
+  "CityID": 64,
+  "name": "无锡市",
+  "ProID": 10,
+  "CitySort": 64
+}, {
+  "CityID": 65,
+  "name": "镇江市",
+  "ProID": 10,
+  "CitySort": 65
+}, {
+  "CityID": 66,
+  "name": "苏州市",
+  "ProID": 10,
+  "CitySort": 66
+}, {
+  "CityID": 67,
+  "name": "南通市",
+  "ProID": 10,
+  "CitySort": 67
+}, {
+  "CityID": 68,
+  "name": "扬州市",
+  "ProID": 10,
+  "CitySort": 68
+}, {
+  "CityID": 69,
+  "name": "盐城市",
+  "ProID": 10,
+  "CitySort": 69
+}, {
+  "CityID": 70,
+  "name": "徐州市",
+  "ProID": 10,
+  "CitySort": 70
+}, {
+  "CityID": 71,
+  "name": "淮安市",
+  "ProID": 10,
+  "CitySort": 71
+}, {
+  "CityID": 72,
+  "name": "连云港市",
+  "ProID": 10,
+  "CitySort": 72
+}, {
+  "CityID": 73,
+  "name": "常州市",
+  "ProID": 10,
+  "CitySort": 73
+}, {
+  "CityID": 74,
+  "name": "泰州市",
+  "ProID": 10,
+  "CitySort": 74
+}, {
+  "CityID": 75,
+  "name": "宿迁市",
+  "ProID": 10,
+  "CitySort": 75
+}]}

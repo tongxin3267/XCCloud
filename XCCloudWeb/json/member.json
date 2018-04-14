@@ -1,0 +1,20 @@
+{"total":12,"rows":[
+  {"ID":1,"MemberId":88801,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":2,"MemberId":88802,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":3,"MemberId":88803,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":4,"MemberId":88804,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":5,"MemberId":88805,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":6,"MemberId":88806,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":7,"MemberId":88807,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":8,"MemberId":88808,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":9,"MemberId":88809,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":10,"MemberId":88810,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":11,"MemberId":88811,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":12,"MemberId":88812,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"},
+  {"ID":13,"MemberId":88813,"CurrentTime":"2017-09-04 12:44:30","LastSurplus":"10000","SaveCoin":1080,"UseCoin":1650,"Kinds":"EST-1","CurrentSurplus":"5460","Note":"萨达所大所大"}
+
+
+
+],"footer":[
+  {"ID":"合计","SaveCoin":187650.00,"UseCoin":16585685885600,"CurrentSurplus":"546858560"}
+]}

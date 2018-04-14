@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24ece1caf8c845f9964ee498786957da" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="XCCloudRS232Model.Base_DeviceInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.Base_MerchInfo" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.Data_MerchDevice" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.Data_MerchSegment" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.flw_485_coin" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.flw_485_savecoin" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.t_foods" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.t_Enum" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.flw_food_sale" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.t_member" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCCloudRS232Model.Data_GameInfo" Width="1.5" PointX="0.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

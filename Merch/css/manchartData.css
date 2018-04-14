@@ -1,0 +1,111 @@
+body{min-height: 800px;}
+/*ifarme导航效果*/
+.titleAppend{width: 100%; box-shadow: 1px 2px 2px #f3f2c3;position: relative;z-index: 70;}
+.titleAppend ul li{display:inline-block;/**display:inline; *zoom:1;*/border-bottom: 30px solid #7e93a7; border-left: 13px solid transparent;  border-right:13px solid transparent; height: 0;position: relative;padding:0 10px;margin-left: -15px;}
+.titleAppend ul .now em{border-bottom: 29px solid #f8d580;}
+.titleAppend ul .now{z-index: 10;}
+.titleAppend ul li em{display: block; border-bottom: 29px solid #f2f2f2;
+    border-left: 13px solid transparent;width: inherit; padding: 0 10px;
+    height: 0;cursor: pointer;/*position: absolute;left: -12px;right:-12px;top: 1px;*/ border-right:13px solid transparent;margin-left: -22px;margin-right: -22px;margin-top: 1px;}
+.titleAppend ul li em a{display:inline-block;font-size: 14px;color: #666;line-height: 30px;;padding: 0 20px 0 10px;}
+.titleAppend ul li .layui-icon{position: absolute;right: 3px;top: 6px; cursor: pointer; transform:scale(0.7);
+    -webkit-transform:scale(0.7);  -moz-transform:scale(0.7);  -o-transform:scale(0.7); !important;}
+.titleAppend ul li .layui-icon:hover{transform:scale(1.2);  -webkit-transform:scale(1.2);  -moz-transform:scale(1.2);  -o-transform:scale(1.2);!important; }
+.test2 iframe{border: none;margin-top: 0.5em;}
+.titleAppend ul li:hover em{border-bottom: 29px solid #f3f2c3;}
+
+
+.index_header{height: 80px;line-height: 80px;background-color:#015581; margin-bottom: 0; color: #afc9d7;opacity: 0.9; }
+.header_list{margin-top: 15px;min-width: 1200px;}
+ #header_list_ul>li:hover a{color: orange;font-size: 15px;!important;}
+ /* 侧边菜单*/
+.main-menu{  width: 200px;position: absolute;top: 80px;left: 0;bottom: 0; background-color: #015581;opacity: 0.7; color: #f3f3f3 }
+
+.main-menu .open{height: 50px;line-height: 50px;font-size: 16px;padding-left: 30px;}
+.main-menu .menu-all{font-size: 18px;}
+.main-menu .open:hover{border-left: 4px solid #df8505;background-color: #46b8da;opacity: 0.7; cursor: pointer;}
+.main-menu .menu-space{border-bottom: #f3f3f3 2px solid;width: 100%;margin: 10px 0; height: 2px;}
+.section-main{position: absolute;top: 80px;left: 200px;right: 0;bottom: 60px;border: 1px solid red;min-height: 600px;}
+.footer{position: absolute;left: 200px;bottom: 0;right: 0;height: 60px;opacity: 0.7;}
+
+/*查询模块*/
+#searchModel .layui-form-pane .layui-form-checkbox {width: 300px;}
+#searchMod .layui-form-pane .layui-form-checkbox span{width:240px;}
+#searchMod #searchbox{max-height: 320px;overflow-y: scroll;margin-left: 110px}
+
+#searchbox .layui-form-checkbox span{background-color: #c1e2b3}
+/*小程序活动推送*/
+.active-list{margin: 15px auto;padding: 15px;clear: both;min-width: 1000px;height: 700px;overflow-y: scroll;border: 1px solid #e1e1e8;box-shadow: #e1e1e8;}
+.active_lists{width: 202px;height: 260px;padding: 15px 20px; border: 1px solid #999;display: inline-block;margin-left: 15px;
+  margin-bottom: 15px; vertical-align: top;}
+.active_lists>img{display: block;width:160px;height: 120px;  }
+.active_lists>p[class="publish_time"]{height: 30px;line-height: 30px;font-size: 16px;margin: 10px 0;}
+.active_lists>p[class="publish_title"]{height: 60px;line-height: 30px;font-size: 16px;margin: 10px 0;}
+.active_lists>div span:first-child{display: inline-block;font-size: 16px;}
+.active_lists>div .publish_time{display: inline-block;font-size: 14px;color: #f0ad4e;}
+
+
+.active_edit_model{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-color: #5e5e5e;z-index: 99;}
+.active_edit_model>form{width: 90%;min-width: 1200px;height: 94%;position: absolute;left: 50%;top: 2%;margin-left: -45%;
+background-color: #f2f1f1; padding: 15px;}
+#demo form{padding: 0 30px;height: 500px;}
+.edit-left{width: 44%;float:left;height: 800px;}
+.edit-left .edit_msg,.edit-left .edit_picture{height: 350px;border: 1px solid #333333;padding: 10px;}
+.edit-left .edit_picture{height: 350px;}
+.edit-right{width: 50%;float:left;height: 800px;margin-left: 3%}
+
+/*删除框提示*/
+.delete_tips_box{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-color: #5e5e5e;z-index: 99;display: none;}
+.delete_tips{position: absolute;top: 50%;left: 50%;width: 300px;height: 200px;margin-top: -100px;margin-left: -150px;
+    z-index: 99;background-color: #e1e1e8;padding: 15px;border-radius: 5px;}
+.delete_tips>div{border: 1px solid #5e5e5e;height: 170px;background-color: #f1f1f1;padding: 10px;border-radius: 5px;}
+.delete_tips>div h4{color: red;height: 100px;line-height: 30px;}
+.edit_msg>ul li{vertical-align: top;line-height: 40px;}
+.edit_msg>ul li span{display: inline-block;height: 40px;margin-top: 0;width: 20%;min-width: 100px;}
+.edit_msg>ul li select,.edit_msg>ul li textarea{display: inline-block;margin-top: 0;width: 75%;}
+.edit_msg>ul li textarea{line-height: 24px;}
+.edit_msg>ul li select{height: 40px;padding-left: 50px;font-size: 16px;}
+.edit_msg>ul li select>option{height: 40px;line-height: 40px;display: inline-block;}
+
+/*权限设置 页面*/
+.show_block .layui-inline{width: 32%;}
+.show_block .layui-inline .layui-form-label{width: 100%;float: none;text-align: left;padding-left: 0;}
+.checkBox{width: 200px;height: 38px;border: 1px solid #e5e5e5;border-radius: 5px;}
+.checkBox span{width: 49%;height: 38px;line-height:38px;display: inline-block;border-radius: 5px;font-size: 16px;text-align: center;color: #fff;}
+.checkBox span:first-child{float: left;background-color: orange}
+.checkBox span:last-child{float: right;background-color:#1a99f6;}
+
+.addReturnSetting{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #e5e5e5;display: none;}
+.addReturnSetting form{width: 800px;height: 370px; position: absolute;top: 50%;left: 50%;margin-top: -195px;
+    margin-left: -400px;background-color: #f1f1f1;padding: 15px;}
+.addReturnSetting form .layui-form-label{width: 100px;text-align: left;}
+.item_two .layui-inline{width: 48%;}
+.item_one .layui-inline{width: 80%;}
+
+/*商户信息列表*/
+.formtMerchant{ display: none;padding: 15px;}
+ .formtMerchant .form{border: 1px solid #999999;height: 450px;padding: 15px;}
+.formtMerchant .form #demo1{width:270px;height:358px; border:1px dashed #999999;  margin:0 20px;overflow-y:scroll;
+    float:left; padding: 15px;}
+
+
+/*微信用户列表*/
+
+.wchatUser{width: auto;padding: 15px;height: 240px;}
+.info_left{padding-right: 10px;}
+.info_right{padding-left: 10px;}
+.wchatUser .wchatUserLists{width: 135px;float: left;height: 180px;margin: 10px 6px;border: 1px dashed #eee;background-color: #f2dede;}
+.wchatUserLists img{display: block;margin: 10px auto;width: 70px;border-radius: 50%;}
+.wchatUserLists p{display: block;height: 20px;line-height: 20px;text-align: center;overflow: hidden;}
+.wchatUser_title{height: 38px;line-height: 38px;font-size: 18px;}
+.user-group{height: 270px;width: 100%;border: 1px solid #e1e1e8;margin-bottom: 20px;padding: 15px;}
+.user-authrize{height: 370px;width: 100%;border: 1px solid #e1e1e8;padding: 15px;}
+
+
+/* 工作组管理*/
+.groupManage{display: none;padding: 15px;}
+ .groupManage>form{border: 1px solid #999999;padding: 15px;}
+ .formStore{display: none;margin: 15px;padding: 15px;}
+
+/* 员工用户列表*/
+.nickName{overflow: hidden;}

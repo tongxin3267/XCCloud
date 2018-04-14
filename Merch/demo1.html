@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <!--引入你自己的layui文件-->
+    <link href="layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+
+
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="" style="text-align: right">
+            <button class="layui-btn layui-btn-normal" onclick="getAddMerchInfo()">新增</button>
+        </div>
+        <div class="formtMerchant">
+            <!--<form action="">-->
+                <div class="layui-col-md8 layui-col-sm8 layui-col-lg8">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商户类别</label>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="required" id="merchKinds" style="height: 38px;width: 190px;text-align: center;">
+                                    <option value="">-请选择-</option>
+                                    <option value="0">普通账号</option>
+                                    <option value="1">大客户账户</option>
+                                    <option value="2">代理商账号</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商户状态</label>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="required" style="height: 38px;width: 190px;text-align: center;">
+                                    <option value="">-请选择-</option>
+                                    <option value="0">停用</option>
+                                    <option value="1">正常</option>
+                                    <option value="2">质疑</option>
+                                    <option value="3">锁定</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商户账号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">是否锁定</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">负责人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">创建子账号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">账号数量</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="display: none">
+                        <label class="layui-form-label">授权到期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮政编码</label>
+                        <div class="layui-input-inline" style="width: 500px;">
+                            <select name="" id="provence" style="height: 38px;"><option value="">-请选择-</option></select>
+                            <select name="" id="city" style="height: 38px;"><option value="">-请选择-</option></select>
+                            <select name="" id="area" style="height: 38px;"><option value="">-请选择-</option></select>
+                            <input type="text" readonly style="height: 36px;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">授权到期</label>
+                        <div class="layui-input-inline">
+                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea" style="width: 512px;height: 90px;line-height: 26px"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align: right;margin-right: 40px;">
+                        <button type="button" class="layui-btn layui-btn-normal">确定</button>
+                    </div>
+                </div>
+                <div class="layui-col-md4 layui-col-sm4 layui-col-lg4">
+                    <form class="layui-form" action="">
+                        <div id="layui-xtree-demo1" style="width:300px;height:500px; border:1px solid black; margin:20px;"></div>
+                        <input type="button" value="获取全部选中的checkbox" id="btn_getCk" />
+                    </form>
+                </div>
+            <!--</form>-->
+        </div>
+        <div class="layui-col-md12">
+            <table class="layui-hide" id="merchantListTable"  lay-filter="merchList"></table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<!--引入你自己的layui文件-->
+<script src="layui/layui.js"></script>
+<!--xtree的js文件-->
+<script src="layui---xtree/layui-xtree.js"></script>
+<script type="text/javascript">
+
+    //tree数据结构
+    var json = [
+            {
+                title: "节点1", value: "jd1", data: [
+                    { title: "节点1.1", value: "jd1.1", data: [] }
+                , { title: "节点1.2", value: "jd1.2", data: [] }
+                , { title: "节点1.3", value: "jd1.3", data: [] }
+                , { title: "节点1.4", value: "jd1.4", data: [] }
+                ]
+            }
+            , {
+                title: "节点2", value: "jd2", data: [
+                    { title: "节点2.1", value: "jd2.1", data: [] }
+                , {
+                    title: "节点2.2", value: "jd2.2", data: [
+                        { title: "节点2.2.1", value: "jd2.2.1", data: [] }
+                        , { title: "节点2.2.2", value: "jd2.2.2", data: [] }
+                        , { title: "节点2.2.3", value: "jd2.2.3", data: [] }
+                        , { title: "节点2.2.4", value: "jd2.2.4", data: [] }
+                    ]
+                }
+                , { title: "节点2.3", value: "jd2.3", data: [] }
+                , { title: "节点2.4", value: "jd2.4", data: [] }
+                ]
+            }
+            , { title: "节点3", value: "jd3", data: [] }
+            , { title: "节点4", value: "jd4", data: [] }
+    ];
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //创建tree
+        var xtree = new layuiXtree({
+            elem: 'layui-xtree-demo1' //放xtree的容器（必填）
+             , form: form              //layui form对象 （必填）
+             , data: json              //数据，结构请参照下面 （必填）
+             , isopen: false            //初次加载时全部展开，默认true （选填）
+             , color: "#000"           //图标颜色 （选填）
+             , icon: {                 //图标样式 （选填）
+                 open: "&#xe7a0;"      //节点打开的图标
+                 , close: "&#xe622;"   //节点关闭的图标
+                 , end: "&#xe621;"     //末尾节点的图标
+             }
+        });
+
+        document.getElementById('btn_getCk').onclick = function () {
+
+            var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+
+            for (var i = 0; i < oCks.length; i++) {
+                console.log(oCks[i].value);
+            }
+        }
+
+
+    });
+
+
+</script>

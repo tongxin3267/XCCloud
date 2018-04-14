@@ -1,0 +1,70 @@
+[{
+    "id": 0,
+    "title": "编号",
+    "field":"ID",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 1,
+    "title": "安装时间",
+    "field":"InstallTime",
+    "type": "time",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 2,
+    "title": "安装位置",
+    "field":"Location",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 3,
+    "title": "安装种类",
+    "field":"InstallKind",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 4,
+    "title": "经办人",
+    "field":"Operator",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 5,
+    "title":"安装数量",
+    "field":"InstallCount",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 5,
+    "title":"备注",
+    "field":"Note",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+}]

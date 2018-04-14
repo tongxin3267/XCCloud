@@ -1,0 +1,8 @@
+<!--pages/loginMb/loginMb.wxml-->
+<view class='container main-container'>
+  <button  bindtap="setVerify" loading="{{loading}}" disabled="{{disabled}}">{{VerifyCode}}</button>
+  <input class='mb-Verification-Code' type="number" name="linkTel" value="{{agentTel}}" placeholder="输入手机验证码" maxlength="11" />
+  <button>注册</button>
+</view>
+
+

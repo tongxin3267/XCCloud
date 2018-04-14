@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>限时送局规则</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .layui-form-onswitch{
+        border-color: #5FB878!important;
+        background-color: #5FB878!important;
+    }
+    .layui-form-switch{
+        position: relative;
+        height: 22px;
+        line-height: 22px;
+        width: 42px;
+        padding: 0 5px;
+        margin-top: 8px;
+        border: 1px solid #d2d2d2;
+        border-radius: 20px;
+        cursor: pointer;
+        background-color: #fff;
+        -webkit-transition: .1s linear;
+        transition: .1s linear;
+    }
+    .layui-form-switch em{position: absolute;
+        right: 5px;
+        top: 0;
+        width: 25px;
+        padding: 0!important;
+        text-align: center!important;
+        color: #999!important;
+        font-style: normal!important;
+        font-size: 12px;}
+    .layui-form-switch i{position: absolute;
+        left: 5px;
+        top: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 20px;
+        background-color: #d2d2d2;
+        -webkit-transition: .1s linear;
+        transition: .1s linear;}
+    .layui-form-onswitch em{
+        left: 5px;
+        right: auto;
+        color: #fff!important;
+    }
+    .layui-form-onswitch i{
+        left: 32px;
+        background-color: #fff;
+    }
+</style>
+<body>
+<div class="layui-row" style="padding: 10px">
+    <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+        <button type="button" class="layui-btn layui-btn-normal" id="addNew"><i class="layui-icon">&#xe654;</i>新增</button>
+        <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查询模板</button>
+    </blockquote>
+    <table class="layui-hide" id="gameFreeRuleTable" lay-filter="gameFreeRuleTable"></table>
+</div>
+<!--新规则设置弹窗-->
+<div id="gameFreeRuleOpen" style="display: none;padding: 15px;">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-col-md3"  style="height: 250px;border: 1px solid #aaa;padding: 10px;">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="overflow-y: scroll;margin-left: -8px;height: 220px" id="gameLists">
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md9"  style="height: 220px;padding-left: 22px;">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">生效时段</label>
+                    <div class="layui-input-inline" style="width: 150px">
+                        <input type="text" class="layui-input" id="StartTime">
+                    </div>
+                    <div class="layui-form-mid">至</div>
+                    <div class="layui-input-inline" style="width: 150px">
+                        <input type="text" class="layui-input" id="EndTime">
+                    </div>
+                    <div class="layui-form-mid">未来</div>
+                    <div class="layui-input-inline" style="width: 50px">
+                        <input type="text" class="layui-input" id="times" value="0">
+                    </div>
+                    <div class="layui-form-mid" style="width: 70px;white-space: normal;padding: 0px!important;">天重复此时间段</div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">会员级别</label>
+                    <div class="layui-input-inline">
+                        <select name="" id="memberLevel" lay-filter="memberLevel"></select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">规则类别</label>
+                    <div class="layui-input-inline">
+                        <select name="" id="RuleType" lay-filter="RuleType">
+
+                            <option value="0" selected>模拟机</option>
+                            <option value="1">娱乐机</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">扣币(局)数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="NeedCoin" required value="1">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">送币(局)数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="FreeCoin" required value="1" placeholder="范围1~7">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 8px 0">最小退币数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="ExitCoin" required>  </div>
+                    </div>
+                </div>
+            <blockquote class="layui-elem-quote">注：勾选多个游戏机时仅会送币一次</blockquote>
+        </div>
+        <div class="layui-col-sm-offset9 layui-col-sm3" style="margin-bottom: 15px;">
+            <button type="reset" class="layui-btn layui-hide" id="reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-danger" id="cancel">取消</button>
+            <button type="submit" class="layui-btn layui-btn-normal" id="save">保存</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+    let memberLevel=''; let memberLevelName='';let RuleType=0;
+    let allowOut=0; let  allowIn=0;
+    // 初始化表格
+    let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+        'url':'/XCCloud/FreeRule?action=QueryFreeRule',
+        'elem':'#gameFreeRuleTable',
+        'cols':[
+            {field:'ID', title:'送局规则ID', align: 'center', sort: true}
+            ,{field:'GameID', title:'游戏机编号', align: 'center', sort: true}
+            ,{field:'GameName',title: '游戏机名称', align: 'center'}
+            ,{field:'MemberLevelName', title: '会员级别', align: 'center'}
+            ,{field:'RuleTypeStr', title: '规则类别', align: 'center'}
+            ,{field:'NeedCoin', title: '扣币（局）数', align: 'center'}
+            ,{field:'FreeCoin', title: '送币（局）数', align: 'center'}
+            ,{field:'ExitCoin', title: '最小退币数', align: 'center'}
+            ,{field:'StartTime', title: '开始时间', align: 'center'}
+            ,{field:'EndTime', title: '结束时间', align: 'center'}
+            ,{field:'State', title: '是否启用', align: 'center',templet: '#state'}
+            ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+    };
+    xc.getInitData(parm);
+
+    var  getCheckBox=function(filter,arr,form){
+        form.on('checkbox('+filter+')', function(data){
+            if (data.elem.checked==true){
+                arr.push(data.value);console.log(arr)
+            }else if(data.elem.checked==false){
+                for (var i=0;i<arr.length;i++){
+                    if(arr[i]==data.value){
+                        arr.splice(i,1)
+                    }
+                }
+            }
+        });
+
+    };
+    layui.use(['form','layer','laydate','table'],function () {
+        let layer=layui.layer;
+        let form=layui.form;
+        let laydate=layui.laydate;
+        let table=layui.table;
+
+        var arrList=[];var arrWeek=[];
+        laydate.render({
+            elem:'#StartTime',
+            type:'datetime'
+        });
+        laydate.render({
+            elem:'#EndTime',
+            type:'datetime'
+        });
+        form.on('select(memberLevel)',function(data){
+            memberLevel=data.value;
+            memberLevelName=data.elem[data.elem.selectedIndex].title;
+        });
+        form.on('select(RuleType)',function(data){
+            RuleType=data.value;
+            console.log(data.value)
+        });
+        form.on('switch(allow_In)',function(data){
+            if(data.elem.checked==true){
+                allowIn=1;
+                console.log(allowIn)
+            }else if(data.elem.checked==false) {
+                allowIn=0;
+            }
+        });
+        form.on('switch(allow_Out)',function(data){
+            if(data.elem.checked==true){
+                allowOut=1;
+            }else if(data.elem.checked==false){
+                allowOut=0;
+            }
+        });
+
+        table.on('tool(gameFreeRuleTable)',function(obj){
+            let data = obj.data; //获得当前行数据
+            let layEvent = obj.event;
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    let _obj={'id':data.ID,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                    let url='/XCCloud/FreeRule?action=DelFreeRule';
+                    let parseJson = JSON.stringify(_obj);
+                    $.ajax({
+                        type:'post',
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: {parasJson: parseJson},
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            console.log(data)
+                            if (data.result_code == 1) {
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                                xc.getInitData(parm);
+                            } else {
+                                layer.msg('操作失败');
+                            }
+                        }
+
+                    })
+
+                });
+            }
+        });
+        form.on('switch(test)', function(data){
+           let ids=data.othis.parents('td').siblings('td[data-field="ID"]').children('div')[0].innerHTML;
+            let _obj={'id':ids,'state':data.elem.checked==true?1:0,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let url='/XCCloud/FreeRule?action=EnFreeRule';
+            let parseJson = JSON.stringify(_obj);
+            console.log(_obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data)
+                    if (data.result_code == 1) {
+                        xc.getInitData(parm);
+                    } else {
+                        layer.msg('操作失败');
+                    }
+                }
+            })
+        });
+        $('#addNew').on('click',function(){
+             memberLevel='';memberLevelName=''
+            $('#reset').trigger('click');
+            xc.gameMemberLevel(token,form,layer);
+            layer.open({
+                type:1,
+                title:'新增投币规则',
+                area:'935px',
+                content:$('#gameFreeRuleOpen')
+            });//打开弹窗
+            xc.addGamelists('gameLists',token,layer)//添加游戏机列表
+            getCheckBox('gameList',arrList,form);
+        });
+          //取消
+        $('#cancel').on('click',function(){
+            xc.closeAll(layer);
+        });
+        //保存
+        $('#save').on('click',function(){
+            let _obj={'gameIndexIds':arrList,
+                'memberLevelId':memberLevel,
+                'ruleType':RuleType,
+                'needCoin':$('#NeedCoin').val(),
+                'freeCoin':$('#FreeCoin').val(),
+                'exitCoin':$('#ExitCoin').val(),
+                'startTime':$('#StartTime').val(),
+                'endTime':$('#EndTime').val(),
+                'times':$('#times').val(),
+                'userToken':token,
+                'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let url='/XCCloud/FreeRule?action=AddFreeRule';
+            let parseJson = JSON.stringify(_obj);
+            console.log(_obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data)
+                    if (data.result_code == 1) {
+                        layer.msg('保存成功！')
+                        xc.getInitData(parm);
+                    } else {
+                        layer.msg('操作失败');
+                    }
+                }
+            })
+        });
+    })
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"> <i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+<script type="text/html" id="state">
+    {{# if(d.State==1){ }}
+          <input type="checkbox" checked name="switch" lay-skin="switch" lay-text="ON|OFF" class="tb_check" lay-filter="test" >
+    {{# }else{ }}
+            <input type="checkbox" name="switch" lay-skin="switch" lay-text="ON|OFF" class="tb_check" lay-filter="test">
+    {{#  } }}
+</script>
+</html>

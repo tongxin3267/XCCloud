@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="css/weui1.1.2.css">
+    <style>
+        .title_img{display: inline-block;width: 35px;vertical-align: middle;background-color: #1296db;margin:  0 10px;border-radius: 50%;}
+    </style>
+</head>
+<body>
+        <div class="weui-cells__title" style="font-size: 18px;background-color: #eeeeee;color: #0e90d2;
+        height: 50px;line-height: 50px;margin: 20px 0;"><img src="images/barrage_fill.svg" alt=" " class="title_img">用户信息</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell ">
+                <div class="weui-cell__hd"><label for="username" class="weui-label">用户名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入用户名" id="username">
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="weui-cells__title" style="font-size: 18px;background-color: #eeeeee;color: #0e90d2;height: 50px;line-height: 50px;margin: 20px 0;">申请理由</div>-->
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd" style="vertical-align: top;margin-top: -75px;"><label for="username" class="weui-label">申请理由</label></div>
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/50</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-cells__title" style="font-size: 18px;background-color: #eeeeee;color: #0e90d2;height: 50px;
+        line-height: 50px;margin: 20px 0;"><img src="images/setup_fill.svg" alt="" class="title_img">权限设置</div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label  class="weui-label">工作组设置</label></div>
+            <div class="weui-cell__bd weui-cells_form">
+                <input class="weui-input" id="firstMenu" type="text" value="选择工作组" readonly="" style="width: 100%">
+                <!--<input class="weui-input" id="secondMenu" type="text" value="2" readonly="" style="width: 45%">-->
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="in" class="weui-label">授权设置</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="in" type="text" value="选择权限" readonly="">
+            </div>
+        </div>
+<script src="../js/jquery-1.8.3-min.js"></script>
+        <script src="js/weui.1.1.2.js"></script>
+        <script type="text/javascript">
+            $("#firstMenu").select({
+                title: "选择手机",
+                items: [
+                    {
+                        title: "iPhone 3GS",
+                        value: "001",
+                    },
+                    {
+                        title: "iPhone 5",
+                        value: "002",
+                    },
+                    {
+                        title: "iPhone 5S",
+                        value: "003",
+                    },
+                    {
+                        title: "iPhone 6",
+                        value: "004",
+                    },
+                    {
+                        title: "iPhone 6S",
+                        value: "005",
+                    },
+                    {
+                        title: "iPhone 6P",
+                        value: "006",
+                    },
+                    {
+                        title: "iPhone 6SP",
+                        value: "007",
+                    },
+                    {
+                        title: "iPhone SE",
+                        value: "008",
+                    },
+                    {
+                        title: "iPhone 7",
+                        value: "009"
+                    }
+                ]
+            });
+            function do_userGroup() {
+                var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "workId": "1" };
+                var url = '/wx/Users?action=GetUserGroupGrant';
+                var parasJson = JSON.stringify(parasObj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: { parasJson: parasJson },
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        var arr=data.result_data;
+                        var groupArr=[];
+                        for( var i=0;i<arr.length;i++){
+                              groupArr.push({"title":arr[i].GroupName,"value":i})
+                        }
+                        console.log(groupArr);
+                        $("#firstMenu").select({
+                            title: "设置权限",
+                            multi: true,
+                            items:groupArr,
+
+                        });
+                    },
+                    error: function (error) {
+                        console.log(1);  //这个地方也用到了
+                    }
+                });
+            }
+//            do_userGroup();
+            function do_userGrant() {
+                var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "workId": "1" };
+                var url = '/wx/Users?action=GetUserGrant';
+                var parasJson = JSON.stringify(parasObj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: { parasJson: parasJson },
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        var arr=data.result_data;
+                        var authArr=[];
+                        for( var i=0;i<arr.length;i++){
+//                            authArr[i].title=arr[i].DictValue;
+//                                authArr[i].value=i;
+                            authArr.push({"title":arr[i].DictValue,"value":i})
+                        }
+                        console.log(authArr);
+                        $("#in").select({
+                            title: "设置权限",
+                            multi: true,
+                            items:authArr,
+
+                    });
+                    },
+                    error: function (error) {
+                        console.log(1);  //这个地方也用到了
+                    }
+                });
+            }
+//            do_userGrant();
+        </script>
+
+
+
+
+</body>
+
+</html>

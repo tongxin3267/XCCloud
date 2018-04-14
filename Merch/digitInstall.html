@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字币安装</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+   <div class="layui-row" style="padding: 15px">
+       <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+           <button type="button" class="layui-btn layui-btn-normal" id="add"><i class="layui-icon">&#xe631;</i>安装</button>
+       </blockquote>
+       <table class="layui-hide" lay-filter="digitInstallTable" id="digitInstallTable"></table>
+   </div>
+
+<!--弹出层-->
+<div id="openModel" style="padding: 15px;display:none;">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class=layui-inline>
+                <label class="layui-form-label">安装位置</label>
+                <div class="layui-input-inline">
+                    <select  id="">
+                        <option value="0">江汉路</option>
+                        <option value="1">江汉路</option>
+                        <option value="2">江汉路</option>
+                    </select>
+                </div>
+            </div>
+            <div class=layui-inline>
+                <label class="layui-form-label">安装类别</label>
+                <div class="layui-input-inline">
+                    <select  id="">
+                        <option value="0">江汉路</option>
+                        <option value="1">江汉路</option>
+                        <option value="2">江汉路</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">安装数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required value="0">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">经办人</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" required placeholder="50个字以内">
+                </div>
+        </div>
+        <div class="layui-form-item" style="text-align:right;">
+            <button type="button" class="layui-btn layui-btn-normal" id="save">确定</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+
+    layui.use(['form','table'],function(){
+        let arr=[{'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Money':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},
+            {'SaleTime':'2018-3-15','Location':'200','DigitName':'七号数字币','Count':40,'Operator':'499','Note':'售币机'},]
+        layui.table.render({
+            elem: '#digitInstallTable'
+            , data: arr
+            // , size:'sm'
+            , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'SaleTime', title:'安装时间', align: 'center'}
+                ,{field:'Location',title: '安装位置', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'DigitName', title: '安装类别', align: 'center'}
+                ,{field:'Count', title: '安装数量', align: 'center'}
+                ,{field:'Operator', title: '经办人', align: 'center'}
+                ,{field:'Note', title: '备注', align: 'center'}
+                ,{fixed: 'right',title: '操作' , align:'center', toolbar: '#barDemo'}]]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 10
+        });
+     $('#add').on('click',function(){
+         layer.open({
+             title:'数字币安装',
+             type:1,
+             area:'680px',
+             content:$('#openModel')
+         })
+     });
+        $('#save').on('click',function(){
+            layer.closeAll();
+        })
+    })
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

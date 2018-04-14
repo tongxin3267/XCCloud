@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/bookMall/bookMall",
+    "pages/bookList/bookList",
+    "pages/mine/mine",
+    "pages/bookDetail/bookDetail",
+    "pages/hotPush/hotPush",
+    "pages/allBook/allBook",
+    "pages/login/login",
+    
+    "pages/bookMall/mall/mall",
+    "pages/bookList/list/list",
+    "pages/login/loginMb/loginMb"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#015581",
+    "navigationBarTitleText": "莘拍档",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/tab/tab_book_store_nor.png",
+        "selectedIconPath": "/images/tab/tab_book_store_pre.png"
+      },
+     
+      {
+        "pagePath": "pages/bookList/bookList",
+        "text": "扫码",
+        "iconPath": "/images/tab/tab_book_comment_nor.png",
+        "selectedIconPath": "/images/tab/tab_book_comment_pre.png"
+      },
+      {
+        "pagePath": "pages/bookDetail/bookDetail",
+        "text": "我的订单",
+        "iconPath": "/images/tab/tab_book_mine_nor.png",
+        "selectedIconPath": "/images/tab/tab_book_mine_pre.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的卡包",
+        "iconPath": "/images/tab/tab_book_mine_nor.png",
+        "selectedIconPath": "/images/tab/tab_book_mine_pre.png"
+      }
+    ],
+    "selectedColor": "#FB7C58",
+    "borderStyle": "white"
+  }
+}

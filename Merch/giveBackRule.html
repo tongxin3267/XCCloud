@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返还规则设置</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div class="layui-row" style="padding: 10px;">
+    <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+        <!--<button type="button" class="layui-btn layui-btn-normal">查询模板</button>-->
+        <button type="button" class="layui-btn layui-btn-normal add"><i class="layui-icon">&#xe654;</i>新增</button>
+    </blockquote>
+    <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+        <table class="layui-hide" id="giveBackRuleTb"  lay-filter="giveBackRuleTb"></table>
+    </div>
+</div>
+<div id="openModel" style="display: none;padding: 15px">
+    <form action="" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">会员级别</label>
+                <div class="layui-input-inline">
+                    <select  id="memberLevel">
+                        <option>-请选择-</option>
+                        <option value="1">普通卡</option>
+                        <option value="2">白银会员</option>
+                        <option value="3">黄金会员</option>
+                        <option value="4">钻石会员</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">返还累计天数</label>
+                <div class="layui-input-inline"><input type="text" class="layui-input"></div>
+                <div class="layui-form-mid">填0表示仅当天有效</div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label">返还方式</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" lay-skin="switch" lay-filter="switchTest" lay-text="按营业日期|按自然日期">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label">统计方式方式</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" lay-skin="switch" lay-filter="switchTest" lay-text="包含当天|不包含当天">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label  class="layui-form-label">输币期间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input">
+                </div>
+                <div class="layui-form-mid">至</div>
+                <div class="layui-input-inline">
+                     <input type="text" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">返还比例</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label  class="layui-form-label">返还卡少于</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input">
+                </div>
+                <div class="layui-form-mid">币不能退卡(返还到会员卡时无效)</div>
+            </div>
+            <div class="layui-inline">
+                <label for="" class="layui-form-label">是否扣除返还币</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+                </div>
+            </div>
+        </div>
+        <div style="text-align:right;margin: 15px 0">
+            <button id="save" class="layui-btn layui-btn-normal" type="button">确定</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+
+    layui.use(['form','table','layer'],function(){
+        document.getElementsByClassName('add')[0].addEventListener('click',function () {
+            layui.layer.open({
+                title:'新增返还规则',
+                type:1,
+                area:'900px',
+                content:$('#openModel')
+            })
+        });
+        document.getElementById('save').addEventListener('click',function(){
+            layer.closeAll();
+        })
+        let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+        layui.table.render({
+            elem: '#giveBackRuleTb'
+            , data: arr
+            // , size:'sm'
+            ,height:'full-100'
+            , cellMinWidth: 90 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'Count', title:'会员级别', align: 'center'}
+                ,{field:'DigitNumber',title: '最小币数', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'DigitName', title: '最大币数', align: 'center'}
+                ,{field:'Money', title: '返还比例', align: 'center'}
+                ,{field:'Money', title: '退卡最小余额', align: 'center'}
+                ,{field:'Money', title: '计算方式', align: 'center'}
+                ,{field:'Money', title: '累计天数', align: 'center'}
+                ,{field:'Money', title: '是否扣除返还币', align: 'center'}
+                ,{field:'Money', title: '是否统计当天', align: 'center'}
+                ,{field:'Money', title: '说明', align: 'center'}
+                ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo'}]
+
+            ]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 10
+        })
+    })
+</script>
+</html>

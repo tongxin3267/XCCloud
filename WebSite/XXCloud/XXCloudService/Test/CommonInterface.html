@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+    <script type="text/javascript">
+
+        function common(url, data) {
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {  },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+    </script>
+
+    //会员接口
+    <script type="text/javascript">
+        function do_getDeviceQR() {
+            url = "/qr/a/000000001";
+            common(url, null);
+        }      
+    </script>
+
+</head>
+<body>
+    <div title="QR" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>QR</div>
+        <input id="Button1" type="button" value="do_getDeviceQR(设备QR)" onclick="do_getDeviceQR()" />
+    </div>       
+</body>
+</html>

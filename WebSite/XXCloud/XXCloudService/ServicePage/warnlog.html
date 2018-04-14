@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="../assets/layui/css/layui.css" rel="stylesheet" />
+    <style type="text/css">
+        .my-label{ width:auto; text-align:left; color:#666666; padding: 9px 5px 9px 0px;}
+    </style>
+</head>
+<body>
+    <div id="app" class ="layui-container" style="width: 1256px">
+        <div class="layui-form" lay-filter="ssssddd">
+            <div class="layui-form-item" style="margin-top: 10px; margin-bottom: 0px;">
+                <label class="layui-form-label my-label">控制器令牌</label>
+                <input type="text" name="title" placeholder="控制器令牌" autocomplete="off" v-model="params.routerToken" class="layui-input layui-input-inline" style="width: 100px;">
+                <label class="layui-form-label my-label">设备串码</label>
+                <input type="text" name="title" placeholder="设备串码" autocomplete="off" v-model="params.deviceSN" class="layui-input layui-input-inline" style="width: 136px;">
+                <label class="layui-form-label my-label">短地址</label>
+                <input type="text" name="title" placeholder="短地址" autocomplete="off" v-model="params.headAddress" class="layui-input layui-input-inline" style="width: 80px;">
+                <label class="layui-form-label my-label">报警类别</label>
+                <div class="layui-inline" style="float: left; width:150px;">
+                    <select id="alertType" name="alertType" lay-filter="alerttype" class="layui-unselect layui-form-select">
+                        <option value="">请选择报警类别</option>
+                        <option value="机头净退币超分">机头净退币超分</option>
+                        <option value="专卡专用解锁">专卡专用解锁</option>
+                    </select>
+                </div>
+
+                <label class="layui-form-label my-label">时间</label>
+                <input type="text" class="layui-input layui-input-inline" id="startDate">
+                <button class="layui-btn layui-btn-primary" @click="doSearch">立即提交</button>
+            </div>
+        </div>
+        <table id="log-table"></table>
+    </div>
+    <script src="../assets/layui/layui.js"></script>
+    <script src="../assets/js/vue.min.js"></script>
+    <script src="../assets/js/axios.min.js"></script>
+
+    <script type="text/javascript">
+        var Public = Public || {};
+        /*获取URL参数值*/
+        Public.getUrlParam = function () {
+            var param, url = location.search, theRequest = {};
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0, len = strs.length; i < len; i++) {
+                    param = strs[i].split("=");
+                    theRequest[param[0]] = decodeURIComponent(param[1]);
+                }
+            }
+            return theRequest;
+        };
+
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "H+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        var urlParam = Public.getUrlParam();
+        var tDate = new Date();
+        tDate.setTime(tDate.getTime() + 24 * 60 * 60 * 1000);
+
+        var vm = new Vue({
+            el: "#app",
+            data: function () {
+                return {
+                    params: {
+                        sysId: "1",
+                        versionNo: "1.0",
+                        routerToken: "",
+                        deviceSN: "",
+                        headAddress: "",
+                        alertType: "",
+                        sDate: new Date().Format("yyyy-MM-dd"),
+                        eDate: tDate.Format("yyyy-MM-dd")
+                    },
+                    rowData: []
+                }
+            },
+            mounted: function () {
+                this.params.routerToken = urlParam["route"];
+                this.params.deviceSN = urlParam["sn"];
+                this.Load();
+                this.RenderDate();
+                this.SelectChanged();
+            },
+            methods: {
+                Load: function () {
+                    var _vm = this;
+                    axios.post('/XCCloudRS232/Device?action=getRouterWarnLog', _vm.params).then(function (d) {
+                        var data = d.data;
+                        if (data.result_code === '1') {
+                            _vm.rowData = data.result_data;
+                            _vm.RenderTable(_vm.rowData);
+                        }
+                        else {
+                            _vm.RenderTable([]);
+                        }
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                doSearch: function () {
+                    this.Load();
+                },
+                RenderTable: function (data) {
+                    var _vm = this;
+                    layui.use('table', function () {
+                        var table = layui.table;
+                        table.render({
+                            elem: '#log-table',
+                            height: 471,
+                            data: data, 
+                            page: true,
+                            limit: 30,
+                            limits: [30, 50, 100],
+                            cols: [[ //表头
+                            { field: 'DeviceName', title: '设备名称', width: 86 },
+                            { field: 'DeviceType', title: '设备类别', width: 86 },
+                            { field: 'SN', title: '长地址', width: 146 },
+                            { field: 'HeadAddress', title: '短地址', width: 72 },
+                            { field: 'AlertType', title: '报警类别', width: 128 },
+                            { field: 'HappenTime', title: '报警时间', width: 164},
+                            { field: 'EndTime', title: '解除时间', width: 80 },
+                            { field: 'State', title: '状态', width: 60, templet: _vm.FormatState },
+                            { field: 'LockGame', title: '锁定游戏机', width: 80, templet: '#LockTpl' },
+                            { field: 'LockMember', title: '锁定会员', width: 80, templet: '#LockTpl' },
+                            { field: 'AlertContent', title: '报警内容' }
+                            ]]
+                        });
+                    });
+                },
+                RenderDate: function () {
+                    var _vm = this;
+                    layui.use('laydate', function () {
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#startDate',
+                            max: tDate.Format("yyyy-MM-dd"),
+                            range: "~",
+                            value: _vm.params.sDate + " ~ " + _vm.params.eDate,
+                            done: function (value, date, endDate) {
+                                if (value === "") {
+                                    _vm.params.sDate = "";
+                                    _vm.params.eDate = "";
+                                }
+                                else {
+                                    _vm.params.sDate = value.split(' ~ ')[0];
+                                    _vm.params.eDate = value.split(' ~ ')[1];
+                                }
+                            }
+                        });
+                    });
+                },
+                SelectChanged: function () {
+                    var _vm = this;
+                    layui.use('form', function () {
+                        var form = layui.form;
+                        form.on('select(alerttype)', function (data) {
+                            _vm.params.alertType = data.value;
+                        });
+                    });
+                },
+                //函数转义模版，效果与模版选择器一样
+                FormatState: function (d) {
+                    if (d.LockGame == 0) {
+                        return "活动";
+                    }
+                    else if (d.LockGame == 1) {
+                        return "确认";
+                    }
+                    else {
+                        return "解决";
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script type="text/html" id="LockTpl">
+        <!--模版选择器-->
+        {{#  if(d.LockGame == 1){ }}
+        是
+        {{#  } else { }}
+        否
+        {{#  } }}
+    </script>
+</body>
+</html>

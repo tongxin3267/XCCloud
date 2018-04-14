@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品盘点</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div class="layui-row" style="padding: 10px">
+    <blockquote class="layui-elem-quote" style="margin-top: 10px;margin-bottom: 10px">
+         <button type="button" class="layui-btn layui-btn-normal" id="addNew"><i class="layui-icon">&#xe654;</i>盘点</button>
+         <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查询模板</button>
+    </blockquote>
+
+    <table class="layui-hide" id="productInventTable" lay-filter="productInventTable"></table>
+</div>
+
+<!--入库弹窗-->
+<div id="InventoryOpen" style="display: none;padding: 15px;">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商品条码</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Barcode">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">预估数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="PredictCount">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">盘点类别</label>
+                <div class="layui-input-inline">
+                    <select type="select"  id="InventoryTypeStr" lay-filter="InventoryTypeStr"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="padding: 8px 0">盘点位置索引</label>
+                <div class="layui-input-inline">
+                    <select type="select"  id="InventoryIndex" lay-filter="InventoryIndex"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">盘点数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="InventoryCount">
+                </div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">库存总额</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="TotalPrice">
+            </div>
+        </div>
+            <br>
+            <div class="layui-inline">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block" style="width: 513px;">
+                    <input type="text" class="layui-input" id="Note">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm-offset9 layui-col-sm3" style="margin-bottom: 15px;">
+            <button type="reset" class="layui-btn layui-hide" id="reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-danger" id="cancel">取消</button>
+            <button type="submit" class="layui-btn layui-btn-normal" id="save">保存</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+
+    window.onload=function(){
+        let xc=xcActionSystem.prototype;
+        let token=xc.getStorage('token');
+        let id='';
+        let InventoryTypeStr;
+        let InventoryIndex;
+        // 初始化表格
+        let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+            'url':'/XCCloud/GoodsInfo?action=QueryGoodInventory',
+            'elem':'#productInventTable',
+            'cols':[
+                 {field:'ID', title:'入库流水号', align: 'center', sort: true}
+                // ,{field:'InventoryTypeStr', title: '盘点类别', align: 'center'}
+                // ,{field:'InventoryIndex', title: '盘点位置索引', align: 'center'}
+                ,{field:'InventoryTime',title: '盘点时间', align: 'center', templet: '#changeTime'} //width 支持：数字、百分比和不填写。
+                ,{field:'RealName', title: '盘点经办人', align: 'center'}
+                ,{field:'InventoryCount', title: '盘点数量', align: 'center'}
+                ,{field:'Note', title: '备注', align: 'center'}
+                ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+        };
+        xc.getInitData(parm);
+        layui.use(['layer','form','laydate'],function(){
+            let layer=layui.layer;
+            let form=layui.form;
+            let laydate=layui.laydate;
+            $('#addNew').on('click',function(){
+                id='';
+               xc.setSelect('盘点类别','InventoryTypeStr');
+                $('#reset').trigger('click');
+                // xc.openProductAdd(layer,'商品入库','680px','storageOpen')
+                layer.open({
+                    type:1,
+                    title:'商品盘点',
+                    area:'680px',
+                    content:$('#InventoryOpen')
+                })
+            });
+            $('#cancel').on('click',function(){
+                xc.closeAll(layer);
+            });
+            //保存新增或者修改的入库记录
+            $('#save').on('click',function(){
+                xc.AddGoodInventory(layer);
+            });
+          //监听select
+            form.on('select(InventoryTypeStr)',function(data){
+                InventoryTypeStr=data.value;
+                console.log(data.value);
+                console.log(InventoryTypeStr);
+                xc.QueryWorkstation(data.value,form,layer);
+            });
+            form.on('select(InventoryIndex)',function(data){
+                InventoryIndex=data.value;
+            });
+            laydate.render({
+                elem: '#InventoryTime',
+                type:'datetime'
+            })
+            xcActionSystem.prototype.AddGoodInventory=function(layer){
+                let _obj={    'id':id,
+                    'barcode':$('#Barcode').val(),
+                    'predictCount':$('#PredictCount').val(),
+                    'inventoryType':InventoryTypeStr,
+                    'inventoryIndex':InventoryIndex,
+                    'totalPrice':$('#TotalPrice').val(),
+                    'inventoryCount':$('#InventoryCount').val(),
+                    'note':$('#Note').val(),
+                    'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                let url='/XCCloud/GoodsInfo?action=AddGoodInventory';
+                let parasJson = JSON.stringify(_obj);
+                $.ajax({
+                    type: "post", url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: JSON.stringify(_obj)},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if (data.result_code==1) {
+                            layer.msg('保存成功！');
+                            xc.getInitData(parm);
+                        }else {
+                            layer.msg(data.result_msg)
+                        }
+                    }
+                })
+            };
+            xcActionSystem.prototype.QueryWorkstation=function(index,form,layer){
+                let _obj={'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                let url;
+                if(index==1){
+                    url='/XCCloud/Workstation?action=QueryWorkstation';
+                }else if(index==3){
+                    url='/XCCloud/Head?action=QueryHead';
+                }
+
+                let parasJson = JSON.stringify(_obj);
+                $.ajax({
+                    type: "post", url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: JSON.stringify(_obj)},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if (data.result_code==1) {
+                            $('#InventoryIndex').html('');
+                            let arr=data.result_data;
+                            if(index==1){
+                                for(var i in arr){
+                                    $('#InventoryIndex').append('<option value="'+arr[i].ID+'">'+arr[i].WorkStation+'</option>')
+                                }
+                            }else if(index==3){
+                                for(var i in arr){
+                                    $('#InventoryIndex').append('<option value="'+arr[i].ID+'">'+arr[i].HeadName+'</option>')
+                                }
+                            }
+
+                            form.render();
+                        }else {
+                            layer.msg(data.return_msg)
+                        }
+                    }
+                })
+            }
+        });
+    }
+</script>
+<script type="text/html" id="changeTime">
+    {{# if(d.InventoryTime!=null&&d.InventoryTime!=''){ }}
+    {{xcActionSystem.prototype.timeStamp2String(d.InventoryTime)}}
+    {{# }else{ }}
+    {{d.InventoryTime}}
+    {{#  } }}
+</script>
+</html>

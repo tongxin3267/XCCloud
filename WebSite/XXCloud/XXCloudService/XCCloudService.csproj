@@ -1,0 +1,1593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEBC527E-778E-4217-8CD0-A84FD101CBCB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XXCloudService</RootNamespace>
+    <AssemblyName>XXCloudService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk">
+      <HintPath>..\packages\PayChannel\AopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="F2FPayDll">
+      <HintPath>..\packages\PayChannel\F2FPayDll.dll</HintPath>
+    </Reference>
+    <Reference Include="Fleck">
+      <HintPath>..\packages\WebSocktet\Fleck.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.6.7.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.7\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>..\packages\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="pingpp">
+      <HintPath>..\packages\PayChannel\pingpp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\packages\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Api\XCCloud\UserInfo.ashx" />
+    <Content Include="assets\css\admin.css" />
+    <Content Include="assets\css\amazeui.min.css" />
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\img\ajax-loader.gif" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\i\examples\admin-chrome.png" />
+    <Content Include="assets\i\examples\admin-firefox.png" />
+    <Content Include="assets\i\examples\admin-ie.png" />
+    <Content Include="assets\i\examples\admin-opera.png" />
+    <Content Include="assets\i\examples\admin-safari.png" />
+    <Content Include="assets\i\examples\adminPage.png" />
+    <Content Include="assets\i\examples\blogPage.png" />
+    <Content Include="assets\i\examples\landing.png" />
+    <Content Include="assets\i\examples\landingPage.png" />
+    <Content Include="assets\i\examples\loginPage.png" />
+    <Content Include="assets\i\examples\sidebarPage.png" />
+    <Content Include="assets\i\favicon.png" />
+    <Content Include="assets\js\amazeui.min.js" />
+    <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\axios.min.js" />
+    <Content Include="assets\js\highcharts.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\qrcode.min.js" />
+    <Content Include="assets\js\vue.min.js" />
+    <Content Include="assets\layer\layer.js" />
+    <Content Include="assets\layer\mobile\layer.js" />
+    <Content Include="assets\layer\mobile\need\layer.css" />
+    <Content Include="assets\layer\theme\default\icon-ext.png" />
+    <Content Include="assets\layer\theme\default\icon.png" />
+    <Content Include="assets\layer\theme\default\layer.css" />
+    <Content Include="assets\layer\theme\default\loading-0.gif" />
+    <Content Include="assets\layer\theme\default\loading-1.gif" />
+    <Content Include="assets\layer\theme\default\loading-2.gif" />
+    <Content Include="assets\layui\css\layui.css" />
+    <Content Include="assets\layui\css\layui.mobile.css" />
+    <Content Include="assets\layui\css\modules\code.css" />
+    <Content Include="assets\layui\css\modules\laydate\default\laydate.css" />
+    <Content Include="assets\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="assets\layui\css\modules\layer\default\icon.png" />
+    <Content Include="assets\layui\css\modules\layer\default\layer.css" />
+    <Content Include="assets\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="assets\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="assets\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="assets\layui\font\iconfont.svg" />
+    <Content Include="assets\layui\images\face\0.gif" />
+    <Content Include="assets\layui\images\face\1.gif" />
+    <Content Include="assets\layui\images\face\10.gif" />
+    <Content Include="assets\layui\images\face\11.gif" />
+    <Content Include="assets\layui\images\face\12.gif" />
+    <Content Include="assets\layui\images\face\13.gif" />
+    <Content Include="assets\layui\images\face\14.gif" />
+    <Content Include="assets\layui\images\face\15.gif" />
+    <Content Include="assets\layui\images\face\16.gif" />
+    <Content Include="assets\layui\images\face\17.gif" />
+    <Content Include="assets\layui\images\face\18.gif" />
+    <Content Include="assets\layui\images\face\19.gif" />
+    <Content Include="assets\layui\images\face\2.gif" />
+    <Content Include="assets\layui\images\face\20.gif" />
+    <Content Include="assets\layui\images\face\21.gif" />
+    <Content Include="assets\layui\images\face\22.gif" />
+    <Content Include="assets\layui\images\face\23.gif" />
+    <Content Include="assets\layui\images\face\24.gif" />
+    <Content Include="assets\layui\images\face\25.gif" />
+    <Content Include="assets\layui\images\face\26.gif" />
+    <Content Include="assets\layui\images\face\27.gif" />
+    <Content Include="assets\layui\images\face\28.gif" />
+    <Content Include="assets\layui\images\face\29.gif" />
+    <Content Include="assets\layui\images\face\3.gif" />
+    <Content Include="assets\layui\images\face\30.gif" />
+    <Content Include="assets\layui\images\face\31.gif" />
+    <Content Include="assets\layui\images\face\32.gif" />
+    <Content Include="assets\layui\images\face\33.gif" />
+    <Content Include="assets\layui\images\face\34.gif" />
+    <Content Include="assets\layui\images\face\35.gif" />
+    <Content Include="assets\layui\images\face\36.gif" />
+    <Content Include="assets\layui\images\face\37.gif" />
+    <Content Include="assets\layui\images\face\38.gif" />
+    <Content Include="assets\layui\images\face\39.gif" />
+    <Content Include="assets\layui\images\face\4.gif" />
+    <Content Include="assets\layui\images\face\40.gif" />
+    <Content Include="assets\layui\images\face\41.gif" />
+    <Content Include="assets\layui\images\face\42.gif" />
+    <Content Include="assets\layui\images\face\43.gif" />
+    <Content Include="assets\layui\images\face\44.gif" />
+    <Content Include="assets\layui\images\face\45.gif" />
+    <Content Include="assets\layui\images\face\46.gif" />
+    <Content Include="assets\layui\images\face\47.gif" />
+    <Content Include="assets\layui\images\face\48.gif" />
+    <Content Include="assets\layui\images\face\49.gif" />
+    <Content Include="assets\layui\images\face\5.gif" />
+    <Content Include="assets\layui\images\face\50.gif" />
+    <Content Include="assets\layui\images\face\51.gif" />
+    <Content Include="assets\layui\images\face\52.gif" />
+    <Content Include="assets\layui\images\face\53.gif" />
+    <Content Include="assets\layui\images\face\54.gif" />
+    <Content Include="assets\layui\images\face\55.gif" />
+    <Content Include="assets\layui\images\face\56.gif" />
+    <Content Include="assets\layui\images\face\57.gif" />
+    <Content Include="assets\layui\images\face\58.gif" />
+    <Content Include="assets\layui\images\face\59.gif" />
+    <Content Include="assets\layui\images\face\6.gif" />
+    <Content Include="assets\layui\images\face\60.gif" />
+    <Content Include="assets\layui\images\face\61.gif" />
+    <Content Include="assets\layui\images\face\62.gif" />
+    <Content Include="assets\layui\images\face\63.gif" />
+    <Content Include="assets\layui\images\face\64.gif" />
+    <Content Include="assets\layui\images\face\65.gif" />
+    <Content Include="assets\layui\images\face\66.gif" />
+    <Content Include="assets\layui\images\face\67.gif" />
+    <Content Include="assets\layui\images\face\68.gif" />
+    <Content Include="assets\layui\images\face\69.gif" />
+    <Content Include="assets\layui\images\face\7.gif" />
+    <Content Include="assets\layui\images\face\70.gif" />
+    <Content Include="assets\layui\images\face\71.gif" />
+    <Content Include="assets\layui\images\face\8.gif" />
+    <Content Include="assets\layui\images\face\9.gif" />
+    <Content Include="assets\layui\layui.all.js" />
+    <Content Include="assets\layui\layui.js" />
+    <Content Include="assets\layui\lay\modules\carousel.js" />
+    <Content Include="assets\layui\lay\modules\code.js" />
+    <Content Include="assets\layui\lay\modules\element.js" />
+    <Content Include="assets\layui\lay\modules\flow.js" />
+    <Content Include="assets\layui\lay\modules\form.js" />
+    <Content Include="assets\layui\lay\modules\jquery.js" />
+    <Content Include="assets\layui\lay\modules\laydate.js" />
+    <Content Include="assets\layui\lay\modules\layedit.js" />
+    <Content Include="assets\layui\lay\modules\layer.js" />
+    <Content Include="assets\layui\lay\modules\laypage.js" />
+    <Content Include="assets\layui\lay\modules\laytpl.js" />
+    <Content Include="assets\layui\lay\modules\mobile.js" />
+    <Content Include="assets\layui\lay\modules\table.js" />
+    <Content Include="assets\layui\lay\modules\tree.js" />
+    <Content Include="assets\layui\lay\modules\upload.js" />
+    <Content Include="assets\layui\lay\modules\util.js" />
+    <Content Include="Boss\Login.aspx" />
+    <Content Include="CallBack\AlipayAuthNotify.aspx" />
+    <Content Include="CallBack\AliPayNotify.aspx" />
+    <Content Include="Config\SAppMessageTemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Imgs\ID图片20180103153738751.png" />
+    <Content Include="index.html" />
+    <Content Include="MobileWeb\billList.html" />
+    <Content Include="MobileWeb\css\ydui.rem.css" />
+    <Content Include="MobileWeb\CurrencyOperation.html" />
+    <Content Include="MobileWeb\games.html" />
+    <Content Include="MobileWeb\home.html" />
+    <Content Include="MobileWeb\hTest.html" />
+    <Content Include="MobileWeb\HtmlPage1.html" />
+    <Content Include="MobileWeb\images\account.png" />
+    <Content Include="MobileWeb\images\addpic.png" />
+    <Content Include="MobileWeb\images\b.png" />
+    <Content Include="MobileWeb\images\btnBg.png" />
+    <Content Include="MobileWeb\images\cancel.png" />
+    <Content Include="MobileWeb\images\card.png" />
+    <Content Include="MobileWeb\images\device.png" />
+    <Content Include="MobileWeb\images\down88.png" />
+    <Content Include="MobileWeb\images\filter.png" />
+    <Content Include="MobileWeb\images\frame.png" />
+    <Content Include="MobileWeb\images\hot.png" />
+    <Content Include="MobileWeb\images\icon.png" />
+    <Content Include="MobileWeb\images\icon1.png" />
+    <Content Include="MobileWeb\images\more.png" />
+    <Content Include="MobileWeb\images\note.png" />
+    <Content Include="MobileWeb\images\sales.png" />
+    <Content Include="MobileWeb\images\sendImg.png" />
+    <Content Include="MobileWeb\images\shoppingcard.png" />
+    <Content Include="MobileWeb\images\star.png" />
+    <Content Include="MobileWeb\images\star_green.png" />
+    <Content Include="MobileWeb\images\vip.png" />
+    <Content Include="MobileWeb\images\welfare.png" />
+    <Content Include="MobileWeb\images\xhr.png" />
+    <Content Include="MobileWeb\index.html" />
+    <Content Include="MobileWeb\js\axios.min.js" />
+    <Content Include="MobileWeb\js\jquery-1.8.3-min.js" />
+    <Content Include="MobileWeb\js\vue.js" />
+    <Content Include="MobileWeb\js\ydui.flexible.js" />
+    <Content Include="MobileWeb\js\ydui.rem.js" />
+    <Content Include="MobileWeb\login.html" />
+    <Content Include="MobileWeb\mall.html" />
+    <Content Include="MobileWeb\mine.html" />
+    <Content Include="MobileWeb\MyOrder.html" />
+    <Content Include="MobileWeb\test.html" />
+    <Content Include="OrderPayCallback\AlipayCallBack.aspx" />
+    <Content Include="OrderPayCallback\DinPayCallBack.aspx" />
+    <Content Include="OrderPayCallback\LCSWPayCallBack.aspx" />
+    <Content Include="OrderPayCallback\PayStatusCheck.aspx" />
+    <Content Include="OrderPayCallback\POSPayCallBack.aspx" />
+    <Content Include="OrderPayCallback\PPOSRequestQR.aspx" />
+    <Content Include="OrderPayCallback\WxPayCallBack.aspx" />
+    <Content Include="Pay\DinPay.aspx" />
+    <Content Include="QR.aspx" />
+    <Content Include="CallBack\WeiXinPayNotify.aspx" />
+    <Content Include="ceshi.aspx" />
+    <Content Include="Config\ApiRequest.xml" />
+    <Content Include="Config\SMSCodeTemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\WeiXinMessageTemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Imgs\logo.png" />
+    <Content Include="Page.aspx" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\layui\font\iconfont.eot" />
+    <Content Include="assets\layui\font\iconfont.ttf" />
+    <Content Include="assets\layui\font\iconfont.woff" />
+    <Content Include="Api\XCCloud\Coins.ashx" />
+    <Content Include="Api\XCCloud\Promotion.ashx" />
+    <Content Include="Api\Payment.ashx" />
+    <Content Include="Api\XCCloud\Project.ashx" />
+    <Content Include="Api\XCCloud\StoreWeight.ashx" />
+    <Content Include="Api\XCGameMana\Account.ashx" />
+    <Content Include="Api\XCGameMana\Query.ashx" />
+    <Content Include="Api\XCCloud\GameInfo.ashx" />
+    <Content Include="Api\XCGameMana\User2.ashx" />
+    <Content Include="Api\XCGame\Ticket.ashx" />
+    <Content Include="Api\XCCloud\GoodsInfo.ashx" />
+    <Content Include="Api\XCGame\Lottery.ashx" />
+    <Content Include="Api\XCCloud\Head.ashx" />
+    <Content Include="Api\XCCloud\Workstation.ashx" />
+    <Content Include="Api\XCCloud\PushRule.ashx" />
+    <Content Include="Api\XCCloud\FreeRule.ashx" />
+    <Content Include="Api\XCCloud\Coupon.ashx" />
+    <Content Include="Api\XCCloud\Jackpot.ashx" />
+    <Content Include="Api\Service\UDPService.ashx" />
+    <Content Include="Api\Service\User.ashx" />
+    <Content Include="Api\XCCloud\DeviceInfo.ashx" />
+    <Content Include="Api\XCGame\Params.ashx" />
+    <Content Include="Api\Service\GetHolidays.ashx" />
+    <None Include="Properties\PublishProfiles\111.pubxml" />
+    <None Include="Properties\PublishProfiles\qqq.pubxml" />
+    <None Include="Properties\PublishProfiles\rrr.pubxml" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="ServicePage\UDPService.html" />
+    <Content Include="ServicePage\UDPServiceTest.html" />
+    <Content Include="ServicePage\warnlog.html" />
+    <Content Include="ServicePage\ValidateImg.aspx" />
+    <Content Include="ServicePage\WebFormTest.aspx" />
+    <Content Include="Test\api.aspx" />
+    <Content Include="Test\payTest.html" />
+    <Content Include="Test\pposTest.aspx" />
+    <Content Include="Test\SocketTest.aspx" />
+    <Content Include="Test\WorkFlowTest\StockHandle.aspx" />
+    <Content Include="Test\WorkFlowTest\StockRequest.aspx" />
+    <Content Include="Test\Test.aspx" />
+    <Content Include="Test\WorkFlowTest\WorkFlowTest.aspx" />
+    <Content Include="Test\wxRedirectUrl.aspx" />
+    <Content Include="Test\XCCloudBar.html" />
+    <Content Include="Test\XCGuanJia.html" />
+    <Content Include="Test\XinHelper.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebSite\.idea\modules.xml" />
+    <Content Include="WebSite\.idea\workspace.xml" />
+    <Content Include="WebSite\css\bootstrap.css" />
+    <Content Include="WebSite\css\bootstrap.min.css" />
+    <Content Include="WebSite\css\common.css" />
+    <Content Include="WebSite\css\digital.css" />
+    <Content Include="WebSite\css\graph.css" />
+    <Content Include="WebSite\css\iconfont.css" />
+    <Content Include="WebSite\css\idangerous.swiper2.7.6.css" />
+    <Content Include="WebSite\css\login_register.css" />
+    <Content Include="WebSite\css\magicsuggest-1.2.2.css" />
+    <Content Include="WebSite\css\normalize.css" />
+    <Content Include="WebSite\css\style.css" />
+    <Content Include="WebSite\css\stylely.css" />
+    <Content Include="WebSite\css\tips.css" />
+    <Content Include="WebSite\getholidays.html" />
+    <Content Include="WebSite\fengchengtest2.html" />
+    <Content Include="WebSite\fengchengtest.html" />
+    <Content Include="WebSite\images\Correct.png" />
+    <Content Include="WebSite\images\date_bg.png" />
+    <Content Include="WebSite\images\green.png" />
+    <Content Include="WebSite\images\jt.png" />
+    <Content Include="WebSite\images\modal-gloss.png" />
+    <Content Include="WebSite\images\qx.png" />
+    <Content Include="WebSite\images\qxBtn.png" />
+    <Content Include="WebSite\images\xxx.jpg" />
+    <Content Include="WebSite\images\xz.png" />
+    <Content Include="WebSite\img\delet.png" />
+    <Content Include="WebSite\img\logo.png" />
+    <Content Include="WebSite\img\qx.png" />
+    <Content Include="WebSite\index.html" />
+    <Content Include="WebSite\jEasyUi\jquery.easyui.min.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.accordion.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.calendar.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.combo.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.combobox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.combogrid.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.combotree.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.datagrid.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.datebox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.datetimebox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.dialog.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.draggable.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.droppable.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.form.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.layout.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.linkbutton.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.menu.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.menubutton.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.messager.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.numberbox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.numberspinner.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.pagination.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.panel.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.parser.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.progressbar.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.propertygrid.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.resizable.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.searchbox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.slider.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.spinner.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.splitbutton.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.tabs.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.timespinner.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.tree.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.treegrid.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.validatebox.js" />
+    <Content Include="WebSite\jEasyUi\plugins\jquery.window.js" />
+    <Content Include="WebSite\jEasyUi\themes\black\accordion.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\calendar.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\combo.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\combobox.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\datagrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\datebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\dialog.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\easyui.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\accordion_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\calendar_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\combo_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\datagrid_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\datebox_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\layout_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\linkbutton_bg.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\loading.gif" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\menu_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\messager_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\pagination_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\panel_tools.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\searchbox_button.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\slider_handle.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\spinner_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\tabs_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\tree_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\validatebox_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\images\validatebox_warning.png" />
+    <Content Include="WebSite\jEasyUi\themes\black\layout.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\linkbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\menu.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\menubutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\messager.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\pagination.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\panel.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\progressbar.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\propertygrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\searchbox.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\slider.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\spinner.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\splitbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\tabs.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\tree.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\validatebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\black\window.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\accordion.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\calendar.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\combo.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\combobox.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\datagrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\datebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\dialog.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\easyui.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\accordion_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\calendar_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\combo_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\datagrid_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\datebox_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\layout_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\linkbutton_bg.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\loading.gif" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\menu_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\messager_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\pagination_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\panel_tools.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\searchbox_button.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\slider_handle.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\spinner_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\tabs_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\tree_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\validatebox_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\images\validatebox_warning.png" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\layout.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\linkbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\menu.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\menubutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\messager.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\pagination.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\panel.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\progressbar.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\propertygrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\searchbox.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\slider.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\spinner.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\splitbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\tabs.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\tree.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\validatebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\bootstrap\window.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\accordion.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\calendar.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\combo.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\combobox.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\datagrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\datebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\dialog.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\easyui.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\accordion_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\calendar_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\combo_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\datagrid_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\datebox_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\layout_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\linkbutton_bg.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\loading.gif" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\menu_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\messager_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\pagination_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\panel_tools.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\searchbox_button.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\slider_handle.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\spinner_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\tabs_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\tree_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\validatebox_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\images\validatebox_warning.png" />
+    <Content Include="WebSite\jEasyUi\themes\default\layout.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\linkbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\menu.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\menubutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\messager.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\pagination.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\panel.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\progressbar.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\propertygrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\searchbox.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\slider.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\spinner.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\splitbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\tabs.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\tree.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\validatebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\default\window.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\accordion.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\calendar.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\combo.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\combobox.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\datagrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\datebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\dialog.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\easyui.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\accordion_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\calendar_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\combo_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\datagrid_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\datebox_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\layout_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\linkbutton_bg.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\loading.gif" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\menu_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\messager_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\pagination_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\panel_tools.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\searchbox_button.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\slider_handle.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\spinner_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\tabs_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\tree_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\validatebox_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\images\validatebox_warning.png" />
+    <Content Include="WebSite\jEasyUi\themes\gray\layout.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\linkbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\menu.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\menubutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\messager.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\pagination.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\panel.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\progressbar.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\propertygrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\searchbox.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\slider.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\spinner.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\splitbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\tabs.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\tree.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\validatebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\gray\window.css" />
+    <Content Include="WebSite\jEasyUi\themes\icon.css" />
+    <Content Include="WebSite\jEasyUi\themes\icons\back.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\icons\cancel.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\cut.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\edit_add.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\edit_remove.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\filesave.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\help.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\mini_add.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\mini_edit.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\mini_refresh.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\no.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\ok.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\pencil.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\print.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\redo.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\reload.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\search.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\sum.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\tip.png" />
+    <Content Include="WebSite\jEasyUi\themes\icons\undo.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\accordion.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\calendar.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\combo.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\combobox.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\datagrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\datebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\dialog.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\easyui.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\accordion_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\blank.gif" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\calendar_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\combo_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\datagrid_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\datebox_arrow.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\layout_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\linkbutton_bg.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\loading.gif" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\menu_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\messager_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\pagination_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\panel_tools.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\searchbox_button.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\slider_handle.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\spinner_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\tabs_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\tree_icons.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\validatebox_arrows.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\images\validatebox_warning.png" />
+    <Content Include="WebSite\jEasyUi\themes\metro\layout.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\linkbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\menu.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\menubutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\messager.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\pagination.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\panel.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\progressbar.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\propertygrid.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\searchbox.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\slider.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\spinner.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\splitbutton.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\tabs.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\tree.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\validatebox.css" />
+    <Content Include="WebSite\jEasyUi\themes\metro\window.css" />
+    <Content Include="WebSite\js\barDetail.js" />
+    <Content Include="WebSite\js\bootstrap.min.js" />
+    <Content Include="WebSite\js\digital.js" />
+    <Content Include="WebSite\js\digital1.js" />
+    <Content Include="WebSite\js\digitalSell.js" />
+    <Content Include="WebSite\js\home.js" />
+    <Content Include="WebSite\js\jquery-1.8.3-min.js" />
+    <Content Include="WebSite\js\jquery-calendar.js" />
+    <Content Include="WebSite\js\jquery.form.js" />
+    <Content Include="WebSite\js\jquery.reveal.js" />
+    <Content Include="WebSite\js\magicsuggest-1.2.2.js" />
+    <Content Include="WebSite\js\member.js" />
+    <Content Include="WebSite\js\packageKind.js" />
+    <Content Include="WebSite\js\tips.js" />
+    <Content Include="WebSite\js\token.js" />
+    <Content Include="WebSite\js\xchen.js" />
+    <Content Include="WebSite\js\yx.js" />
+    <Content Include="WebSite\layui-xtree\layui-xtree.js" />
+    <Content Include="WebSite\layui\css\layui.css" />
+    <Content Include="WebSite\layui\css\layui.mobile.css" />
+    <Content Include="WebSite\layui\css\modules\code.css" />
+    <Content Include="WebSite\layui\css\modules\laydate\default\laydate.css" />
+    <Content Include="WebSite\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="WebSite\layui\css\modules\layer\default\icon.png" />
+    <Content Include="WebSite\layui\css\modules\layer\default\layer.css" />
+    <Content Include="WebSite\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="WebSite\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="WebSite\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="WebSite\layui\font\iconfont.svg" />
+    <Content Include="WebSite\layui\images\face\0.gif" />
+    <Content Include="WebSite\layui\images\face\1.gif" />
+    <Content Include="WebSite\layui\images\face\10.gif" />
+    <Content Include="WebSite\layui\images\face\11.gif" />
+    <Content Include="WebSite\layui\images\face\12.gif" />
+    <Content Include="WebSite\layui\images\face\13.gif" />
+    <Content Include="WebSite\layui\images\face\14.gif" />
+    <Content Include="WebSite\layui\images\face\15.gif" />
+    <Content Include="WebSite\layui\images\face\16.gif" />
+    <Content Include="WebSite\layui\images\face\17.gif" />
+    <Content Include="WebSite\layui\images\face\18.gif" />
+    <Content Include="WebSite\layui\images\face\19.gif" />
+    <Content Include="WebSite\layui\images\face\2.gif" />
+    <Content Include="WebSite\layui\images\face\20.gif" />
+    <Content Include="WebSite\layui\images\face\21.gif" />
+    <Content Include="WebSite\layui\images\face\22.gif" />
+    <Content Include="WebSite\layui\images\face\23.gif" />
+    <Content Include="WebSite\layui\images\face\24.gif" />
+    <Content Include="WebSite\layui\images\face\25.gif" />
+    <Content Include="WebSite\layui\images\face\26.gif" />
+    <Content Include="WebSite\layui\images\face\27.gif" />
+    <Content Include="WebSite\layui\images\face\28.gif" />
+    <Content Include="WebSite\layui\images\face\29.gif" />
+    <Content Include="WebSite\layui\images\face\3.gif" />
+    <Content Include="WebSite\layui\images\face\30.gif" />
+    <Content Include="WebSite\layui\images\face\31.gif" />
+    <Content Include="WebSite\layui\images\face\32.gif" />
+    <Content Include="WebSite\layui\images\face\33.gif" />
+    <Content Include="WebSite\layui\images\face\34.gif" />
+    <Content Include="WebSite\layui\images\face\35.gif" />
+    <Content Include="WebSite\layui\images\face\36.gif" />
+    <Content Include="WebSite\layui\images\face\37.gif" />
+    <Content Include="WebSite\layui\images\face\38.gif" />
+    <Content Include="WebSite\layui\images\face\39.gif" />
+    <Content Include="WebSite\layui\images\face\4.gif" />
+    <Content Include="WebSite\layui\images\face\40.gif" />
+    <Content Include="WebSite\layui\images\face\41.gif" />
+    <Content Include="WebSite\layui\images\face\42.gif" />
+    <Content Include="WebSite\layui\images\face\43.gif" />
+    <Content Include="WebSite\layui\images\face\44.gif" />
+    <Content Include="WebSite\layui\images\face\45.gif" />
+    <Content Include="WebSite\layui\images\face\46.gif" />
+    <Content Include="WebSite\layui\images\face\47.gif" />
+    <Content Include="WebSite\layui\images\face\48.gif" />
+    <Content Include="WebSite\layui\images\face\49.gif" />
+    <Content Include="WebSite\layui\images\face\5.gif" />
+    <Content Include="WebSite\layui\images\face\50.gif" />
+    <Content Include="WebSite\layui\images\face\51.gif" />
+    <Content Include="WebSite\layui\images\face\52.gif" />
+    <Content Include="WebSite\layui\images\face\53.gif" />
+    <Content Include="WebSite\layui\images\face\54.gif" />
+    <Content Include="WebSite\layui\images\face\55.gif" />
+    <Content Include="WebSite\layui\images\face\56.gif" />
+    <Content Include="WebSite\layui\images\face\57.gif" />
+    <Content Include="WebSite\layui\images\face\58.gif" />
+    <Content Include="WebSite\layui\images\face\59.gif" />
+    <Content Include="WebSite\layui\images\face\6.gif" />
+    <Content Include="WebSite\layui\images\face\60.gif" />
+    <Content Include="WebSite\layui\images\face\61.gif" />
+    <Content Include="WebSite\layui\images\face\62.gif" />
+    <Content Include="WebSite\layui\images\face\63.gif" />
+    <Content Include="WebSite\layui\images\face\64.gif" />
+    <Content Include="WebSite\layui\images\face\65.gif" />
+    <Content Include="WebSite\layui\images\face\66.gif" />
+    <Content Include="WebSite\layui\images\face\67.gif" />
+    <Content Include="WebSite\layui\images\face\68.gif" />
+    <Content Include="WebSite\layui\images\face\69.gif" />
+    <Content Include="WebSite\layui\images\face\7.gif" />
+    <Content Include="WebSite\layui\images\face\70.gif" />
+    <Content Include="WebSite\layui\images\face\71.gif" />
+    <Content Include="WebSite\layui\images\face\8.gif" />
+    <Content Include="WebSite\layui\images\face\9.gif" />
+    <Content Include="WebSite\layui\layui.all.js" />
+    <Content Include="WebSite\layui\layui.js" />
+    <Content Include="WebSite\layui\lay\modules\carousel.js" />
+    <Content Include="WebSite\layui\lay\modules\code.js" />
+    <Content Include="WebSite\layui\lay\modules\element.js" />
+    <Content Include="WebSite\layui\lay\modules\flow.js" />
+    <Content Include="WebSite\layui\lay\modules\form.js" />
+    <Content Include="WebSite\layui\lay\modules\jquery.js" />
+    <Content Include="WebSite\layui\lay\modules\laydate.js" />
+    <Content Include="WebSite\layui\lay\modules\layedit.js" />
+    <Content Include="WebSite\layui\lay\modules\layer.js" />
+    <Content Include="WebSite\layui\lay\modules\laypage.js" />
+    <Content Include="WebSite\layui\lay\modules\laytpl.js" />
+    <Content Include="WebSite\layui\lay\modules\mobile.js" />
+    <Content Include="WebSite\layui\lay\modules\table.js" />
+    <Content Include="WebSite\layui\lay\modules\tree.js" />
+    <Content Include="WebSite\layui\lay\modules\upload.js" />
+    <Content Include="WebSite\layui\lay\modules\util.js" />
+    <Content Include="WebSite\lib\animate.min.css" />
+    <Content Include="WebSite\lib\bootstrap.min.css" />
+    <Content Include="WebSite\lib\bootstrap.min.js" />
+    <Content Include="WebSite\lib\data.js" />
+    <Content Include="WebSite\lib\drilldown.js" />
+    <Content Include="WebSite\lib\hchart-more.js" />
+    <Content Include="WebSite\lib\hChart3D.js" />
+    <Content Include="WebSite\lib\heightCharts.js" />
+    <Content Include="WebSite\lib\hightcharts-ZH_CN.js" />
+    <Content Include="WebSite\lib\idangerous.swiper2.7.6.min.js" />
+    <Content Include="WebSite\lib\jquery.easyui.min.js" />
+    <Content Include="WebSite\lib\jquery.min.js" />
+    <Content Include="WebSite\lib\solid-gauge.js" />
+    <Content Include="WebSite\lib\swiper.min.js" />
+    <Content Include="WebSite\lib\wow.js" />
+    <Content Include="WebSite\login.html" />
+    <Content Include="WebSite\taskForBoss.html" />
+    <Content Include="WebSite\wxpageuggtest.htm" />
+    <Content Include="Test\lijunjietest.htm" />
+    <Content Include="Test\lijunjietest3.htm" />
+    <Content Include="Test\lijunjietest2.htm" />
+    <Content Include="WebSite\test0.html" />
+    <Content Include="WebSite\test10.html" />
+    <Content Include="WebSite\test11.html" />
+    <Content Include="WebSite\test12.html" />
+    <Content Include="WebSite\test13.html" />
+    <Content Include="WebSite\test14.html" />
+    <Content Include="WebSite\test15.html" />
+    <Content Include="WebSite\test16.html" />
+    <Content Include="WebSite\test17.html" />
+    <Content Include="WebSite\test50.html" />
+    <Content Include="WebSite\test54.html" />
+    <Content Include="WebSite\test7.html" />
+    <Content Include="WebSite\test8.html" />
+    <Content Include="WebSite\test9.html" />
+    <Content Include="Test\CommonInterface.html" />
+    <Content Include="Test\wexinapi.html" />
+    <Content Include="Test\XCCloudInterface.html" />
+    <Content Include="WebSite\wxpageauth.html" />
+    <Content Include="WebSite\xtree.html" />
+    <Content Include="WeiXin\Account.aspx" />
+    <Content Include="WeiXin\Api\OAuth.ashx" />
+    <Content Include="WeiXin\ErrorPage.aspx" />
+    <Content Include="WeiXin\Index.aspx" />
+    <Content Include="WeiXin\Login.aspx" />
+    <Content Include="WeiXin\OAuth.aspx" />
+    <Content Include="Pay\Payment.aspx" />
+    <Content Include="WeiXin\QR.aspx" />
+    <Content Include="WeiXin\Register.aspx" />
+    <Content Include="WeiXin\Test.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Client.ashx.cs">
+      <DependentUpon>Client.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Coin.ashx.cs">
+      <DependentUpon>Coin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Common\QR.ashx.cs">
+      <DependentUpon>QR.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Payment.ashx.cs">
+      <DependentUpon>Payment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Service\GetHolidays.ashx.cs">
+      <DependentUpon>GetHolidays.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Service\UDPService.ashx.cs">
+      <DependentUpon>UDPService.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Service\User.ashx.cs">
+      <DependentUpon>User.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\Account.ashx.cs">
+      <DependentUpon>Account.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\Foods.ashx.cs">
+      <DependentUpon>Foods.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Coins.ashx.cs">
+      <DependentUpon>Coins.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Common\ExceptionHelper.cs" />
+    <Compile Include="Api\XCCloud\Common\TreeHelper.cs" />
+    <Compile Include="Api\XCCloud\Coupon.ashx.cs">
+      <DependentUpon>Coupon.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Foods.ashx.cs">
+      <DependentUpon>Foods.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\FreeRule.ashx.cs">
+      <DependentUpon>FreeRule.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\GameInfo.ashx.cs">
+      <DependentUpon>GameInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\DeviceInfo.ashx.cs">
+      <DependentUpon>DeviceInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\GoodsInfo.ashx.cs">
+      <DependentUpon>GoodsInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Head.ashx.cs">
+      <DependentUpon>Head.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Jackpot.ashx.cs">
+      <DependentUpon>Jackpot.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Order.ashx.cs">
+      <DependentUpon>Order.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Project.ashx.cs">
+      <DependentUpon>Project.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Promotion.ashx.cs">
+      <DependentUpon>Promotion.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\PushRule.ashx.cs">
+      <DependentUpon>PushRule.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\StoreWeight.ashx.cs">
+      <DependentUpon>StoreWeight.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\UserGroup.ashx.cs">
+      <DependentUpon>UserGroup.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\UserInfo.ashx.cs">
+      <DependentUpon>UserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Workstation.ashx.cs">
+      <DependentUpon>Workstation.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Account.ashx.cs">
+      <DependentUpon>Account.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Device.ashx.cs">
+      <DependentUpon>Device.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Query.ashx.cs">
+      <DependentUpon>Query.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Ticket.ashx.cs">
+      <DependentUpon>Ticket.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\User2.ashx.cs">
+      <DependentUpon>User2.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Game.ashx.cs">
+      <DependentUpon>Game.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Lottery.ashx.cs">
+      <DependentUpon>Lottery.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Params.ashx.cs">
+      <DependentUpon>Params.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Project.ashx.cs">
+      <DependentUpon>Project.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Ticket.ashx.cs">
+      <DependentUpon>Ticket.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\UserInfo.ashx.cs">
+      <DependentUpon>UserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\AuthorizeAttribute.cs" />
+    <Compile Include="Boss\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boss\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CallBack\AlipayAuthNotify.aspx.cs">
+      <DependentUpon>AlipayAuthNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CallBack\AlipayAuthNotify.aspx.designer.cs">
+      <DependentUpon>AlipayAuthNotify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CallBack\AliPayNotify.aspx.cs">
+      <DependentUpon>AliPayNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CallBack\AliPayNotify.aspx.designer.cs">
+      <DependentUpon>AliPayNotify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyHub.cs" />
+    <Compile Include="OrderPayCallback\AlipayCallBack.aspx.cs">
+      <DependentUpon>AlipayCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\AlipayCallBack.aspx.designer.cs">
+      <DependentUpon>AlipayCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\Common\Config.cs" />
+    <Compile Include="OrderPayCallback\Common\LCSWPayAPI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\Common\LCSWPayDate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\Common\MyCerts.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\Common\OrderPayNotify.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\Common\PayLogHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\DinPayCallBack.aspx.cs">
+      <DependentUpon>DinPayCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\DinPayCallBack.aspx.designer.cs">
+      <DependentUpon>DinPayCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\LCSWPayCallBack.aspx.cs">
+      <DependentUpon>LCSWPayCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\LCSWPayCallBack.aspx.designer.cs">
+      <DependentUpon>LCSWPayCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\PayStatusCheck.aspx.cs">
+      <DependentUpon>PayStatusCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\PayStatusCheck.aspx.designer.cs">
+      <DependentUpon>PayStatusCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\POSPayCallBack.aspx.cs">
+      <DependentUpon>POSPayCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\POSPayCallBack.aspx.designer.cs">
+      <DependentUpon>POSPayCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\PPOSRequestQR.aspx.cs">
+      <DependentUpon>PPOSRequestQR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\PPOSRequestQR.aspx.designer.cs">
+      <DependentUpon>PPOSRequestQR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayCallback\WxPayCallBack.aspx.cs">
+      <DependentUpon>WxPayCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPayCallback\WxPayCallBack.aspx.designer.cs">
+      <DependentUpon>WxPayCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\DinPay.aspx.cs">
+      <DependentUpon>DinPay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay\DinPay.aspx.designer.cs">
+      <DependentUpon>DinPay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QR.aspx.cs">
+      <DependentUpon>QR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QR.aspx.designer.cs">
+      <DependentUpon>QR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Dashboard.ashx.cs">
+      <DependentUpon>Dashboard.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\DigitalCoin.ashx.cs">
+      <DependentUpon>DigitalCoin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Goods.ashx.cs">
+      <DependentUpon>Goods.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\DataGameInfo.ashx.cs">
+      <DependentUpon>DataGameInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\Device.ashx.cs">
+      <DependentUpon>Device.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\DeviceInfo.ashx.cs">
+      <DependentUpon>DeviceInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloudRS232\Merch.ashx.cs">
+      <DependentUpon>Merch.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Bill.ashx.cs">
+      <DependentUpon>Bill.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Dictionary.ashx.cs">
+      <DependentUpon>Dictionary.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Login.ashx.cs">
+      <DependentUpon>Login.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Main.ashx.cs">
+      <DependentUpon>Main.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Merch.ashx.cs">
+      <DependentUpon>Merch.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Parameter.ashx.cs">
+      <DependentUpon>Parameter.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\DataOrder.ashx.cs">
+      <DependentUpon>DataOrder.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Member.ashx.cs">
+      <DependentUpon>Member.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\PhotoUpload.ashx.cs">
+      <DependentUpon>PhotoUpload.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Promotion.ashx.cs">
+      <DependentUpon>Promotion.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Store.ashx.cs">
+      <DependentUpon>Store.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\WSOrder.ashx.cs">
+      <DependentUpon>WSOrder.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\User.ashx.cs">
+      <DependentUpon>User.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\UserRegister.ashx.cs">
+      <DependentUpon>UserRegister.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Device.ashx.cs">
+      <DependentUpon>Device.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\flw_485_coin.ashx.cs">
+      <DependentUpon>flw_485_coin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Coins.ashx.cs">
+      <DependentUpon>Coins.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Foods.ashx.cs">
+      <DependentUpon>Foods.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGame\Member.ashx.cs">
+      <DependentUpon>Member.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Query.ashx.cs">
+      <DependentUpon>Query.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\Shop.ashx.cs">
+      <DependentUpon>Shop.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\SMSService.ashx.cs">
+      <DependentUpon>SMSService.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\SocketMsg.ashx.cs">
+      <DependentUpon>SocketMsg.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\Member.ashx.cs">
+      <DependentUpon>Member.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCCloud\StoreInfo.ashx.cs">
+      <DependentUpon>StoreInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\XCGameMana\Token.ashx.cs">
+      <DependentUpon>Token.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ApiBase.cs" />
+    <Compile Include="Base\ApiMethodAttribute.cs" />
+    <Compile Include="Base\SignKeyEnum.cs" />
+    <Compile Include="CallBack\WeiXinPayNotify.aspx.cs">
+      <DependentUpon>WeiXinPayNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CallBack\WeiXinPayNotify.aspx.designer.cs">
+      <DependentUpon>WeiXinPayNotify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ceshi.aspx.cs">
+      <DependentUpon>ceshi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ceshi.aspx.designer.cs">
+      <DependentUpon>ceshi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DBService\BLL\CoinBLL.cs" />
+    <Compile Include="DBService\BLL\DashboardBLL.cs" />
+    <Compile Include="DBService\BLL\DigiteCoinBLL.cs" />
+    <Compile Include="DBService\BLL\QueryBLL.cs" />
+    <Compile Include="DBService\DAL\CoinDAL.cs" />
+    <Compile Include="DBService\DAL\DashboardDAL.cs" />
+    <Compile Include="DBService\DAL\DigiteCoinDAL.cs" />
+    <Compile Include="DBService\DAL\QueryDAL.cs" />
+    <Compile Include="DBService\Model\CoinModel.cs" />
+    <Compile Include="DBService\Model\DashboardModel.cs" />
+    <Compile Include="DBService\Model\Dict_SystemModel.cs" />
+    <Compile Include="DBService\Model\DigiteCoinModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page.aspx.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page.aspx.designer.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\WeiXinPayment.ashx.cs">
+      <DependentUpon>WeiXinPayment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ResponseModels\GoodsModel.cs" />
+    <Compile Include="DBService\Model\QueryModel.cs" />
+    <Compile Include="DBService\SQLDAL\DataAccess.cs" />
+    <Compile Include="DBService\SQLDAL\TransactionBody.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseModels\SMSModel.cs" />
+    <Compile Include="ServicePage\ValidateImg.aspx.cs">
+      <DependentUpon>ValidateImg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ServicePage\ValidateImg.aspx.designer.cs">
+      <DependentUpon>ValidateImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ServicePage\WebFormTest.aspx.cs">
+      <DependentUpon>WebFormTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ServicePage\WebFormTest.aspx.designer.cs">
+      <DependentUpon>WebFormTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="Test\api.aspx.cs">
+      <DependentUpon>api.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\api.aspx.designer.cs">
+      <DependentUpon>api.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\pposTest.aspx.cs">
+      <DependentUpon>pposTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\pposTest.aspx.designer.cs">
+      <DependentUpon>pposTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\SocketTest.ashx.cs">
+      <DependentUpon>SocketTest.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\SocketTest.aspx.cs">
+      <DependentUpon>SocketTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\SocketTest.aspx.designer.cs">
+      <DependentUpon>SocketTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\StockHandle.aspx.cs">
+      <DependentUpon>StockHandle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\StockHandle.aspx.designer.cs">
+      <DependentUpon>StockHandle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\StockRequest.aspx.cs">
+      <DependentUpon>StockRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\StockRequest.aspx.designer.cs">
+      <DependentUpon>StockRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\WorkFlowHandler.ashx.cs">
+      <DependentUpon>WorkFlowHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\WorkFlowTest.aspx.cs">
+      <DependentUpon>WorkFlowTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\WorkFlowTest\WorkFlowTest.aspx.designer.cs">
+      <DependentUpon>WorkFlowTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\wxRedirectUrl.aspx.cs">
+      <DependentUpon>wxRedirectUrl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\wxRedirectUrl.aspx.designer.cs">
+      <DependentUpon>wxRedirectUrl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\ApplicationEnd.cs" />
+    <Compile Include="Utility\ApplicationStart.cs" />
+    <Compile Include="Utility\IConUtiltiy.cs" />
+    <Compile Include="Utility\Info\RouterInfo.cs" />
+    <Compile Include="Utility\UDPApiService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\UDPServer.cs" />
+    <Compile Include="WeiXin\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\Api\OAuth.ashx.cs">
+      <DependentUpon>OAuth.ashx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Api\Users.ashx.cs">
+      <DependentUpon>Users.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\OAuth.aspx.cs">
+      <DependentUpon>OAuth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\OAuth.aspx.designer.cs">
+      <DependentUpon>OAuth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\QR.aspx.cs">
+      <DependentUpon>QR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\QR.aspx.designer.cs">
+      <DependentUpon>QR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeiXin\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\Upload\image\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Logs\" />
+    <Folder Include="memberphoto\" />
+    <Folder Include="WebSite\.idea\inspectionProfiles\" />
+    <Folder Include="WeiXin\Pay\Pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Api\Dashboard.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Api\Query.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Api\Coin.ashx" />
+    <Content Include="Api\DigitalCoin.ashx" />
+    <Content Include="Api\Goods.ashx" />
+    <Content Include="packages.config" />
+    <Content Include="Api\XCGame\Member.ashx" />
+    <Content Include="Api\SMSService.ashx" />
+    <Content Include="Api\Shop.ashx" />
+    <Content Include="Api\Client.ashx" />
+    <Content Include="Api\SocketMsg.ashx" />
+    <Content Include="Api\XCCloud\StoreInfo.ashx" />
+    <Content Include="Api\XCCloud\Member.ashx" />
+    <Content Include="Api\XCGameMana\Token.ashx" />
+    <Content Include="Api\XCGameMana\Store.ashx" />
+    <Content Include="Api\XCGame\Device.ashx" />
+    <Content Include="Api\XCGame\flw_485_coin.ashx" />
+    <Content Include="Api\Common\QR.ashx" />
+    <Content Include="Api\XCGameMana\UserRegister.ashx" />
+    <Content Include="Api\XCGameMana\User.ashx" />
+    <Content Include="Api\XCGameMana\Member.ashx" />
+    <Content Include="Api\XCGameMana\WSOrder.ashx" />
+    <Content Include="Api\XCGameMana\Promotion.ashx" />
+    <Content Include="Api\XCGameMana\DataOrder.ashx" />
+    <Content Include="Pay\WeiXinPayment.ashx" />
+    <Content Include="Api\XCCloud\Dictionary.ashx" />
+    <Content Include="Api\XCGame\Foods.ashx" />
+    <Content Include="Api\XCGame\Coins.ashx" />
+    <Content Include="Api\XCCloud\Parameter.ashx" />
+    <Content Include="Api\XCGameMana\PhotoUpload.ashx" />
+    <Content Include="Api\XCCloud\Merch.ashx" />
+    <Content Include="Api\XCCloud\Login.ashx" />
+    <Content Include="Api\XCCloud\Main.ashx" />
+    <Content Include="Api\XCCloudRS232\Merch.ashx" />
+    <Content Include="Api\XCCloudRS232\Device.ashx" />
+    <Content Include="Api\XCCloudRS232\DataGameInfo.ashx" />
+    <Content Include="Api\XCCloudRS232\DeviceInfo.ashx" />
+    <Content Include="Api\XCCloud\Bill.ashx" />
+    <Content Include="Api\XCCloudRS232\Foods.ashx" />
+    <Content Include="Api\XCCloudRS232\Account.ashx" />
+    <Content Include="Api\XCCloud\UserGroup.ashx" />
+    <Content Include="Api\XCCloud\Foods.ashx" />
+    <Content Include="Api\XCCloud\Order.ashx" />
+    <Content Include="Api\XCGameMana\Device.ashx" />
+    <Content Include="Api\XCGame\UserInfo.ashx" />
+    <Content Include="Api\XCGame\Project.ashx" />
+    <Content Include="Api\XCGameMana\Ticket.ashx" />
+    <Content Include="Api\XCGame\Game.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
+    <Content Include="Test\SocketTest.ashx" />
+    <Content Include="Test\WorkFlowTest\WorkFlowHandler.ashx" />
+    <None Include="WebSite\.idea\test.iml" />
+    <None Include="WebSite\css\bootstrap.css.map" />
+    <None Include="WebSite\css\bootstrap.min.css.map" />
+    <None Include="WebSite\data.json" />
+    <None Include="WebSite\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="WebSite\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="WebSite\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="WebSite\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="WebSite\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="WebSite\json\aaa.json" />
+    <None Include="WebSite\json\dataDigitalInstall.json" />
+    <None Include="WebSite\json\dataDigitalInventory.json" />
+    <None Include="WebSite\json\dataDigitalSell.json" />
+    <None Include="WebSite\json\dataInstall.json" />
+    <None Include="WebSite\json\dataInventory.json" />
+    <None Include="WebSite\json\dataProductRecord.json" />
+    <None Include="WebSite\json\dataTokenDestroy.json" />
+    <None Include="WebSite\json\destroy.json" />
+    <None Include="WebSite\json\digitalInstall.json" />
+    <None Include="WebSite\json\digitalInven.json" />
+    <None Include="WebSite\json\digitalSell1.json" />
+    <None Include="WebSite\json\install.json" />
+    <None Include="WebSite\json\member.json" />
+    <None Include="WebSite\json\product.json" />
+    <None Include="WebSite\json\tokenIn.json" />
+    <None Include="WebSite\json\tokenSell.json" />
+    <Content Include="WeiXin\Api\Users.ashx" />
+    <Content Include="WebSite\layui\font\iconfont.eot" />
+    <Content Include="WebSite\layui\font\iconfont.ttf" />
+    <Content Include="WebSite\layui\font\iconfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.Business\XCCloudService.Business.csproj">
+      <Project>{391eb2f5-b166-4439-b0bd-91f8e3377271}</Project>
+      <Name>XCCloudService.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.CacheService\XCCloudService.CacheService.csproj">
+      <Project>{52f0eb44-359e-47c9-8a33-c459d43da545}</Project>
+      <Name>XCCloudService.CacheService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Pay\XCCloudService.Pay.csproj">
+      <Project>{cc20d914-ca39-497b-b70d-99b6e4efb302}</Project>
+      <Name>XCCloudService.Pay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Socket\XCCloudService.SocketService.TCP.csproj">
+      <Project>{1201063a-0f56-4cfd-abe7-be685df27477}</Project>
+      <Name>XCCloudService.SocketService.TCP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.UDP\XCCloudService.SocketService.UDP.csproj">
+      <Project>{dbf6e89c-b2e9-4310-8f22-b18edd95668d}</Project>
+      <Name>XCCloudService.SocketService.UDP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.WeiXin\XCCloudService.WeiXin.csproj">
+      <Project>{1a85b373-5ee7-4cbd-87d3-de183ad1036a}</Project>
+      <Name>XCCloudService.WeiXin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.WorkFlow\XCCloudService.WorkFlow.csproj">
+      <Project>{4907c5da-31ab-46f1-b55a-9eeba3248a6e}</Project>
+      <Name>XCCloudService.WorkFlow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.BLL\XCCloudService.BLL.csproj">
+      <Project>{bcbc3ea2-3c42-4d5f-842a-45e614bbadce}</Project>
+      <Name>XCCloudService.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.DAL\XCCloudService.DAL.csproj">
+      <Project>{0fa3e9cf-9fd2-4d99-8efa-c44acfda160d}</Project>
+      <Name>XCCloudService.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.Model\XCCloudService.Model.csproj">
+      <Project>{1e38ec5a-0a89-4d9e-9cdf-6f79c580b6a1}</Project>
+      <Name>XCCloudService.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.RadarServer\XXCloudService.RadarServer.csproj">
+      <Project>{2d63076b-e662-4eb7-a9a8-cb50bc35f992}</Project>
+      <Name>XXCloudService.RadarServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>18116</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3288/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:3288/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>礼品彩票管理</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+     <div class="layui-row" style="padding: 10px">
+         <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+             <!--<button type="button" class="layui-btn layui-btn-normal">查询模板</button>-->
+             <button type="button" class="layui-btn layui-btn-normal install"><i class="layui-icon">&#xe631;</i>安装</button>
+         </blockquote>
+         <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+             <table class="layui-hide" id="lotteryGiftTb"  lay-filter="lotteryGiftTb"></table>
+         </div>
+     </div>
+     <!--弹出层-->
+<div id="openModel" style="display:none;padding: 15px;">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">游戏机名</label>
+                <div class="layui-input-inline">
+                    <select name="" id="GameNameList" lay-filter="GameNameList"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">机头列表</label>
+                <div class="layui-input-inline">
+                    <select name="" id="GameHeadList" lay-filter="GameHeadList"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">安装数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required id="reloadCount">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required id="Note">
+                </div>
+            </div>
+            <br>
+
+
+        </div>
+        <blockquote class="layui-elem-quote" style="padding: 5px 15px;"> 安装礼品</blockquote>
+        <div class="layui-form-item">
+            <div class="layui-input-inline"style="width: 300px;">
+                <input type="text" class="layui-input" placeholder="输入商品条码或者名称"  id="searchText">
+            </div>
+            <div class="layui-input-inline"><button type="button" class="layui-btn layui-btn-normal" id="searchGoods">
+                <i class="layui-icon">&#xe615;</i></button></div>
+        </div>
+        <table id="GoodsList" lay-filter="GoodsList" class="layui-hide"></table>
+        <div style="text-align:right;padding-right: 100px;margin: 15px ;">
+            <button type="button" class="layui-btn layui-btn-normal" id="save">确定</button>
+            <button type="button" class="layui-btn layui-btn-danger" id="cancel">取消</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+<script type="text/html" id="barDemo1">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+    let GameNameList='';
+    let GameHeadList='';
+    let goodsId='';
+    let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+        'url':'/XCCloud/DeviceInfo?action=QueryReloadGifts',
+        'elem':'#lotteryGiftTb',
+        'cols':[
+            {field:'ID', title:'安装流水号', align: 'center', sort: true}
+            ,{field:'RealTime',title: '安装时间', align: 'center'} //width 支持：数字、百分比和不填写。
+            // ,{field:'DeviceType', title: '安装位置', align: 'center'}
+            // ,{field:'ReloadType', title: '安装类别', align: 'center'}
+            ,{field:'LogName', title: '经办人', align: 'center'}
+            ,{field:'ReloadCount', title: '安装数量', align: 'center'}
+            ,{field:'Note', title: '备注', align: 'center'}
+            ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+    };
+    xc.getInitData(parm);
+    $(function () {
+       layui.use(['form','layer','table'],function(){
+           let form=layui.form;
+           let layer=layui.layer;
+           let table=layui.table;
+           // 点击安装，弹出层
+           $('.install').on('click',function(){
+               layui.layer.open({
+                   title:'礼品安装',
+                   type:1,
+                   area:'700px',
+                   content:$('#openModel')
+               });
+               xc.getStoreGameList('GameNameList',form,layer);
+               xc.getGameHeadList('GameHeadList',form,layer,GameNameList)
+               xc.initGoodsTb();
+           });
+
+           form.on('select(GameNameList)',function(data){
+               GameNameList=data.value;
+               xc.getGameHeadList('GameHeadList',form,layer,GameNameList)
+           });
+           form.on('select(GameHeadList)',function(data){
+               GameHeadList=data.value;
+           });
+
+           //监听选中商品
+           table.on('checkbox(GoodsList)', function(obj){
+               if (obj.type == "all") {
+                   var csss = $(".layui-table-cell.laytable-cell-checkbox");
+                   csss.each(function(index, e){
+                       e.children[0].checked = false;
+                       e.children[1].className="layui-unselect layui-form-checkbox";
+                       goodsId='';
+                   });
+               } else {
+                   if(obj.checked==true){
+                       goodsId=obj.data.ID;
+                   }else {
+                       goodsId='';
+                   }
+                   var csss = $(".layui-table-cell.laytable-cell-checkbox");
+                   csss.each(function(index, e){
+                       var dataIndex = e.parentNode.parentNode.getAttribute("data-index");
+                       if (dataIndex != null) {
+                           if(dataIndex != obj.data.LAY_TABLE_INDEX){
+                               e.children[0].checked = false;
+                               e.children[1].className="layui-unselect layui-form-checkbox";
+                           }
+                       } else {
+                           e.children[0].checked = false;
+                           e.children[1].className="layui-unselect layui-form-checkbox";
+                       }
+                   });
+               }
+           });
+
+           $('#save').on('click',function(){
+               xc.ReloadDevice(GameHeadList,'2','3',layer);
+           });
+           $('#cancel').on('click',function(){
+               layer.closeAll();
+                GameNameList='';
+                GameHeadList='';
+                goodsId='';
+           });
+           $('#searchGoods').on('click',function(){
+               xc.initGoodsTb(layer,table);
+           })
+       })
+    });
+
+    //获取游戏机列表，并添加到下拉框中
+    xcActionSystem.prototype.getStoreGameList=function(id,form,layer){
+        let obj={'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+        let parseJson=JSON.stringify(obj);
+        $.ajax({
+            type:'post',
+            url:'/XCCloud/GameInfo?action=GetStoreGameInfo',
+            contentType: "application/json; charset=utf-8",
+            data:{parseJson:parseJson},
+            success:function(data){
+                data=JSON.parse(data);
+                console.log(data);
+                if(data.result_code==1){
+                    let  arr=data.result_data;
+                    $('#'+id).html('');
+                    for(let i in arr){
+                        $('#'+id).append('<option value="'+arr[i].Key+'" title="'+arr[i].Value+'">'+arr[i].Value+'</option>');
+                    }
+                    form.render('select');
+                    GameNameList=arr[0].Key;
+                }else {
+                    layer.msg('游戏机列表添加失败！')
+                }
+            }
+        })
+    };
+    //根据所选择的游戏机，加载对应的卡头
+    xcActionSystem.prototype.getGameHeadList=function(id,form,layer,gameLists){
+        let obj={'gameIndexId':gameLists,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+        let parseJson=JSON.stringify(obj);
+        $.ajax({
+            type:'post',
+            url:'/XCCloud/Head?action=GetGameHeadInfo',
+            contentType: "application/json; charset=utf-8",
+            data:{parseJson:parseJson},
+            success:function(data){
+                data=JSON.parse(data);
+                console.log(data);
+                if(data.result_code==1){
+                    let  arr=data.result_data;
+                    if(arr.length>0){
+                        $('#'+id).html('');
+                        for(let i in arr){
+                            $('#'+id).append('<option value="'+arr[i].ID+'" title="'+arr[i].HeadName+'">'+arr[i].HeadName+'</option>');
+                        }
+                        GameHeadList=arr[0].ID;
+                        form.render('select');
+                    }else {
+                        layer.msg('卡头列表为空！')
+                    }
+
+                }else {
+                    layer.msg('卡头列表添加失败！')
+                }
+            }
+        })
+    };
+    //加载商品表格
+    xcActionSystem.prototype.initGoodsTb=function(layer,table) {
+        var searchText=$('#searchText').val();
+        let obj={'goodNameOrBarcode':searchText,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+        $.ajax({
+            type: "post", url: '/XCCloud/Promotion?action=GetGoodsInfoList',
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: JSON.stringify(obj)},
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.Result_Code == "1"||data.result_code==1) {
+                 let   tableData = data.Result_Data||data.result_data;
+                        table.render({
+                            elem:'#GoodsList'
+                            , data: tableData
+                            ,size:'sm'
+                            , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                            , cols: [[ {type:'checkbox'}
+                                ,{field:'ID', title: '商品ID', align: 'center'}
+                                ,{field:'Barcode', title: '商品条码', align: 'center'}
+                                ,{field:'GoodName', title: '商品名称', align: 'center'}
+                                ,{field:'GoodTypeStr', title: '商品类别', align: 'center'}
+                                ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo1'}
+                            ]]
+                        });
+                }  else {
+                        layer.msg(data.result_msg);
+
+                }
+            }
+        })
+    };
+    //礼品安装
+    xcActionSystem.prototype.ReloadDevice=function(GameHeadList,GameNameList,reloadType,layer){
+        let obj={
+            'goodId':goodsId,
+            'deviceId':GameHeadList,
+            'deviceType':GameNameList,
+            'reloadType':reloadType,
+            'reloadCount':$('#reloadCount').val(),
+            'note':$('#Note').val(),
+            'userToken':token,
+            'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+        let parseJson=JSON.stringify(obj);
+        $.ajax({
+            type:'post',
+            url:'/XCCloud/DeviceInfo?action=ReloadDevice',
+            contentType: "application/json; charset=utf-8",
+            data:{parseJson:parseJson},
+            success:function(data){
+                data=JSON.parse(data);
+                if(data.result_code==1){
+                   layer.msg('安装成功！');
+                   layer.closeAll();
+                }else {
+                    layer.msg(data.result_msg)
+                }
+            }
+        })
+    }
+</script>
+</html>

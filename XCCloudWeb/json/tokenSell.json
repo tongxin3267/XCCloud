@@ -1,0 +1,19 @@
+{"total":12,"rows":[
+  {"ID":1,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":2,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":3,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":4,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":5,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":6,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":7,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":8,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":9,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":10,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":11,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":12,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":13,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"},
+  {"ID":14,"SellTime":"2017-09-04 12:44:30","VipId":108,"tokenSum":"Pppp","Operator":1650,"SellMachine":"546","Note":"萨达所大所大"}
+
+],"footer":[
+  {"ID":"合计","CoinNumber":180.00,"CoinCount":16500,"Sum":"5460"}
+]}

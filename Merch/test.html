@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>wertyuio</p>
+<button type="button" onclick="aa()">wee</button>
+</body>
+<script src="js/jquery-1.8.3-min.js">
+
+</script>
+<script>
+var date=new Date();
+
+    var data="/Date(1513134851123+0800)/";
+
+function timeStamp2String(time){
+    var datetime = new Date();
+    datetime.setTime(time.substring(6,19));
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+}
+timeStamp2String(data.substring(6,19));
+
+//shenzhen is a new-developing city which is being included by guangdong provience  of china.
+    console.log(timeStamp2String(data));
+    function aa() {
+        var obj={"nextOpenId":"","sysId":"0","versionNo":"0.0.0.1"};
+        var url="http://mp.4000051530.com/wx/Users?action=GetWxUserList";
+        var parasJson = JSON.stringify(obj);
+        console.log(1);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: parasJson},
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            }
+        })
+    }
+</script>
+</html>

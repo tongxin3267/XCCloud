@@ -1,0 +1,15 @@
+模板ID lH2A8m8mXWBlbE4nRt8eyTh6Y4PSE0O6RDHpWjzeYyE
+标题 密码修改通知
+行业 IT科技 - 互联网|电子商务
+使用人数3
+最后修改时间2017-10-27 15:54:27
+详细内容
+{{first.DATA}}
+用户名：{{keyword1.DATA}}
+新密码：{{keyword2.DATA}}
+{{remark.DATA}}
+内容示例
+您刚修改了在广进快聘网的账号密码
+用户名：wellson
+新密码：123456
+请妥善保管！如非本人操作，请联系客服

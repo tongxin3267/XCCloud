@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>富文本</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+      <div class="layui-main">
+          <textarea id="demo" style="display: none;"></textarea>
+
+      </div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage:{
+                url:'/XCCloud/Bill?action=UploadPictureInRich',
+                type:'post',
+                done:function(data){
+                    console.log(data)
+                }
+            }
+        });
+        layedit.build('demo',{
+            height:400,
+            width:500,
+        }); //建立编辑器
+
+    });
+</script>
+</html>

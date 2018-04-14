@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div class=" addBox" style="height: 100%;position: absolute;right: 0;left: 0">
+    <div class="layui-tab layui-tab-brief" style="height: 90%">
+        <ul class="layui-tab-title">
+            <li class="layui-this layui-tab-item-sale">售币/充值</li>
+            <!--<li>入会</li>-->
+            <li class="layui-tab-item-digit">数字币</li>
+            <li class="layui-tab-item-goods">商品/餐饮</li>
+            <li class="layui-tab-item-ticket">门票</li>
+            <li class="layui-tab-item-mix">混合</li>
+        </ul>
+        <div class="layui-tab-content iframeBox" style="height: 100%">
+            <div class="layui-tab-item layui-show sale-iframe" style="height: 100%">
+                <iframe src="packageSale.html" frameborder="0"  style="width: 100%;height: 100%"></iframe>
+            </div>
+            <div class="layui-tab-item digit-iframe" style="height: 100%"><iframe src="packageDigit.html" frameborder="0"  style="width: 100%;height: 100%"></iframe></div>
+            <div class="layui-tab-item goods-iframe" style="height: 100%"><iframe src="packageGoods.html" frameborder="0"  style="width: 100%;height: 100%"></iframe></div>
+            <div class="layui-tab-item ticket-iframe" style="height: 100%"><iframe src="packageTickets.html" frameborder="0"  style="width: 100%;height: 100%"></iframe></div>
+            <div class="layui-tab-item mix-iframe" style="height: 100%"><iframe src="packageMix.html" frameborder="0"  style="width: 100%;height: 100%"></iframe></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+    layui.use(['form','element','layer'],function(data){
+        let form=layui.form;   let element = layui.element;
+        let layer=layui.layer;
+    });
+    function closePackage()
+    {
+        let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+            'url':'/XCCloud/Promotion?action=GetFoodInfoList',
+            'elem':'#digitDestroyTb',
+            'cols':[
+                {field:'FoodID', title:'套餐编号', align: 'center', sort: true}
+                ,{field:'FoodName',title: '套餐名称', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'FoodTypeStr', title: '套餐类别', align: 'center'}
+                ,{field:'RechargeTypeStr', title: '充值方式', align: 'center'}
+                ,{field:'AllowInternetStr', title: '是否允许第三方', align: 'center'}
+                ,{field:'AllowPrintStr', title: '是否允许打印', align: 'center'}
+                ,{field:'ForeAuthorizeStr', title: '是否允许前台授权', align: 'center'}
+                ,{field:'StartTimeStr', title: '启用时间', align: 'center'}
+                ,{field:'EndTimeStr', title: '停用时间', align: 'center'}
+                ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+        };
+        parent.xc.getInitData(parm);
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+    }
+</script>
+</html>

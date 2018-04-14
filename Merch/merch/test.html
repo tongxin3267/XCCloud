@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>莘宸用户注册</title>
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="viewport" media="(device-height: 568px)" content="initial-scale=1.0,user-scalable=no,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--<link rel="stylesheet" href="common.css">-->
+</head>
+<body>
+  <header style="height: 60px;background-color: #bce8f1">
+      
+  </header>
+  <main>
+      <form action="">
+          <button type="button" onmousedown="tonext()" >跳转注册</button>
+      </form>
+  </main>
+</body>
+<script>
+    function tonext() {
+        console.log(openid);
+        var  href1="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx86275e2035a8089d&redirect_uri=http%3A%2F%2Fmp.4000051530.com%2FWebSite%2Fmerch%2Fzhuce.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+        window.location.href=href1;
+    }
+
+</script>
+</html>

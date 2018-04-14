@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="/website/js/jquery-1.8.3-min.js"></script>
+
+<script type="text/javascript">
+
+    function common(url, parasJson) {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }
+
+    //今日营收总览
+    function do_dashboard_mom() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = '/dashboard?action=mom';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //今日营收分析
+    function do_dashboard_todayRevenue() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = '/dashboard?action=todayRevenue';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //今日吧台营收
+    function do_dashboard_todayBarCounterRevenue() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = '/dashboard?action=todayBarCounterRevenue';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //客流量分析
+    function do_dashboard_todayPassengerFlow() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = '/dashboard?action=todayPassengerFlow';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //今日吧台营收
+    function do_dashboard_gameRanking() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = '/dashboard?action=todayGameRanking';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //代币入库
+    function do_CoinStorage() {
+        var parasObj = { "businessdate": "2017-09-20", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/coin?action=coinStorage";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //代币销毁
+    function do_CoinDestroy() {
+        var parasObj = { "destroydate": "2017-09-20", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/coin?action=coinDestroy";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //数字币销售分析
+    function do_CoinSales() {
+        var parasObj = { "salesdate": "2017-09-06", "coins": "12", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/coin?action=coinSales";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_query_init() {
+        var parasObj = { "userid": "0", "pagename": "tokenDestroy", "processname": "tokenDestroy", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/query?action=init";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //数字币销售分析
+    function do_DigitalCoin_coinSales() {
+        var parasObj = { "businessDate": "2017-09-05", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/digitalcoin?action=coinSales";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //数字币销毁分析
+    function do_DigitalCoin_coinDestroy() {
+        var parasObj = { "businessDate": "2017-09-05", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/digitalcoin?action=coinDestroy";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+
+    //商品档案维护
+    function do_GoodsInfo() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/goods?action=goodsInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_member() {
+        var parasObj = { "mobile": "15618920033y", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/member?action=getInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_register() {
+        var parasObj = { "mobile": "15618920029", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/member?action=register";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_updatemember() {
+        var parasObj =
+            {
+                "iccardid":90000011,
+                "membername":'李俊杰2',
+                "gender":1,
+                "birthday":'2017-09-08',
+                "certificalid":'420300197610102511',
+                "mobile": "15618920092",
+                "token": "1",
+                "signkey": "1f626576304bf5d95b72ece2222e42c3"
+            };
+        var url = "/member?action=update";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+    //username,userpwd,smsid,phone,body
+    function do_sendSMS() {
+        var parasObj =
+        {
+            "mobile": "15618920033",
+            "body": "短信验证888881，请保护好",
+            "type":1,
+            "token": "1",
+            "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/SMSService?action=send";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_SendSMSCode() {
+        var parasObj = { "templateId": 1, mobile:"15618920033","token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/SMSService?action=sendSMSCode";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_checkCode() {
+        var parasObj = { "mobile": "15618920033", "code":"123456","token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/SMSService?action=checkCode";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_getBalance() {
+        var parasObj ={"pid": "1012818","token": "1","signkey": "1f626576304bf5d95b72ece2222e42c3"};
+        var url = "/SMSService?action=balance";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_qrCodeUrl()
+    {
+        var url1 = "http://123.56.111.145";
+        //var url1 = "http://localhost:2860";
+        var url = url1 + "/WeiXin/Test.aspx?id=100";
+        var parasObj = { "url": encodeURIComponent(url), "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/WeiXin/Api/NumberOfPublic.ashx?action=qrCodeUrl";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_userRegister() {
+        var parasObj = { "storeid": "000001", "loginname": "lijunjie", "loginpassword": "888888", "realname": "lijunjie", "mobile": "15618920011","token": "1","signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/userinfo?action=register";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    
+    function do_xccloud_userInfo() {
+        var parasObj = { "mobile": "15618920011", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/userinfo?action=getUserInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_nearbyStores() {
+        var parasObj = { "latitude": "32.609372", "longitude": "110.787638", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/StoreInfo?action=nearbyStores";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }    
+
+    function do_socketSendTest() {
+        var url = "/Api/SocketMsg.ashx";
+        $.post(url, null, function (data) {
+
+        });
+    }
+
+</script>
+
+</head>
+<body>
+
+    <form id="sendForm">
+        <input id="sendText" placeholder="Text to send" />
+    </form>
+    <pre id="incomming"></pre>
+
+    <div title = "基础数据查询" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+    <div>初始化init</div>
+        <input id="Button1" type="button" value="query_init" onclick="do_query_init()"/>
+    </div>
+    <br />
+
+    <div title = "系统看板" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>系统看板dashboard</div>
+        <input id="Button6" type="button" value="dashboard_mom(今日营收总览)" onclick="do_dashboard_mom()"/>
+        <input id="Button8" type="button" value="todayRevenue(今日营收分析)" onclick="do_dashboard_todayRevenue()"/>
+        <input id="Button3" type="button" value="todayBarCounterRevenue(今日吧台营收)" onclick="do_dashboard_todayBarCounterRevenue()"/>
+        <input id="Button4" type="button" value="todayPassengerFlow(客流量分析)" onclick="do_dashboard_todayPassengerFlow()"/> 
+        <input id="Button2" type="button" value="dashboard_gameRanking(游戏机台盈亏排行榜)" onclick="do_dashboard_gameRanking()"/> 
+    </div>
+    <br />
+
+    <div title = "代币管理" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>代币管理</div>
+        <input id="Button5" type="button" value="do_CoinStorage(代币入库)" onclick="do_CoinStorage()"/>
+        <input id="Button9" type="button" value="do_CoinDestroy(代币销毁)" onclick="do_CoinDestroy()"/>
+        <input id="Button10" type="button" value="do_CoinSales(代币销售)" onclick="do_CoinSales()"/>
+    </div>
+
+    <div title = "数字币管理" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>数字币管理</div>
+        <input id="Button7" type="button" value="do_DigitalCoin_coinSales(数字币销售分析)" onclick="do_DigitalCoin_coinSales()"/>
+        <input id="Button12" type="button" value="do_DigitalCoin_coinDestroy(数字币销售分析)" onclick="do_DigitalCoin_coinDestroy()"/>
+    </div>
+
+    <div title = " 商品管理" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>商品档案维护</div>
+        <input id="Button11" type="button" value="do_GoodsInfo(获取商品信息)" onclick="do_GoodsInfo()"/>
+    </div>
+
+    <input id="Button12" type="button" value="do_member(获取会员信息)" onclick="do_member()" />
+    <input id="Button13" type="button" value="do_member(会员注册)" onclick="do_register()" />
+    <input id="Button14" type="button" value="do_member(会员更新)" onclick="do_updatemember()" />
+    <br />
+    <input id="Button15" type="button" value="do_sendSMS(发送短信)" onclick="do_sendSMS()" />
+    <input id="Button16" type="button" value="do_getBalance(获取短信网关费用)" onclick="do_getBalance()" />
+    <input id="Button18" type="button" value="do_SendSMSCode(发送短信验证码)" onclick="do_SendSMSCode()" />
+    <input id="Button20" type="button" value="do_checkCode(发送短信验证码)" onclick="do_checkCode()" />
+    <br/>
+
+    <div title=" 微信" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>微信</div>
+        <input id="Button17" type="button" value="do_qrCodeUrl(获取二维码URL)" onclick="do_qrCodeUrl()" />
+    </div>
+
+    <div title=" socket" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>socket</div>
+        <input id="Button20" type="button" value="do_socketSendTest(发送信息)" onclick="do_socketSendTest()" />
+    </div>
+
+
+    <div title="用户管理" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>用户管理</div>
+        <input id="Button21" type="button" value="do_xccloud_userRegister(用户注册)" onclick="do_xccloud_userRegister()" />
+        <input id="Button22" type="button" value="do_xccloud_userInfo(用户注册)" onclick="do_xccloud_userInfo()" />
+    </div>
+    
+    <div title="门店管理" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>门店管理</div>
+        <input id="Button21" type="button" value="do_xccloud_nearbyStores(附近门店)" onclick="do_xccloud_nearbyStores()" />
+    </div>
+</body>
+</html>

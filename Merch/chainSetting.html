@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连锁店配置</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .layui-elem-quote{width: 150px;padding: 8px!important;}
+    #balanceModelBox{width: 300px;margin:15px;}
+    .setBox{padding: 15px;height: 200px;width:250px;border: 1px solid #aaa;border-radius: 3px;overflow-y: scroll;}
+    .setBox>div{border: 1px solid #aaa;margin-bottom: 15px;border-radius: 3px;height: 30px;line-height: 30px;padding: 0 15px;}
+    .setBox>div>span{display: inline-block;width: 160px;}
+    .setBox>div>i{display: inline-block;width: 26px;height: 26px}
+</style>
+<body>
+ <div class="" style="padding: 15px;">
+     <form action="" class="layui-form layui-form-pane">
+         <div class="layui-form-item">
+             <label  class="layui-form-label">选择门店</label>
+             <div class="layui-input-inline">
+                 <select name="store" id="checkStore" lay-filter="checkStore"></select>
+             </div>
+
+         </div>
+         <fieldset class="layui-elem-field">
+             <!--<legend>字段集区块 - 默认风格</legend>-->
+             <div class="layui-field-box">
+                 <blockquote class="layui-elem-quote" style="width: 150px">门店权重分配</blockquote>
+                 <div class="layui-col-md12">
+                     <div class="layui-form-item">
+                         <div class="layui-inline">
+                             <label  class="layui-form-label">用户选择</label>
+                             <div class="layui-input-inline" >
+                                 <select name="store" id="checkUser" lay-filter="checkUser"  style="width: 190px;height: 38px;"></select>
+                             </div>
+                         </div>
+                         <div class="layui-inline">
+                             <label  class="layui-form-label">登录用户名</label>
+                             <div class="layui-input-inline">
+                                 <input type="text" class="layui-input" id="logName" readonly disabled>
+                             </div>
+                         </div>
+                         <div class="layui-inline">
+                             <label  class="layui-form-label">权重值(%)</label>
+                             <div class="layui-input-inline">
+                                 <input type="text" class="layui-input" id="weightValues">
+                             </div>
+                         </div>
+                         <div class="layui-inline">
+                             <button type="button" class="layui-btn layui-btn-normal" id="addWeightKinds">权重类别</button>
+                             <button type="button" class="layui-btn layui-btn-normal" id="save"><i class="layui-icon">&#xe654;</i>添加</button>
+                         </div>
+                     </div>
+                     <table class="layui-hide" lay-filter="storeWeightTable" id="storeWeightTable"></table>
+                 </div>
+
+                 <div class="layui-col-md12">
+                     <blockquote class="layui-elem-quote" style="width: 150px">会员卡漫游设置</blockquote>
+                     <div class="layui-col-md3 ">
+                         <blockquote class="layui-elem-quote" style="width: 150px">代币余额通用</blockquote>
+                         <div class="vipSet setBox"></div>
+                     </div>
+                     <div class="layui-col-md3 ">
+                         <blockquote class="layui-elem-quote" style="width: 150px">积分余额通用</blockquote>
+                         <div class="scoreSet setBox"></div>
+                     </div>
+                     <div class="layui-col-md3 ">
+                         <blockquote class="layui-elem-quote" style="width: 150px">彩票余额通用</blockquote>
+                         <div class="lotterySet setBox"></div>
+                     </div>
+                     <div class="layui-col-md3 ">
+                         <blockquote class="layui-elem-quote" style="width: 150px">储值金金额通用</blockquote>
+                         <div class="moneySet setBox"></div>
+                     </div>
+                 </div>
+             </div>
+         </fieldset>
+     </form>
+ </div>
+ <!--//弹出层-->
+<div id="weightKindModel" style="padding: 15px;display: none;">
+    <form action="" class="layui-form layui-form-pane">
+        <div class="layui-col-md5" style="height: 470px">
+            <blockquote class="layui-elem-quote" style="width: 300px">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <select name="store" id="selectKind" lay-filter="selectKind">
+                            <option value="">-选择权重类别-</option>
+                            <option value="0">全场营业</option>
+                            <option value="1">按游戏机分组</option>
+                        </select>
+                    </div>
+                </div>
+            </blockquote>
+            <div style="border: 1px solid #aaa;height: 320px;padding: 15px;overflow-y: scroll" id="gameList"></div>
+        </div>
+        <div class="layui-col-md2" style="height: 470px;padding: 165px 37px">
+            <button type="button" class="layui-btn layui-btn-normal" style="margin-bottom: 50px" id="setBtn"><i class="layui-icon">&#xe65b;</i></button>
+            <br>
+            <button type="button" class="layui-btn layui-btn-normal" id="removeBtn"><i class="layui-icon">&#xe65a;</i></button>
+        </div>
+        <div class="layui-col-md5" style="height: 470px">
+            <blockquote class="layui-elem-quote" style="width: 300px">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <select name="store" id="selectUser" lay-filter="selectUser">
+                            <option value="">-选择权重用户-</option>
+                        </select>
+                    </div>
+                </div>
+            </blockquote>
+            <div style="border: 1px solid #aaa;height: 320px;padding: 15px;overflow-y: scroll" id="userGameList"></div>
+        </div>
+        <div class="layui-col-md12" style="text-align: right;margin-right: 150px;">
+            <button type="button" class="layui-btn layui-btn-normal" id="saveWGL">保存</button>
+        </div>
+    </form>
+</div>
+
+<div id="balanceModel" style="display: none;">
+    <form action="" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-inline"style="width: 300px;margin: 15px;">
+                <select name="" id="balanceModelBox" lay-filter="balanceModelBox" style="width: 300px;margin: 15px;">
+
+                </select>
+            </div>
+        </div>
+        <div style="text-align: right;padding-right: 50px;margin-bottom: 20px">
+            <button type="button" class="layui-btn layui-btn-normal" id="saveBalance">确定</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    window.onload=function () {
+        let xc=xcActionSystem.prototype;
+        let token=xc.getStorage('token');
+        let _storeId='';let _userId='';
+        let arrTable=[];
+        //
+        let arrGameList=[];let arrUserGameList=[];
+        //勾选游戏机编号
+        let arrGame1=[];let arrGame2=[];
+        //权重类别0/1
+        let wk='';
+        //权重用户
+        let wUser='';
+        //选择接收余额店铺的ID
+        let chainStoreIDs='';
+        //获取门店列表
+        xcActionSystem.prototype.getStoreList=function () {
+            let url='/XCCloud/StoreWeight?action=GetStoreList';
+            let obj={'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.Result_Code==1){
+                        $('#checkStore').html('<option>-请选择-</option>')
+                        let arr=data.Result_Data;
+                        for(var i in arr){
+                            $('#checkStore').append('<option value="'+arr[i].StoreID+'">'+arr[i].StoreName+'</option>')
+                        }
+                        layui.use('form',function () {
+                            let form=layui.form;
+                            form.render();
+                        })
+                    }
+                }
+            })
+        };
+        xcActionSystem.prototype.getUserList=function(id){
+            let url='/XCCloud/StoreWeight?action=GetStoreBossList';
+            let obj={'storeId':id,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.Result_Code==1){
+                        $('#checkUser').html('<option>-请选择-</option>')
+                        let arr=data.Result_Data;
+                        for(var i in arr){
+                            $('#checkUser').append('<option value="'+arr[i].UserID+'" title="'+arr[i].LogName+'">'+arr[i].RealName+'</option>')
+                        }
+                        layui.use('form',function () {
+                            let form=layui.form;
+                            form.render();
+                        })
+                    }
+                }
+            })
+        };
+        //添加门店权重信息
+        xcActionSystem.prototype.AddStoreWeight=function(){
+            let url='/XCCloud/StoreWeight?action=AddStoreWeight';
+            let weightValues=$('#weightValues').val();
+            let logNames=$('#logName').val();
+            let obj={'storeId':_storeId,'userId':_userId,'weightValue':weightValues,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            if(_userId==''){
+                layui.use('layer',function () {
+                    let layer=layui.form;
+                    layer.msg('请选择门店用户！');
+                })
+            }else if(weightValues==''){
+                layui.use('layer',function () {
+                    let layer=layui.layer;
+                    layer.msg('请添加权重值！');
+                })
+            }else {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parseJson},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if(data.result_code==1){
+                            xc.GetStoreWeightList(_storeId);
+                        }else {
+                            layui.use('layer',function () {
+                                let layer=layui.layer;
+                                layer.msg('添加门店权重信息失败！');
+                            })
+                        }
+                    }
+                })
+            }
+
+        };
+        //获取门店权重列表
+        xcActionSystem.prototype.GetStoreWeightList=function(storeIds){
+            let url='/XCCloud/StoreWeight?action=GetStoreWeightList';
+            let obj={'storeId':storeIds,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.Result_Code==1){
+                        layui.use(['table'],function () {
+                            let table=layui.table;
+                            table.render({
+                                elem: '#storeWeightTable'
+                                , data: data.Result_Data
+                                , height:200
+                                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                , cols: [[
+                                     {field: 'ID', title: '门店权重ID', align: 'center'}
+                                    , {field: 'RealName', title: '用户姓名', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                                    , {field: 'LogName', title: '登录用户名', align: 'center'}
+                                    , {field: 'WeightValue', title: '权重值', align: 'center'} //单元格内容水平居中
+                                    , {fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}
+                                ]]
+                                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                                , limit: 10
+                            });
+                        })
+                    }else {
+                        layui.use('layer',function () {
+                            let layer=layui.layer;
+                            layer.msg('添加门店权重信息失败！');
+                        })
+                    }
+                }
+            })
+        };
+        //删除门店权重信息
+        xcActionSystem.prototype.DelStoreWeight=function(ids){
+            let url='/XCCloud/StoreWeight?action=DelStoreWeight';
+            let obj={'id':ids,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.Result_Code==1){
+                        layui.use('layer',function () {
+                            let layer=layui.form;
+                            layer.msg('删除门店权重信息成功！');
+                        })
+                    }else {
+                        layui.use('layer',function () {
+                            let layer=layui.form;
+                            layer.msg('删除门店权重信息失败！');
+                        })
+                    }
+                }
+            })
+        };
+        //打开弹窗
+        xcActionSystem.prototype.openModel=function(){
+            layui.use('layer',function () {
+                let layer=layui.layer;
+                layer.open({
+                    type:1,
+                    shade:0.6,
+                    area:['800px','600px'],
+                    content:$('#weightKindModel')
+                })
+            })
+        };
+        //获取权重用户列表
+        xcActionSystem.prototype.GetStoreWeightUserList=function(storeIds){
+            let url='/XCCloud/StoreWeight?action=GetStoreWeightUserList';
+            let obj={'storeId':storeIds,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.Result_Code==1){
+                        $('#selectUser').html('<option>-选择权重用户-</option>');
+                        let arr=data.Result_Data;
+                        for(var i in arr){
+                            $('#selectUser').append('<option value="'+arr[i].UserID+'">'+arr[i].RealName+'</option>')
+                        }
+                        layui.use('form',function () {
+                            let form=layui.form;
+                            form.render();
+                        })
+                    }
+                }
+            })
+        };
+        //获取门店游戏机列表
+        xcActionSystem.prototype.GetStoreWeightGameList=function(wk){
+            let url='/XCCloud/StoreWeight?action=GetStoreWeightGameList';
+            let obj={'storeId':_storeId,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            if(wk==1){
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parseJson},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if(data.Result_Code==1){
+                            arrGameList=data.Result_Data;
+                            $('#gameList').html('');
+                            for(var i in arrGameList){
+                                $('#gameList').append('<div class="layui-form-item" id="'+arrGameList[i].GameID+'">' +
+                                    '<div class="layui-inline">' +
+                                    '<div class="layui-input-inline">' +
+                                    '<input type="checkbox" lay-filter="gameLists1" value="'+arrGameList[i].GameID+'" title="'+arrGameList[i].GameName+'" lay-skin="primary"></div>' +
+                                    '</div>' +
+                                    '<hr class="layui-bg-blue">'+
+                                    '</div>' )
+                            }
+                            layui.use('form',function () {
+                                let form=layui.form;
+                                form.render();
+                            })
+                        }
+                    }
+                })
+            }else {
+                $('#gameList').html('');
+            }
+        };
+        //获取权重用户游戏机列表
+        xcActionSystem.prototype.GetStoreWeightUserGameList=function(userIds,wk){
+            let url='/XCCloud/StoreWeight?action=GetStoreWeightUserGameList';
+            let obj={'storeId':_storeId,'userId':userIds,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            if(wk==1){
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parseJson},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        $('#userGameList').html('');
+                        if(data.Result_Code==1){
+                            arrUserGameList =data.Result_Data;
+                            for(var i in arrUserGameList){
+                                $('#userGameList').append('<div class="layui-form-item" id="'+arrUserGameList[i].GameID+'">' +
+                                    '<div class="layui-inline">' +
+                                    '<div class="layui-input-inline" >' +
+                                    '<input type="checkbox" lay-filter="gameLists2" value="'+arrUserGameList[i].GameID+'" title="'+arrUserGameList[i].GameName+'" lay-skin="primary"></div>' +
+                                    '</div>' +
+                                    '<hr class="layui-bg-blue">' +
+                                    '</div>')
+                            }
+                            layui.use('form',function () {
+                                let form=layui.form;
+                                form.render();
+                            })
+                        }
+                    }
+                })
+            }else {
+                $('#userGameList').html('');
+            }
+
+        };
+        //10.获取门店余额通用列表
+        xcActionSystem.prototype.GetChainStoreRuleList=function(){
+            let url='/XCCloud/StoreWeight?action=GetChainStoreRuleList';
+            let obj={'storeId':_storeId,'ruleType':'','userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.Result_Code==1){
+                        $('.setBox').html('');
+                         let arr=data.Result_Data;
+                         for(var i in arr){
+                             if(arr[i].RuleType==0){
+                                 $('.vipSet').append('<div id="'+arr[i].ID+'">' +
+                                     '<span>'+arr[i].StoreName+'</span>' +
+                                     '<i class="layui-icon iconDel" style="color: red;">&#x1006;</i></div>')
+                             }else if(arr[i].RuleType==1){
+                                 $('.scoreSet').append('<div id="'+arr[i].ID+'">' +
+                                     '<span>'+arr[i].StoreName+'</span>' +
+                                     '<i class="layui-icon iconDel" style="color: red;">&#x1006;</i></div>')
+                             }else if(arr[i].RuleType==2){
+                                 $('.lotterySet').append('<div id="'+arr[i].ID+'">' +
+                                     '<span>'+arr[i].StoreName+'</span>' +
+                                     '<i class="layui-icon iconDel" style="color: red;">&#x1006;</i></div>')
+                             }else if(arr[i].RuleType==3){
+                                 $('.moneySet').append('<div id="'+arr[i].ID+'">' +
+                                     '<span>'+arr[i].StoreName+'</span>' +
+                                     '<i class="layui-icon iconDel" style="color: red;">&#x1006;</i></div>')
+                             }
+                         }
+
+                        layui.use('form',function () {
+                            let form=layui.form;
+                            form.render();
+                        })
+                    }
+                }
+            })
+        };
+        xc.getStoreList();
+        xc.GetStoreWeightList('0');
+        layui.use(['form','table','layer'],function () {
+            let form=layui.form;
+            let table=layui.table;
+            let layer=layui.layer;
+            form.on('select(checkStore)',function(data){
+                _storeId=data.value;
+                xc.getUserList(_storeId);
+                xc.GetStoreWeightUserList(_storeId);
+                xc.GetStoreWeightList(_storeId);
+                xc.GetChainStoreRuleList();
+            });
+            form.on('select(selectKind)',function(data){
+                wk=data.value;
+                xc.GetStoreWeightGameList(wk);
+            });
+            form.on('select(selectUser)',function(data){
+                wUser=data.value;
+                console.log(wUser);
+                if(wk==1){
+                    xc.GetStoreWeightUserGameList(wUser,wk);
+                }else {}
+
+            });
+            form.on('select(checkUser)',function(data){
+                _userId=data.value;
+                $('#logName').val(data.elem[data.elem.selectedIndex].title);
+                $('#logName').attr({'name':data.elem[data.elem.selectedIndex].text});
+            });
+            table.on('tool(storeWeightTable)', function(obj){
+                let data = obj.data; //获得当前行数据
+                let layEvent = obj.event;
+                let _ids=data.ID;
+                 if(layEvent === 'del'){ //删除
+                    layer.confirm('真的删除行么', function(index){
+                        let url='/XCCloud/StoreWeight?action=DelStoreWeight';
+                        let _obj={'id':_ids,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                        let parseJson = JSON.stringify(_obj);
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            contentType: "application/json; charset=utf-8",
+                            data: {parasJson: parseJson},
+                            success: function (data) {
+                                data = JSON.parse(data);
+                                if(data.result_code==1){
+                                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                        layer.close(index);
+                                        layer.msg('删除门店权重信息成功！');
+                                }else {
+                                        layer.msg('删除门店权重信息失败！');
+                                }
+                            }
+                        })
+
+                        //向服务端发送删除指令
+                    });
+                }
+            });
+            getCheckBox('gameLists1',arrGame1,form);
+            getCheckBox('gameLists2',arrGame2,form);
+
+            form.on('select(balanceModelBox)',function(data){
+                chainStoreIDs=data.value;
+            })
+        });
+        let  getCheckBox=function(filter,arr,form){
+            form.on('checkbox('+filter+')', function(data){
+                if (data.elem.checked==true){
+                    arr.push({'GameID':parseInt(data.value),'GameName':data.elem.title});
+                }else if(data.elem.checked==false){
+                    for (var i=0;i<arr.length;i++){
+                        if(arr[i].GameID==data.value){
+                            arr.splice(i,1)
+                        }
+                    }
+                }
+                console.log(arr);
+            });
+        };
+
+        $('#addWeightKinds').on('click',function(){
+            xc.openModel();
+            wk='';
+            wUser='';
+        });
+        $('#save').on('click',function(){
+            xc.AddStoreWeight();
+        });
+        $('#setBtn').on('click',function () {
+            layui.use(['layer','form'],function () {
+                let layer=layui.layer;
+                let form=layui.form;
+                if(wk==1){
+                    if(wUser!=''){
+                        for(let i in arrGame1){
+                            let divtext=$('#'+arrGame1[i].GameID);
+                            $('#gameList').find(divtext).remove();
+                            $('#userGameList').append('<div class="layui-form-item" id="'+arrGame1[i].GameID+'">' +
+                                '<div class="layui-inline">' +
+                                '<div class="layui-input-inline" >' +
+                                '<input type="checkbox" lay-filter="gameLists2" value="'+arrGame1[i].GameID+'" title="'+arrGame1[i].GameName+'" lay-skin="primary"></div>' +
+                                '</div>' +
+                                '<hr class="layui-bg-blue">' +
+                                '</div>');
+                            form.render();
+                            arrUserGameList.push(arrGame1[i]);
+                            for(let j in arrGameList){
+                              if(arrGameList[j].GameID==arrGame1[i].GameID){
+                                  arrGameList.splice(j,1);
+                              }
+                            }
+                        }
+                        arrGame1.splice(0,arrGame1.length);
+                    } else {
+                            layer.msg('请选择权重用户')
+                    }
+                }else {
+                        layer.msg('请查看权重类型是否正确')
+                }
+            });
+
+        });
+        $('#removeBtn').on('click',function () {
+            layui.use(['layer','form'],function () {
+                let layer=layui.layer;
+                let form=layui.form;
+                if(wk==1){
+                    if(wUser!=''){
+                        for(let i in arrGame2){
+                            let divtext=$('#'+arrGame2[i].GameID);
+                            $('#userGameList').find(divtext).remove();
+                            $('#gameList').append('<div class="layui-form-item" id="'+arrGame2[i].GameID+'">' +
+                                '<div class="layui-inline">' +
+                                '<div class="layui-input-inline" >' +
+                                '<input type="checkbox" lay-filter="gameLists1" value="'+arrGame2[i].GameID+'" title="'+arrGame2[i].GameName+'" lay-skin="primary"></div>' +
+                                '</div>' +
+                                '<hr class="layui-bg-blue">' +
+                                '</div>');
+                            form.render();
+                            for(let j in arrUserGameList){
+                                if(arrUserGameList[j].GameID==arrGame2[i].GameID){
+                                    arrUserGameList.splice(j,1);
+                                }
+                            }
+                        }
+                        arrGame2.splice(0,arrGame2.length);
+                    } else {
+                        layer.msg('请选择权重用户')
+                    }
+                }else {
+                    layer.msg('请查看权重类型是否正确')
+                }
+            });
+
+        });
+        $('#saveWGL').on('click',function () {
+            let arrGameIDs=[];
+            for (var i in arrUserGameList){
+                arrGameIDs.push(arrUserGameList[i].GameID);
+            }
+            let url='/XCCloud/StoreWeight?action=SaveStoreWeightUserGameInfo';
+            let obj={'storeId':_storeId,'userId':wUser,'weightType':wk,'gameIDs':arrGameIDs,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.result_code==1){
+                        layui.use('layer',function () {
+                           let layer=layui.layer;
+                           layer.msg('保存成功');
+                           setTimeout(layer.closeAll(),500);
+                            arrUserGameList.splice(0,arrUserGameList.length);
+                        })
+                    }
+                }
+            })
+
+        });
+        //13.删除接收余额的门店
+        $('.setBox').on('click','div>i',function () {
+            let that=$(this);
+            let ids=$(this).parent('div').attr('id');
+            let url='/XCCloud/StoreWeight?action=DelChainStore';
+            let obj={'id':ids,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.result_code==1){
+                        layui.use('layer',function () {
+                            let layer=layui.layer;
+                            layer.msg('删除成功');
+                            that.parent().remove();
+                        })
+                    }
+                  }
+             })
+        }).dblclick(function () {
+            let that=$(this);
+            let ruleTypes='';
+            if(that.siblings('blockquote').text()=="代币余额通用"){
+                ruleTypes=0;
+            }else if(that.siblings('blockquote').text()=="积分余额通用"){
+                ruleTypes=1;
+            }else if(that.siblings('blockquote').text()=="彩票余额通用"){
+                ruleTypes=2;
+            }else if(that.siblings('blockquote').text()=="储值金金额通用"){
+                ruleTypes=3;
+            }
+
+            let url='/XCCloud/StoreWeight?action=GetUnChainStoreList';
+            let obj={'storeId':_storeId,'ruleType':ruleTypes,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                     if(data.Result_Code==1){
+                         $('#balanceModelBox').html('');
+                         let arr=data.Result_Data;
+                         xc.setStorage('ruleTypes',ruleTypes);
+                         for(var i in  arr){
+                             $('#balanceModelBox').html('<option>-请选择-</option>').append('<option value="'+arr[i].StoreID+'">'+arr[i].StoreName+'</option>');
+                         }
+                         layui.use(['form','layer'],function () {
+                             let form=layui.form;
+                             let layer=layui.layer;
+                             form.render();
+                             layer.open({
+                                 type:1,
+                                 title:'选择接收余额的店铺',
+                                 area:'340px',
+                                 content:$('#balanceModel'),
+                             })
+                         })
+
+                     }
+                }
+            })
+        });
+        $('#saveBalance').on('click',function () {
+           let _ruleTypes=xc.getStorage('ruleTypes');
+           let url='/XCCloud/StoreWeight?action=SaveChainStore';
+           let obj={'revStoreId':chainStoreIDs,'ruleType':_ruleTypes,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let parseJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parseJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.result_code==1){
+                        layui.use('layer',function () {
+                            let layer=layui.layer;
+                            setTimeout(layer.closeAll(),500);
+                           xc.GetChainStoreRuleList();
+                        })
+                    }
+                }
+            })
+        })
+    }
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

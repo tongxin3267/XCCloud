@@ -1,0 +1,893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E38EC5A-0A89-4D9E-9CDF-6F79C580B6A1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCCloudService.Model</RootNamespace>
+    <AssemblyName>XXCloudService.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\ResponseModel.cs" />
+    <Compile Include="Base\ResponseModelFactory.cs" />
+    <Compile Include="Base\SocketResponseModel.cs" />
+    <Compile Include="Base\SocketResponseModelFactory.cs" />
+    <Compile Include="CustomModel\Common\TCPAnswerOrderModel.cs" />
+    <Compile Include="CustomModel\Common\TCPAnswerSocketModel.cs" />
+    <Compile Include="CustomModel\Common\UDPSocketCommonQueryAnswerModel.cs" />
+    <Compile Include="CustomModel\Common\UDPSocketStoreQueryAnswerModel.cs" />
+    <Compile Include="CustomModel\Common\UDPSocketSNAnswerModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\AccountModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\BaseDeviceInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\DataGameInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\DeviceModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\FoodsModel.cs" />
+    <Compile Include="CustomModel\XCCloudRS232\MerchModel.cs" />
+    <Compile Include="CustomModel\XCCloud\BaiduMapModel.cs" />
+    <Compile Include="CustomModel\XCCloud\BaseMemberModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Base_GoodsInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Base_StoreInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Base_MerchInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_CouponInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_FoodInfoListModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_GameFreeRuleModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_GoodInventoryModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_GoodStorageModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_MemberLevelModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_Push_RuleModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Data_ReloadModel.cs" />
+    <Compile Include="CustomModel\XCCloud\DictionaryResponseModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Flw_OrderModel.cs" />
+    <Compile Include="CustomModel\XCCloud\FoodInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Member\MemberRegisterResponseModel.cs" />
+    <Compile Include="CustomModel\XCCloud\MenuInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Merch\MerchInfoCacheModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Order\OrderMainModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Order\OrderDetailModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Order\OrderModel.cs" />
+    <Compile Include="CustomModel\XCCloud\PaymentModel.cs" />
+    <Compile Include="CustomModel\XCCloud\Store\StoreInfoCacheModel.cs" />
+    <Compile Include="CustomModel\XCCloud\UserLogResponseModel.cs" />
+    <Compile Include="CustomModel\XCCloud\UserInfoRegisterResponseModel.cs" />
+    <Compile Include="CustomModel\XCCloud\UserInfoModel.cs" />
+    <Compile Include="CustomModel\XCCloud\UserGrantModel.cs" />
+    <Compile Include="CustomModel\XCCloud\UserGroupModel.cs" />
+    <Compile Include="CustomModel\XCCloud\User\UserInfoCacheModel.cs" />
+    <Compile Include="CustomModel\XCCloud\XCCloudUserTokenModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\Client.cs" />
+    <Compile Include="CustomModel\XCGameManager\DataOrderModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\DeviceModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\PromotionModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\RechargeModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\StoreCacheModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\TerminalStoreReponseModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\TmpmemberModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\TokenModel.cs" />
+    <Compile Include="CustomModel\XCGameManager\XCGameManaRadarMonitor.cs" />
+    <Compile Include="CustomModel\XCGame\DashboardModel.cs" />
+    <Compile Include="CustomModel\XCGame\FoodsModel.cs" />
+    <Compile Include="CustomModel\XCGame\MemberModel.cs" />
+    <Compile Include="CustomModel\XCGame\MenberICICardModel.cs" />
+    <Compile Include="CustomModel\XCGame\Project_buy_codelistModel.cs" />
+    <Compile Include="CustomModel\XCGame\UserInfoModel.cs" />
+    <Compile Include="CustomModel\XCGame\XCGameUserTokenModel.cs" />
+    <Compile Include="CustomModel\XCGame\XCGameMemberTokenModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Socket\UDP\CattleMemberCardQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\CattleMemberCardQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\ComonSuccessResponseModel.cs" />
+    <Compile Include="Socket\UDP\ComonErrorResponseModel.cs" />
+    <Compile Include="Socket\UDP\DeviceControlAnswerRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\DeviceControlOutParmasModel.cs" />
+    <Compile Include="Socket\UDP\DeviceStateOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\LotteryOperateRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\OutTicketOperateRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\MemberTransOperateRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\TicketOperateRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\LotteryOperateResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\OutTicketOperateResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\MemberTransOperateResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\TicketOperateResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\LotteryQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\OutTicketQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\ParamQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\TicketQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\RadarNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\RadarHeartbeatOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\RadarNotifyOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\RadarNotifyResponseModel.cs" />
+    <Compile Include="Socket\UDP\RadarRegisterOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\RadarRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\DeviceControlResponseModel.cs" />
+    <Compile Include="Socket\UDP\DeviceStateRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\DeviceControlRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\RadarRegisterRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\RadarRegisterResponseModel.cs" />
+    <Compile Include="Socket\UDP\DeviceStateResponseModel..cs" />
+    <Compile Include="Socket\UDP\RadarHeartbeatRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryNotifyOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryOutParamsModel.cs" />
+    <Compile Include="Socket\UDP\MemberQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryResponseModel.cs" />
+    <Compile Include="Socket\UDP\MemberQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryResultNotifyResponseModel.cs" />
+    <Compile Include="Socket\UDP\StoreQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\LotteryQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\OutTicketQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\ParamQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\TicketQueryResultNotifyRequestModel.cs" />
+    <Compile Include="Socket\UDP\UserPhoneQueryRequestDataModel.cs" />
+    <Compile Include="Socket\UDP\UserPhoneQueryResultNotifyRequestModel.cs" />
+    <Compile Include="WeiXin\Message\SAppMsgConfigAttribute.cs" />
+    <Compile Include="WeiXin\Message\XcGameGetCoinSuccessConfigModel.cs" />
+    <Compile Include="WeiXin\Message\XcGameGetCoinSuccessDataModel.cs" />
+    <Compile Include="WeiXin\Message\XcUserNewPasswordConfigModel.cs" />
+    <Compile Include="WeiXin\Message\XcUserNewPasswordDataModel.cs" />
+    <Compile Include="WeiXin\Message\XcUserResetPasswordConfigModel.cs" />
+    <Compile Include="WeiXin\Message\MerchResetPasswordConfigModel.cs" />
+    <Compile Include="WeiXin\Message\XcUserResetPasswordDataModel.cs" />
+    <Compile Include="WeiXin\Message\MerchResetPasswordDataModel.cs" />
+    <Compile Include="WeiXin\Message\OrderFailSuccessConfigModel.cs" />
+    <Compile Include="WeiXin\Message\OrderFailSuccessDataModel.cs" />
+    <Compile Include="WeiXin\Message\OrderPaySuccessConfigModel.cs" />
+    <Compile Include="WeiXin\Message\OrderPaySuccessDataModel .cs" />
+    <Compile Include="WeiXin\Message\MerchNewPasswordConfigModel.cs" />
+    <Compile Include="WeiXin\Message\StoreRegisterRemindConfigModel.cs" />
+    <Compile Include="WeiXin\Message\UserRegisterRemindConfigModel.cs" />
+    <Compile Include="WeiXin\Message\MerchNewPasswordDataModel.cs" />
+    <Compile Include="WeiXin\Message\StoreRegisterRemindDataModel.cs" />
+    <Compile Include="WeiXin\Message\UserRegisterRemindDataModel.cs" />
+    <Compile Include="WeiXin\Message\WeixinMsgConfigAttribute.cs" />
+    <Compile Include="WeiXin\Message\BuySuccessNotifyConfigModel.cs" />
+    <Compile Include="WeiXin\Message\BuySuccessNotifyDataModel.cs" />
+    <Compile Include="WeiXin\Message\MessageTemplate.cs" />
+    <Compile Include="WeiXin\Message\PushMessageModel.cs" />
+    <Compile Include="WeiXin\SAppMessage\MemberCoinsConfigModel.cs" />
+    <Compile Include="WeiXin\SAppMessage\MemberCoinsDataModel.cs" />
+    <Compile Include="WeiXin\SAppMessage\MemberCoinsOperationNotifyDataModel.cs" />
+    <Compile Include="WeiXin\SAppMessage\MemberFoodSaleDataModel.cs" />
+    <Compile Include="WeiXin\SAppMessage\MemberFoodSaleConfigModel.cs" />
+    <Compile Include="WeiXin\Session\WeiXinSAppSessionModel.cs" />
+    <Compile Include="XCCloudRS232\Base_DeviceInfo.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\Base_MerchInfo.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\Data_GameInfo.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\Data_MerchDevice.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\Data_MerchSegment.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\flw_485_coin.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\flw_485_savecoin.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\flw_food_sale.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\t_Enum.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\t_foods.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\t_member.cs">
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\XCCloudRS232DBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudRS232DBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\XCCloudRS232DBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudRS232DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloudRS232\XCCloudRS232DBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudRS232DBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_ChainRule.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_ChainRule_Store.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_DepotInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_DeviceInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_EnumParams.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_GoodsInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_MemberInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_MerchantInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_MerchFunction.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_SettleOrg.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_SettlePPOS.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_StorageInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_StoreDogList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_StoreInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_StoreWeight.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_StoreWeight_Game.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_UserGrant.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_UserGroup.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_UserGroup_Grant.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Base_UserInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_BalanceType_StoreList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_BillInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Card_Balance.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Card_Balance_StoreList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Card_Right.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Card_Right_StoreList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CoinDestory.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CoinInventory.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CoinStorage.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CouponInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CouponList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_CouponRight.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Coupon_StoreList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_DigitCoin.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_DigitCoinDestroy.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_FoodInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Food_Detial.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Food_Level.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Food_StoreList.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Food_WorkStation.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GameFreeRule.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GameFreeRule_List.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GameInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GameInfo_Ext.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GameInfo_Photo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Game_StockInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GivebackRule.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GoodInventory.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GoodsStock.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GoodStock_Record.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_GoodStorage.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Head.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_JackpotInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Jackpot_Level.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Jackpot_Matrix.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_LotteryInventory.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_LotteryStorage.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_MemberLevel.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Member_Card.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Member_Card_Store.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Message.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Parameters.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_ProjectInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Project_BandPrice.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Project_Device.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Push_Rule.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Reload.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Storage_Record.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Data_Workstation.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Dict_Area.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Dict_BalanceType.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Dict_FunctionMenu.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Dict_System.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_485_Coin.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_485_SaveCoin.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_CheckDate.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Coin_Exit.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Coin_Sale.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_CouponUse.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Digite_Coin.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Digite_Coin_Detail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Food_Exit.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Food_ExitDetail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Food_Sale.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Food_SaleDetail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Game_Free.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Game_Watch.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Game_WinPrize.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Giveback.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Goods.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Good_Detail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Jackpot.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Lottery.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Order.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Order_Detail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Order_SerialNumber.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Project_BuyDetail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Project_Play_Time.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Schedule.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Ticket_Exit.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Flw_Transfer.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Log_GameAlarm.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Log_Operation.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Search_Template.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Search_Template_Detail.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Store_CheckDate.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Store_GameTotal.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\Store_HeadTotal.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\XCCloudDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\XCCloudDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\XCCloudDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCCloudDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="XCCloud\XC_WorkInfo.cs">
+      <DependentUpon>XCCloudDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPDeviceControlLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPDeviceStateChangeLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPIndex.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPRadarHeatLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPRadarNotifyLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPRadarRegisterLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\t_UDPSendDeviceControlLog.cs">
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\XCGameManagerLogDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerLogDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\XCGameManagerLogDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerLogDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManagerLog\XCGameManagerLogDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerLogDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\Data_Order.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\sysdiagrams.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_AdminUser.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_apiRequestLog.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_datamessage.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_device.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_Enum.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_food_sale.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\T_MemberToken.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_MobileToken.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_MPOrder.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_promotion.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_store.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_store_dog.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_ticket.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_user.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_UserRegister.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\t_usertoken.cs">
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\XCGameManagerDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\XCGameManagerDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGameManager\XCGameManagerDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameManagerDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomModel\XCGame\XCGameRouteDeviceTokenModel.cs" />
+    <Compile Include="XCGame\flw_485_coin.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_485_savecoin.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_checkdate.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_checkdate_schedule.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_food_sale.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_game_free.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_lottery.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_project_buy.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_project_buy_codelist.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_project_play.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_schedule.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\flw_ticket_exit.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_device.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_foods.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_game.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_game_free_rule.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_goods.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_head.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_member.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_memberlevel.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_parameters.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_project.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_push_rule.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\t_workstation.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\u_users.cs">
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\XCGameDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\XCGameDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XCGame\XCGameDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XCGameDBModel.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="XCCloud\XCCloudDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XCCloudDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="XCCloudRS232\XCCloudRS232DBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XCCloudRS232DBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="XCCloudRS232\XCCloudRS232DBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCCloudRS232DBModel.edmx</DependentUpon>
+      <LastGenOutput>XCCloudRS232DBModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="XCCloudRS232\XCCloudRS232DBModel.edmx.diagram">
+      <DependentUpon>XCCloudRS232DBModel.edmx</DependentUpon>
+    </None>
+    <None Include="XCCloudRS232\XCCloudRS232DBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCCloudRS232DBModel.edmx</DependentUpon>
+      <LastGenOutput>XCCloudRS232DBModel.cs</LastGenOutput>
+    </None>
+    <None Include="XCCloud\XCCloudDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCCloudDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCCloudDBModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="XCCloud\XCCloudDBModel.edmx.diagram">
+      <DependentUpon>XCCloudDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="XCCloud\XCCloudDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCCloudDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCCloudDBModel.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="XCGame\XCGameDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XCGameDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="XCGameManager\XCGameManagerDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XCGameManagerDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="XCGameManagerLog\XCGameManagerLogDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XCGameManagerLogDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="XCGameManagerLog\XCGameManagerLogDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameManagerLogDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameManagerLogDBModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="XCGameManagerLog\XCGameManagerLogDBModel.edmx.diagram">
+      <DependentUpon>XCGameManagerLogDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="XCGameManagerLog\XCGameManagerLogDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameManagerLogDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameManagerLogDBModel.cs</LastGenOutput>
+    </None>
+    <None Include="XCGameManager\XCGameManagerDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameManagerDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameManagerDBModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="XCGameManager\XCGameManagerDBModel.edmx.diagram">
+      <DependentUpon>XCGameManagerDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="XCGameManager\XCGameManagerDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameManagerDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameManagerDBModel.cs</LastGenOutput>
+    </None>
+    <None Include="XCGame\XCGameDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameDBModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="XCGame\XCGameDBModel.edmx.diagram">
+      <DependentUpon>XCGameDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="XCGame\XCGameDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>XCGameDBModel.edmx</DependentUpon>
+      <LastGenOutput>XCGameDBModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

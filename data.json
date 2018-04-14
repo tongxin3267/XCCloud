@@ -1,0 +1,226 @@
+[{
+    "foodid":"1",
+    "foodname":"50元50币",
+    "foodtype":"recharge",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "title":"50代币",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "vipprice":"会员价格",
+    "usecoin":"-1",
+    "uselottery":"-1",
+    "usepoint":"1"
+},{
+    "foodid":"2",
+    "foodname":"中号小黄人",
+    "foodtype":"gift",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"88.00",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "title":"",
+    "vipprice":"会员价格",
+    "usecoin":"500",
+    "uselottery":"5000",
+    "usepoint":"12132"
+
+},{
+    "foodid":"3",
+    "foodname":"淘气堡",
+    "foodtype":"ticket",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "vipprice":"会员价格",
+    "title":"1次",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"4",
+    "foodname":"200元数字币",
+    "foodtype":"currency",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"200.00",
+    "vipprice":"会员价格",
+    "title":"300代币",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"5",
+    "foodname":"热干面",
+    "foodtype":"catering",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"8.00",
+    "vipprice":"8.00",
+    "title":"",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"6",
+    "foodname":"开业大礼包",
+    "foodtype":"GiftBag",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"99.00",
+    "title":"多项...",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+},{
+    "foodid":"1",
+    "foodname":"50元50币",
+    "foodtype":"recharge",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "title":"50代币",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+},{
+    "foodid":"2",
+    "foodname":"中号小黄人",
+    "foodtype":"gift",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"88.00",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "title":"",
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+
+},{
+    "foodid":"3",
+    "foodname":"淘气堡",
+    "foodtype":"ticket",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "vipprice":"会员价格",
+    "title":"1次",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"4",
+    "foodname":"200元数字币",
+    "foodtype":"currency",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"200.00",
+    "vipprice":"会员价格",
+    "title":"300代币",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"5",
+    "foodname":"热干面",
+    "foodtype":"catering",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"散客价格",
+    "vipprice":"8.00",
+    "title":"",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"6",
+    "foodname":"开业大礼包",
+    "foodtype":"GiftBag",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"99.00",
+    "title":"多项...",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+
+
+
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+},{
+    "foodid":"1",
+    "foodname":"50元50币",
+    "foodtype":"recharge",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "title":"50代币",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+},{
+    "foodid":"2",
+    "foodname":"中号小黄人",
+    "foodtype":"gift",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"88.00",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+    "title":"",
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+
+},{
+    "foodid":"3",
+    "foodname":"淘气堡",
+    "foodtype":"ticket",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"50.00",
+    "vipprice":"会员价格",
+    "title":"1次",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"4",
+    "foodname":"200元数字币",
+    "foodtype":"currency",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"200.00",
+    "vipprice":"会员价格",
+    "title":"300代币",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"5",
+    "foodname":"热干面",
+    "foodtype":"catering",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"8.00",
+    "vipprice":"8.00",
+    "title":"",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项"
+},{
+    "foodid":"6",
+    "foodname":"开业大礼包",
+    "foodtype":"GiftBag",
+    "foodimgurl":"images/sales.png",
+    "touristprice":"99.00",
+    "title":"多项...",
+    "fooddata":"套餐内容，存在多项则用json数据扩展此项",
+
+
+
+    "vipprice":"会员价格",
+    "usecoin":"代币兑换价值，-1表示不允许代币兑换",
+    "uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+    "usepoint":"积分兑换价值，-1表示不允许积分兑换"
+}]

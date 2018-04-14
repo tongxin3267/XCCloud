@@ -1,0 +1,35 @@
+[{
+
+    "memberid" :"0",
+    "memberurl" :"images/sales.png",
+    "membertitle" :"银卡",
+    "memberdeposit" :"￥0.00"
+
+},{
+
+    "memberid" :"1",
+    "memberurl" :"images/sales.png",
+    "membertitle" :"金卡",
+    "memberdeposit" :"￥10.00"
+
+},{
+
+    "memberid" :"2",
+    "memberurl" :"images/sales.png",
+    "membertitle" :"钻卡",
+    "memberdeposit" :"￥20.00"
+
+},{
+
+    "memberid" :"3",
+    "memberurl" :"images/sales.png",
+    "membertitle" :"白金卡",
+    "memberdeposit" :"￥30.00"
+},{
+
+    "memberid" :"4",
+    "memberurl" :"images/sales.png",
+    "membertitle" :"王者卡",
+    "memberdeposit" :"￥40.00"
+
+}]

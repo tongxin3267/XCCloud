@@ -1,0 +1,897 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XCGameManagerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Data_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="StoreID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderType" Type="int" Nullable="false" />
+          <Property Name="BuyType" Type="varchar" MaxLength="20" />
+          <Property Name="PayStatus" Type="int" Nullable="false" />
+          <Property Name="PayTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Descript" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TradeNo" Type="varchar" MaxLength="64" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" />
+          <Property Name="StoreName" Type="varchar" MaxLength="200" />
+          <Property Name="Coins" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="t_AdminUser">
+          <Key>
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_apiRequestLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysId" Type="varchar" MaxLength="2" />
+          <Property Name="ApiType" Type="tinyint" Nullable="false" />
+          <Property Name="RequestUrl" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="RequestContent" Type="varchar(max)" Nullable="false" />
+          <Property Name="ReturnCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="LogMessage" Type="varchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_datamessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageType" Type="int" />
+          <Property Name="Sender" Type="varchar" MaxLength="50" />
+          <Property Name="SenderType" Type="int" />
+          <Property Name="Receiver" Type="varchar" MaxLength="50" />
+          <Property Name="ReceiverType" Type="int" />
+          <Property Name="ChannelType" Type="int" />
+          <Property Name="Data" Type="varchar" MaxLength="200" />
+          <Property Name="ReadFlag" Type="int" />
+          <Property Name="ReadTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_device">
+          <Key>
+            <PropertyRef Name="TerminalNo" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TerminalNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeviceName" Type="varchar" MaxLength="255" />
+          <Property Name="DeviceType" Type="varchar" MaxLength="255" />
+          <Property Name="StoreType" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="t_Enum">
+          <Key>
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="t_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowType" Type="varchar" MaxLength="1" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="FoodID" Type="int" />
+          <Property Name="CoinQuantity" Type="int" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="MemberLevelID" Type="int" />
+          <Property Name="Deposit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OpenFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RenewFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreditFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="PayType" Type="varchar" MaxLength="1" />
+          <Property Name="BuyFoodType" Type="varchar" MaxLength="1" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="ExitRealTime" Type="datetime" />
+          <Property Name="ExitBalance" Type="int" />
+          <Property Name="ExitUserID" Type="int" />
+          <Property Name="ExitScheduleID" Type="int" />
+          <Property Name="ExitWorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="OrderID" Type="varchar" MaxLength="32" />
+          <Property Name="StoreId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_MemberToken">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="200" />
+          <Property Name="StoreId" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ICCardID" Type="varchar" MaxLength="50" />
+          <Property Name="MemberLevelName" Type="varchar" MaxLength="100" />
+          <Property Name="StoreName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="EndTime" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="t_MobileToken">
+          <Key>
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="200" />
+          <Property Name="Phone" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OpenId" Type="varchar" MaxLength="100" />
+          <Property Name="AliId" Type="varchar" MaxLength="100" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_MPOrder">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="OrderNumber" Type="varchar" MaxLength="200" />
+          <Property Name="StoreId" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateTime" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_promotion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreName" Type="varchar" MaxLength="100" />
+          <Property Name="StoreID" Type="varchar" MaxLength="50" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="ReleaseTime" Type="datetime" />
+          <Property Name="PicturePath" Type="varchar" MaxLength="200" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="PagePath" Type="varchar(max)" />
+          <Property Name="Publisher" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+          <Property Name="PublishType" Type="int" />
+          <Property Name="PromotionType" Type="int" />
+        </EntityType>
+        <EntityType Name="t_store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="companyname" Type="varchar" MaxLength="255" />
+          <Property Name="province" Type="varchar" MaxLength="255" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="boss" Type="varchar" MaxLength="255" />
+          <Property Name="phone" Type="varchar" MaxLength="255" />
+          <Property Name="telphone" Type="varchar" MaxLength="255" />
+          <Property Name="client_level" Type="varchar" MaxLength="255" />
+          <Property Name="clienttype" Type="varchar" MaxLength="255" />
+          <Property Name="createtime" Type="datetime" />
+          <Property Name="updatetime" Type="datetime" />
+          <Property Name="power_due_date" Type="date" />
+          <Property Name="note" Type="varchar" MaxLength="500" />
+          <Property Name="parentid" Type="varchar" MaxLength="255" />
+          <Property Name="developer" Type="varchar" MaxLength="255" />
+          <Property Name="store_password" Type="varchar" MaxLength="255" />
+          <Property Name="store_dbname" Type="varchar" MaxLength="100" />
+          <Property Name="wxfee" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="StoreType" Type="int" />
+          <Property Name="Token" Type="varchar" MaxLength="64" />
+          <Property Name="State" Type="int" />
+          <Property Name="openId" Type="varchar" MaxLength="100" />
+          <Property Name="StoreDBDeployType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_store_dog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreId" Type="varchar" MaxLength="10" />
+          <Property Name="DogId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t_ticket">
+          <Key>
+            <PropertyRef Name="TicketNo" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StoreId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobile" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="OpenId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t_UserRegister">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="PassWord" Type="varchar" MaxLength="200" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="AuditingTime" Type="datetime" />
+          <Property Name="AuditingUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t_usertoken">
+          <Key>
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="XCGameUserId" Type="int" />
+          <Property Name="StoreName" Type="varchar" MaxLength="200" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="EndTime" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="XCGameManagerDBModelStoreContainer">
+          <EntitySet Name="Data_Order" EntityType="Self.Data_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_AdminUser" EntityType="Self.t_AdminUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_apiRequestLog" EntityType="Self.t_apiRequestLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_datamessage" EntityType="Self.t_datamessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_device" EntityType="Self.t_device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Enum" EntityType="Self.t_Enum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_food_sale" EntityType="Self.t_food_sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_MemberToken" EntityType="Self.T_MemberToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_MobileToken" EntityType="Self.t_MobileToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_MPOrder" EntityType="Self.t_MPOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_promotion" EntityType="Self.t_promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_store" EntityType="Self.t_store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_store_dog" EntityType="Self.t_store_dog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_ticket" EntityType="Self.t_ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UserRegister" EntityType="Self.t_UserRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_usertoken" EntityType="Self.t_usertoken" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XCGameManagerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="XCGameManagerDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_MPOrder" EntityType="XCGameManagerDBModel.t_MPOrder" />
+          <EntitySet Name="t_UserRegister" EntityType="XCGameManagerDBModel.t_UserRegister" />
+          <EntitySet Name="t_food_sale" EntityType="XCGameManagerDBModel.t_food_sale" />
+          <EntitySet Name="t_datamessage" EntityType="XCGameManagerDBModel.t_datamessage" />
+          <EntitySet Name="t_promotion" EntityType="XCGameManagerDBModel.t_promotion" />
+          <EntitySet Name="T_MemberToken" EntityType="XCGameManagerDBModel.T_MemberToken" />
+          <EntitySet Name="Data_Order" EntityType="XCGameManagerDBModel.Data_Order" />
+          <EntitySet Name="t_device" EntityType="XCGameManagerDBModel.t_device" />
+          <EntitySet Name="t_ticket" EntityType="XCGameManagerDBModel.t_ticket" />
+          <EntitySet Name="t_MobileToken" EntityType="XCGameManagerDBModel.t_MobileToken" />
+          <EntitySet Name="t_store" EntityType="XCGameManagerDBModel.t_store" />
+          <EntitySet Name="t_user" EntityType="XCGameManagerDBModel.t_user" />
+          <EntitySet Name="t_usertoken" EntityType="XCGameManagerDBModel.t_usertoken" />
+          <EntitySet Name="t_AdminUser" EntityType="XCGameManagerDBModel.t_AdminUser" />
+          <EntitySet Name="t_apiRequestLog" EntityType="XCGameManagerDBModel.t_apiRequestLog" />
+          <EntitySet Name="sysdiagrams" EntityType="XCGameManagerDBModel.sysdiagrams" />
+          <EntitySet Name="t_Enum" EntityType="XCGameManagerDBModel.t_Enum" />
+          <EntitySet Name="t_store_dog" EntityType="XCGameManagerDBModel.t_store_dog" />
+        </EntityContainer>
+        <EntityType Name="t_MPOrder">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="OrderNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_UserRegister">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditingTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditingUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassWord" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="FoodID" Type="Int32" />
+          <Property Name="CoinQuantity" Type="Int32" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="MemberLevelID" Type="Int32" />
+          <Property Name="Deposit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OpenFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RenewFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreditFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PayType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BuyFoodType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExitRealTime" Type="DateTime" Precision="3" />
+          <Property Name="ExitBalance" Type="Int32" />
+          <Property Name="ExitUserID" Type="Int32" />
+          <Property Name="ExitScheduleID" Type="Int32" />
+          <Property Name="ExitWorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="StoreId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_datamessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageType" Type="Int32" />
+          <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SenderType" Type="Int32" />
+          <Property Name="Receiver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiverType" Type="Int32" />
+          <Property Name="ChannelType" Type="Int32" />
+          <Property Name="Data" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ReadFlag" Type="Int32" />
+          <Property Name="ReadTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_promotion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StoreID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="ReleaseTime" Type="DateTime" Precision="3" />
+          <Property Name="PicturePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="PublishType" Type="Int32" />
+          <Property Name="PromotionType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="T_MemberToken">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MemberLevelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StoreName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Data_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="StoreID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Fee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrderType" Type="Int32" Nullable="false" />
+          <Property Name="PayStatus" Type="Int32" Nullable="false" />
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descript" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TradeNo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuyType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StoreName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Coins" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_device">
+          <Key>
+            <PropertyRef Name="TerminalNo" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerminalNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StoreType" Type="Int32" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_ticket">
+          <Key>
+            <PropertyRef Name="TicketNo" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_MobileToken">
+          <Key>
+            <PropertyRef Name="Phone" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OpenId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="AliId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="province" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="boss" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telphone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="client_level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="clienttype" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Precision="3" />
+          <Property Name="updatetime" Type="DateTime" Precision="3" />
+          <Property Name="power_due_date" Type="DateTime" Precision="0" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="parentid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="developer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="store_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="store_dbname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="wxfee" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="StoreType" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="openId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StoreDBDeployType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="OpenId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_usertoken">
+          <Key>
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StoreName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="XCGameUserId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_AdminUser">
+          <Key>
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_apiRequestLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SysId" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ApiType" Type="Byte" Nullable="false" />
+          <Property Name="RequestUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RequestContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReturnCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Exception" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LogMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="t_Enum">
+          <Key>
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_store_dog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DogId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XCGameManagerDBModelStoreContainer" CdmEntityContainer="XCGameManagerDBEntities">
+          <EntitySetMapping Name="t_MPOrder">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_MPOrder">
+              <MappingFragment StoreEntitySet="t_MPOrder">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UserRegister">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_UserRegister">
+              <MappingFragment StoreEntitySet="t_UserRegister">
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuditingUser" ColumnName="AuditingUser" />
+                <ScalarProperty Name="AuditingTime" ColumnName="AuditingTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_food_sale">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_food_sale">
+              <MappingFragment StoreEntitySet="t_food_sale">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ExitWorkStation" ColumnName="ExitWorkStation" />
+                <ScalarProperty Name="ExitScheduleID" ColumnName="ExitScheduleID" />
+                <ScalarProperty Name="ExitUserID" ColumnName="ExitUserID" />
+                <ScalarProperty Name="ExitBalance" ColumnName="ExitBalance" />
+                <ScalarProperty Name="ExitRealTime" ColumnName="ExitRealTime" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BuyFoodType" ColumnName="BuyFoodType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="CreditFee" ColumnName="CreditFee" />
+                <ScalarProperty Name="ChangeFee" ColumnName="ChangeFee" />
+                <ScalarProperty Name="RenewFee" ColumnName="RenewFee" />
+                <ScalarProperty Name="OpenFee" ColumnName="OpenFee" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="MemberLevelID" ColumnName="MemberLevelID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="CoinQuantity" ColumnName="CoinQuantity" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="FlowType" ColumnName="FlowType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_datamessage">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_datamessage">
+              <MappingFragment StoreEntitySet="t_datamessage">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ReadTime" ColumnName="ReadTime" />
+                <ScalarProperty Name="ReadFlag" ColumnName="ReadFlag" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ChannelType" ColumnName="ChannelType" />
+                <ScalarProperty Name="ReceiverType" ColumnName="ReceiverType" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="SenderType" ColumnName="SenderType" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_promotion">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_promotion">
+              <MappingFragment StoreEntitySet="t_promotion">
+                <ScalarProperty Name="PromotionType" ColumnName="PromotionType" />
+                <ScalarProperty Name="PublishType" ColumnName="PublishType" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PagePath" ColumnName="PagePath" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="ReleaseTime" ColumnName="ReleaseTime" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_MemberToken">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.T_MemberToken">
+              <MappingFragment StoreEntitySet="T_MemberToken">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="MemberLevelName" ColumnName="MemberLevelName" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Data_Order">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.Data_Order">
+              <MappingFragment StoreEntitySet="Data_Order">
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="BuyType" ColumnName="BuyType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="TradeNo" ColumnName="TradeNo" />
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_device">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_device">
+              <MappingFragment StoreEntitySet="t_device">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="StoreType" ColumnName="StoreType" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="TerminalNo" ColumnName="TerminalNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_ticket">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_ticket">
+              <MappingFragment StoreEntitySet="t_ticket">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_MobileToken">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_MobileToken">
+              <MappingFragment StoreEntitySet="t_MobileToken">
+                <ScalarProperty Name="AliId" ColumnName="AliId" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_store">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_store">
+              <MappingFragment StoreEntitySet="t_store">
+                <ScalarProperty Name="StoreDBDeployType" ColumnName="StoreDBDeployType" />
+                <ScalarProperty Name="openId" ColumnName="openId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="StoreType" ColumnName="StoreType" />
+                <ScalarProperty Name="wxfee" ColumnName="wxfee" />
+                <ScalarProperty Name="store_dbname" ColumnName="store_dbname" />
+                <ScalarProperty Name="store_password" ColumnName="store_password" />
+                <ScalarProperty Name="developer" ColumnName="developer" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="power_due_date" ColumnName="power_due_date" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="clienttype" ColumnName="clienttype" />
+                <ScalarProperty Name="client_level" ColumnName="client_level" />
+                <ScalarProperty Name="telphone" ColumnName="telphone" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="boss" ColumnName="boss" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="companyname" ColumnName="companyname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_usertoken">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_usertoken">
+              <MappingFragment StoreEntitySet="t_usertoken">
+                <ScalarProperty Name="XCGameUserId" ColumnName="XCGameUserId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_AdminUser">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_AdminUser">
+              <MappingFragment StoreEntitySet="t_AdminUser">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_apiRequestLog">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_apiRequestLog">
+              <MappingFragment StoreEntitySet="t_apiRequestLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="RequestContent" ColumnName="RequestContent" />
+                <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+                <ScalarProperty Name="ApiType" ColumnName="ApiType" />
+                <ScalarProperty Name="SysId" ColumnName="SysId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Enum">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_Enum">
+              <MappingFragment StoreEntitySet="t_Enum">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_store_dog">
+            <EntityTypeMapping TypeName="XCGameManagerDBModel.t_store_dog">
+              <MappingFragment StoreEntitySet="t_store_dog">
+                <ScalarProperty Name="DogId" ColumnName="DogId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

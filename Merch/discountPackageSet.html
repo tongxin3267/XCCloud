@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优惠套餐设定</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .iframeBox{height: 100%;}
+    .iframeBox .layui-tab-item{position: absolute;top:65px;left: 0;right: 0;bottom: 0;}
+    .iframeBox iframe{border: none;min-width: 400px;}
+</style>
+<body>
+   <div class="layui-row">
+       <blockquote class="layui-elem-quote" style="text-align: right">
+           <button type="button" class="layui-btn layui-btn-normal">查询模板</button>
+           <button type="button" class="layui-btn layui-btn-normal addNewPackage">新增套餐</button>
+       </blockquote>
+       <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+           <table class="layui-hide" id="digitDestroyTb"  lay-filter="digitDestroyTb"></table>
+       </div>
+   </div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    var xc=xcActionSystem.prototype;
+    var token=xc.getStorage('token');
+    layui.use(['element','form','layer','table'], function(){
+        let element = layui.element,
+            form=layui.form,
+            layer=layui.layer,
+            table=layui.table;
+     $('.addNewPackage').on('click',()=>{
+         xc.removeStorage('foodId');
+         xc.setStorage('dpsAdd','dpsAdd');
+       var index=  layer.open({
+             title:'新增套餐',
+             shade:0.6,
+             type:2,
+             area:['1100px','600px'],
+             content:['packageMix.html','no'],
+         })
+     });
+     let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+         'url':'/XCCloud/Promotion?action=GetFoodInfoList',
+         'elem':'#digitDestroyTb',
+         'cols':[
+             {field:'FoodID', title:'套餐编号', align: 'center', sort: true}
+             ,{field:'FoodName',title: '套餐名称', align: 'center'} //width 支持：数字、百分比和不填写。
+             ,{field:'FoodTypeStr', title: '套餐类别', align: 'center'}
+             ,{field:'RechargeTypeStr', title: '充值方式', align: 'center'}
+             ,{field:'AllowInternetStr', title: '是否允许第三方', align: 'center'}
+             ,{field:'AllowPrintStr', title: '是否允许打印', align: 'center'}
+             ,{field:'ForeAuthorizeStr', title: '是否允许前台授权', align: 'center'}
+             ,{field:'StartTimeStr', title: '启用时间', align: 'center'}
+             ,{field:'EndTimeStr', title: '停用时间', align: 'center'}
+             ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+     };
+     xc.getInitData(parm);
+
+     table.on('tool(digitDestroyTb)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            var foodId=data.FoodID;
+            var foodName=data.FoodName;
+           xc.removeStorage('dpsAdd');
+            if(layEvent === 'detail'){ //查看
+                xc.setStorage('foodId',foodId);
+                // if(data.FoodTypeStr=='售币'){
+                //     layer.open({
+                //         type:2,
+                //         title:'修改："'+foodName+'"套餐',
+                //         shade:0.6,
+                //         area:['1100px','500px'],
+                //         content:['packageSale.html','no']
+                //     });
+                // }else if(data.FoodTypeStr=='数字币'){
+                //     layer.open({
+                //         type:2,
+                //         title:'修改:"'+foodName+'"套餐',
+                //         shade:0.6,
+                //         area:['1100px','520px'],
+                //         content:['packageDigit.html','no']
+                //     })
+                // }else if(data.FoodTypeStr=='商品'){
+                //     layer.open({
+                //         type:2,
+                //         title:'修改商品套餐',
+                //         shade:0.6,
+                //         area:['1100px','565px'],
+                //         content:['packageGoods.html','no']
+                //     })
+                // } else if(data.FoodTypeStr=='门票'){
+                //     layer.open({
+                //         type:2,
+                //         title:'修改:"'+foodName+'"套餐',
+                //         shade:0.6,
+                //         area:['1100px','510px'],
+                //         content:['packageTickets.html','no']
+                //     })
+                // }else
+                    if(data.FoodTypeStr=='混合'){
+                    layer.open({
+                        type:2,
+                        title:'修改:'+foodName+'"套餐',
+                        shade:0.6,
+                        area:['1100px','600px'],
+                        content:['packageMix.html','no']
+                    })
+                }
+           }
+     });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+</html>

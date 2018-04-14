@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<msgtemplates>
+  <msgtemplate id="FoodSaleNotify">
+    <title>购买套餐通知</title>
+    <templateid>dHhgeIl4AAttGqElBG2-4KtH88O89Bzn1zplqTLYqMw</templateid>
+    <detailsurl>pages/mine/mineCard/mineCard</detailsurl>
+    <keyword1color>#173177</keyword1color>
+    <keyword2color>#173177</keyword2color>
+    <keyword3color>#173177</keyword3color>
+    <keyword4color>#173177</keyword4color>
+    <keyword5color>#173177</keyword5color>
+    <keyword6color>#173177</keyword6color>
+  </msgtemplate>
+  <msgtemplate id="MemberCoinsNotify">
+    <title>交易通知</title>
+    <templateid>urGBL757BU0UBHVREOdpvEbxfkNnd8fHo6d0XTe-CWY</templateid>
+    <detailsurl>pages/mine/mineCard/mineCard</detailsurl>
+    <keyword1color>#173177</keyword1color>
+    <keyword2color>#173177</keyword2color>
+    <keyword3color>#173177</keyword3color>
+    <keyword4color>#173177</keyword4color>
+    <keyword5color>#173177</keyword5color>
+    <keyword6color>#173177</keyword6color>
+  </msgtemplate>
+</msgtemplates>

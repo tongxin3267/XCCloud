@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+<script type="text/javascript">
+
+    function common(url, parasJson) {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }
+
+    //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+    //var mobileToken = "7bdbd39e16864e86b134d1e2623a90b0";
+    //var memberToken = "bce4e8a617314a6ca983d54ee11de0c7";
+    //var websocketUrl = "ws://192.168.1.145:12882";
+    //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+
+    //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+    var mobileToken = "2f257562d65949538603fe394ecb37f6";
+    var memberToken = "c95daf690433418e8083d1a9520cca8b";
+    var websocketUrl = "wss://mp.4000051530.com/websocket";
+    //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+    
+
+    
+    var count = 0;
+
+    function getCount() {
+        count = count + $("#coinText").val();
+        return count;
+    }
+
+    function getSystemTime() {
+        var myDate = new Date();
+        var datestr = myDate.getFullYear() + "-" + myDate.getMonth() + "-" + myDate.getDay();
+        datestr = datestr + " " + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds();
+        return datestr;
+    }
+
+    function getRegisterObj(sendStoreID, sendUserID, clientType) {
+
+        var sendObject = new Object();
+        sendObject.token = mobileToken;
+        //sendObject.token = "35dee209d48f4b2eb87b816b945fd27c";
+
+        var obj = new Object();
+        obj.msgType = 1;
+        obj.sObj = sendObject;
+        return obj;
+    };
+
+    function do_485_coin() {
+        var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberPassword": "888888", "deviceToken": "000006", "memberToken": memberToken, "mobileToken": mobileToken, "coins": $("#coinText").val() };
+        var url = "/xcgame/flw_485_coin?action=flw_485_coinSale";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_saveCoins() {
+        var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": mobileToken, "memberToken": memberToken, "deviceToken": "000006" };
+        var url = "/xcgame/coins?action=saveCoins";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function getPushMsgObj(sendStoreID, sendUserID, receiveStoreID, receiveUserID, clientType, content) {
+        var sendObject = new Object();
+        sendObject.storeId = "100010";
+        sendObject.token = mobileToken;
+
+        var ReceiveObject = new Object();
+        ReceiveObject.storeId = "100010";
+        ReceiveObject.mobile = "15618920033";
+
+        var obj = new Object();
+        obj.msgType = 2;    
+        obj.sObj = sendObject;
+        obj.rObj = ReceiveObject;
+        obj.data = "测试";
+        //obj.receiveStoreID = receiveStoreID;
+        //obj.receiveUserID = receiveUserID;
+        //obj.clientType = clientType;
+        //obj.content = content;
+        //obj.rObj = 18871465971;
+        return obj;
+    };
+    var isshifou = 0;
+    var start = function () {
+        var inc = document.getElementById('incomming');
+        //var wsImpl = window.WebSocket || window.MozWebSocket;
+        var form = document.getElementById('sendForm');
+        var input = document.getElementById('sendText');
+
+        inc.innerHTML += "connecting to server ..<br/>";
+
+        // create a new websocket and connect
+        //window.ws = new WebSocket('wss://mp.4000051530.com/websocket');
+        window.ws = new WebSocket(websocketUrl);
+        // when data is comming from the server, this metod is called
+        ws.onmessage = function (evt) {
+            console.log(evt);
+            inc.innerHTML += evt.data + getSystemTime() + '出币数据：' + getCount() + '<br/>';
+        };
+
+        // when the connection is established, this method is called
+        ws.onopen = function () {
+            inc.innerHTML += '.. connection open<br/>';
+        };
+
+        // when the connection is closed, this method is called
+        ws.onclose = function () {
+            inc.innerHTML += '.. connection closed<br/>';
+        }
+
+        document.getElementById("button01").addEventListener("click", function () {
+            var businessObj = getRegisterObj(100099, 6, 100119, 5, 1);
+            var str = JSON.stringify(businessObj);
+            ws.send(str);
+        });
+
+        document.getElementById("button02").addEventListener("click", function () {
+            do_saveCoins();
+        });
+
+        document.getElementById("button00").addEventListener("click", function () {
+            ws.close();
+        });
+    }
+    window.onload = start;
+</script>
+
+
+</head>
+<body>
+    <form id="sendForm">
+        <input id="sendText" placeholder="Text to send" />
+        <input id="coinText" placeholder="0" />
+        <!--<input id="Submit1" type="submit" value="submit" />-->
+        <input id="button00" type="button" value="关闭连接" />
+        <input id="button01" type="button" value="用户注册" />
+        <input id="button02" type="button" value="出币" />
+    </form>
+    <pre id="incomming"></pre>
+</body>
+</html>

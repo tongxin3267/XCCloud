@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="52951dd81c404a7e843b469451f85d46" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="XCGameDBModel.t_goods" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_device" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_foods" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_food_sale" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_schedule" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_memberlevel" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.u_users" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_checkdate" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_checkdate_schedule" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_workstation" Width="1.5" PointX="11.375" PointY="7.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_485_coin" Width="1.5" PointX="11.375" PointY="11.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_485_savecoin" Width="3" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_project_buy" Width="2.75" PointX="13.375" PointY="5.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_project" Width="1.5" PointX="13.375" PointY="11.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_game" Width="1.5" PointX="19.25" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_head" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_game_free" Width="1.5" PointX="15.375" PointY="9.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_game_free_rule" Width="1.5" PointX="11.375" PointY="15.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_push_rule" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_project_buy_codelist" Width="3.875" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_lottery" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_parameters" Width="1.5" PointX="13.375" PointY="17.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.t_member" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_ticket_exit" Width="1.5" PointX="17.375" PointY="9.75" />
+        <EntityTypeShape EntityType="XCGameDBModel.flw_project_play" Width="1.5" PointX="3.375" PointY="16.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

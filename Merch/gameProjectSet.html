@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游艺项目设定</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .boxDiv{height: 460px;border: 1px solid #aaaaaa;border-radius: 5px;padding: 3px;margin-bottom: 15px;}
+    .boxDiv .deviceCheckList{height: 355px;margin: 10px;padding:5px 15px;border: 1px dashed #e2e2e2;overflow-y: scroll}
+    .layui-col-md1 .lbt{height: 80px!important;}
+</style>
+<body>
+  <div class="layui-row" style="padding: 10px">
+      <blockquote style="text-align: right;padding-right: 100px;" class="layui-elem-quote">
+          <button type="button" class="layui-btn layui-btn-normal addBtn"><i class="layui-icon">&#xe654;</i>新增</button>
+      </blockquote>
+      <table class="layui-hide" id="ProjectList" lay-filter="ProjectList"></table>
+  </div>
+<!--//弹窗层   -->
+<div class="model" style="padding: 15px;display: none" id="model"  >
+    <form class="layui-form layui-form-pane">
+        <div class="first">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="projectName">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设备状态</label>
+                    <div class="layui-input-inline" style="height: 36px;border: 1px solid rgb(230,230,230)">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="设备有效|设备无效" lay-filter="projectStatus" id="projectStatus">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">计费方式</label>
+                    <div class="layui-input-inline">
+                        <select name="" id="feeType" lay-filter="feeType"></select>
+                    </div>
+                </div>
+                <div class="layui-inline layui-hide" id="feeCycleBox">
+                    <label class="layui-form-label">计费周期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="(分钟)" id="feeCycle">
+                    </div>
+                </div>
+                <div class="layui-inline layui-hide" id="feeDepositBox">
+                    <label class="layui-form-label">预收押金</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="(币)" id="feeDeposit">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">扣费方式</label>
+                    <div class="layui-input-inline" style="height: 36px;border: 1px solid rgb(230,230,230)">
+                        <input type="checkbox" name="zzz" lay-skin="switch" lay-text="需要签出|单次扣费" lay-filter="ifcharge" id="ifcharge">
+                    </div>
+                </div>
+                <div class="layui-inline layui-hide" id="regretTimeBox">
+                    <label class="layui-form-label">后悔时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="(分钟)" id="regretTime">
+                    </div>
+                </div>
+                <div class="layui-inline layui-hide"  id="lockBox">
+                    <label class="layui-form-label">是否锁定</label>
+                    <div class="layui-input-inline" style="height: 36px;border: 1px solid rgb(230,230,230)">
+                        <input type="checkbox" name="zzz" lay-skin="switch" lay-text="入场锁定|自由入场" lay-filter="whenLock">
+                    </div>
+                </div>
+            </div>
+            <blockquote class="site-text layui-elem-quote" style="position: relative;">
+                <button type="button" class="layui-btn layui-btn-normal" id="bandBoxBtn">波段设定 <i class="layui-icon">&#xe620;</i></button>
+                <div style="position: absolute;top: 80px;height: 180px;border: 1px solid red;width: 98%;z-index: 9999;background-color:#aaa;" class="layui-hide" id="bandBox">
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block" id="memberBox" style="margin:10px 0 10px 13px;height: 160px;overflow-y: scroll;border: 1px dashed #eee;width: 150px;">
+                                <!--<input type="checkbox" name="like[write]" lay-filter="ml" value="1" title="普通会员"><br>-->
+                                <!--<input type="checkbox" name="like[read]" lay-filter="ml" value="2" title="银卡会员"><br>-->
+                                <!--<input type="checkbox" name="like[game]" lay-filter="ml" value="3" title="金卡会员"><br>-->
+                                <!--<input type="checkbox" name="like[game]" lay-filter="ml" value="4" title="钻石会员"><br>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9" style="padding: 15px 0">
+                       <div class="layui-form-item">
+                           <div class="layui-inline">
+                               <label class="layui-form-label">档位类别</label>
+                               <div class="layui-input-inline">
+                                   <select name="" id="bandType" lay-filter="bandType"></select>
+                               </div>
+                           </div>
+                           <div class="layui-inline">
+                               <label class="layui-form-label">档位数量</label>
+                               <div class="layui-input-inline">
+                                   <input type="text" class="layui-input" id="bandCount">
+                               </div>
+                           </div>
+                           <div class="layui-inline">
+                               <label class="layui-form-label">档位价格</label>
+                               <div class="layui-input-inline">
+                                   <input type="text" class="layui-input" id="bandPrice">
+                               </div>
+                           </div>
+                       </div>
+                        <div class="layui-form-item" style="text-align: right;padding-right: 100px;">
+                            <button type="button" class="layui-btn layui-btn-normal" id="addTimes">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </blockquote>
+            <div style="height: 200px">
+                <table class="layui-hide" lay-filter="banTable" id="banTable"></table>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="height: 100px">备注</label>
+                <div class="layui-input-block">
+                    <textarea name="" id="note"  class="layui-textarea" style="height: 100px!important;"></textarea>
+                </div>
+            </div>
+            <div style="text-align: right;padding-right: 100px;margin: 10px 0">
+                <button type="button" class="tosecond layui-btn-normal layui-btn">下一步</button>
+            </div>
+        </div>
+        <!--设备签入-->
+        <div class="second layui-hide">
+             <div class="layui-col-md5 boxDiv">
+                 <blockquote class="site-text layui-elem-quote">
+                        <button type="button" class="layui-btn layui-btn-normal">签入设备列表 <i class="layui-icon">&#xe62d;</i></button>
+                 </blockquote>
+                 <div class="deviceCheckList deviceCheckIn">
+
+                 </div>
+             </div>
+             <div class="layui-col-md1" style="height: 460px;padding: 100px 0">
+                 <button type="button" class="layui-btn lbt" style="margin-left: 10px;padding: 0 15px" id="inBind">绑定 <br><i class="layui-icon">&#xe65a;</i></button>
+                 <button type="button"  class="layui-btn lbt" style="margin-top: 60px;padding: 0 17px" id="inBindOff">解绑<br><i class="layui-icon">&#xe65b;</i></button>
+             </div>
+             <div class="layui-col-md6 boxDiv">
+                 <blockquote class="site-text layui-elem-quote">
+                     <button type="button" class="layui-btn layui-btn-normal">空闲设备列表 <i class="layui-icon">&#xe62d;</i></button>
+                 </blockquote>
+                 <div class="layui-form-item">
+                     <div class="layui-inline">
+                         <label class="layui-form-label" style="width: 88px;">设备类型</label>
+                         <div class="layui-input-inline" style="width: 100px;">
+                             <select  id="deviceType1" lay-filter="deviceType1"></select>
+                         </div>
+                         <div class="layui-input-inline" style="width: 195px;">
+                             <input type="text"  placeholder="设备序列号"  class="layui-input" id="searchInNumber">
+                         </div>
+                         <div class="layui-input-inline" style="width: 60px;">
+                             <button type="button" class="layui-btn-normal layui-btn" id="searchIn"><i class="layui-icon">&#xe615;</i></button>
+                         </div>
+                     </div>
+                 </div>
+                 <table class="layui-hide" id="deviceIn" lay-filter="deviceIn"></table>
+             </div>
+            <div style="text-align: right;padding-right: 100px;margin: 10px 0">
+                <button type="button" class="tofirst layui-btn-normal layui-btn">上一步</button>
+                <button type="button" class="tothread layui-btn-normal layui-btn layui-hide" id="sigleTo">下一步</button>
+                <button type="button" class="layui-btn-danger layui-btn " id="saveListBtn_sigle" >保存</button>
+            </div>
+        </div>
+        <!--设备签出-->
+        <div class="thread layui-hide">
+            <div class="layui-col-md5 boxDiv">
+                <blockquote class="site-text layui-elem-quote">
+                    <button type="button" class="layui-btn layui-btn-normal">签出设备列表 <i class="layui-icon">&#xe62d;</i></button>
+                </blockquote>
+                <div class="deviceCheckList deviceCheckOut">
+
+                </div>
+            </div>
+            <div class="layui-col-md1" style="height: 460px;padding:  100px 0">
+                <button type="button" class="layui-btn lbt" style="margin-left: 10px;padding: 0 15px" id="outBind">绑定 <br><i class="layui-icon">&#xe65a;</i></button>
+                <button type="button"  class="layui-btn lbt" style="margin-top: 60px;padding: 0 17px" id="outBindOff">解绑<br><i class="layui-icon">&#xe65b;</i></button>
+            </div>
+            <div class="layui-col-md6 boxDiv" >
+                <blockquote class="site-text layui-elem-quote">
+                    <button type="button" class="layui-btn layui-btn-normal">空闲设备列表 <i class="layui-icon">&#xe62d;</i></button>
+                </blockquote>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 88px;">设备类型</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <select  id="deviceType2" lay-filter="deviceType2" ></select>
+                        </div>
+                        <div class="layui-input-inline" style="width: 195px;">
+                            <input type="text"  placeholder="设备序列号"  class="layui-input" id="searchOutNumber">
+                        </div>
+                        <div class="layui-input-inline" style="width: 60px;">
+                           <button type="button" class="layui-btn-normal layui-btn" id="searchOut"><i class="layui-icon">&#xe615;</i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="layui-hide" id="deviceOut" lay-filter="deviceOut"></table>
+            </div>
+            <div style="text-align: right;padding-right: 100px;margin: 10px 0">
+                <button type="button" class="tosecond layui-btn-normal layui-btn">上一步</button>
+                <button type="reset" class="layui-btn-danger layui-btn" id="resetBtn">重置</button>
+                <button type="button" class="layui-btn-danger layui-btn" id="saveListBtn" >保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    var xc=xcActionSystem.prototype;
+    var deviceType1='';var deviceType2=''; var bandType='';var bandTypeStr='';
+    var freeTypes='';
+    var ifcharge=0; var whenLock=0; var projectStatus=1;
+
+    var id='';
+    //绑定ID数组
+    var bindDeviceIDs1=[]; var bindDeviceIDs2=[];
+    //解绑ID数组
+    var offBindID1=[]; var offBindID2=[];
+    var token=xc.getStorage('token');
+    var foodLevels=[];
+    xc.InitProjectList(token,xc);
+    xc.removeStorage('deviceResult');
+    layui.use(['form','layer','table'],function(){
+        const form=layui.form;
+        const layer=layui.layer;
+        const table=layui.table;
+      $('.addBtn').on('click',function(){  //弹窗
+          xc.setStorage('gpsStatus','add');
+          foodLevels=[];bindDeviceIDs1=[];bindDeviceIDs2=[];offBindID1=[]; offBindID2=[];id='';
+          $('#resetBtn').trigger('click');
+
+          $('.first').removeClass('layui-hide');
+          $('.second').addClass('layui-hide');
+          $('.thread').addClass('layui-hide');
+
+          xc.setSelect('计费方式','feeType'); //初始化下拉框
+          xc.setSelect('档位类别','bandType');
+          xc.setSelect('设备类型','deviceType1');
+          xc.setSelect('设备类型','deviceType2');
+          xc.outIframe(layer);
+          var tableData=[];
+          xcActionSystem.prototype.removeStorage('deviceResult');
+
+          let obj={'type':'','mcuId':'','bindDeviceIDs':[],'userToken': token, 'signkey': '1f626576304bf5d95b72ece2222e42c3'};
+          let url='/XCCloud/Project?action=GetBindDeviceList';
+          $.ajax({
+              type: "post", url: url,
+              contentType: "application/json; charset=utf-8",
+              data: {parasJson: JSON.stringify(obj)},
+              success: function (data) {
+                  data = JSON.parse(data);
+                  console.log(data);
+                  if (data.Result_Code == "1"||data.result_code==1) {
+                      tableData = data.Result_Data||data.result_data;
+                      xcActionSystem.prototype.setStorage('deviceResult',JSON.stringify(tableData));
+                  }
+              }
+          });
+          table.render({
+              elem: '#banTable'
+              , height:'200px'
+              , data: foodLevels
+              , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+              , cols: [[{field:'memberLevelIDs', title:'适用级别', align: 'center'}
+                  ,{field:'bandType',title: '档位类别', align: 'center'} //width 支持：数字、百分比和不填写。
+                  ,{field:'bandCount', title: '档位数量', align: 'center'}
+                  ,{field:'bandPrice', title: '档位价格', align: 'center'}
+                  ,{fixed: 'right', width:120, align:'center', toolbar: '#barDemo1'}]]
+              , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+              , limit: 10
+          });
+          xc.SearchMemberLevel1('memberBox', token, layer);
+          table.render({
+                  elem: '#deviceIn'
+                  , data: JSON.parse(xc.getStorage('deviceResult')),
+                  height:'300px'
+                  , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                  , cols: [[
+                      {type:'checkbox'}
+                      , {field: 'ID', title: 'ID', align: 'center'}
+                      ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                      , {field: 'typeStr', title: '设备类型', align: 'center'}
+                      , {field: 'MCUID', title: '设备编号', align: 'center'}
+                  ]]
+                  , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                  , limit: 10
+              });
+          $('.deviceCheckIn').html('');
+          $('.deviceCheckOut').html('');
+      });
+
+        form.on('switch(ifcharge)', function(data){
+            data.elem.checked==false ? $('#regretTimeBox').addClass('layui-hide') : $('#regretTimeBox').removeClass('layui-hide');
+            data.elem.checked==false ? $('#lockBox').addClass('layui-hide') : $('#lockBox').removeClass('layui-hide');
+            data.elem.checked==false ? $('#sigleTo').addClass('layui-hide') : $('#sigleTo').removeClass('layui-hide');
+            data.elem.checked==false ? $('#saveListBtn_sigle').removeClass('layui-hide') : $('#saveListBtn_sigle').addClass('layui-hide');
+            data.elem.checked==false ?  ifcharge=0: ifcharge=1
+        });
+        form.on('switch(projectStatus)', function(data){
+            data.elem.checked==true ?  projectStatus=1: projectStatus=0
+        });
+        form.on('switch(whenLock)', function(data){
+            data.elem.checked==true ?  whenLock=1: whenLock=0
+        });
+        form.on('select(feeType)',function(data){ //波段方式，显示输入框
+            freeTypes=data.value;
+          if(data.value==1){
+             $('#feeCycleBox').removeClass('layui-hide');
+              $('#feeDepositBox').removeClass('layui-hide');
+          }else {
+              $('#feeCycleBox').addClass('layui-hide');
+              $('#feeDepositBox').addClass('layui-hide');
+          }
+      });
+        form.on('select(bandType)',function(data){
+            bandType=data.value;
+            data.value==1 ? bandTypeStr='大于等于' : bandTypeStr='小于等于'
+        });
+        form.on('select(deviceType1)',function(data){
+            deviceType1=data.elem[data.elem.selectedIndex].title;
+            var arrTable=[];//按类型查询结果
+            var _arr=xcActionSystem.prototype.getStorage('deviceResult');
+
+            if(_arr!=undefined&&_arr!=[]&&_arr!=null){
+
+                var _data=JSON.parse(xc.getStorage('deviceResult'));
+                if(deviceType1){
+                    for(var i in _data){
+                        if(_data[i].typeStr==deviceType1){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }else {
+                    arrTable=_data;
+                }
+
+
+                layui.use('table',function () {
+                    var table=layui.table;
+                    table.render({
+                        elem: '#deviceIn'
+                        , data: arrTable,
+                        height:'300px'
+                        , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        , cols: [[
+                            {type:'checkbox'}
+                            , {field: 'ID', title: 'ID', align: 'center'}
+                            ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                            , {field: 'typeStr', title: '设备类型', align: 'center'}
+                            , {field: 'MCUID', title: '设备编号', align: 'center'}
+                        ]]
+                        , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                        , limit: 10
+                    })
+                })
+            }
+
+
+        });
+        form.on('select(deviceType2)',function(data){
+            deviceType2=data.elem[data.elem.selectedIndex].title;
+            var arrTable=[];//按类型查询结果
+            var _arr=xcActionSystem.prototype.getStorage('deviceResult');
+            if(_arr!=undefined&&_arr!=[]&&_arr!=null){
+                var _data=JSON.parse(xc.getStorage('deviceResult'));
+
+                if(deviceType2){
+                    for(var i in _data){
+                        if(_data[i].typeStr==deviceType2){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }else {
+                    arrTable=_data;
+                }
+
+                layui.use('table',function () {
+                    var table=layui.table;
+                    table.render({
+                        elem: '#deviceOut'
+                        , data: arrTable,
+                        height:'300px'
+                        , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        , cols: [[
+                            {type:'checkbox'}
+                            , {field: 'ID', title: 'ID', align: 'center'}
+                            ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                            , {field: 'typeStr', title: '设备类型', align: 'center'}
+                            , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                        ]]
+                        , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                        , limit: 10
+                    })
+                })
+            }
+
+
+        });
+        //获取绑定ID
+        table.on('checkbox(deviceIn)', function(obj){
+            if(obj.type=='one'){
+                if(obj.checked==true){
+                    bindDeviceIDs1.push({'ID':obj.data.ID,'DeviceName':obj.data.DeviceName,'typeStr':obj.data.typeStr,'MCUID':obj.data.MCUID});
+                }else if(obj.checked==false){
+                    for (var i=0;i<bindDeviceIDs1.length;i++){
+                        if(bindDeviceIDs1[i].ID==obj.data.ID){
+                            bindDeviceIDs1.splice(i,1)
+                        }
+                    }
+                }
+            }
+        });
+        table.on('checkbox(deviceOut)', function(obj){
+          if(obj.type=='one'){
+                if(obj.checked==true){
+                    bindDeviceIDs2.push({'ID':obj.data.ID,'DeviceName':obj.data.DeviceName,'typeStr':obj.data.typeStr,'MCUID':obj.data.MCUID});
+                }else if(obj.checked==false){
+                    for (var i=0;i<bindDeviceIDs2.length;i++){
+                        if(bindDeviceIDs2[i].ID==obj.data.ID){
+                            bindDeviceIDs2.splice(i,1)
+                        }
+                    }
+                }
+            }
+        });
+        //获取解绑ID
+        form.on('checkbox(deviceCheckIn)',function(data){
+            if( data.elem.checked==true){
+                offBindID1.push(data.elem.name);
+                console.log(offBindID1);
+            }else if( data.elem.checked==false){
+                for (var i=0;i<offBindID1.length;i++){
+                    if(offBindID1[i]==data.elem.name){
+                        offBindID1.splice(i,1)
+                    }
+                }
+            }
+        });
+        form.on('checkbox(deviceCheckOut)',function(data){
+            if( data.elem.checked==true){
+                offBindID2.push(data.elem.name)
+            }else if( data.elem.checked==false){
+                for (var i=0;i<offBindID2.length;i++){
+                    if(offBindID2[i]==data.elem.name){
+                        offBindID2.splice(i,1)
+                    }
+                }
+            }
+        });
+        //页面table 删除、修改事件监听
+        table.on('tool(ProjectList)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+             id=data.ID;
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                   var _obj={'projectIds':id,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                   var url='/XCCloud/Project?action=DeleteProjectInfo';
+                    let parseJson = JSON.stringify(_obj);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: {parasJson: parseJson},
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            console.log(data);
+                            if (data.result_code == 1) {
+                                layui.use('layer',function () {
+                                    var layer=layui.layer;
+                                    layer.msg('删除成功！');
+                                    xc.removeStorage('deviceResult');
+                                    $('#searchIn').trigger('click');
+                                    layer.closeAll();
+                                })
+                            } else {
+                                layer.msg('操作失败');
+                            }
+                        }
+                    })
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                xc.setStorage('gpsStatus','edit');
+                var _obj={'id':id,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                var url='/XCCloud/Project?action=GetProjectInfo';
+                let parseJson = JSON.stringify(_obj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parseJson},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if (data.Result_Code == 1) {
+                            xc.removeStorage('deviceResult');
+                            $('.first').removeClass('layui-hide');
+                            $('.second').addClass('layui-hide');
+                            $('.thread').addClass('layui-hide');
+                            $('.deviceCheckIn').html('');
+                            $('.deviceCheckOut').html('');
+                            var arr=data.Result_Data;
+                                $('#projectName').val(arr.ProjectName);
+                                $('#feeCycle').val(arr.FeeCycle);
+                                $('#feeDeposit').val(arr.FeeDeposit);
+                                $('#regretTime').val(arr.RegretTime);
+                                $('#note').val(arr.Note);
+                            freeTypes=arr.FeeType;
+                            ifcharge=arr.SignOutEN;
+                            whenLock=arr.WhenLock;
+                            projectStatus=arr.ProjectStatus;
+                            xc.setSelect('计费方式','feeType',arr.FeeType);
+                            xc.setSelect('档位类别','bandType');
+
+                            if(arr.SignOutEN==1){
+                                $('#ifcharge').attr({'checked':true});
+                                $('#regretTimeBox').removeClass('layui-hide');
+                                $('#lockBox').removeClass('layui-hide');
+                                $('#sigleTo').removeClass('layui-hide');
+                                $('#saveListBtn_sigle').addClass('layui-hide');
+                            }else {
+                                $('#regretTime').val('');
+                                $('#ifcharge').attr({'checked':false});
+                                $('#regretTimeBox').addClass('layui-hide');
+                                $('#lockBox').addClass('layui-hide');
+                                $('#sigleTo').addClass('layui-hide');
+                                $('#saveListBtn_sigle').removeClass('layui-hide')
+                            }
+                            if(arr.WhenLock==1){
+                                $('#whenLock').attr({'checked':true});
+                            }else {
+                                $('#whenLock').attr({'checked':false});
+                            }
+                            if(arr.ProjectStatus==1){
+                                $('#projectStatus').attr({'checked':true});
+                            }else {
+                                $('#projectStatus').attr({'checked':false});
+                            }
+                            var saveDevice=[];
+                            for(var i in arr.ProjectDevices){
+                                saveDevice.push({'deviceId':arr.ProjectDevices[i].DeviceID,'bindType':arr.ProjectDevices[i].BindType});
+                                  if(arr.ProjectDevices[i].BindType==0){
+                                            $('.deviceCheckIn').append('' +
+                                                '<div id="'+arr.ProjectDevices[i].DeviceID+'" name="'+arr.ProjectDevices[i].typeStr+
+                                                '" name2="'+arr.ProjectDevices[i].DeviceName+'" name3="'+arr.ProjectDevices[i].MCUID+'" class="layui-form-item">' +
+                                                '<div class="layui-inline" style="width: 60px"><div class="layui-input-inline">' +
+                                                '<input type="checkbox" lay-filter="deviceCheckIn" name="'+arr.ProjectDevices[i].DeviceID+'">' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="layui-inline">' +
+                                                '<p>设备名称：'+arr.ProjectDevices[i].DeviceName+'</p>' +
+                                                '<p>设备类型：'+arr.ProjectDevices[i].typeStr+'</p>' +
+                                                '<p>设备编号：'+arr.ProjectDevices[i].MCUID+'</p>' +
+                                                '</div>' +
+                                                '<hr class="layui-bg-blue">');
+                                        }else {
+                                            $('.deviceCheckOut').append('' +
+                                                '<div id="'+arr.ProjectDevices[i].DeviceID+'" name="'+arr.ProjectDevices[i].typeStr+
+                                                '" name2="'+arr.ProjectDevices[i].DeviceName+'" name3="'+arr.ProjectDevices[i].MCUID+'" class="layui-form-item">' +
+                                                '<div class="layui-inline" style="width: 60px"><div class="layui-input-inline">' +
+                                                '<input type="checkbox" lay-filter="deviceCheckIn" name="'+arr.ProjectDevices[i].DeviceID+'">' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '<div class="layui-inline">' +
+                                                '<p>设备名称：'+arr.ProjectDevices[i].DeviceName+'</p>' +
+                                                '<p>设备类型：'+arr.ProjectDevices[i].typeStr+'</p>' +
+                                                '<p>设备编号：'+arr.ProjectDevices[i].MCUID+'</p>' +
+                                                '</div>' +
+                                                '<hr class="layui-bg-blue">');
+                                        }
+                                  form.render();
+                            }
+                            xc.setStorage('saveDevice',JSON.stringify(saveDevice));
+                            let obj={'type':'','mcuId':'','bindDeviceIDs':[],'userToken': token, 'signkey': '1f626576304bf5d95b72ece2222e42c3'};
+                            let url='/XCCloud/Project?action=GetBindDeviceList';
+                            $.ajax({
+                                type: "post", url: url,
+                                contentType: "application/json; charset=utf-8",
+                                data: {parasJson: JSON.stringify(obj)},
+                                success: function (data) {
+                                    data = JSON.parse(data);
+                                    console.log(data);
+                                    if (data.Result_Code == "1"||data.result_code==1) {
+                                        tableData = data.Result_Data||data.result_data;
+                                        xcActionSystem.prototype.setStorage('deviceResult',JSON.stringify(tableData));
+                                    }
+                                }
+                            });
+                            xc.SearchMemberLevel1('memberBox', token, layer);
+                            table.render({
+                                elem: '#deviceIn'
+                                , data: JSON.parse(xc.getStorage('deviceResult')),
+                                height:'300px'
+                                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                , cols: [[
+                                    {type:'checkbox'}
+                                    , {field: 'ID', title: 'ID', align: 'center'}
+                                    ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                                    , {field: 'typeStr', title: '设备类型', align: 'center'}
+                                    , {field: 'MCUID', title: '设备编号', align: 'center'}
+                                ]]
+                                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                                , limit: 10
+                            });
+
+                            //渲染波段设定的表格
+                            foodLevels=arr.BandPrices;
+                            table.render({
+                                elem: '#banTable'
+                                , height:'200px'
+                                , data: arr.BandPrices
+                                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                , cols: [[{field:'MemberLevels', title:'适用级别', align: 'center'}
+                                    ,{field:'BandTypeStr',title: '档位类别', align: 'center'} //width 支持：数字、百分比和不填写。
+                                    ,{field:'BandCount', title: '档位数量', align: 'center'}
+                                    ,{field:'BandPrice', title: '档位价格', align: 'center'}
+                                    ,{fixed: 'right', width:120, align:'center', toolbar: '#barDemo1'}]]
+                                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                                , limit: 10
+                            });
+                            layer.open({
+                                title:'设置游乐项目',
+                                shade:0.6,
+                                type:1,
+                                area:'1030px',
+                                content:$('#model')
+                            });
+                            form.render();
+                        } else {
+                            layer.msg('操作失败');
+                        }
+                    }
+                })
+            }
+        });
+        table.on('tool(banTable)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            var MemberLevelss=data.MemberLevels;
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                 for (var i in  foodLevels) {
+                     if(foodLevels[i].MemberLevels=MemberLevelss){
+                         foodLevels.splice(i,1);
+                     }
+                 }
+                });
+            }
+        });
+        //签入search
+        $('#searchIn').on('click',function(){
+            var arrTable=[];//按类型查询结果
+            var _arr=xcActionSystem.prototype.getStorage('deviceResult');
+            var  MCUIDs=$('#searchInNumber').val();
+            if(_arr!=undefined&&_arr!=[]&&_arr!=null){
+
+                var _data=JSON.parse(xc.getStorage('deviceResult'));
+                if(MCUIDs!=""){
+                    for(var i in _data){
+                        if(_data[i].MCUID==MCUIDs){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }else {
+                    for(var i in _data){
+                        if(_data[i].typeStr==deviceType1){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }
+                layui.use('table',function () {
+                    var table=layui.table;
+                    table.render({
+                        elem: '#deviceIn'
+                        , data: arrTable,
+                        height:'300px'
+                        , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        , cols: [[
+                            {type:'checkbox'}
+                            , {field: 'ID', title: 'ID', align: 'center'}
+                            ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                            , {field: 'typeStr', title: '设备类型', align: 'center'}
+                            , {field: 'MCUID', title: '设备编号', align: 'center'}
+                        ]]
+                        , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                        , limit: 10
+                    })
+                })
+            }
+
+        });
+        //签出search
+        $('#searchOut').on('click',function(){
+            var arrTable=[];//按类型查询结果
+            var _arr=xcActionSystem.prototype.getStorage('deviceResult');
+            var  MCUIDs=$('#searchOutNumber').val();
+            if(_arr!=undefined&&_arr!=[]&&_arr!=null){
+                var _data=JSON.parse(xc.getStorage('deviceResult'));
+                if(MCUIDs!=""){
+                    for(var i in _data){
+                        if(_data[i].MCUID==MCUIDs){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }else {
+                    for(var i in _data){
+                        if(_data[i].typeStr==deviceType2){
+                            arrTable.push(_data[i]);
+                        }
+                    }
+                }
+                layui.use('table',function () {
+                    var table=layui.table;
+                    table.render({
+                        elem: '#deviceOut'
+                        , data: arrTable,
+                        height:'300px'
+                        , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        , cols: [[
+                            {type:'checkbox'}
+                            , {field: 'ID', title: 'ID', align: 'center'}
+                            ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                            , {field: 'typeStr', title: '设备类型', align: 'center'}
+                            , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                        ]]
+                        , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                        , limit: 10
+                    })
+                })
+            }
+        });
+
+        var memberLevel=[];
+        getCheckBox('ml',memberLevel,form);
+        //添加优惠时间段
+        $('#addTimes').on('click',function(){
+            $('#bandBoxBtn').trigger('click');
+           var  bandTypes=bandType;
+           var  bandTypeStrs=bandTypeStr;
+           var bandCounts=$('#bandCount').val();
+           var bandPrices=$('#bandPrice').val();
+           var ml1=[];var ml2=[];
+           for(var i in memberLevel){
+               ml1.push(memberLevel[i].value);ml2.push(memberLevel[i].title);
+           }
+           var memberLevelID=ml1.join('|');
+           var memberLevels=ml2.join('|');
+            if(memberLevelID!=""&&memberLevelID!=null&&memberLevelID!=undefined){
+                foodLevels.push({'MemberLevelIDs':memberLevelID,'MemberLevels':memberLevels,'BandType':bandTypes,'BandTypeStr':bandTypeStrs,'BandCount':bandCounts,'BandPrice':bandPrices});
+                console.log(foodLevels);
+                table.render({
+                    elem: '#banTable'
+                    , height:'200px'
+                    , data: foodLevels
+                    , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                    , cols: [[{field:'MemberLevels', title:'适用级别', align: 'center'}
+                        ,{field:'BandTypeStr',title: '档位类别', align: 'center'} //width 支持：数字、百分比和不填写。
+                        ,{field:'BandCount', title: '档位数量', align: 'center'}
+                        ,{field:'BandPrice', title: '档位价格', align: 'center'}
+                        ,{fixed: 'right', width:80, align:'center', toolbar: '#barDemo1'}]]
+                    , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                    , limit: 10
+                });
+            }
+            memberLevel.splice(0,memberLevel.length);
+        })
+    });
+    //切换时间段设置栏和结果表的显示状态
+    $('#bandBoxBtn').toggle(function(){
+        $('#bandBox').removeClass('layui-hide');
+        xc.SearchMemberLevel1('memberBox', token, layer);
+    },function(){
+        $('#bandBox').addClass('layui-hide');
+        xc.SearchMemberLevel1('memberBox', token, layer);
+    });
+    $('.tofirst').on('click',function(){
+        $('.first').removeClass('layui-hide').siblings().addClass('layui-hide');
+    });
+    $('.tosecond').on('click',function(){
+        $('.second').removeClass('layui-hide').siblings().addClass('layui-hide');
+        var _data=JSON.parse(xc.getStorage('deviceResult'));
+        layui.use('table',function () {
+            var table=layui.table;
+            table.render({
+                elem: '#deviceIn'
+                , data: _data,
+                height:'300px'
+                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[
+                    {type:'checkbox'}
+                    , {field: 'ID', title: 'ID', align: 'center'}
+                    ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                    , {field: 'typeStr', title: '设备类型', align: 'center'}
+                    , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                ]]
+                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                , limit: 10
+            })
+        })
+    });
+    $('.tothread').on('click',function(){
+        $('.thread').removeClass('layui-hide').siblings().addClass('layui-hide');
+        let _data=JSON.parse(xc.getStorage('deviceResult'));
+        layui.use('table',function () {
+            let table=layui.table;
+            table.render({
+                elem: '#deviceOut'
+                , data: _data,
+                height:'300px'
+                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[
+                    {type:'checkbox'}
+                    , {field: 'ID', title: 'ID', align: 'center'}
+                    ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                    , {field: 'typeStr', title: '设备类型', align: 'center'}
+                    , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                ]]
+                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                , limit: 10
+            })
+        })
+    });
+    $('#inBind').on('click',function(){
+        if(bindDeviceIDs1.length>0){
+            var _data=JSON.parse(xc.getStorage('deviceResult'));
+            for(var i in bindDeviceIDs1){
+              for(var j in _data){
+                  if(bindDeviceIDs1[i].ID==_data[j].ID){
+                      $('.deviceCheckIn').append('' +
+                          '<div id="'+_data[j].ID+'" name="'+_data[j].typeStr+
+                          '" name2="'+_data[j].DeviceName+'" name3="'+_data[j].MCUID+'" class="layui-form-item">' +
+                          '<div class="layui-inline" style="width: 60px"><div class="layui-input-inline">' +
+                          '<input type="checkbox" lay-filter="deviceCheckIn" name="'+_data[j].ID+'">' +
+                          '</div>' +
+                          '</div>' +
+                          '<div class="layui-inline">' +
+                          '<p>设备名称：'+_data[j].DeviceName+'</p>' +
+                          '<p>设备类型：'+_data[j].typeStr+'</p>' +
+                          '<p>设备编号：'+_data[j].MCUID+'</p>' +
+                          '</div>' +
+                          '<hr class="layui-bg-blue">');
+                      _data.splice(j,1);
+                  }
+              }
+            }
+            $('.deviceCheckIn').find('input[type="checkbox"]').attr('checked',false);
+            offBindID1.splice(0,offBindID1.length);
+            bindDeviceIDs1.splice(0,bindDeviceIDs1.length);
+            layui.use('form',function(){
+                var form=layui.form;
+                form.render();
+            });
+            xc.setStorage('deviceResult',JSON.stringify(_data));
+            layui.use('table',function () {
+                let table=layui.table;
+                table.render({
+                    elem: '#deviceIn'
+                    , data: _data,
+                    height:'300px'
+                    , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                    , cols: [[
+                        {type:'checkbox'}
+                        , {field: 'ID', title: 'ID', align: 'center'}
+                        ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                        , {field: 'typeStr', title: '设备类型', align: 'center'}
+                        , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                    ]]
+                    , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                    , limit: 10
+                })
+            })
+        }
+    });
+    $('#inBindOff').on('click',function(){
+        var _arr=JSON.parse(xc.getStorage('deviceResult'));
+        for(var i in offBindID1){
+            var ids=$('.deviceCheckIn').find('div[id="'+offBindID1[i]+'"]').attr('id');
+                    var DeviceNames=  $('.deviceCheckIn').find('div[id="'+offBindID1[i]+'"]').attr('name2');
+                    var typeStrs=  $('.deviceCheckIn').find('div[id="'+offBindID1[i]+'"]').attr('name');
+                    var MCUIDs=  $('.deviceCheckIn').find('div[id="'+offBindID1[i]+'"]').attr('name3');
+            _arr.push({'ID':ids,'DeviceName':DeviceNames,'typeStr':typeStrs,'MCUID':MCUIDs});
+                    $('.deviceCheckIn').find('div[id="'+offBindID1[i]+'"]').remove();
+        }
+        offBindID1.splice(0,offBindID1.length);
+        bindDeviceIDs1.splice(0,bindDeviceIDs1.length);
+        $('.deviceCheckIn').find('input[type="checkbox"]').attr('checked',false);
+        layui.use('form',function(){
+            var form=layui.form;
+            form.render();
+        });
+
+        xc.setStorage('deviceResult',JSON.stringify(_arr));
+        layui.use('table',function(){
+            var table=layui.table;
+            table.render({
+                elem: "#deviceIn"
+                , data: _arr
+                , height:'300px'
+                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[{type:'checkbox'}
+                    , {field: 'ID', title: '设备ID', align: 'center',width:'60px'}
+                    , {field: 'DeviceName', title: '设备名称', align: 'center'}
+                    , {field: 'typeStr', title: '设备类别', align: 'center'}
+                    , {field: 'MCUID', title: '设备编号', align: 'center'}
+                ]]
+                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                , limit: 10
+            });
+        })
+    });
+    $('#outBind').on('click',function(){
+        if(bindDeviceIDs2.length>0){
+            var _data=JSON.parse(xc.getStorage('deviceResult'));
+            for(var i in bindDeviceIDs2){
+                for(var j in _data){
+                    if(bindDeviceIDs2[i].ID==_data[j].ID){
+                        $('.deviceCheckOut').append('' +
+                            '<div id="'+_data[j].ID+'" name="'+_data[j].typeStr+
+                            '" name2="'+_data[j].DeviceName+'" name3="'+_data[j].MCUID+'" class="layui-form-item">' +
+                            '<div class="layui-inline" style="width: 60px"><div class="layui-input-inline">' +
+                            '<input type="checkbox" lay-filter="deviceCheckOut" name="'+_data[j].ID+'">' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="layui-inline">' +
+                            '<p>设备名称：'+_data[j].DeviceName+'</p>' +
+                            '<p>设备类型：'+_data[j].typeStr+'</p>' +
+                            '<p>设备编号：'+_data[j].MCUID+'</p>' +
+                            '</div>' +
+                            '<hr class="layui-bg-blue">');
+                        _data.splice(j,1);
+                    }
+                }
+            }
+            $('.deviceCheckOut').find('input[type="checkbox"]').attr('checked',false);
+            offBindID2.splice(0,offBindID2.length);
+            bindDeviceIDs2.splice(0,bindDeviceIDs2.length);
+            layui.use('form',function(){
+                var form=layui.form;
+                form.render();
+            });
+            xc.setStorage('deviceResult',JSON.stringify(_data));
+            layui.use('table',function () {
+                var table=layui.table;
+                table.render({
+                    elem: '#deviceOut'
+                    , data: _data,
+                    height:'300px'
+                    , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                    , cols: [[
+                        {type:'checkbox'}
+                        , {field: 'ID', title: 'ID', align: 'center'}
+                        ,  {field: 'DeviceName', title: '设备名称', align: 'center'}
+                        , {field: 'typeStr', title: '设备类型', align: 'center'}
+                        , {field: 'MCUID', title: '设备编号', align: 'center'}
+
+                    ]]
+                    , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                    , limit: 10
+                })
+            })
+        }
+    });
+    $('#outBindOff').on('click',function(){
+        var _arr=JSON.parse(xc.getStorage('deviceResult'));
+        for(var i in offBindID2){
+            var ids=$('.deviceCheckOut').find('div[id="'+offBindID2[i]+'"]').attr('id');
+            var DeviceNames=  $('.deviceCheckOut').find('div[id="'+offBindID2[i]+'"]').attr('name2');
+            var typeStrs=  $('.deviceCheckOut').find('div[id="'+offBindID2[i]+'"]').attr('name');
+            var MCUIDs=  $('.deviceCheckOut').find('div[id="'+offBindID2[i]+'"]').attr('name3');
+            _arr.push({'ID':ids,'DeviceName':DeviceNames,'typeStr':typeStrs,'MCUID':MCUIDs});
+            $('.deviceCheckOut').find('div[id="'+offBindID2[i]+'"]').remove();
+        }
+        offBindID2.splice(0,offBindID2.length);
+        bindDeviceIDs2.splice(0,bindDeviceIDs2.length);
+        $('.deviceCheckOut').find('input[type="checkbox"]').attr('checked',false);
+        layui.use('form',function(){
+            var form=layui.form;
+            form.render();
+        });
+
+        xc.setStorage('deviceResult',JSON.stringify(_arr));
+        layui.use('table',function(){
+            var table=layui.table;
+            table.render({
+                elem: "#deviceOut"
+                , data: _arr
+                , height:'300px'
+                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[{type:'checkbox'}
+                    , {field: 'ID', title: '设备ID', align: 'center',width:'60px'}
+                    , {field: 'DeviceName', title: '设备名称', align: 'center'}
+                    , {field: 'typeStr', title: '设备类别', align: 'center'}
+                    , {field: 'MCUID', title: '设备编号', align: 'center'}
+                ]]
+                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                , limit: 10
+            });
+        })
+    });
+
+    var  getCheckBox=function(filter,arr,form){
+        form.on('checkbox('+filter+')', function(data){
+            if (data.elem.checked==true){
+                arr.push({'value':data.value,'title':data.elem.title});
+            }else if(data.elem.checked==false){
+                for (var i=0;i<arr.length;i++){
+                    if(arr[i].value==data.value){
+                        arr.splice(i,1)
+                    }
+                }
+            }
+        });
+    };
+
+//    保存信息（修改、新增）
+    var saveProject=function(){
+        var ids=id,
+            projectNames=$('#projectName').val(),
+            projectStatuss=projectStatus,
+            feeTypes=freeTypes,
+            feeCycles=$('#feeCycle').val(),
+            feeDeposits=$('#feeDeposit').val(),
+            signOutEns=ifcharge,
+            whenLocks=whenLock,
+            regretTimes=$('#regretTime').val(),
+            notes=$('#note').val(),
+            bandPricess=foodLevels;
+
+        var projectDevices=[];
+
+        $('.deviceCheckIn').find($(".layui-form-item")).each(function (i,item) {
+            projectDevices.push({'deviceId':item.id,'bindType':0});
+        });
+        $('.deviceCheckOut').find($(".layui-form-item")).each(function (i,item) {
+            projectDevices.push({'deviceId':item.id,'bindType':1});
+        });
+       var _saveDevice=xc.getStorage('saveDevice');
+
+        if( xc.getStorage('gpsStatus')=='edit'){
+            if(aa(projectDevices,JSON.parse(_saveDevice))==true){
+                projectDevices=null;
+            }else {projectDevices=projectDevices}
+        }
+
+        var _obj={'id':ids,'projectName':projectNames,'projectStatus':projectStatuss,'feeType':feeTypes,'feeCycle':feeCycles,
+'feeDeposit':feeDeposits,'signOutEn':signOutEns,'whenLock':whenLocks,'regretTime':regretTimes,'note':notes,
+'bandPrices':bandPricess,'projectDevices':projectDevices,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+console.log(_obj);
+    var url='/XCCloud/Project?action=SaveProjectInfo';
+        let parseJson = JSON.stringify(_obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: parseJson},
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                if (data.result_code == 1) {
+                    layui.use('layer',function () {
+                        var layer=layui.layer;
+                        layer.msg('保存成功！');
+                        layer.closeAll();
+                        xc.InitProjectList(token,xc);
+                    })
+                } else {
+                    layer.msg('操作失败');
+                }
+            }
+    })
+    };
+    $('#saveListBtn').on('click',function(){
+        saveProject();
+        id='';
+    });
+    $('#saveListBtn_sigle').on('click',function(){
+        saveProject();
+        id='';
+    });
+
+    function aa(a,b) {
+        var flag=true;
+        if(a.length==b.length){
+            for (var i in JSON.stringify(a)){
+                for(var j in JSON.stringify(b)){
+                    if(b[j]==a[i]){
+                        flag=true;
+                    }else {
+                        flag=false
+                    }
+                }
+            }
+        }else {
+            flag=false;
+        }
+        return flag;
+    }
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+<script type="text/html" id="barDemo1">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

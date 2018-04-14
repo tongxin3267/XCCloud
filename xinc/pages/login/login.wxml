@@ -1,0 +1,19 @@
+<!--login.wxml-->
+
+<view class="login-container">
+  <view class="main-container">
+    <view class="account-password-container">
+      <image src="/images/account.png"></image>
+      <input class='phoneInput' placeholder="请输入电话号码" bindinput="accountInput" />
+    </view>
+    <view class="account-password-container">
+      <image class='Verificationimg' src="/images/account.png"></image>
+      <input class='VerificationInput' placeholder="请输入验证码" bindinput="passwordInput" />
+      <image class='Verification' src="{{Verification}}"></image>
+      <text class='Invisibility' catchtap="Invisibility">点击刷新</text>
+    </view>
+    
+    <text>{{success}}</text>
+  </view>
+  <button class="login-button" catchtap="login">下一步</button>
+</view>

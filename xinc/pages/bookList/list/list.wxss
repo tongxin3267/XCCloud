@@ -1,0 +1,19 @@
+/* pages/bookList/list/list.wxss */
+.Prompt{margin-top: 50%;display: flex;padding-left: 40rpx;}
+.radio-group{display: block;margin-top: 40rpx;}
+.radio{display: block;}
+.hidden{display: none;}
+.cardH{display: block;width: 100%;text-align: center;margin-top:40rpx;}
+.cardL{margin-left: 40rpx;float: left;}
+.cardn{float: right;margin-right: 40rpx}
+.clerR{clear: both;overflow: hidden;padding-top: 50rpx;}
+.cardBg{background: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3816142543,615332580&fm=27&gp=0.jpg') no-repeat center;height: 250rpx;background-size: 100% 100%;color: gold;margin-bottom:100rpx;}
+.show{display: block;}
+
+
+
+
+
+
+
+

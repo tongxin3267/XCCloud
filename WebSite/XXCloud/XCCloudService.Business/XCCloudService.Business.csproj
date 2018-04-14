@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{391EB2F5-B166-4439-B0BD-91F8E3377271}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCCloudService.Business</RootNamespace>
+    <AssemblyName>XCCloudService.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiRequestType.cs" />
+    <Compile Include="Common\CoinBusiess.cs" />
+    <Compile Include="Common\DeviceStateBusiness.cs" />
+    <Compile Include="Common\FilterMobileBusiness.cs" />
+    <Compile Include="Common\IconOutLockBusiness.cs" />
+    <Compile Include="Common\MobileTokenBusiness.cs" />
+    <Compile Include="Common\QRBusiness.cs" />
+    <Compile Include="Common\RequestRouteBusiness.cs" />
+    <Compile Include="Common\TCPAnswerSocketBusiness.cs" />
+    <Compile Include="Common\UDPClientItemBusiness.cs" />
+    <Compile Include="Common\UDPSocketCommonQueryAnswerBusiness.cs" />
+    <Compile Include="Common\UDPSocketStoreQueryAnswerBusiness.cs" />
+    <Compile Include="Common\UDPSocketAnswerBusiness.cs" />
+    <Compile Include="Common\UnionIdTokenBusiness.cs" />
+    <Compile Include="Common\XCGameRouteDeviceTokenBusiness.cs" />
+    <Compile Include="Log\ApiRequestLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestClientEnum.cs" />
+    <Compile Include="SMSBusiness.cs" />
+    <Compile Include="WeiXin\RegisterOpenIDBusiness.cs" />
+    <Compile Include="WeiXin\SAppAccessTokenBusiness.cs" />
+    <Compile Include="WeiXin\SAppPushMessageBusiness.cs" />
+    <Compile Include="WeiXin\WeiXinAccessTokenBusiness.cs" />
+    <Compile Include="WeiXin\WeiXinSAppSessionBussiness.cs" />
+    <Compile Include="XCCloudRS232\AccountBusiness.cs" />
+    <Compile Include="XCCloudRS232\DeviceBusiness.cs" />
+    <Compile Include="XCCloudRS232\DeviceStatusBusiness.cs" />
+    <Compile Include="XCCloudRS232\GameBusiness.cs" />
+    <Compile Include="XCCloudRS232\MemberBusiness.cs" />
+    <Compile Include="XCCloudRS232\MerchBusiness.cs" />
+    <Compile Include="XCCloudRS232\MerchDeviceBusiness.cs" />
+    <Compile Include="XCCloudRS232\MerchSegmentBusiness.cs" />
+    <Compile Include="XCCloud\Flw_OrderBusiness.cs" />
+    <Compile Include="XCCloud\MemberBusiness.cs" />
+    <Compile Include="XCCloud\ScheduleBusiness.cs" />
+    <Compile Include="XCCloud\MerchBusiness.cs" />
+    <Compile Include="XCCloud\UserBusiness.cs" />
+    <Compile Include="XCCloud\StoreBusiness.cs" />
+    <Compile Include="XCCloud\XCCloudUnionIDBusiness.cs" />
+    <Compile Include="XCGameManaLog\UDPDBBusiness.cs" />
+    <Compile Include="XCGameMana\DataOrderQueryBusiness.cs" />
+    <Compile Include="XCGameMana\DeviceManaBusiness.cs" />
+    <Compile Include="XCGameMana\ExtendBusiness.cs" />
+    <Compile Include="XCGameMana\MPOrderBusiness.cs" />
+    <Compile Include="XCGameMana\PayBusiness.cs" />
+    <Compile Include="XCGameMana\StoreBusiness.cs" />
+    <Compile Include="XCGameMana\XCGameManaAdminUserTokenBusiness.cs" />
+    <Compile Include="XCGameMana\XCCloudManaUserTokenBusiness.cs" />
+    <Compile Include="XCGameMana\XCCloudUserTokenBusiness.cs" />
+    <Compile Include="XCGame\DeviceBusiness.cs" />
+    <Compile Include="XCGame\MeberAndMobileTokenBusiness.cs" />
+    <Compile Include="XCGame\MemberBusiness.cs" />
+    <Compile Include="XCGame\MemberCardQueryBusiness.cs" />
+    <Compile Include="XCGame\MemberPreservationBusiness.cs" />
+    <Compile Include="XCGame\MemberTokenBusiness.cs" />
+    <Compile Include="XCGame\ScheduleBusiness.cs" />
+    <Compile Include="XCGame\UserInfoBusiness.cs" />
+    <Compile Include="XCGame\UserTokenBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.CacheService\XCCloudService.CacheService.csproj">
+      <Project>{52f0eb44-359e-47c9-8a33-c459d43da545}</Project>
+      <Name>XCCloudService.CacheService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.BLL\XCCloudService.BLL.csproj">
+      <Project>{bcbc3ea2-3c42-4d5f-842a-45e614bbadce}</Project>
+      <Name>XCCloudService.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.DAL\XCCloudService.DAL.csproj">
+      <Project>{0fa3e9cf-9fd2-4d99-8efa-c44acfda160d}</Project>
+      <Name>XCCloudService.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.Model\XCCloudService.Model.csproj">
+      <Project>{1e38ec5a-0a89-4d9e-9cdf-6f79c580b6a1}</Project>
+      <Name>XCCloudService.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.RadarServer\XXCloudService.RadarServer.csproj">
+      <Project>{2d63076b-e662-4eb7-a9a8-cb50bc35f992}</Project>
+      <Name>XXCloudService.RadarServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

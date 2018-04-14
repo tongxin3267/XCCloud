@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<msgtemplates>
+  <msgtemplate id="BuySuccessNotify">
+    <title>购买成功通知</title>
+    <templateid>18k5i1CRs9Z9mHDBYjvDjucj1oC9NTHV7GjlmBUTOWo</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>欢迎下次光临</remark>
+    <firstcolor>#173177</firstcolor>
+    <keynote1color>#173177</keynote1color>
+    <keynote2color>#173177</keynote2color>
+    <keynote3color>#173177</keynote3color>
+    <remarkcolor>#173177</remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="OrderPaySuccess">
+    <title>你好，你的订单已支付成功</title>
+    <templateid>u9FnpHo6yLbklRrLbs_fLLy8gvNHjq8xpJ_mbPkH1nA</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>感谢你的使用，欢迎再次购买！</remark>
+    <firstcolor>#173177</firstcolor>
+    <keynote1color>#173177</keynote1color>
+    <keynote2color>#173177</keynote2color>
+    <keynote3color>#173177</keynote3color>
+    <remarkcolor>#173177</remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="MemberRechargeNotify">
+    <title>会员充值通知</title>
+    <templateid>EuHQdLLoU5RuZ_R4NGf6XjwkQ07M9fMPZ3J109EbQ50</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+  </msgtemplate>
+  <msgtemplate id="UserRegisterRemind">
+    <title>收到莘宸商户注册信息</title>
+    <templateid>FXplFqR4Mo55im--hfYC0Hg-U_8IIwns_bc5RR0__gs</templateid>
+    <detailsurl>http://mp.4000051530.com/merch/authManage.html</detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>点击进入审批页面</remark>
+    <firstcolor>#173177</firstcolor>
+    <keynote1color>#173177</keynote1color>
+    <keynote2color>#173177</keynote2color>
+    <remarkcolor>#173177</remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="MerchNewPassword">
+    <title>莘宸商户登陆密码</title>
+    <templateid>tHvW3c-ygrn-lmzDTCKmjgSlIdp8gMgUQRlH6dMEJkw</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>请妥善保管。</remark>
+    <firstcolor></firstcolor>
+    <keynote1color></keynote1color>
+    <keynote2color></keynote2color>
+    <remarkcolor></remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="MerchResetPassword">
+    <title>莘宸商户重置密码</title>
+    <templateid>lH2A8m8mXWBlbE4nRt8eyTh6Y4PSE0O6RDHpWjzeYyE</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>请妥善保管！如非本人操作，请联系客服</remark>
+    <firstcolor></firstcolor>
+    <keynote1color></keynote1color>
+    <keynote2color></keynote2color>
+    <remarkcolor></remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="StoreRegisterRemind">
+    <title>你好，有客户申请开店</title>
+    <templateid>f47IfmaGahJl89ToLYi7TQR8Q_8ZBYbYIcRbcU5qr3A</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>请管理员尽快处理！</remark>
+    <firstcolor></firstcolor>
+    <keynote1color></keynote1color>
+    <keynote2color></keynote2color>
+    <remarkcolor></remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="XcUserNewPassword">
+    <title>莘宸用户登陆密码</title>
+    <templateid>tHvW3c-ygrn-lmzDTCKmjgSlIdp8gMgUQRlH6dMEJkw</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>请妥善保管。</remark>
+    <firstcolor></firstcolor>
+    <keynote1color></keynote1color>
+    <keynote2color></keynote2color>
+    <remarkcolor></remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="XcUserResetPassword">
+    <title>莘宸用户重置密码</title>
+    <templateid>lH2A8m8mXWBlbE4nRt8eyTh6Y4PSE0O6RDHpWjzeYyE</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>请妥善保管！如非本人操作，请联系客服</remark>
+    <firstcolor></firstcolor>
+    <keynote1color></keynote1color>
+    <keynote2color></keynote2color>
+    <remarkcolor></remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="OrderFailSuccess">
+    <title>你好，你的订单已支付失败</title>
+    <templateid>QTWmFeQENb6aX5Zwxcs_m6-GsrmjSr6R9DIwJW4fOxk</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>如果有疑问,请联系我们客服,24小时为您服务</remark>
+    <firstcolor>#173177</firstcolor>
+    <keynote1color>#173177</keynote1color>
+    <keynote2color>#173177</keynote2color>
+    <keynote3color>#173177</keynote3color>
+    <remarkcolor>#173177</remarkcolor>
+  </msgtemplate>
+  <msgtemplate id="XcGameGetCoinSuccess">
+    <title>你好，你的提币操作已完成</title>
+    <templateid>7BhkU_ecCZitYYyeawFJAP07Fzp_aRbwp-ZLtyPvLJw</templateid>
+    <detailsurl></detailsurl>
+    <sapppagepath></sapppagepath>
+    <remark>如果有疑问,请联系我们客服,24小时为您服务</remark>
+    <firstcolor>#173177</firstcolor>
+    <keynote1color>#173177</keynote1color>
+    <keynote2color>#173177</keynote2color>
+    <keynote3color>#173177</keynote3color>
+    <remarkcolor>#173177</remarkcolor>
+  </msgtemplate>
+</msgtemplates> 

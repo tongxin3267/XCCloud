@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+ <div style="padding: 15px">
+         <form action="" class="layui-form layui-form-pane">
+             <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">数字币级别</label>
+                    <div class="layui-input-inline">
+                        <select name="" id="digitLevel" lay-filter="digitLevel"></select>
+                    </div>
+                </div>
+                 <div class="layui-inline">
+                     <label class="layui-form-label">当前入库</label>
+                     <div class="layui-input-inline">
+                         <input name="" id="currStorage" class="layui-input" readonly>
+                     </div>
+                 </div>
+             </div>
+             <div class="layui-col-sm12">
+                 <div class="layui-col-sm6" style="height: 300px;padding: 5px">
+                     <h2>提示：<span>读卡器没有放入数字币</span></h2>
+                     <div class="layui-form-item">
+                             <label class="layui-form-label">请核对卡号</label>
+                             <div class="layui-input-block">
+                                 <input name="" id="checkCard" class="layui-input" value="">
+                             </div>
+                     </div>
+                     <div>
+                         <button type="button"class="layui-btn" id="storageBtn">开始入库</button>
+                         <button type="button"class="layui-btn">开始校验</button>
+                         <button type="button"class="layui-btn layui-btn-danger">关闭</button>
+                     </div>
+                 </div>
+                 <div class="layui-col-sm6" style="height: 300px;padding: 5px;">
+                     <div class="cardBox" style="padding: 5px;border: 1px dashed #aaa;height: 100%;overflow-y: scroll;"></div>
+                 </div>
+             </div>
+         </form>
+ </div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    var aaa='';
+    var xc=xcActionSystem.prototype;
+    var token=xc.getStorage('token');
+    AddDigitCoin=function(){
+
+var digitLevelID=$("#digitLevel").find('option:selected').val();
+        var  iCardID=$('#checkCard').val();
+        var obj={'digitLevelID':digitLevelID,'iCardID':iCardID,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+        var url='/XCCloud/Coins?action=AddDigitCoin';
+        let parseJson=JSON.stringify(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parseJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                if(data.result_code==1){
+                    $('.cardBox').append('<p>'+iCardID+'</p>');
+                    $('#currStorage').val(parseInt($('#currStorage').val())+1);
+                }else {
+                    layer.msg("操作失败")
+                }
+            }
+        })
+    }
+    document.getElementById('storageBtn').onclick= function(){AddDigitCoin()};
+    layui.use(['form','layer','laydate'],function() {
+        var layer=layui.layer, $=layui.jquery,laydate=layui.laydate,form=layui.form;
+
+
+
+
+        xc.GetMemberLevel(token,form,layer);
+
+
+        xc.GetDigitCoin(token,layer)
+    })
+</script>
+</html>

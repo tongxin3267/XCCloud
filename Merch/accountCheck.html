@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+    <title>账目审核</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div style="padding: 10px;">
+    <blockquote class="layui-elem-quote layui-col-md12 layui-col-sm12" style="text-align: right;margin-right:100px;display: inline-block;">
+        <div class="layui-col-md5 layui-col-sm5" style="text-align: left">
+            <label class="layui-form-label">审核日期</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="checkDates">
+            </div>
+            <div class="layui-input-inline" >
+                <button class="layui-btn layui-btn_serch layui-btn-normal" data-type="reload" id="searchSigle"><i class="layui-icon">&#xe6b2;</i>查询</button>
+            </div>
+        </div>
+        <div class="layui-col-md5 layui-col-sm5">
+            <button class="layui-btn layui-btn_serch " data-type="reload" id="shBtn"><i class="layui-icon">&#xe615;</i>高级搜索</button>
+            <button class="layui-btn layui-btn_serch " data-type="reload" id="checkAll"><i class="layui-icon">&#xe600;</i>一键审核</button>
+        </div>
+
+    </blockquote>
+
+
+        <div class="layui-col-md12">
+            <table class="layui-hide" id="accountCheck"  lay-filter="accountCheck"></table>
+        </div>
+
+
+    <div id="searchModel" style="display: none">
+        <form action="" class="layui-form" style="padding: 15px">
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">查询条件</label>
+                <div class="layui-input-block" id="searchListUp" style="border: 1px dashed #f0ad4e">
+
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <div class="" pane id="searchListDown"  style="border: 1px dashed #f0ad4e;margin-left: 110px" lay-filter="sld">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane" id="searchbox" style="margin-left: 110px">
+            </div>
+            <div class="layui-col-md-offset9" id="submitBtn">
+                <button type="reset" class="layui-btn layui-btn-normal " id="searchReset"><i class="layui-icon">&#x1002;</i>重置</button>
+                <button type="button" class="layui-btn layui-btn-danger " id="searchCAncle" onclick="closePage()"><i class="layui-icon">&#xe65c;</i>取消</button>
+                <button type="button" class="layui-btn layui-btn-normal " id="searchBtn"><i class="layui-icon">&#xe6b2;</i>查询</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="js/heightCharts.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var token=getStorage('token'),arr=[],arrList=[];
+    var dates=new Date();
+    dates=dates.getFullYear()+'-'+(dates.getMonth()>9?(dates.getMonth()+1):"0"+(dates.getMonth()+1))+'-'+dates.getDate();
+    console.log(dates);
+    var parm={'url':'/XCCloud/Order?action=GetOrdersCheck',
+        'obj':{'checkDate':dates,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+        'elem':'#accountCheck',
+        cols:[ {type:'numbers',fixed: 'left'}
+            ,{field:'ID', title: '流水号',fixed: 'left', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            ,{field:'CheckDate', title: '审核日期',fixed: 'left', align: 'center'}
+            ,{field:'ScheduleState', title: '状态',fixed: 'left', align: 'center',templet: '#titleTpl'}
+            , {toolbar: '#barDemo', fixed: 'left', title: '操作', width:140, align:'center'}
+            ,{field:'StoreName', title: '门店名称', align: 'center'}
+            ,{field:'PayCount', title: '应收现金', align: 'center'} //单元格内容水平居中
+            ,{field:'AliRealPay', title: '支付宝进账', align: 'center'} //单元格内容水平居中
+            ,{field:'WechatRealPay', title: '微信进账',  align: 'center'}
+            ,{field:'GroupBuyRealPay', title: '团购进账',  align: 'center'}
+            ,{field:'OpenCount', title: '开卡数量',  align: 'center'}
+            ,{field:' OpenDeposit', title: '开卡押金',  align: 'center'}
+            ,{field:'OpenFee', title: '开卡手续费',  align: 'center'}
+            ,{field:'RefundCount', title: '退卡数量',  align: 'center'}
+            ,{field:'RefundDeposit', title: '退卡押金',  align: 'center'}
+            ,{field:'TokenRealPay', title: '(代币)数字币',  align: 'center'}
+            ,{field:'RechargeRealPay', title: '充值金额',  align: 'center'}
+            ,{field:'CoinRealPay', title: '事物币金额',  align: 'center'}
+            ,{field:'GoodRealPay', title: '商品销售金额',  align: 'center'}
+            ,{field:'TicketRealPay', title: '门票销售金额',  align: 'center'}
+            ,{field:'GroupBuyCount', title: '团购币数',  align: 'center'}
+            ,{field:'CoinMoney', title: '过户币金额',  align: 'center'}
+            ,{field:'TicketCoins', title: '条码兑币',  align: 'center'}
+            ,{field:'TicketCoinMoney', title: '条码对款',  align: 'center'}
+            ,{field:'FreeCoin', title: '会议送币',  align: 'center'}
+            ,{field:'SaveCoin', title: '手工存币',  align: 'center'}
+        ]};
+    // getInitData(parm);
+
+    layui.use(['laydate','table','layer'],function () {
+        var laydate=layui.laydate,table=layui.table,layer=layui.layer;
+        laydate.render({
+            elem: '#checkDates',type: 'date',value: dates
+        });
+        table.render({
+            elem: '#accountCheck'
+            ,height: 315
+            ,cellMinWidth: 120
+            ,data: [{
+                "ID": "10001"
+                ,"ScheduleState":'0'
+                ,"CheckDate": "杜甫"
+                ,"StoreName": "xianxin@layui.com"
+                ,"PayCount": "男"
+                ,"AliRealPay": "浙江杭州"
+                ,"PayTypeStr": "人生恰似一场修行"
+                ,"WechatRealPay": "116"
+                ,"GroupBuyRealPay": "192.168.0.8"
+
+            },{
+                "ID": "10001"
+                ,"ScheduleState":'1'
+                ,"CheckDate": "杜甫"
+                ,"StoreName": "xianxin@layui.com"
+                ,"PayCount": "男"
+                ,"AliRealPay": "浙江杭州"
+                ,"PayTypeStr": "人生恰似一场修行"
+                ,"WechatRealPay": "116"
+                ,"GroupBuyRealPay": "192.168.0.8"
+
+            },{
+                "ID": "10001"
+                ,"ScheduleState":'2'
+                ,"CheckDate": "杜甫"
+                ,"StoreName": "xianxin@layui.com"
+                ,"PayCount": "男"
+                ,"AliRealPay": "浙江杭州"
+                ,"PayTypeStr": "人生恰似一场修行"
+                ,"WechatRealPay": "116"
+                ,"GroupBuyRealPay": "192.168.0.8"
+
+            }
+            ] //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {type:'numbers',fixed: 'left'}
+                ,{field:'ID', title: '流水号',fixed: 'left', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'CheckDate', title: '审核日期',fixed: 'left', align: 'center'}
+                ,{field:'ScheduleState', title: '状态',fixed: 'left', align: 'center',templet: '#titleTpl'}
+                , {toolbar: '#barDemo', fixed: 'left', title: '操作', width:140, align:'center'}
+                ,{field:'StoreName', title: '门店名称', align: 'center'}
+                ,{field:'PayCount', title: '应收现金', align: 'center'} //单元格内容水平居中
+                ,{field:'AliRealPay', title: '支付宝进账', align: 'center'} //单元格内容水平居中
+                ,{field:'WechatRealPay', title: '微信进账',  align: 'center'}
+                ,{field:'GroupBuyRealPay', title: '团购进账',  align: 'center'}
+                ,{field:'OpenCount', title: '开卡数量',  align: 'center'}
+                ,{field:' OpenDeposit', title: '开卡押金',  align: 'center'}
+                ,{field:'OpenFee', title: '开卡手续费',  align: 'center'}
+                ,{field:'RefundCount', title: '退卡数量',  align: 'center'}
+                ,{field:'RefundDeposit', title: '退卡押金',  align: 'center'}
+                ,{field:'TokenRealPay', title: '(代币)数字币',  align: 'center'}
+                ,{field:'RechargeRealPay', title: '充值金额',  align: 'center'}
+                ,{field:'CoinRealPay', title: '事物币金额',  align: 'center'}
+                ,{field:'GoodRealPay', title: '商品销售金额',  align: 'center'}
+                ,{field:'TicketRealPay', title: '门票销售金额',  align: 'center'}
+                ,{field:'GroupBuyCount', title: '团购币数',  align: 'center'}
+                ,{field:'CoinMoney', title: '过户币金额',  align: 'center'}
+                ,{field:'TicketCoins', title: '条码兑币',  align: 'center'}
+                ,{field:'TicketCoinMoney', title: '条码对款',  align: 'center'}
+                ,{field:'FreeCoin', title: '会议送币',  align: 'center'}
+                ,{field:'SaveCoin', title: '手工存币',  align: 'center'}
+
+            ]]
+        });
+        table.on('tool(accountCheck)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+           var status=data.ScheduleState;
+            var id=data.ID;
+            var checkDate=data.CheckDate;
+            if(layEvent === 'detail'&&status=="未审核"){ //查看
+                layer.confirm('是否确定通过审核？', {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    var _obj={'id':id,'checkDate':checkDate,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                    var url='/XCCloud/Order?action=CheckOrders';
+                    var  parasJsonChart = JSON.stringify(_obj);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: parasJsonChart,
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            console.log(data);
+                            if (data.result_code == '1') {
+                                layer.msg('审核成功');
+                                layer.closeAll();
+                            }else {
+                                layer.msg('操作失败')
+                            }
+                        }
+                    })
+                }, function(){
+
+                });
+
+            }
+        })
+        $('#checkAll').on('click',function () {
+            layer.confirm('是否确定进行一键审核？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                var dates=$('#checkDates').val();
+                var _obj={'checkDate':dates,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"}
+                var url='/XCCloud/Order?action=CheckOrders';
+                var  parasJsonChart = JSON.stringify(_obj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: parasJsonChart,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if (data.result_code == '1') {
+                            layer.msg('一键审核成功');
+                            layer.closeAll();
+                        }else {
+                            layer.msg('操作失败')
+                        }
+                    }
+                })
+            }, function(){
+
+            });
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: parasJsonChart,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if (data.result_code == '1') {
+                        layer.msg('一键审核成功');
+                        layer.closeAll();
+                    }else {
+                        layer.msg('操作失败')
+                    }
+                }
+            })
+        })
+    })
+</script>
+<script type="text/html" id="barDemo">
+    {{#  if(d.ScheduleState == 0){ }}
+    <a class="layui-btn layui-btn-disabled layui-btn-sm" lay-event="detail" disabled="" ><i class="layui-icon">&#xe642;</i>审核</a>
+    {{#  } else if(d.ScheduleState == 1){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="detail" ><i class="layui-icon">&#xe642;</i>审核</a>
+    {{#  } else if(d.ScheduleState == 2){ }}
+    <a class="layui-btn layui-btn-disabled layui-btn-sm" lay-event="detail" disabled=""><i class="layui-icon">&#xe642;</i>审核</a>
+    {{#  } }}
+</script>
+<script type="text/html" id="titleTpl">
+    {{#  if(d.ScheduleState == 0){ }}
+    进行中
+    {{#  } else if(d.ScheduleState == 1){ }}
+   未审核
+    {{#  } else if(d.ScheduleState == 2){ }}
+    已审核
+    {{#  } }}
+</script>
+</html>

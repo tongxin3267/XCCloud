@@ -1,0 +1,372 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+
+    <script type="text/javascript">
+
+    function common(url, parasJson) {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }    
+
+    function do_xccloud_getnotes() {
+        var parasObj = { "merchId": "", "dictKey": "", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Dictionary?action=GetNodes";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_setsub() {
+        var parasObj = { "merchId": "", "id": 2, "dictKey": "Grand2", "dictValue": "授权功能1", "enabled": 1, "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Dictionary?action=SetSub";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_addroot() {
+        var parasObj = { "merchId": "B4201030001", "id": 1, "dictKey": "Grand6", "dictValue": "授权功能6", "enabled": 1, "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Dictionary?action=AddRoot";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_addsub() {
+        var parasObj = { "merchId": "", "id": 1, "dictKey": "Grand6", "dictValue": "授权功能6", "enabled": 1, "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Dictionary?action=AddSub";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getgivebackrules() {
+        var parasObj = { "storeId": "", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Parameter?action=GetGivebackRules";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_addgivebackrule() {
+        var parasObj = { "storeId": "S0100011", "memberLvlId": 0, "allowBackPrincipal": 1, "backType": 1, "allowContainToday": 1, "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Parameter?action=AddGivebackRule";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getmerchlist() {
+        var parasObj = {
+             "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Merch?action=GetMerchList";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getmerchinfo() {
+        var parasObj = { "merchId": "B4201030001", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var url = "/xccloud/Merch?action=GetMerchInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_addmerch() {
+        var parasObj = {
+            "merchId": "B4201030001", "merchType": 0, "merchStatus": 0, "merchAccount": "12345fengc", "merchName": "fengc", "mobil": "13545208294", "createUserId": "1",
+            "merchFunction": [{ "functionId": 2, "functionEn": 1 }, { "functionId": 3, "functionEn": 0 }], "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Merch?action=AddMerch";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_login() {
+        //var parasObj = {
+        //    "userName": "fengcheng", "password": "123456", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        //};
+        var parasObj = {
+            "userName": "fengcheng", "password": "123456", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Login?action=CheckUser";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getpicture() {
+        var parasObj = {
+            "type": "c", "userToken": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/qr/c";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getmenus() {
+        var parasObj = {
+            "logId": "2", "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Main?action=GetMenus";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_uploadpicture() {
+        var parasObj = {
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Bill?action=UploadPicture";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getbills() {
+        var parasObj = {
+            "title": "123", "publishDate": "2017-12-14", "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Bill?action=GetBills";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getpictures() {
+        var parasObj = {
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Bill?action=GetPictures";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_publishbill() {
+        var parasObj = {
+            title: "second", publishType: "1", promotionType: "3", picturePath: "/Upload/image/XCCloud/0370ZD@&%+OF8Q`!E.png", pagePath: "<style type='text/css'>.view{padding:0;word-wrap:b…osition:0% 0%; height:405px; }</style> <p>666</p>",
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Bill?action=PublishBill";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_savestoreinfo() {
+        var parasObj = {
+            
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/StoreInfo?action=SaveStoreInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getparentstorelist() {
+        var parasObj = {
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/StoreInfo?action=GetParentStoreList";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getstorelist() {
+        var parasObj = {
+            "conditions": [
+                    { "id": 15, "field": "authorExpireDate", "values": ["2018-01-01", ""] },
+                    { "id": 15, "field": "selttleType", "values": "不采用三方结算" }
+            ], "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/StoreInfo?action=GetStoreList";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getusergroup() {
+        var parasObj = {
+            "groupId":1,
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/UserGroup?action=GetUserGroup";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getusergrouplist() {
+        var parasObj = {
+            "userId": 8,
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/UserGroup?action=GetUserGroupList";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getxcuserinfo() {
+        var parasObj = {
+            "userId": 8,
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/UserInfo?action=GetXcUserInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getxcusergrant() {
+        var parasObj = {
+            "userId": null||"",
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/UserInfo?action=GetXcUserGrant";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getwxuserbatch() {
+        var parasObj = {
+            "sysId": "0", "versionNo": "0.0.0.1"
+        };
+        var url = "/wx/Users?action=GetWxUserInfoBatch";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getwxusersave() {
+        var parasObj = {
+            iCCardId
+:
+"66666",
+            logName
+:
+"fengcheng",
+        mobile
+:
+"13555555555",
+        openId
+:
+"oNWocwSherAn-w6dczrGq0L_HaCU",
+        realName
+:
+"冯程",
+        signkey
+:
+"1f626576304bf5d95b72ece2222e42c3",
+        status
+:
+"0",
+        unionId
+:
+"oZtPw1b6ZdHb0OtUxuugmXubbXTA",
+        userGroupId
+:
+"7",
+            userId
+:
+"8",
+        userGrants
+:
+[{ id: "265", grantEn: 1 }
+
+, { id: "266", grantEn: 1 }
+, { id: "267", grantEn: 1 }
+]
+
+        };
+        var url = "/xccloud/UserInfo?action=SaveXcUserInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getsearchtemplate() {
+        var parasObj = {
+            "pagename": "storeSearch", "processname": "storeSearch", "sysId": "0", "versionNo": "0.0.0.1","token": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/Query?action=init";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_checkorders() {
+        var parasObj = {
+            "id": 1, "sysId": "0", "versionNo": "0.0.0.1", "token": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Order?action=CheckOrders";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getprojectinfo() {
+        var parasObj = {
+            "id": 1,
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Project?action=GetProjectInfo";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_xccloud_getbinddevicelist() {
+        var parasObj = {
+            "type": 7, "bindDeviceIDs": [1, 2],
+            "userToken": "f91d831d7a3241339d4f999eac6d6f7f", "signkey": "1f626576304bf5d95b72ece2222e42c3"
+        };
+        var url = "/xccloud/Project?action=GetBindDeviceList";
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    </script>
+
+</head>
+<body>    
+    <div title="商户后台" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>关键字</div>
+        <input type="button" value="do_xccloud_getnotes" onclick="do_xccloud_getnotes()" />
+        <input type="button" value="do_xccloud_setsub" onclick="do_xccloud_setsub()" />
+        <input type="button" value="do_xccloud_addroot" onclick="do_xccloud_addroot()" />
+        <input type="button" value="do_xccloud_addsub" onclick="do_xccloud_addsub()" />
+        <div>参数设置</div>
+        <input type="button" value="do_xccloud_getgivebackrules" onclick="do_xccloud_getgivebackrules()" />
+        <input type="button" value="do_xccloud_addgivebackrule" onclick="do_xccloud_addgivebackrule()" />
+        <div>商户管理</div>
+        <input type="button" value="do_xccloud_getmerchlist" onclick="do_xccloud_getmerchlist()" />
+        <input type="button" value="do_xccloud_getmerchinfo" onclick="do_xccloud_getmerchinfo()" />
+        <input type="button" value="do_xccloud_addmerch" onclick="do_xccloud_addmerch()" />
+        <div>用户登录</div>
+        <input type="button" value="do_xccloud_login" onclick="do_xccloud_login()" />
+        <input type="button" value="do_xccloud_getpicture" onclick="do_xccloud_getpicture()" />
+        <div>主界面</div>
+        <input type="button" value="do_xccloud_getmenus" onclick="do_xccloud_getmenus()" />
+        <div>小程序海报推送</div>
+        <input type="button" value="do_xccloud_uploadpicture" onclick="do_xccloud_uploadpicture()" />
+        <input type="button" value="do_xccloud_getbills" onclick="do_xccloud_getbills()" />
+        <input type="button" value="do_xccloud_getpictures" onclick="do_xccloud_getpictures()" />
+        <input type="button" value="do_xccloud_publishbill" onclick="do_xccloud_publishbill()" />  
+        <div>门店管理</div>
+        <input type="button" value="do_xccloud_savestoreinfo" onclick="do_xccloud_savestoreinfo()" /> 
+        <input type="button" value="do_xccloud_getstorelist" onclick="do_xccloud_getstorelist()" />
+        <div>工作组管理</div>
+        <input type="button" value="do_xccloud_getusergroup" onclick="do_xccloud_getusergroup()" />  
+        <input type="button" value="do_xccloud_getusergrouplist" onclick="do_xccloud_getusergrouplist()" />  
+        <div>用户管理</div>
+        <input type="button" value="do_xccloud_getxcuserinfo" onclick="do_xccloud_getxcuserinfo()" />   
+        <input type="button" value="do_xccloud_getxcusergrant" onclick="do_xccloud_getxcusergrant()" />
+        <input type="button" value="do_xccloud_getwxuserbatch" onclick="do_xccloud_getwxuserbatch()" />  
+        <input type="button" value="do_xccloud_getwxusersave" onclick="do_xccloud_getwxusersave()" />     
+        <div>查询条件</div>
+        <input type="button" value="do_xccloud_getsearchtemplate" onclick="do_xccloud_getsearchtemplate()" /> 
+        <div>账目审核</div>
+        <input type="button" value="do_xccloud_checkorders" onclick="do_xccloud_checkorders()" /> 
+        <div>游艺项目设定</div>
+        <input type="button" value="do_xccloud_getprojectinfo" onclick="do_xccloud_getprojectinfo()" />
+        <input type="button" value="do_xccloud_getbinddevicelist" onclick="do_xccloud_getbinddevicelist()" />
+    </div>
+</body>
+</html>

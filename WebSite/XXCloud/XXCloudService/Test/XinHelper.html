@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#txtSmsCode").val("123456");
+            $("#txtMobile").val("15618920033");
+            $("#txtICCardId1").val("90000002");
+            $("#txtICCardId2").val("90000007");
+        });
+
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function do_getRegisterSMSCode() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100027", "mobile": $("#txtMobile").val(), "imgCode": $("#txtImgCode").val() };
+            var url = "/xcgamemana/User2?action=getRegisterSMSCode";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_registerUser() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100027", "mobile": $("#txtMobile").val(), "smsCode": $("#txtSmsCode").val() };
+            var url = "/xcgamemana/User2?action=registerUser";
+            var parasJson = JSON.stringify(parasObj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    $("#txtUserToken").val(data.result_data.userToken);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function do_getTicketInfo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Ticket?action=getTicketInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        //10000028
+        //10000040
+        function do_transICCardCoins() {
+            var parasObj = {
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "userToken": $("#txtUserToken").val(),
+                "storeId":"100027",
+                "cardIdOut": $("#txtICCardId1").val(),
+                "cardIdIn": $("#txtICCardId2").val(),
+                "coins":"11",
+                "mobile": $("#txtMobile").val(),
+                "cardIdOutPassword":"888888"
+            };
+            var url = "/xcgame/Member?action=transICCardCoins";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_lock() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Ticket?action=lockTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_unlock() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Ticket?action=unlockTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_exchangeLottery() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "icCardId": $("#txtICCardId1").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Lottery?action=exchangeLottery";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getLotteryInfo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Lottery?action=getLotteryInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getMember() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "icCardId": $("#txtICCardId1").val() };
+            var url = "/xcgame/Member?action=getInfo2";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getOutTicket() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Ticket?action=getOutTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_userTicket() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val() };
+            var url = "/xcgame/Ticket?action=addTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_exchangeOutTicket() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val(), "barCode": $("#txtBarCode").val(), "icCardId": $("#txtICCardId1").val() };
+            var url = "/xcgame/Ticket?action=exchangeOutTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getCustomCardInfo() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val()
+            };
+            var url = "/xcgame/member?action=getCustomCardInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_showImgCode() {
+            window.open("/ServicePage/ValidateImg.aspx");
+        }
+
+        function do_getParams() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val()
+            };
+            var url = "/xcgame/Params?action=getStoreParam";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+    </script>
+
+    
+    <div title="票据" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>票据</div>
+        ICCardId1:<input id="txtICCardId1" type="text" />&nbsp;&nbsp;ICCardId2:<input id="txtICCardId2" type="text" />
+        <br />
+        Mobile:<input id="txtMobile" type="text" />
+        <br />
+        UserToken:<input id="txtUserToken" type="text"/>
+        <br />
+        BarCode:<input id="txtBarCode" type="text" />
+        <br />
+        ImgCode:<input id="txtImgCode" type="text" />
+        <br />
+        SmsCode:<input id="txtSmsCode" type="text" />
+        <br />
+        <input id="Button1" type="button" value="button" onclick="do_showImgCode()"/>
+        <input id="do_getRegisterSMSCode" type="button" value="do_getRegisterSMSCode(获取用户注册短信验证码)" onclick="do_getRegisterSMSCode()" />
+        <input id="do_registerUser" type="button" value="do_registerUser(获取用户注册短信验证码)" onclick="do_registerUser()" />
+        <input id="do_getTicketInfo" type="button" value="do_getTicketInfo(获取门票信息)" onclick="do_getTicketInfo()" />
+        <input id="do_userTicket" type="button" value="do_userTicket(使用门票)" onclick="do_userTicket()" />
+        <input id="do_transICCardCoins" type="button" value="do_transICCardCoins(会员卡转账)" onclick="do_transICCardCoins()" />
+        <input id="do_lock" type="button" value="do_lock(锁定门票)" onclick="do_lock()" />
+        <input id="do_unlock" type="button" value="do_unlock(解锁门票)" onclick="do_unlock()" />
+        <input id="do_exchangeLottery" type="button" value="do_exchangeLottery(获取彩票)" onclick="do_exchangeLottery()" />
+        <input id="do_getLotteryInfo" type="button" value="do_getLotteryInfo(获取彩票信息)" onclick="do_getLotteryInfo()" />
+
+        <input id="do_getMember" type="button" value="do_getMember(获取会员信息)" onclick="do_getMember()" />
+        <input id="do_getOutTicket" type="button" value="do_getOutTicket(获取出票信息)" onclick="do_getOutTicket()" />
+        <input id="do_exchangeOutTicket" type="button" value="do_exchangeOutTicket(获取出票信息)" onclick="do_exchangeOutTicket()" />
+        <input id="do_getCustomCardInfo" type="button" value="do_getCustomCardInfo(获取定制会员信息)" onclick="do_getCustomCardInfo()" />
+        <input id="do_getParams" type="button" value="do_getParams(获取门店参数)" onclick="do_getParams()" />
+    </div>
+    
+</body>
+</html>

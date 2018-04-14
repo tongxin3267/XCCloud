@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员数据分析</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/jquery-1.8.3-min.js"></script>
+    <script src="https://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/modules/data.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/modules/drilldown.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/themes/sand-signika.js"></script>
+</head>
+<body>
+<div class="layui-row" style="padding: 10px">
+    <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+        <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查询模板</button>
+        <!--<button type="button" class="layui-btn layui-btn-normal install">安装</button>-->
+    </blockquote>
+   <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+       <div class="layui-tab">
+           <ul class="layui-tab-title">
+               <li class="layui-this">会员数据总览</li>
+               <li>会员数据查询</li>
+               <li>会员充值查询</li>
+               <li>会员退卡查询</li>
+               <li>会员返还查询</li>
+           </ul>
+           <div class="layui-tab-content">
+               <div class="layui-tab-item layui-show">
+                  <div id="container" style="height: 300px"></div>
+               </div>
+               <div class="layui-tab-item"> <div id="container1"></div></div>
+               <div class="layui-tab-item">内容3</div>
+               <div class="layui-tab-item">内容4</div>
+               <div class="layui-tab-item">内容5</div>
+           </div>
+       </div>
+   </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+
+    layui.use(['form','table','element'],function(){
+        let element=layui.element;
+        let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+        layui.table.render({
+            elem: '#ticketsDetailTb'
+            , data: arr
+            // , size:'sm'
+            ,height:'full-100'
+            , cellMinWidth: 90 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'Count', title:'小票条码', align: 'center'}
+                ,{field:'DigitNumber',title: '机头编号', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'DigitName', title: '打印时间', align: 'center'}
+                ,{field:'Money', title: '出票币数', align: 'center'}
+                ,{field:'Money', title: '兑币金额', align: 'center'}
+                ,{field:'Money', title: '兑换时间', align: 'center'}
+                ,{field:'Money', title: '状态', align: 'center'}
+                ,{field:'Money', title: '兑换卡号', align: 'center'}
+                ,{field:'Money', title: '是否禁止兑票', align: 'center'}
+                ,{field:'Money', title: '营业日期', align: 'center'}
+                ,{field:'Money', title: '兑换人', align: 'center'}
+                ,{field:'Money', title: '工作站', align: 'center'}
+                ,{field:'Money', title: '备注', align: 'center'}
+                ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo'}]
+
+            ]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 10
+        })
+    });
+    $(function () {
+        // Create the chart
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: '最近两年会员增值趋势图'
+            },
+            subtitle: {
+                text: '莘宸科技'
+            },
+            xAxis: {
+                categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+            },
+            yAxis: {
+                title: {
+                    text: '会员数量 (百人)'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true          // 开启数据标签
+                    },
+                    enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                }
+            },
+            series: [{
+                name: '2017年',
+                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }, {
+                name: '2016年',
+                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            }]
+        });
+        var chart1=Highcharts.chart('container1',{
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '堆叠条形图'
+            },
+            xAxis: {
+                categories: ['投币量', '退币量', '币余额', '兑币量', '兑现']
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '水果消费总量'
+                }
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: [{
+                name: '小张',
+                data: [5, 3, 4, 7, 2]
+            }
+                //          , {
+                //     name: '小彭',
+                //     data: [2, 2, 3, 2, 1]
+                // }, {
+                //     name: '小潘',
+                //     data: [3, 4, 4, 2, 5]
+                // }
+            ]
+        });
+    });
+</script>
+</html>

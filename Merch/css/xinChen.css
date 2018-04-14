@@ -1,0 +1,410 @@
+
+html,body{height:100%; font-size:100px;}
+body{font:0.16rem "Arial","Microsoft YaHei",Verdana,Helvetica,sans-serif;text-align:left;background:#fff;color:#2d3e50;margin:0px;line-height:22px; box-sizing: border-box}
+table{font:0.18rem "Arial","Microsoft YaHei",Verdana,Helvetica,sans-serif;text-align:left;margin:0px;padding:0px;border:0px;color:#2d3e50;line-height:22px;}
+body,figure,h1,h2,h3,h4,h5,h6,p,pre,blockquote,form,fieldset,legend,input,button,select,textarea {margin:0;padding:0;font-family:"Arial","Microsoft YaHei";}
+address,caption,cite,code,dfn,em,var,i{font-style:normal;font-weight:normal;}
+ul,ol,li,dl,dt,dd{ margin:0px; padding:0px;border:0px;list-style:none;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display: block;}
+abbr[title],dfn[title] {border-bottom:1px dotted;cursor:help;}
+pre,code,kbd,samp{font-family:monospace,sans-serif;_font-family:'Courier New',monospace,sans-serif;font-size: 1em;}
+pre{white-space: pre;/*CSS2*/white-space:pre-wrap;/*CSS2.1*/white-space:pre-line;/*CSS3*/word-wrap:break-word;/*IE*/}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+audio[controls],canvas,video{display:inline-block;*display:inline;*zoom:1;}
+input,textarea{outline:none;}
+textarea{resize:none;overflow:auto;}
+input[type="checkbox"],input[type="radio"]{vertical-align:middle;}
+input[type="button"],input[type="submit"]{ cursor:pointer;}
+input::-ms-clear{display:none;}
+input::-ms-reveal{display:none;}
+img{border:none;}
+#loopContainer{  position: relative;}
+
+/*index.html*/
+.layui-nav-item .submenu{background-color: #93D1FF;!important;}
+
+
+
+
+
+
+
+
+/*home.html主页第一个图表的提示文字*/
+#news{width: 2rem;height: 1rem;z-index: 9999;position: absolute;  top:45%;left: 2%;font-size: 0.14rem}
+#news li .sellTime{display:inline-block;width: 60%; font-size: 14px;}
+#news li .sellValue{display:inline-block;width: 35%;color: #7cb5ec;font-size: 24px;}
+#news li:first-child .sellValue{color: #F7a35c}
+#news li:nth-child(2) .sellValue{color: #058Dc7}
+#news li:nth-child(3) .sellValue{color: #69Cd4b}
+
+.nav-ul ul li a i{font-size: 0.3rem;}
+
+/*更删改查的弹出层*/
+.crudTable{
+    position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-color: rgba(0,0,0,0.5);z-index: 99;
+    display: none;
+}
+.crudContent{position: absolute;top: 120px;left: 50%;width: 750px;min-height: 25em;margin-left: -375px;background-color: #f1f1f1;padding: 20px;border-radius: 5px}
+.crudContent form{width: 860px}
+.crudContent ul{width: 45%;display: inline-block}
+.crudContent ul li{height: 60px;width: 100%;line-height:60px ;font-size: 20px}
+.crudContent ul li:last-child{margin-bottom: 50px}
+.crudContent select{height: 40px;font-size: 20px;width: 65%;padding: 0 5px}
+.crudContent span{display:inline-block;width:120px;text-align: right; }
+.crudContent input{height: 40px;width: 65%;padding: 0 5px}
+.crudContent #numberkeyboard{position: absolute;width: 38%;right: 50px;top: 40px;z-index: 999}
+/*ul button{width: 30%;height: 40px;line-height: 40px;text-align: center;display: block;margin: 10px auto 10px;color: #1a99f6}*/
+
+/*.crudContent .closeBtn,.gamesManage .closeBtn{position: absolute;top: 3px;right: 3px;width: 25px;height: 25px;border:none;border-radius: 50%;line-height: 25px;text-align:*/
+/*center;color: #1a99f6;list-style-type:none;}*/
+.crudContent button,.crudContent .closeBtn:hover{background-color: #1a99f6;color: #f1f1f1}
+
+#uploadImg .crudContent{width: 900px;min-height: 25em;margin-left: -450px;}
+#uploadImg .crudContent ul{width: 45%;float: left}
+#uploadImg .crudContent .file-input{width: 98%;height: 60%;display: inline-block;}
+#uploadImg .kv-main{width: 55%;height: 500px;display: inline-block}
+#uploadImg .file-drop-zone {height: 310px}
+
+/*所有查询模板按钮*/
+.checkModel .div_check{position: absolute;right: 5px;font-size: 0.18rem;!important;}
+.checkModel .div_check a{text-decoration: none}
+.checkModel{width: 100%;position: relative;display: inline-block!important;height: 0.5rem;}
+.changeData{width: 100px;height: 0.6rem;vertical-align:top;display: inline-block!important;}
+.div_check{width: 3.5rem;}
+.big-link { display:block; margin: 15px 5% 0; text-align: center; font-size: 0.16rem; color: #fff;width: 1rem;float: right;
+    border: 1px solid #9d9d9d;height: 0.3rem;line-height: 0.3rem;border-radius: 5px;
+}
+
+/*弹出层*/
+.crudTable{  position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-color: rgba(0,0,0,0.5);z-index: 99;  display: none;
+}
+.cancleBtn{position: absolute;top:0;right: 0;border-radius: 50%;padding: 0 5px;!important;}
+.crudContent{position: absolute;top: 1.5rem;left: 50%;width: 8rem;min-height: 3.5rem;margin-left: -4rem;background-color: #f1f1f1;padding: 15px;border-radius: 5px}
+.crudContent form{width: 100%;background-color: #fff;border: 1px dashed #5e5e5e}
+.crudContent ul{width: 45%;display: inline-block}
+.crudContent ul li{height: 0.6rem;width: 100%;line-height:0.6rem ;}
+.crudContent ul li:last-child{margin-bottom: 0.5rem;text-align: center;}
+.crudContent select{height: 0.38rem;width: 64%;padding: 0 5px;font-size: 0.18rem;}
+.crudContent span{display:inline-block;width:1.2rem;text-align: right;font-size: 0.18rem; }
+.crudContent input{height: 0.36rem;width: 60%;padding: 0 5px;font-size: 0.18rem;border: 1px solid #aaa;}
+.crudContent #numberkeyboard{position: absolute;width: 38%;right: 0.5rem;top: 0.38rem;z-index: 999}
+
+
+.addPlayStation{  display: inline-block;  width: 1.4rem;  height: 0.38rem;  line-height: 0.38rem;  padding: 0;
+    font-size: 0.18rem;  margin: 5px 0 5px 15px;
+}
+/*数字键盘的样式*/
+#numberkeyboard {  border: 1px solid #b3b3b3;  background: #f2f3f7;  height: 2.85rem;  margin: 0;
+    padding: 2px;
+    /*position: relative; */
+    visibility: visible !important;  width: 2.85rem;
+}
+
+#numberkeyboard .numbtn {  -moz-border-radius: 4px; /* Gecko browsers */  -webkit-border-radius: 4px; /* Webkit browsers */
+    float: left;  height: 0.68rem;  width: 0.68rem;  border: solid 1px #b3b3b3;
+    margin-top: 1px;  margin-left: 1px;  font-family: Verdana, 微软雅黑, 雅黑;  font-size: 22px;  line-height: 0.69rem;  color: orange;  text-align: center;  cursor: default;
+}
+#numberkeyboard .numbtn1{  width: 1.37rem  }
+#numberkeyboard .numbtn:hover {  background: #7ab5d3;  }
+.numbtndown {  background-position: -1px -1.43rem !important;  }
+
+/*商品管理*/
+/*商品入库分析*/
+.groupList{width: 33%;display: inline-block;margin: 5px 0;}
+.groupList label{width: 0.8rem;display: inline-block;}
+.groupList input{width: 65%;display: inline-block;padding: 0 0.15rem}
+.groupList label,.groupList input{height: 0.3rem;line-height: 0.3rem;font-size: 0.18rem;}
+
+
+/*礼品彩票管理*/
+/*彩票入库*/
+.lotteryListBox{margin: 5px 0;}
+.lotteryListBox label{width: 0.8rem;height: 0.38rem;line-height: 0.38rem;display: inline-block}
+.lotteryListBox input{width: 30%;height: 0.38rem;line-height: 0.38rem;padding: 0 15px;display: inline-block;}
+/*礼品彩票安装分析*/
+.formContent{width: 100%;height: 100%;position: fixed;z-index: 999;background-color: #5e5e5e;top: 0;left: 0;}
+.formContent form{width: 60%;position: absolute;top: 0.5rem;margin: 0 20%;padding: 15px;background-color: #F1f1f1;
+    min-width: 8rem;max-width: 12rem;}
+/*.formContent form label,.formContent form input,.formContent form select,.formContent form button{
+height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;}*/
+.lotteryInstall{width: 10rem;}
+.lotteryLeft{width: 47%;float:left;background-color: #fff;padding: 15px;}
+.lotteryRight{width: 47%;float: right;background-color: #fff;padding: 15px;}
+.leftList{margin: 10px 0;}
+/*.leftList label{width: 24%;}*/
+/*.leftList input{height0:36rem;line-height:0.36rem;width: 75%;float: right;padding: 0 15px;border: 1px solid #aaa;}*/
+.searchBtn{display: inline-block;vertical-align: top;width: 42px;height: 38px;margin: 0;}
+
+.leftList select{height0:38rem;line-height:0.38rem;width: 75%;float: right;padding: 0 15px;display: inline-block;}
+.lotteryLeft .switchBoxNext{width: 100%;display: block;height: 0.38rem;line-height: 0.38rem;border: 1px solid #5e5e5e;
+    border-radius: 3px;  clear: both; overflow: hidden;}
+.lotteryLeft .switchBoxNext>div{width: 49%;height: 0.38rem;line-height: 0.38rem;  float: left;border-radius: 3px;cursor: pointer;}
+.lotteryLeft .switchBoxNext>div:last-child{float: right;overflow: hidden; text-align: center;}
+.leftListSearch input{width: 75%;float: left;}
+.leftListSearch button{ margin-left: 20px;}
+.leftTable table{font-size: 18px;font-weight: normal;text-align: center;}
+.lotteryRight label{width: 0.38rem;float: left;}
+.lotteryRight textarea{width: 75%;height: 5rem;float: right;padding: 15px;line-height: 30px;}
+.lotteryLeft .switchBoxNext>div{width: 49%;height: 0.38rem;line-height: 0.38rem;  float: left;border-radius: 3px;cursor: pointer; text-align: center;}
+.switchBoxNext>div:last-child{background-color: #169bd5;color: #fff;font-weight: bold;text-overflow:ellipsis; white-space:nowrap; overflow:hidden;height: 0.38rem;line-height: 0.38rem}
+.switchBoxNext>div:first-child{background-color: orange;color: #fff;font-weight: bold; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;height: 0.38rem;line-height: 0.38rem}
+
+/*游戏机管理*/
+/*游戏机档案维护*/
+.easySetting,.advancedSetting{background-color: #fff;padding: 15px;border: 1px dashed #5e5e5e;max-height: 6rem;overflow-y: scroll;}
+.easySetting label,.advancedSetting label,.easySetting input,.advancedSetting input,.easySetting button,.advancedSetting button
+,.advancedSetting select,.easySetting select{
+    height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;
+}
+.easySetting .lineList,.advancedSetting .lineList{width: 100%;background-color: #F1f1f1;}
+.easySetting .lineList ul,.advancedSetting .lineList ul{width: 100%;padding-left: 20px;}
+.form-groupList{width: 24%;height:100%;line-height: 100%;display: inline-block;vertical-align: middle;margin: 10px 0;background-color: #F1f1f1;}
+
+.form-groupList input,
+.form-groupList select{width: 100%;display: block;border: 1px solid #eee;background-color: #fff;border-radius: 3px;padding: 0;
+    text-indent: 15px;}
+
+.form-groupList label
+{width: 100%;display: block;border: 1px solid #eee;border-radius: 3px;padding: 0;
+    text-indent: 15px;}
+
+
+.form-groupList label{overflow: hidden;text-overflow:ellipsis; margin-bottom: 5px; }
+.form-groupList select{cursor: pointer;}
+.form-groupList .switchBoxNext{width: 100%;display: block;border: 1px solid #5e5e5e;
+    border-radius: 3px;  clear: both; overflow: hidden;}
+.form-groupList .switchBoxNext>div{width: 50%;  float: left;border-radius: 3px;cursor: pointer;text-align: center;font-size: 0.18rem;}
+.form-groupList .switchBoxNext>div:last-child{float: right;overflow: hidden;}
+.advancedSetTitle{ border: 1px solid lightsteelblue;border-radius: 3px;padding-left: 0.3rem;}
+
+
+.advancedSetTitle li{width: 1.2rem;display: inline-block; text-align: center;height: 0.28rem;line-height: 0.28rem;font-size: 0.16rem;
+    border: 1px solid lightsteelblue;border-radius: 3px;border: 1px solid #169bd5;margin: 5px 0;cursor: pointer;
+}
+.advancedSetTitle .liActived{background-color: #169bd5;color: #fff;}
+.advancedSetTitle li {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid #44a5fc;
+  color: #333;
+  transform: skew(-20deg);
+}
+ 
+.advancedSetTitle li span {
+    display: inline-block;
+  transform: skew(20deg);
+}
+
+
+.easySetDetail,.advancedSetDetail{border: 1px solid lightsteelblue;}
+
+
+/*门票管理*/
+/*游乐项目设定*/
+/*.crudTable {position: fixed;top: 0;left: 0;z-index: 999;width: 100%;height: 100%;background-color: #5e5e5e;}*/
+.crudTable .crudTableBox{width:10rem;position:absolute;clear: both;left: 50%;top:1rem;margin-left: -5rem;
+    background-color: #F1f1f1;padding: 15px;box-shadow: #F1f1f1;}
+/*.gamesManage{overflow-y: auto;}*/
+.crudTable .gamesManage, .crudTable .deviceSetIn, .crudTable .deviceSetOut{
+    background-color:#fff;padding: 15px;border: 1px dashed #5e5e5e;max-height: 7rem;overflow-y: scroll;
+}
+.crudTable .deviceSetIn table, .crudTable .deviceSetOut table{font-size: 0.18rem;}
+.gamesManage .layui-form-item{width: 48%;display: inline-block;vertical-align: top}
+.gamesManage .bandBtn{height: 0.38rem;line-height: 0.38rem;border: 1px solid #5e5e5e;border-bottom: none;width: 1.5rem;text-align: center;font-size: 0.18rem;}
+.gamesManage .setBox{border: 1px solid #5e5e5e;}
+.gamesManage .tbs tr{height: 0.38rem;line-height: 0.38rem; border-color: #5e5e5e;}
+.gamesManage label, .gamesManage select, .gamesManage input{height: 0.38rem;line-height: 0.38rem;margin: 5px 0;display: inline-block; padding: 0 5px;!important;}
+.gamesManage label{width: 1rem;}
+.switchBoxNext{height: 0.38rem;border: 1px solid #5e5e5e;border-radius: 5px;}
+.switchBoxNext>div{ width: 50%;display: inline-block; text-align: center;float: left;border-radius: 5px;}
+.chargeK label{font-size: 0.14rem;}
+.tbs{width: 100%;}
+.deviceSetIn label, .deviceSetIn select, .deviceSetIn button,
+.deviceSetIn input{height: 0.38rem;line-height: 0.38rem;margin: 5px 0;padding: 0 5px;!important;}
+
+.deviceSetOut label, .deviceSetOut select, .deviceSetOut button,
+.deviceSetOut input{height: 0.38rem;line-height: 0.38rem;margin: 5px 0; padding: 0 5px;}
+
+.deviceAction{padding: 0;!important;}
+.deviceAction li:first-child{margin-top: 0.6rem;}
+.deviceAction li{padding: 0;height: 120px!important;}
+.deviceAction li button{padding: 0;width: 100%;height: 76px!important;}
+.deviceAction .setFooter{text-align: right;}
+.deviceAction .setFooter .nextBtn_out_back,
+.deviceAction .setFooter .nextBtn_in_back{
+    margin-left:20px;
+    padding:0;!important;
+}
+.closeBtn .btn-esc{width: 0.38rem;  text-align: center;}
+.bandBox>div[class='layui-form-item']{width: 33%;display: inline-block;}
+.bandBox .lineBox{display: inline-block;width: 1.4rem;margin-left: 10px;}
+.layui-right{
+    float: right;
+    margin-right: 5px;
+}
+.deviceList ul,.deviceFreeContent{height: 3.5rem;}
+
+/*门票规则设定*/
+.ticketsSet .layui-form-item{width: 49%;  display: inline-block;vertical-align: top;}
+
+.ticketsSet .tickets{padding: 15px;border: 1px dashed #5e5e5e;}
+.ticketsSet .switchBoxNext{height: 0.38rem;}
+.timePrice .layui-form-item{width: 33%;  display: inline-block;vertical-align: top;}
+.ticketsSet .timeTitles{border: 1px solid #5e5e5e;height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;!important;}
+.checkBox .layui-form-item{width: 100%;margin: 5px 0;border-bottom: 1px dashed #5e5e5e;}
+.switchBox .switchBoxNext .notSelected {background-color: #fff;!important;}
+.tickets_tbs{border: 1px solid #5e5e5e;}
+.tickets_tbs tr{height: 0.3rem;line-height: 0.3rem;}
+.tickets_tbs tr th,.tickets_tbs tr td{text-align: center;}
+
+
+/*促销管理*/
+/*优惠套餐设定*/
+.packageSetModal{width: 100%;height: 100%;position: fixed;left: 0;top: 0;z-index: 999;background-color: #5e5e5e;display: none;}
+.packageSerContent{position: absolute;left:50%;top: 50px;margin-left:-5rem;width: 10rem;
+    background-color: #F1f1f1;padding: 15px;height: 6.4rem;}
+.escPage{width: 24px;height: 24px;font-size: 18px;cursor: pointer;}
+.setListBox{position: relative}
+.setList{position: absolute;top: 0;left: 0;}
+.setList li{border: 1px solid #5e5e5e;border-radius: 5px;height: 0.38rem;line-height: 0.38rem;text-align: center;
+    margin-left:5px;font-size: 0.18rem;width: 15%;float: left}
+.setList li:hover{  background-color: #f1f1f1;color: #333;}
+.setList .li_active{background-color: #169bd5;color: #fff;}
+.setList .li_active:hover{background-color: #169bd5;color: #fff;}
+.packageSetModal select{height: 0.38rem;line-height: 0.38rem;}
+.discountForm{margin-top: 15px; overflow: scroll;border: 1px dashed #5e5e5e;padding: 15px;height: 5.3rem;}
+
+.sale_recharge_content .layui-form-item{width: 49%;display: inline-block;}
+.sale_switchBox .layui-form-item{width: 49%;display: inline-block;}
+
+.membership .layui-form-item{width: 49%;display: inline-block;vertical-align: top;}
+.digital .layui-form-item{width: 49%;display: inline-block;vertical-align: top;}
+.membership .layui-form-item-note{width: 98%;}
+.digital .layui-form-item-note{width: 98%;}
+.switchBoxList .layui-form-item{width: 30%;display: inline-block;vertical-align: top;}
+
+.food-search input{width: 3.5rem;vertical-align: top;display: inline-block;}
+.food-search button{vertical-align: top;display: inline-block;}
+.goods_food  .switchBoxList .layui-form-item{width: 48%;display: inline-block;vertical-align: top;}
+.searchListBox{height: 2rem;border: 1px solid #5e5e5e; margin: 15px 0;}
+.searchList{width: 100%;border: 1px solid #5e5e5e;}
+.searchList tr{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;}
+
+.tickets-top .layui-form-item{width: 48%;display: inline-block;vertical-align: top;}
+
+
+.mix-title .layui-form-item{width: 32%;display: inline-block;vertical-align: top;}
+.mix-select .layui-form-item{width: 48%;display: inline-block;vertical-align: top;}
+.mix-search{border: 1px solid #5e5e5e;margin: 15px 0;height: 4.5rem; overflow: scroll;position: relative}
+.mix-search .mix_set_add li{height: 0.38rem;line-height: 0.38rem;width: 30%;font-size: 0.18rem;float: left;
+    margin: 8px 0 8px 8px;border-radius: 5px;text-align: center;color: #fff; }
+.mix_set_addList{position: absolute;top: 5px;left: 5px;width: 5.5rem;padding: 15px 0;border: 1px solid #5e5e5e;opacity: 1;}
+.mix_set_addList li{padding: 10px;}
+.mix_set_tableContent{width: 96%;border: 1px solid #5e5e5e;margin: 5px auto;}
+.mix_set_tableContent tr{height: 0.38rem;text-align: center;}
+.goods_search{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;vertical-align: top;margin-left: 10px;}
+.goods_table {height: 3rem;width: 94%;margin: 5px auto;overflow: scroll;border: 1px solid #5e5e5e;}
+.goods_table  table{border: 1px solid #5e5e5e;text-align: center;margin: 5px auto;}
+.goods_table  table tr{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;}
+
+
+/*投币规则*/
+.formContent-coin{width: 100%;height: 100%;position: fixed;z-index: 999;background-color: #5e5e5e;top: 0;left: 0;}
+.formContent-coin form{position: absolute;padding: 15px;background-color: #F1f1f1;
+  }
+.formContent-coin .coinRuleMask{
+    z-index: 999;width: 8rem;height: 6.7rem;margin-left: -4rem;left: 50%;top: 50%;margin-top: -3.5rem;padding: 15px;
+}
+.coinRuleMaskContent{border: 1px dashed #5e5e5e;overflow: scroll;padding: 15px;height: 6.7rem;}
+.coin-search{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;width: 60%;}
+.coinSearchBox{height: 2rem;width: 94%;margin: 5px 0;border: 1px solid #5e5e5e;vertical-align: top;}
+.mix_tbs{width: 90%;margin: 5px;border: 1px solid #5e5e5e;}
+.mix_tbs tr{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;text-align: center;}
+.coinRuleMaskContent .switchBox{margin: 5px 0;}
+.coin-list .layui-form-item{width: 48%;display: inline-block;}
+
+/*送次数*/
+.formContent1{width: 100%;height: 100%;position: fixed;z-index: 999;background-color: #5e5e5e;top: 0;left: 0;}
+.formContent1 form{position: absolute;top: 0.5rem;padding: 15px;background-color: #F1f1f1;left: 50%;margin-left: -5rem;
+    width: 10rem;}
+.giveTimesContent{border: 1px dashed #5e5e5e;padding: 15px;}
+.timesBox .layui-form-item{width: 48%;display: inline-block;}
+/*电子优惠券*/
+.electronic{width: 100%;height: 100%;position: fixed;z-index: 999;background-color: #5e5e5e;top: 0;left: 0;display: none;}
+.electronic form{position: absolute;padding: 15px;background-color: #F1f1f1;z-index: 999;width: 8rem;height: 3.7rem;
+    margin-left: -4rem;left: 50%;top: 50%;margin-top: -1.85rem;padding: 15px;}
+.electronic .electronicCoupons{border: 1px dashed #5e5e5e;padding: 0.15rem;}
+.electronicCoupons .layui-form-item{width: 48%;display: inline-block;vertical-align: top;}
+
+/*奖励规则设置*/
+.refundRuleBox,.prizeRule{position: fixed;width: 100%;height: 100%;top: 0;left: 0;z-index: 99;background-color: #5e5e5e;}
+.prizeRule form{position: absolute;width: 10rem;height: 7rem;top: 50%;left: 50%;margin-left: -5rem;margin-top: -3.5rem;
+background-color: #f1f1f1;padding: 15px;}
+.prizeRuleContent{border: 1px dashed #5e5e5e; padding: 15px;height: 7rem;overflow-y: scroll;}
+.list-four .layui-form-item{width: 20%;display: inline-block;vertical-align: top;}
+.prizeSearch ,.prizeBtn{height: 0.38rem;line-height: 0.38rem;font-size: 0.18rem;vertical-align: bottom;}
+.table-bordered,.giftTable{width: 100%;margin: 5px 0;}
+.table-bordered,.giftTable tr {height: 0.38rem;line-height: 0.38rem;text-align: center;}
+
+/*返还规则设定*/
+.refundRuleBox form{position: absolute;width: 10rem;height: 4rem;top: 50%;left: 50%;margin-left: -5rem;margin-top: -2rem;
+    background-color: #f1f1f1;padding: 15px;}
+.refundRule{border: 1px dashed #5e5e5e; padding: 15px;height: 3.7rem;overflow-y: scroll;}
+.refundRuleBox .layui-form-item{width: 48%;display: inline-block;vertical-align: top;}
+.returnPercent .layui-form-item{width: 31%;}
+
+
+/*会员数据分析*/
+.memberNav li{width: 1.5rem;height: 0.38rem;line-height: 0.38rem;float: left;color: #fff;font-size: 0.18rem;text-align: center;
+margin: 0.15rem 0.2rem;border-radius: 5px; background-color: #1E9FFF;}
+
+.memberDetails li{width: 35%; display:inline-block;height: 0.38rem;line-height: 0.38rem;float: left;font-size: 0.18rem;text-align: center;
+    margin: 0.1rem;border-radius: 5px;}
+.memberDetails li label{width: 1.5rem;display:inline-block}
+.memberDetails li span{width: 0.6rem;display:inline-block}
+.memberNav .li_active{background-color: orange;!important;}
+
+
+.layui-table-view{margin: 0;!important;}
+
+
+/*产品入库*/
+.productStroageContent{display: none;position: fixed;width: 100%;height: 100%;top: 0;left: 0;z-index: 999;}
+.productStroageContent form{width: 8rem;height: 2.8rem;position: absolute;top: 50%;left: 50%;margin-top: -1.4rem;margin-left: -4rem;padding: 0.15rem;background-color: #eee;}
+.productStroageContent .formBox{border: 1px dashed #5e5e5e;padding: 0.15rem;background-color: #f1f1f1;}
+.formBox .layui-form-item{width: 48%;display: inline-block;}
+/*彩票入库*/
+.formContentLottery{display: none;position: fixed;width: 100%;height: 100%;top: 0;left: 0;z-index: 999;}
+.formContentLottery form{width: 8rem;height: 2.8rem;position: absolute;top: 50%;left: 50%;margin-top: -1.4rem;margin-left: -4rem;padding: 0.15rem;background-color: #eee;}
+.formContentLottery .formBox{border: 1px dashed #5e5e5e;padding: 0.15rem;background-color: #f1f1f1;}
+
+
+.formContentLotteryInventory{display: none;position: fixed;width: 100%;height: 100%;top: 0;left: 0;z-index: 999;}
+.formContentLotteryInventory form{width: 8rem;height: 2.8rem;position: absolute;top: 50%;left: 50%;margin-top: -1.4rem;margin-left: -4rem;padding: 0.15rem;background-color: #eee;}
+.formContentLotteryInventory .formBox{border: 1px dashed #5e5e5e;padding: 0.15rem;background-color: #f1f1f1;}
+
+
+
+
+.analysisList li{width: 1.3rem;display: inline-block; text-align: center;height: 0.28rem;line-height: 0.28rem;font-size: 0.16rem;
+    border: 1px solid lightsteelblue;border-radius: 3px;border: 1px solid #169bd5;margin: 5px 0;cursor: pointer;
+}
+.analysisList .liActived{background-color: #169bd5;color: #fff;}
+.analysisList li {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-right: 20px;
+  border: 1px solid #44a5fc;
+  color: #333;
+  transform: skew(-20deg);
+  vertical-align: top;
+}
+ 
+.analysisList li span {
+    display: inline-block;
+  transform: skew(20deg);
+}
+
+#playStationAccounts th{text-align: center;}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>彩票入库</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+    <div class="layui-row" style="padding: 10px">
+        <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+            <button type="button" class="layui-btn layui-btn-normal" id="add"><i class="layui-icon">&#xe654;</i>入库</button>
+        </blockquote>
+        <table class="layui-hide" id="lotteryStorageTable" lay-filter="lotteryStorageTable"></table>
+    </div>
+
+<div id="openModel" style="display:none;padding: 15px 15px 15px 20px">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">单卷编码</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" required>
+            </div>
+            <div class="layui-form-mid">至</div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" required lay-required="required|number">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">入库卷数</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">入库总量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" required>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">入库卷数</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input">
+            </div>
+        </div>
+        <div style="text-align:right; padding-right: 100px;margin: 15px 0">
+            <button type="submit" class="layui-btn layui-btn-normal" id="save">确定</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+<script>
+
+    $(function () {
+        layui.use(['form','table','layer'],function(){
+            let form=layui.form;
+            let table=layui.table;
+            let layer=layui.layer;
+
+            //弹出层
+            $('#add').on('click',function(){
+                layer.open({
+                    title:'新增入库记录',
+                    type:1,
+                    area:'680px',
+                    content:$('#openModel')
+                })
+            });
+            let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+                {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+            layui.table.render({
+                elem: '#lotteryStorageTable'
+                , data: arr
+                // , size:'sm'
+                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[{field:'SaleTime', title:'入库时间', align: 'center'}
+                    ,{field:'DigitNumber',title: '单卷起码', align: 'center'} //width 支持：数字、百分比和不填写。
+                    ,{field:'DigitName', title: '单卷止码', align: 'center',templet:'#prob'}
+                    ,{field:'Count', title: '入库数量', align: 'center'}
+                    ,{field:'Money', title: '入库总量', align: 'center'}
+                    ,{field:'SaleMachine', title: '操作员', align: 'center'}
+                    ,{field:'SaleMachine', title: '备注', align: 'center'}
+                    ,{fixed: 'right',title: '操作' ,width:160, align:'center', toolbar: '#barDemo'}]]
+                , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+                , limit: 10
+            })
+        })
+    })
+</script>
+</html>

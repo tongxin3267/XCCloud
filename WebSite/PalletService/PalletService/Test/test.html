@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script src="/js/jquery-1.8.3-min.js"></script>
+    <script>
+        var host = "http://192.168.1.145:8080";
+
+        var isRegister = false;
+        var mobileToken = "68f1f2f3d8f54a4eb31c2e997456cd01";
+        var memberToken = "dd87aa623dd44f27b2081fc00f4d1ee7";
+        var websocketUrl = "ws://192.168.1.145:12880";
+        
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function getRegisterObj(sendStoreID, sendUserID, clientType, content) {
+            var sendObject = new Object();
+            sendObject.token = "15618920033";
+            var obj = new Object();
+            obj.msgType = 0;
+            obj.sObj = sendObject;
+            return obj;
+        };
+
+        function getDogId() {
+            var sendObject = new Object();
+            sendObject.token = "15618920033";
+            var obj = new Object();
+            obj.msgType = 2;
+            obj.sObj = sendObject;
+            return obj;
+        };
+
+        function getPeopleCard() {
+            var sendObject = new Object();
+            sendObject.token = "15618920033";
+            var obj = new Object();
+            obj.msgType = 3;
+            obj.sObj = sendObject;
+            return obj;
+        };
+
+        function getIcCard() {
+            var sendObject = new Object();
+            sendObject.userToken = "15618920033";
+            var obj = new Object();
+            obj.msgType = 4;
+            obj.sObj = sendObject;
+            return obj;
+        };
+
+        function openICCard() {
+            var sendObject = new Object();
+            var dataObject = new Object();
+            dataObject.mobile = "15619200033";
+            dataObject.name = "陈广龙";
+            dataObject.birthday = "1982-02-01";
+            dataObject.gender = "0";
+            dataObject.note = "";
+            dataObject.memberLevelId = "1";
+            dataObject.foodId = "1";
+            dataObject.icCardId = "123433211";
+
+            sendObject.userToken = "15618920033";
+            var obj = new Object();
+            obj.msgType = 5;
+            obj.sObj = sendObject;
+            obj.dataObj = dataObject;
+            return obj;
+        }
+
+
+        function getPrintData(ticketType) {
+
+            var ticketData = new Object();
+            if (ticketType == 0) {
+                ticketData.foodName = "5元10币";
+                ticketData.no = "100011";
+                ticketData.validityDate = "2017-12-01";
+                ticketData.coins = 1000
+            } else if (ticketType == "1") {
+                ticketData.memberlenvel = "普通会员";
+                ticketData.iccard = "90000001";
+                ticketData.coins = "30币";
+                ticketData.Integral = "3000";                
+            } else if (ticketType == "2")
+            {
+                ticketData.rechargemoeney = "15元";
+                ticketData.rechargecoins = "30币";
+                ticketData.rechargetime = "2017-12-06";
+            }
+            else if (ticketType == "3") {
+                ticketData.moneyexchange = "100币";
+                ticketData.money = "100元";
+                ticketData.currentmoney = "1000元";
+            }
+            else if (ticketType == "4") {
+                ticketData.coins = "100币";
+                ticketData.feecoins = "1000币";
+                ticketData.feemode = "电子币";
+            } else if (ticketType == "5") {
+                ticketData.coins = "100币";
+                ticketData.savecoins = "1000币";
+            }
+            else if (ticketType == "6") {
+                ticketData.coins = "1000币";
+                ticketData.currencycoins = "500币";
+            }
+            else if (ticketType == "7") {
+                ticketData.consumecoins = "1000";
+                ticketData.exchangecoins = "500币";
+                ticketData.coins = "100币";  
+            }
+            else if (ticketType == "8") {                
+                ticketData.commodityname = "奶茶";
+                ticketData.number = "2";
+                ticketData.money = "100元";
+                ticketData.totalmoney = "100";
+                ticketData.paymentmethod = "支付宝";
+            }
+            else if (ticketType == "9") {
+                ticketData.index = "23";
+                ticketData.ticketid = "20023";
+                ticketData.ticketname = "电影";
+                ticketData.ticketnumber = "4";
+                ticketData.money = "40";
+                ticketData.tickettime = "2017-12-06";
+            }
+            var data = new Object();
+            data.ticketType = ticketType;
+            data.ticketData = ticketData;
+            return data;
+        }
+
+        function print() {
+            var sendObject = new Object();
+            sendObject.token = "15618920033";
+
+            var data = getPrintData(9);
+
+            var obj = new Object();
+            obj.msgType = 5;
+            obj.sObj = sendObject;
+            obj.data = data;
+            return obj;
+        };
+
+        function outputCoin() {
+            var sendObject = new Object();
+            var dataObject = new Object();
+            dataObject.action = "1";
+            dataObject.coins = "10";
+            sendObject.token = "15618920033";
+            var obj = new Object();
+            obj.msgType = 6;
+            obj.sObj = sendObject;
+            obj.data = dataObject;
+            return obj;
+        };
+
+        var msgType = 0;
+
+        function do_login() {
+            var parasObj = {  "storeId":"100010","userName": "admin","password":"88888888" };
+            var url = "/Handler1.ashx?action=userLogin";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+
+        var start = function () {
+            var inc = document.getElementById('incomming');
+            //var wsImpl = window.WebSocket || window.MozWebSocket;
+            var form = document.getElementById('sendForm');
+            var input = document.getElementById('sendText');
+
+            inc.innerHTML += "connecting to server ..<br/>";
+
+            // create a new websocket and connect
+            //window.ws = new WebSocket('wss://mp.4000051530.com/websocket');
+            window.ws = new WebSocket(websocketUrl);
+            // when data is comming from the server, this metod is called
+            ws.onmessage = function (evt) {
+                console.log(evt);
+                var json = evt.data;
+                inc.innerHTML += evt.data  + '<br/>';
+            };
+
+            // when the connection is established, this method is called
+            ws.onopen = function () {
+                inc.innerHTML += '.. connection open<br/>';
+            };
+
+            // when the connection is closed, this method is called
+            ws.onclose = function () {
+                inc.innerHTML += '.. connection closed<br/>';
+            }
+
+            document.getElementById("button01").addEventListener("click", function () {
+                var str = JSON.stringify(getRegisterObj());
+                ws.send(str);   
+            });
+
+            document.getElementById("button02").addEventListener("click", function () {
+                var str = JSON.stringify(getDogId());
+                ws.send(str);
+            });
+
+            document.getElementById("button03").addEventListener("click", function () {
+                var str = JSON.stringify(getPeopleCard());
+                ws.send(str);
+            });
+
+            document.getElementById("button04").addEventListener("click", function () {
+                var str = JSON.stringify(getIcCard());
+                ws.send(str);
+            });
+
+            document.getElementById("button05").addEventListener("click", function () {
+                var str = JSON.stringify(print());
+                ws.send(str);
+            });
+
+            document.getElementById("button06").addEventListener("click", function () {
+                var str = JSON.stringify(outputCoin());
+                ws.send(str);
+            });
+
+            document.getElementById("button10").addEventListener("click", function () {
+                var str = JSON.stringify(outputCoin());
+                ws.send(str);
+            });
+        }
+        window.onload = start;
+    </script>
+</head>
+<body>
+    <form id="sendForm">
+        <input id="sendText" placeholder="Text to send" />
+        <input id="coinText" placeholder="0" />
+        <input id="button01" type="button" value="用户注册" />
+        <input id="button02" type="button" value="读取加密狗" />
+        <input id="button03" type="button" value="读取身份证" />
+        <input id="button04" type="button" value="读取ICCard"  />
+        <input id="button09" type="button" value="退卡" />
+        <input id="button10" type="button" value="写入ICCard" />
+        <input id="button05" type="button" value="打印小票"  />
+        <input id="button06" type="button" value="出币" />
+        <input id="button07" type="button" value="用户登录" onclick="do_login()"/>
+        <input id="button08" type="button" value="出币" />
+    </form>
+    <pre id="incomming"></pre>
+</body>
+</html>

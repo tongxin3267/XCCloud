@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+    <script type="text/javascript">
+
+        var dataGlobal;
+    function common(url, parasJson) {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                dataGlobal = JSON.parse(data);
+                console.log(dataGlobal);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }
+
+    function do_connectSocket() {
+        var url = "/wx/socket/socketservice?action=connect";
+        var parasObj = { "sysId": "0", "versionNo": "3", "storeId": "100010", "token": "ed4e495d4bfb417f8720f5fc549e9a2c" };
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_send() {
+        var url = "/wx/socket/socketservice?action=send";
+        var parasObj = { "sysId": "0", "versionNo": "3", "storeId": "100010", "token": "ed4e495d4bfb417f8720f5fc549e9a2c" };
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    function do_getSAppUserSession() {
+        var url = "/wx/oauth?action=getSAppUserSession";
+        var parasObj = { "sysId": "0", "versionNo": "3", "code": "100010", "mobileToken": "7bdbd39e16864e86b134d1e2623a90b0" };
+        var parasJson = JSON.stringify(parasObj);
+        
+        common(url, parasJson);
+        $("#sessionId").val(dataGlobal.serverSessionKey);
+    }
+
+    function do_getPrepareId() {
+        var url = "/pay/WeiXinPayment?action=getWXRepareId";
+        var parasObj = { "sysId": "0", "versionNo": "3", "storeId": "100010", "mobileToken": "7bdbd39e16864e86b134d1e2623a90b0", "productName": "productName", "payPrice": "1", "openId": "oNWocwVUdOOajF2CpSmnyD8uN3Nw","buyType":"购买","coins":"10" };
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    </script>
+
+</head>
+<body>
+    <div title="QR" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>QR</div>
+        <input id="Button1" type="button" value="do_connectSocket(链接socket)" onclick="do_connectSocket()" />
+        <input id="Button2" type="button" value="do_send(发送)" onclick="do_send()">
+        <input id="Button3" type="button" value="do_getSAppUserSession(发送)" onclick="do_getSAppUserSession()" />
+        <input id="Button4" type="button" value="do_getPrepareId(发送)" onclick="do_getPrepareId()" />
+        <input id="sessionId" type="text" />
+    </div>     
+</body>
+</html>

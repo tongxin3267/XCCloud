@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏机账目分析</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div class="layui-row" style="padding: 10px;">
+    <blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+        <button type="button" class="layui-btn layui-btn-normal">查询模板</button>
+        <!--<button type="button" class="layui-btn layui-btn-normal install">安装</button>-->
+    </blockquote>
+    <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+        <table class="layui-hide" id="gameAccountTb"  lay-filter="gameAccountTb"></table>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"> <i class="layui-icon">&#xe642;</i>编辑</a>
+</script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+
+    layui.use(['form','table'],function(){
+        let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+        layui.table.render({
+            elem: '#gameAccountTb'
+            , data: arr
+            // , size:'sm'
+            , cellMinWidth: 90 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'Count', title:'营业日期', align: 'center',rowspan:2}
+                ,{field:'DigitNumber',title: '游戏机编号', align: 'center',rowspan:2} //width 支持：数字、百分比和不填写。
+                ,{field:'DigitName', title: '游戏机名', align: 'center',rowspan:2}
+                ,{align: 'center', title: '投币', colspan: 6},
+                {align: 'center', title: '出币', colspan: 6},
+                {field:'Money', title: '总赢收币数', align: 'center',rowspan:2}
+                ,{field:'Money', title: '总赢收金额', align: 'center',rowspan:2}
+                ,{fixed: 'right',title: '操作' , align:'center', toolbar: '#barDemo',rowspan:2}],
+                [{field:'SaleTime', title: '会员卡', align: 'center'}
+                ,{field:'Money', title: '数字币', align: 'center'}
+                ,{field:'Money', title: '实物币', align: 'center'}
+                ,{field:'Money', title: '送币', align: 'center'}
+                ,{field:'Money', title: '总币数', align: 'center'}
+                ,{field:'Money', title: '总金额', align: 'center'},
+
+                    {field:'SaleTime', title: '会员卡', align: 'center'}
+                    ,{field:'Money', title: '小票下币', align: 'center'}
+                    ,{field:'Money', title: '实物币', align: 'center'}
+                    ,{field:'Money', title: '总币数', align: 'center'}
+                    ,{field:'Money', title: '总金额', align: 'center'}
+                    ,{field:'Money', title: '出币率', align: 'center'}]
+                ]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 15
+        })
+    })
+</script>
+</html>

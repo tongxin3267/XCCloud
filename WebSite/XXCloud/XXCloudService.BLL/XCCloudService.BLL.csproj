@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCBC3EA2-3C42-4D5F-842A-45E614BBADCE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCCloudService.BLL</RootNamespace>
+    <AssemblyName>XXCloudService.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseService.cs" />
+    <Compile Include="CommonBLL\XCCloudBLL.cs" />
+    <Compile Include="CommonBLL\XCCloudRS232BLL.cs" />
+    <Compile Include="CommonBLL\XCGameManaLogBLL.cs" />
+    <Compile Include="CommonBLL\XCGameBLL.cs" />
+    <Compile Include="CommonBLL\XCGameManabll.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IDataGameInfoService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IBase_DeviceInfoService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\Iflw_485_savecoinService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\Iflw_485_coinService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IFoodService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IMemberService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IDeviceService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IEnumService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IFoodsService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IMerchDeviceService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IMerchSegmentService.cs" />
+    <Compile Include="IBLL\XCCloudRS232\IMerchService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_ChainRuleService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_ChainRule_StoreService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_DepotInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_DeviceInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_GoodsInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_MemberInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_MerchantInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_MerchFunctionService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_SettleOrgService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_SettlePPOSService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_StorageInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_StoreWeightService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_StoreWeight_GameService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_UserGrantService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_UserGroupService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_UserGroup_GrantService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_BalanceType_StoreListService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_BillInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_CoinDestoryService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_CoinInventoryService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_CoinStorageService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_CouponInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_CouponListService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Coupon_StoreListService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_DigitCoinDestroyService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_DigitCoinService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_FoodInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Food_DetialService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Food_LevelService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Food_StoreListService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Food_WorkStationService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GameFreeRuleService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GameFreeRule_ListService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GameInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GameInfo_ExtService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GameInfo_PhotoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Game_StockInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GivebackRuleService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GoodInventoryService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GoodsStockService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GoodStock_RecordService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_GoodStorageService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_HeadService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_JackpotInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Jackpot_LevelService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Jackpot_MatrixService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_MemberLevelService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Member_CardService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Member_Card_StoreService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_ParametersService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_ProjectInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Project_BandPriceService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Project_DeviceService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Push_RuleService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_ReloadService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_Storage_RecordService.cs" />
+    <Compile Include="IBLL\XCCloud\IData_WorkstationService.cs" />
+    <Compile Include="IBLL\XCCloud\IDict_BalanceTypeService.cs" />
+    <Compile Include="IBLL\XCCloud\IDict_SystemService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_CouponUseService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_Game_FreeService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_Game_WatchService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_Game_WinPrizeService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_OrderService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_Order_DetailService.cs" />
+    <Compile Include="IBLL\XCCloud\IFlw_Order_SerialNumberService.cs" />
+    <Compile Include="IBLL\XCCloud\ILog_OperationService.cs" />
+    <Compile Include="IBLL\XCCloud\IStore_CheckDateService.cs" />
+    <Compile Include="IBLL\XCCloud\IXC_WorkInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IDict_AreaService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_StoreInfoService.cs" />
+    <Compile Include="IBLL\XCCloud\IBase_UserInfoService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPDeviceStateChangeLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPIndexLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPRadarNotifyLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPDeviceControlLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPSendDeviceControlLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPRadarHeatLogService.cs" />
+    <Compile Include="IBLL\XCGameManagerLog\IUDPRadarRegisterLogService.cs" />
+    <Compile Include="IBLL\XCGameManager\IApiRequestLogService.cs" />
+    <Compile Include="IBLL\XCGameManager\IDataOrderService.cs" />
+    <Compile Include="IBLL\XCGameManager\ITicketService.cs" />
+    <Compile Include="IBLL\XCGameManager\IMemberTokenService.cs" />
+    <Compile Include="IBLL\XCGameManager\IMobileTokenService.cs" />
+    <Compile Include="IBLL\XCGameManager\IMPorderService.cs" />
+    <Compile Include="IBLL\XCGameManager\IPromotionService.cs" />
+    <Compile Include="IBLL\XCGameManager\IStoreService.cs" />
+    <Compile Include="IBLL\XCGameManager\IDeviceService.cs" />
+    <Compile Include="IBLL\XCGameManager\IDataMessageService.cs" />
+    <Compile Include="IBLL\XCGameManager\ITFoodsaleService.cs" />
+    <Compile Include="IBLL\XCGameManager\IAdminUserService.cs" />
+    <Compile Include="IBLL\XCGameManager\IUserTokenService.cs" />
+    <Compile Include="IBLL\XCGameManager\IUserService.cs" />
+    <Compile Include="IBLL\XCGameManager\IUserRegisterService.cs" />
+    <Compile Include="IBLL\XCGame\ICheckDateService.cs" />
+    <Compile Include="IBLL\XCGame\ICheckdate_ScheduleService.cs" />
+    <Compile Include="IBLL\XCGame\IFlwGameFreeService.cs" />
+    <Compile Include="IBLL\XCGame\IParametersService.cs" />
+    <Compile Include="IBLL\XCGame\IGameFreeRuleService.cs" />
+    <Compile Include="IBLL\XCGame\IProjectPlayService.cs" />
+    <Compile Include="IBLL\XCGame\IPushRuleService.cs" />
+    <Compile Include="IBLL\XCGame\Iflw_485_savecoinService.cs" />
+    <Compile Include="IBLL\XCGame\IHeadService.cs" />
+    <Compile Include="IBLL\XCGame\IGameService.cs" />
+    <Compile Include="IBLL\XCGame\IProjectService.cs" />
+    <Compile Include="IBLL\XCGame\IProject_buyService.cs" />
+    <Compile Include="IBLL\XCGame\IProject_buy_codelistService.cs" />
+    <Compile Include="IBLL\XCGame\IFlwLotteryService.cs" />
+    <Compile Include="IBLL\XCGame\IFlwTicketExitService.cs" />
+    <Compile Include="IBLL\XCGame\IWorkStationService.cs" />
+    <Compile Include="IBLL\XCGame\IUserService.cs" />
+    <Compile Include="IBLL\XCGame\IDeviceService.cs" />
+    <Compile Include="IBLL\XCGame\Iflw_485_coinService.cs" />
+    <Compile Include="IBLL\XCGame\IFoodsaleService.cs" />
+    <Compile Include="IBLL\XCGame\IFoodsService.cs" />
+    <Compile Include="IBLL\XCGame\IGoodsService.cs" />
+    <Compile Include="IBLL\XCGame\IMemberlevelService.cs" />
+    <Compile Include="IBLL\XCGame\IScheduleService.cs" />
+    <Compile Include="XCCloudRS232\DataGameInfoService.cs" />
+    <Compile Include="XCCloudRS232\Base_DeviceInfoService.cs" />
+    <Compile Include="XCCloudRS232\flw_485_savecoinService.cs" />
+    <Compile Include="XCCloudRS232\flw_485_coinService.cs" />
+    <Compile Include="XCCloudRS232\FoodsSaleService.cs" />
+    <Compile Include="XCCloudRS232\MemberService.cs" />
+    <Compile Include="XCCloudRS232\DeviceService.cs" />
+    <Compile Include="XCCloudRS232\EnumService.cs" />
+    <Compile Include="XCCloudRS232\FoodsService.cs" />
+    <Compile Include="XCCloudRS232\MerchDeviceService.cs" />
+    <Compile Include="XCCloudRS232\MerchSegmentService.cs" />
+    <Compile Include="XCCloudRS232\MerchService.cs" />
+    <Compile Include="XCCloud\Base_ChainRuleService.cs" />
+    <Compile Include="XCCloud\Base_ChainRule_StoreService.cs" />
+    <Compile Include="XCCloud\Base_DepotInfoService.cs" />
+    <Compile Include="XCCloud\Base_DeviceInfoService.cs" />
+    <Compile Include="XCCloud\Base_GoodsInfoService.cs" />
+    <Compile Include="XCCloud\Base_MemberInfoService.cs" />
+    <Compile Include="XCCloud\Base_MerchantInfoService.cs" />
+    <Compile Include="XCCloud\Base_MerchFunctionService.cs" />
+    <Compile Include="XCCloud\Base_SettleOrgService.cs" />
+    <Compile Include="XCCloud\Base_SettlePPOSService.cs" />
+    <Compile Include="XCCloud\Base_StorageInfoService.cs" />
+    <Compile Include="XCCloud\Base_StoreWeightService.cs" />
+    <Compile Include="XCCloud\Base_StoreWeight_GameService.cs" />
+    <Compile Include="XCCloud\Base_UserGrantService.cs" />
+    <Compile Include="XCCloud\Base_UserGroupService.cs" />
+    <Compile Include="XCCloud\Base_UserGroup_GrantService.cs" />
+    <Compile Include="XCCloud\Data_BalanceType_StoreListService.cs" />
+    <Compile Include="XCCloud\Data_BillInfoService.cs" />
+    <Compile Include="XCCloud\Data_CoinDestoryService.cs" />
+    <Compile Include="XCCloud\Data_CoinInventoryService.cs" />
+    <Compile Include="XCCloud\Data_CoinStorageService.cs" />
+    <Compile Include="XCCloud\Data_CouponInfoService.cs" />
+    <Compile Include="XCCloud\Data_CouponListService.cs" />
+    <Compile Include="XCCloud\Data_Coupon_StoreListService.cs" />
+    <Compile Include="XCCloud\Data_DigitCoinDestroyService.cs" />
+    <Compile Include="XCCloud\Data_DigitCoinService.cs" />
+    <Compile Include="XCCloud\Data_FoodInfoService.cs" />
+    <Compile Include="XCCloud\Data_Food_DetialService.cs" />
+    <Compile Include="XCCloud\Data_Food_LevelService.cs" />
+    <Compile Include="XCCloud\Data_Food_StoreListService.cs" />
+    <Compile Include="XCCloud\Data_Food_WorkStationService.cs" />
+    <Compile Include="XCCloud\Data_GameFreeRuleService.cs" />
+    <Compile Include="XCCloud\Data_GameFreeRule_ListService.cs" />
+    <Compile Include="XCCloud\Data_GameInfoService.cs" />
+    <Compile Include="XCCloud\Data_GameInfo_ExtService.cs" />
+    <Compile Include="XCCloud\Data_GameInfo_PhotoService.cs" />
+    <Compile Include="XCCloud\Data_Game_StockInfoService.cs" />
+    <Compile Include="XCCloud\Data_GivebackRuleService.cs" />
+    <Compile Include="XCCloud\Data_GoodInventoryService.cs" />
+    <Compile Include="XCCloud\Data_GoodsStockService.cs" />
+    <Compile Include="XCCloud\Data_GoodStock_RecordService.cs" />
+    <Compile Include="XCCloud\Data_GoodStorageService.cs" />
+    <Compile Include="XCCloud\Data_HeadService.cs" />
+    <Compile Include="XCCloud\Data_JackpotInfoService.cs" />
+    <Compile Include="XCCloud\Data_Jackpot_LevelService.cs" />
+    <Compile Include="XCCloud\Data_Jackpot_MatrixService.cs" />
+    <Compile Include="XCCloud\Data_MemberLevelService.cs" />
+    <Compile Include="XCCloud\Data_Member_CardService.cs" />
+    <Compile Include="XCCloud\Data_Member_Card_StoreService.cs" />
+    <Compile Include="XCCloud\Data_ParametersService.cs" />
+    <Compile Include="XCCloud\Data_ProjectInfoService.cs" />
+    <Compile Include="XCCloud\Data_Project_BandPriceService.cs" />
+    <Compile Include="XCCloud\Data_Project_DeviceService.cs" />
+    <Compile Include="XCCloud\Data_Push_RuleService.cs" />
+    <Compile Include="XCCloud\Data_ReloadService.cs" />
+    <Compile Include="XCCloud\Data_Storage_RecordServcie.cs" />
+    <Compile Include="XCCloud\Data_WorkstationService.cs" />
+    <Compile Include="XCCloud\Dict_BalanceTypeService.cs" />
+    <Compile Include="XCCloud\Dict_SystemService.cs" />
+    <Compile Include="XCCloud\Flw_CouponUseService.cs" />
+    <Compile Include="XCCloud\Flw_Game_FreeService.cs" />
+    <Compile Include="XCCloud\Flw_Game_WatchService.cs" />
+    <Compile Include="XCCloud\Flw_Game_WinPrizeService.cs" />
+    <Compile Include="XCCloud\Flw_OrderService.cs" />
+    <Compile Include="XCCloud\Flw_Order_DetailService.cs" />
+    <Compile Include="XCCloud\Flw_Order_SerialNumberService.cs" />
+    <Compile Include="XCCloud\Log_OperationService.cs" />
+    <Compile Include="XCCloud\Store_CheckDateService.cs" />
+    <Compile Include="XCCloud\XC_WorkInfoService.cs" />
+    <Compile Include="XCCloud\Dict_AreaService.cs" />
+    <Compile Include="XCCloud\Base_StoreInfoService.cs" />
+    <Compile Include="XCCloud\Base_UserInfoService.cs" />
+    <Compile Include="XCGameManagerLog\UDPDeviceStateChangeService.cs" />
+    <Compile Include="XCGameManagerLog\UDPIndexLogService.cs" />
+    <Compile Include="XCGameManagerLog\UDPRadarNotifyLogService.cs" />
+    <Compile Include="XCGameManagerLog\UDPDeviceControlLogService.cs" />
+    <Compile Include="XCGameManagerLog\UDPSendDeviceControlLogService.cs" />
+    <Compile Include="XCGameManagerLog\UDPRadarHeatLogService.cs" />
+    <Compile Include="XCGameManagerLog\UDPRadarRegisterLogService.cs" />
+    <Compile Include="XCGameManager\ApiRequestLogService.cs" />
+    <Compile Include="XCGameManager\DataOrderService.cs" />
+    <Compile Include="XCGameManager\TicketService.cs" />
+    <Compile Include="XCGameManager\MemberTokenService.cs" />
+    <Compile Include="XCGameManager\MobileTokenService.cs" />
+    <Compile Include="XCGameManager\MPorderService.cs" />
+    <Compile Include="XCGameManager\PromotionService.cs" />
+    <Compile Include="XCGameManager\StoreService.cs" />
+    <Compile Include="XCGameManager\DeviceService.cs" />
+    <Compile Include="XCGameManager\TCPService.cs" />
+    <Compile Include="XCGameManager\TFoodsaleService.cs" />
+    <Compile Include="XCGameManager\AdminUserService.cs" />
+    <Compile Include="XCGameManager\UserTokenService.cs" />
+    <Compile Include="XCGameManager\UserService.cs" />
+    <Compile Include="XCGameManager\UserRegisterService.cs" />
+    <Compile Include="XCGame\CheckDateService.cs" />
+    <Compile Include="XCGame\Checkdate_ScheduleService.cs" />
+    <Compile Include="XCGame\FlwGameFreeService.cs" />
+    <Compile Include="XCGame\ParametersService.cs" />
+    <Compile Include="XCGame\GameFreeRuleService.cs" />
+    <Compile Include="XCGame\ProjectPlayService.cs" />
+    <Compile Include="XCGame\PushRuleService.cs" />
+    <Compile Include="XCGame\flw_485_savecoinService.cs" />
+    <Compile Include="XCGame\HeadService.cs" />
+    <Compile Include="XCGame\GameService.cs" />
+    <Compile Include="XCGame\ProjectService.cs" />
+    <Compile Include="XCGame\Project_buyService.cs" />
+    <Compile Include="XCGame\Project_buy_codelistService.cs" />
+    <Compile Include="XCGame\FlwLotteryService.cs" />
+    <Compile Include="XCGame\FlwTicketExitService.cs" />
+    <Compile Include="XCGame\WorkStationService.cs" />
+    <Compile Include="XCGame\UserService.cs" />
+    <Compile Include="XCGame\DeviceService.cs" />
+    <Compile Include="XCGame\flw_485_coinService.cs" />
+    <Compile Include="XCGame\FoodsaleService.cs" />
+    <Compile Include="XCGame\FoodsService.cs" />
+    <Compile Include="XCGame\GoodsService.cs" />
+    <Compile Include="XCGame\MemberlevelService.cs" />
+    <Compile Include="XCGame\MemberService.cs" />
+    <Compile Include="Container\BLLContainer.cs" />
+    <Compile Include="IBLL\IBaseService.cs" />
+    <Compile Include="IBLL\XCGame\IMemberService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XCGame\ScheduleService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\XXCloudService.DAL\XCCloudService.DAL.csproj">
+      <Project>{0fa3e9cf-9fd2-4d99-8efa-c44acfda160d}</Project>
+      <Name>XCCloudService.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.Model\XCCloudService.Model.csproj">
+      <Project>{1e38ec5a-0a89-4d9e-9cdf-6f79c580b6a1}</Project>
+      <Name>XCCloudService.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

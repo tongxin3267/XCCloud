@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>frontDesk</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/iconfont.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/swiper.min.css">
+
+	<!-- Demo styles -->
+
+</head>
+<!--<body style="background: url('images/frontDesk.png') repeat scroll right center transparent;">-->
+<body>
+<!--顶部导航-->
+<div class="container-fluid top boxShadow">
+	<!--小屏幕导航按钮和logo-->
+	<!--小屏幕导航按钮和logo-->
+	<!--导航-->
+	<div class="navbar-collapse collapse">
+		<div class="navbar-header">
+			<a href="index.html" class="navbar-brand"><img src="images/logo.png"></a>
+		</div>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a class="boxBtn" href="javascript:(0);"><span class="glyphicon glyphicon-menu-down"></span>&nbsp;&nbsp;现金:￥10500</a></li>
+			<li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;莘宸乐园【同城广场店】</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user mag-_r1"></span><i>当前操作员：</i>&nbsp;&nbsp;张三</a></li>
+            <li class="dropdown">
+				<a  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					未读消息 (0)
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="index.html">1</a></li>
+					<li><a href="index.html">1</a></li>
+					<li><a href="index.html">1</a></li>
+					<li><a href="index.html">1</a></li>
+                </ul>
+			</li>
+			<li class="dropdown">
+				<a type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					admin
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="dLabel">
+					<li><a href="index.html"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;&nbsp;前台首页</a></li>
+					<li><a href="index.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人主页</a></li>
+					<li><a href="index.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个人设置</a></li>
+					<li><a href="index.html"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;账户中心</a></li>
+					<li><a href="index.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;我的收藏</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a></li>
+            <div class="bbs text-right">
+                <p>开班时间：2017-08-23 15:38:12 <span>当前时间： <em id="oDiv"></em></span></p>
+            </div>
+		</ul>
+
+        <div class="navbar-right navLeftS">
+            <!--<div class="col-md-6 col-sm-6 navStyle">-->
+            <div class="navStyle">
+				<h4>售币机</h4>
+				<p>18000/30000</p>
+			</div>
+			<div class="navT">60%</div>
+            <!--</div>-->
+            <!--<div class="col-md-6 col-sm-6">-->
+                <!--<div class="r_out">-->
+                    <!--<div class="r_in">-->
+                        <!--<div class="r_c c3"></div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+	</div>
+	<!--导航-->
+	<!--饼状图弹出-->
+	<div class="boxBg hidden">
+		<div class="box row">
+            <a class="layerCancel iconfont icon-cha" href="javascript:(0);"></a>
+			<div class="crashDetials col-md-3 col-sm-3">
+			</div>
+			<div id="crash" class="col-md-9 col-sm-9">
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<!--快速充币弹出层-->
+<div class="conF">
+	<span>请先购物再结算</span>
+</div>
+<div class="FastSell hidden row">
+    <div class="FastSellK">
+        <a class="layerCancel iconfont icon-cha" href="javascript:(0);"></a>
+
+        <div class="col-md-6 col-sm-6" style="margin-top: 2em;">
+            <h4 class="col-md-8 col-sm-8 inputNtSty">当前快速售币：</h4><em class="inputNt inputNtSty col-md-4 col-sm-4">1元2币</em>
+            <div class="col-md-12 col-sm-12 inputNm">
+                <input type="text" class="FastSellSty form-control" id="inputD1" oninput="inpDiv1()" placeholder="输入购币金额"/>
+                <input type="text" class="FastSellSty form-control" id="inputD2" oninput="inpDiv2()" placeholder="购币数量"/>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <div class="switchZdy addHeight col-md-12 col-xs-12">
+                    <div class="col-md-6 col-xs-6 onSwitch">实物币</div>
+                    <div class="col-md-6 col-xs-6">代币</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="formNum formNum1 col-md-6 col-sm-6">
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">1</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">2</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">3</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">4</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">5</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">6</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">7</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">8</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">9</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">.</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="num">0</a></div>
+            <div class=" col-md-3 col-sm-3 pad_0"><a href="javascript:(0);" class="remove" >删除</a></div>
+            <div class="col-md-6 col-sm-6 pad_0"><a href="javascript:(0);" class="removeAll">清空</a></div>
+			<div class="col-md-6 col-sm-6 pad_0"><button type="button" class="btn btn-c1">确定</button></div>
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid">
+	<!--结账弹出层-->
+    <div class="CheckoutMB hidden row">
+        <div class="FastSellK">
+			<a class="layerCancel iconfont icon-cha" href="javascript:(0);"></a>
+			<div class="col-md-4 col-sm-4 pad_0">
+				<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应收现金：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumPrice"></div></div>
+				<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣代币：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumCoin"></div></div>
+				<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣积分：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumLottery"></div></div>
+				<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣彩票：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumPoint"></div></div>
+				<ul class="col-md-12 col-sm-12 payment shopCStyle">
+					<li>
+						<div class="inputNm col-md-12 col-sm-12 shopCStyle"><span class="col-md-5 col-sm-5 shopCStyle">实收现金：</span><label class="col-md-7 col-sm-7"><input id="input1" type="text" class="form-control" oninput="sumPrice()"/></label></div><!--onpropertychange="sumPrice()"-->
+						<div class="col-md-12 col-sm-12 shopCStyle"><span class="col-md-5 col-sm-5 shopCStyle">找零：</span><label class="col-md-7 col-sm-7"><input class="form-control" type="text" id="input2" placeholder="" readonly></label></div>
+					</li>
+					<li class="hidden">
+						<div class="col-md-12 col-sm-12 shopCStyle"><span class="col-md-5 col-sm-5 pad_0">扣储值金：</span><label class="col-md-7 col-sm-7"><input id="input3" type="text" class="form-control" /></label></div>
+						<div class="col-md-12 col-sm-12 shopCStyle hidden"><span class="col-md-5 col-sm-5 pad_0">找零：</span><label class="col-md-7 col-sm-7"><input type="text" class="form-control" /></label></div>
+					</li>
+					<li class="hidden">
+						<h4 class="">请扫描客户手机付款码</h4>
+						<label class="col-md-12 col-sm-12 pad_0"><input id="input5" type="text" class="form-control" /></label>
+					</li>
+				</ul>
+				<div class="col-md-12 col-sm-12 shopCStyle" style="margin-top: 1em"><button type="button" class="btn btn-danger">结账</button></div>
+            </div>
+			<div class="formNum formNum2 col-md-6 col-sm-6">
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">1</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">2</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">3</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">4</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">5</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">6</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">7</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">8</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">9</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">.</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="num">0</a></div>
+				<div class=" col-md-4 col-sm-4 pad_0"><a href="javascript:(0);" class="remove" >删除</a></div>
+
+			</div>
+			<ul class="col-md-2 col-sm-2 payList pad_0">
+				<li><button type="button" class="btn btn-primary btn-lg">现金</button></li>
+				<li><button type="button" class="btn btn-primary btn-lg">储值卡</button></li>
+				<li><button type="button" class="btn btn-primary btn-lg">扫码支付</button></li>
+				<button type="button" class="btn btn-primary btn-lg">打印</button>
+			</ul>
+		</div>
+    </div>
+	<!--主体内容-->
+	<div class="row">
+		<!--左边购物车-->
+		<div class="fl majorLeft">
+			<div class="corner"></div>
+			<ul class="member col-md-12 col-sm-12">
+				<li class="col-md-7 col-sm-7"><span>会员卡号：4444444444444454545454</span></li>
+				<li class="col-md-5 col-sm-5"><span>代币：</span></li>
+				<li class="col-md-7 col-sm-5"><span>会员姓名：</span></li>
+				<li class="col-md-5 col-sm-5"><span>积分：</span></li>
+				<li class="col-md-7 col-sm-5"><span>会员等级：</span></li>
+				<li class="col-md-5 col-sm-5"><span>彩票：</span></li>
+			</ul>
+			<div class="shopCart col-md-12 col-sm-12">
+				<!--<div class="shopCartMb col-md-12 col-sm-12 shopCStyle hidden">-->
+					<!--<div class="col-md-7 col-sm-7 shopCStyle">-->
+						<!--<h4 class="shopCStyle"></h4>-->
+						<!--<h5 class="shopCStyle">支付方式：-->
+                            <!--<select class="useSelect form-control" style="display: inline-block;">-->
+                                <!--<option value="Price">现金</option>-->
+                                <!--<option class="useCoin" value="useCoin">代币</option>-->
+                                <!--<option class="useLottery" value="useLottery">积分</option>-->
+                                <!--<option class="usePoint" value="usePoint">彩票</option>-->
+                            <!--</select>-->
+						<!--</h5>-->
+						<!--<p class="shopCStyle">支付单价：<i class="fhRMB hidden">￥</i><em class="shopD"></em></p>-->
+					<!--</div>-->
+					<!--<div class="col-md-5 col-sm-5 shopCStyle">-->
+                        <!--<div class="col-md-12 col-sm-12 strongStyle"><i class="fhRMB col-md-2 col-sm-2 hidden strongStyle">￥</i><strong class="col-md-10 col-sm-10 strongStyle"></strong></div>-->
+                        <!--<div class="col-md-12 col-sm-12 shopCStyle"><em>数量：<span>1</span></em></div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<table class="table table-bordered col-md-12 col-sm-12">
+					<thead style="background: #f5f5f5">
+						<tr>
+							<th>商品名</th>
+							<th>数量</th>
+							<th>单价</th>
+						</tr>
+					</thead>
+					<tbody id="v-for-tbody">
+						<tr v-for="(items,index) in shopData">
+							<td>{{items.foodName}}</td>
+							<td>{{items.amount}}</td>
+							<!--<td>{{items.vipPrice}}</td>-->
+							<td class="selectSty">
+								<select v-model="items.selected">
+									<option v-for="option in (items.options)" v-bind:value="option.value">
+										{{ option.text }}
+									</option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="Checkout col-md-12 col-sm-12">
+					<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应收现金：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumPrice"></div></div>
+					<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣代币：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumCoin"></div></div>
+					<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣积分：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumLottery"></div></div>
+					<div class="col-md-12 col-sm-12 shopCStyle"><div class="col-md-7 col-sm-7 text-left shopCStyle">应扣彩票：</div><div class="col-md-5 col-sm-5 text-right shopCStyle sumPoint"></div></div>
+					<div class="CheckoutBtn col-md-12 col-sm-12 shopCStyle"><button type="button" class="btn btn-danger">挂单</button><button type="button" class="btn btn-success closeAccounts">结账</button></div>
+				</div>
+			</div>
+
+		</div>
+		<!--中间菜单-->
+		<ul class="majorMenu fl heightKz">
+			<li id="AddCount"><a class="iconfont icon-jia" href="javascript:(0)"></a></li>
+			<li id="reduceCount"><a class="iconfont icon-jian" href="javascript:(0)"></a></li>
+			<li class="cur"><a href="javascript:(0)">入会办卡</a></li>
+			<li><a id="FastSell" href="javascript:(0)">快速售币</a></li>
+			<li><a id="sales" href="javascript:(0)">产品销售</a></li>
+			<li><a href="javascript:(0)">会员操作</a></li>
+			<li><a href="javascript:(0)">会员返还</a></li>
+			<li><a href="javascript:(0)">退货处理</a></li>
+			<li><a href="javascript:(0)">会员卡挂失</a></li>
+
+		</ul>
+		<!--右边显示内容-->
+		<div class="heightKz">
+			<div class="salesAll">
+				<div class="salesTitle">
+					<div class="swiper-container">
+						<ul class="swiper-wrapper">
+							<li class="on swiper-slide"><a href="javascript:(0)">全部</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">充值</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">礼品</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">门票</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">数字币</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">餐饮</a></li>
+							<li class="swiper-slide"><a href="javascript:(0)">礼包</a></li>
+						</ul>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+				<div class="sales">
+					<!--<div class="salesStencil hidden">-->
+						<!--<img src="images/sales.png">-->
+						<!--<h3></h3>-->
+						<!--<p>￥</p>-->
+						<!--<h5></h5>-->
+					<!--</div>-->
+					<!--<ul id="v-for-object" class="salesStencil">-->
+						<!--<li v-for="(items,index) in tbodyData" class="salesStencil hidden">-->
+							<!--<img src="images/sales.png">-->
+							<!--<h3>{{items.name}}</h3>-->
+							<!--<p>￥</p>-->
+							<!--<h5>{{items.name}}</h5>-->
+						<!--</li>-->
+					<!--</ul>-->
+					<ul id="v-for-object" class="salesStencil hidden">
+						<li v-for="(items,index) in tbodyData" class="salesStencil" @click="deletePerson(index)" v-bind:style="{ background: activeColor}" >
+							<img :src="items.imageUrl"/>
+							<h3>{{items.foodName}}</h3>
+							<p>￥{{items.vipPrice}}</p>
+							<h5>{{items.coins}}</h5>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+			<!--<iframe class="hidden" id="iFrame2" src="Member.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+			<!--<iframe class="hidden" id="iFrame4" src="sales.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+
+			<!--<iframe class="hidden" id="iFrame5" src="MemberOperation.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+			<!--<iframe class="hidden"  src="MembersReturn.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+			<!--<iframe class="hidden" id="iFrame7" src="AnyReturns.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+			<!--<iframe class="hidden" id="iFrame8" src="cardLoss.html" width="100%" height="100%" frameborder="0" seamless></iframe>-->
+		</div>
+    </div>
+
+	<!-- Modal(通用提示框) -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+				</div>
+				<div class="modal-body">
+					{{ msg }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!--页面内容-->
+
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<!--<script src="js/yx.js"></script>-->
+<script src="js/vue.js"></script>
+<!--<script src="js/heightCharts.js"></script>-->
+<!--<script src="js/hChart3D.js"></script>-->
+<!--<script src="js/hightcharts-ZH_CN.js"></script>-->
+
+<!--&lt;!&ndash; Initialize Swiper &ndash;&gt;-->
+<script>
+    /*var appendNumber = 4;
+    var prependNumber = 1;*/
+    var swiper = new Swiper('.swiper-container', {
+        /*pagination: '.swiper-pagination',*/
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 6,
+        centeredSlides: false,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+
+
+</script>
+<script>
+    //存储session
+    function setStorage(key,value) {
+        if(window.localStorage){
+            var storage=window.localStorage;
+            storage.setItem(key,value);
+        }
+    }
+    //删除session
+    function removeStorage(key) {
+        if(window.localStorage){
+            var storage=window.localStorage;
+            storage.removeItem(key);
+        }
+    }
+    //获取session
+    function getStorage(key,value) {
+        if(window.localStorage){
+            var storage=window.localStorage;
+            value = localStorage.getItem(key);
+            return value;
+        }
+    }
+
+    var tbodyData  = "";	//全局变量
+    var shopData = [];
+    var foodId ="";
+	function getaMeal() {			//获取销售列表
+        var userToken = getStorage("userToken");
+        console.log(userToken);
+        var storeId = getStorage("storeId");
+        console.log(storeId);
+        var obj={"sysId": "0","versionNo": "0.0.0.1",'userToken':userToken ,'memberLevelId':"",'foodType':'1','storeId':storeId};
+        var url="/api/XCCloud/Foods.ashx?action=getFoodInfo";           //登录接口
+        var parasJson = JSON.stringify(obj);
+        if(userToken != null) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: parasJson,
+                success: function (res) {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    if (res.result_code === "1") {
+                        $(".sales").find("ul").removeClass("hidden");
+						console.log("成功");
+                         tbodyData  = res.result_data;
+                        new Vue({
+                            el: '#v-for-object',
+                            data: {
+                                salesIS: true,
+                                tbodyData:tbodyData,
+                                activeColor: '#17ceca'
+                            },
+                            methods: {
+                                deletePerson: function(index) {
+                                    console.log("点击的索引值"+index);
+                                    console.log("foodid"+tbodyData[index].foodId );
+                                    console.log("shopData长度是否为0"+shopData.length === 0);
+                                    if(shopData.length === 0){
+                                        shopData .push({
+                                            allowPrint: tbodyData[index].allowPrint,
+                                            coins: tbodyData[index].coins,
+                                            detailsCount: tbodyData[index].detailsCount,
+                                            foodId: tbodyData[index].foodId,
+                                            foodName: tbodyData[index].foodName,
+                                            foodType: tbodyData[index].foodType,
+                                            rechargeType: tbodyData[index].rechargeType,
+                                            vipPrice: tbodyData[index].vipPrice,
+                                            amount: 1,
+                                            selected: 'A',
+                                            options: [
+                                                { text: '单价', value: 'A' },
+                                                { text: '代币', value: 'B' },
+                                                { text: '彩票', value: 'C' }
+                                            ]
+                                        });
+                                        setTimeout(function () {
+                                            $("#v-for-tbody tr:last").addClass('end').siblings().removeClass('end');
+                                        },50);
+//
+                                        console.log("新加的"+shopData)
+                                    }else {
+                                        for (var i = 0; i < shopData.length; i++){
+                                            console.log(tbodyData[index].foodId === shopData[i].foodId);
+                                            if (tbodyData[index].foodId === shopData[i].foodId) {
+                                                foodId = i;
+                                                console.log("遍历的i"+i);
+                                                break;
+                                            }else {
+                                                foodId = ""
+                                            }
+                                        }
+                                        console.log("遍历的i（索引值）"+foodId);
+                                        if (foodId === "") {
+//                                            shopData .push(tbodyData[i]);
+                                            shopData .push({
+                                                allowPrint: tbodyData[i].allowPrint,
+                                                coins: tbodyData[i].coins,
+                                                detailsCount: tbodyData[i].detailsCount,
+                                                foodId: tbodyData[i].foodId,
+                                                foodName: tbodyData[i].foodName,
+                                                foodType: tbodyData[i].foodType,
+                                                rechargeType: tbodyData[i].rechargeType,
+                                                vipPrice: tbodyData[i].vipPrice,
+                                                amount: 1,
+                                                selected: 'A',
+                                                options: [
+                                                    { text: '单价', value: 'A' },
+                                                    { text: '代币', value: 'B' }
+                                                ]
+                                            });
+                                            console.log("新加的"+shopData);
+                                            setTimeout(function () {
+                                                $("#v-for-tbody tr:last").addClass('end').siblings().removeClass('end');
+                                            },50);
+//
+                                            console.log()
+                                        }else {
+                                            shopData[foodId].amount =shopData[foodId].amount+1;
+                                            console.log("原来的"+shopData);
+                                            console.log(foodId);
+                                        }
+
+                                    }
+                                    console.log(shopData)
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    }
+    getaMeal();
+    new Vue({
+        el: '#v-for-tbody',
+        data: {
+            shopData:shopData
+        },
+        methods: {
+
+        }
+    });
+//    function getFoodDetail() {			//获取套餐明细
+//        var userToken = getStorage("userToken");
+//        console.log(userToken);
+//        var storeId = getStorage("storeId");
+//        console.log(storeId);
+//        var obj={"sysId": "0","versionNo": "0.0.0.1",'userToken':userToken ,'memberLevelId':"1",'foodId':'1'};
+//        var url="/api/XCCloud/Foods.ashx?action=getFoodDetail";        //接口地址
+//        var parasJson = JSON.stringify(obj);
+//
+//        if(userToken != null) {
+//            $.ajax({
+//                type: "post",
+//                url: url,
+//                contentType: "application/json; charset=utf-8",
+//                data: parasJson,
+//                success: function (res) {
+//                    res = JSON.parse(res);
+//                    console.log(res);
+//                    if (res.result_code === "1") {
+//                        console.log("成功");
+////                        tbodyData  = res.result_data;
+//                        tbodyData =[{foodName:"1",vipPrice:"2",coins:"5"},{foodName:"1",vipPrice:"2",coins:"5"}];
+////                    <h3>{{items.foodName}}</h3>
+////                        <p>￥{{items.vipPrice}}</p>
+////                        <h5>{{items.coins}}</h5>
+//                        new Vue({
+//                            el: '#v-for-object',
+//                            data: {
+//                                tbodyData:tbodyData
+//                            }
+//                        });
+//                    }
+//                }
+//            })
+//        }
+//    }
+
+	function promptModal(modalMsg) {
+        new Vue({
+            el: '#myModal',
+            data: {
+                msg: modalMsg
+			}
+        });
+		$('#myModal').modal()
+
+    }
+
+    var userToken = getStorage("userToken");
+    var ws = new WebSocket("ws://127.0.0.1:12880");	//WebSocketTest运行
+    function WebSocketTest() {
+        if ("WebSocket" in window)
+        {
+            // 打开一个 web socket
+
+            console.log(userToken);
+            ws.onopen = function() {
+                console.log("连接成功");
+
+                var msgTypeRegister =JSON.stringify({
+                    "msgType":"0",
+                    "sObj": {
+                        "userToken": userToken
+                    }
+                });
+//                var msgTypeIcB  =JSON.stringify({"msgType":"2"});
+                function send(data)
+                {
+                    console.log("Send:"+data);
+                    ws.send(data);
+                }
+                send(msgTypeRegister);
+//                send(msgTypeIcA);
+            };
+
+            ws.onmessage = function (evt)
+            {
+                console.log("接收成功");
+                var receivedMsg = JSON.parse(evt.data);
+                console.log(receivedMsg);
+//                if(receivedMsg.result_code === 1){
+//                    if(receivedMsg.answerMsgType === "1"){
+//                        machineName = receivedMsg.dataObj.machineName;
+//                        console.log(machineName );
+//                    }else if(receivedMsg.answerMsgType === "2"){
+//                        console.log(2);
+//                        dogIdToken = receivedMsg.dataObj.dogId
+//                    }
+//                }else {
+//                    console.log("出错");
+//                    WebSocketTest();
+//                }
+            };
+
+            ws.onclose = function()
+            {
+                // 关闭 websocket
+                alert("连接已关闭...");
+            };
+
+        }
+
+        else
+        {
+            // 浏览器不支持 WebSocket
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+    WebSocketTest();
+//    setTimeout(function () {
+//        var msgTypeIcA =JSON.stringify({		//读身份证或者ic卡
+//            "msgType":"4",
+//            "sObj": {
+//                "userToken": userToken
+//            }
+//        });
+//        ws.send(msgTypeIcA);
+//    }, 100);
+//    setTimeout(function () {
+//        var ActivateCard =JSON.stringify({		//注册
+//            "msgType":"5",
+//            "sObj": {
+//                "userToken": userToken
+//            },
+//            "dataObj": {
+//                "mobile": "15619200033",
+//            	"name": "陈广龙",
+//        		"birthday": "1982-02-01",
+//            	"gender": "0",
+//            	"note": "",
+//           	 	"memberLevelId": "1",
+//            	"foodId": "1",//办卡时用户未选择套餐，可以为空
+//            	"icCardId": "123433211"
+//			}
+//        });
+//        ws.send(ActivateCard);
+//    }, 100);
+    setTimeout(function () {
+        var msgTypePrint =JSON.stringify({		//注册
+            "msgType":"8",
+            "sObj": {
+                "userToken": userToken
+            },
+            "data": {
+        	"ticketType": 8,			//打印小票
+            "ticketData": {
+            	"orderNo": "20071215100010234213423"
+			}
+            }
+        });
+        ws.send(msgTypePrint);
+    }, 100);
+//
+//    {
+//        "msgType": 8,
+//        "sObj": {
+//        "userToken": "c7201dfa239e45058f99f96e18c01e21"
+//    },
+//        "data": {
+//        "ticketType": 8,//票据类型
+//            "ticketData": {
+//            "orderNo": "20071215100010234213423"
+//        }
+//    }
+//    }
+    $(".closeAccounts").click(function () {  //结账按钮点击
+		console.log(11111);
+        console.log(shopData)
+        if(shopData.length ===0){
+            var modalMsg = "购物车为空，请先购买商品";
+    		promptModal(modalMsg);
+        }
+        else {
+            $(".CheckoutMB").removeClass("hidden");
+            var inputIN= $(".sumPrice").html().split("￥")[1];
+            $("#input1").val(inputIN);
+            $("#input3").val(inputIN);
+            $("#input2").val(0.00)
+        }
+    });
+
+
+
+</script>
+
+</body>
+</html>

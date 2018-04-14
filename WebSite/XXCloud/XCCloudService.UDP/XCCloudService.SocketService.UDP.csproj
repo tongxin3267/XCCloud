@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBF6E89C-B2E9-4310-8F22-B18EDD95668D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCCloudService.SocketService.UDP</RootNamespace>
+    <AssemblyName>XCCloudService.SocketService.UDP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CallBackEvent.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientList.cs" />
+    <Compile Include="ClientService.cs" />
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\UDPConfig.cs" />
+    <Compile Include="Common\UDPLogHelper.cs" />
+    <Compile Include="Factory\DataFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PubLib.cs" />
+    <Compile Include="Security\SignKeyHelper.cs" />
+    <Compile Include="Server.cs" />
+    <Compile Include="ServiceObjectConvert.cs" />
+    <Compile Include="StateObject.cs" />
+    <Compile Include="TransmiteEnum.cs" />
+    <Compile Include="TransmiteObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.Business\XCCloudService.Business.csproj">
+      <Project>{391eb2f5-b166-4439-b0bd-91f8e3377271}</Project>
+      <Name>XCCloudService.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.Socket\XCCloudService.SocketService.TCP.csproj">
+      <Project>{1201063a-0f56-4cfd-abe7-be685df27477}</Project>
+      <Name>XCCloudService.SocketService.TCP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCCloudService.WeiXin\XCCloudService.WeiXin.csproj">
+      <Project>{1a85b373-5ee7-4cbd-87d3-de183ad1036a}</Project>
+      <Name>XCCloudService.WeiXin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.BLL\XCCloudService.BLL.csproj">
+      <Project>{bcbc3ea2-3c42-4d5f-842a-45e614bbadce}</Project>
+      <Name>XCCloudService.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.Model\XCCloudService.Model.csproj">
+      <Project>{1e38ec5a-0a89-4d9e-9cdf-6f79c580b6a1}</Project>
+      <Name>XCCloudService.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

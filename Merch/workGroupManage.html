@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+	<link rel="stylesheet" href="css/layui.css">
+	<link rel="stylesheet" href="css/manchartData.css">
+	<link href="css/common.css" rel="stylesheet" type="text/css"/>
+
+
+	<title>工作组管理</title>
+	<style>
+		.layui-table-page{height: 50px;!important;}
+	</style>
+</head>
+<body>
+<div class="" style="padding: 5px;">
+	<div class="layui-row">
+		<blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+			<button type="button" class="layui-btn layui-btn-normal" onclick="getAddMerchInfo()"><i class="layui-icon">&#xe615;</i>新增</button>
+		</blockquote>
+		<div class="layui-col-md12">
+			<table class="layui-hide" id="groupManageTable"  lay-filter="groupManage"></table>
+		</div>
+	</div>
+</div>
+<div class="groupManage">
+	<form action="" class="layui-form">
+		<div class="layui-row">
+			<div class="layui-col-md5" style="border: 1px dashed #333;padding: 5px 15px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label">工作组名称</label>
+					<div class="layui-input-block">
+						<input type="text" class="layui-input" id="groupName">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">描述：</label>
+					<div class="layui-input-block">
+						<textarea placeholder="请输入内容" class="layui-textarea" style="height: 400px;" id="note"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md7">
+				<div id="demo1" style="height: 500px;overflow-y: scroll;border: 1px dashed #333;margin-left: 20px;">
+
+				</div>
+			</div>
+		</div>
+		<div class="layui-row" style="text-align: right;padding-right: 50px;" id="addGroupBtn-box">
+			<button class="layui-btn " type="reset">重置</button>
+			<button class="layui-btn layui-btn-normal layui-btn-danger" type="button" id="" onclick="closePage()">取消</button>
+			<button class="layui-btn layui-btn-normal" type="button" id="addGroupBtn">确定</button>
+		</div>
+	</form>
+</div>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="layui---xtree/layui-xtree.js"></script>
+<script src="layui---xtree/layui-xtree-look.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var token=getStorage('token');
+    var parm={'url':'/XCCloud/UserGroup?action=GetUserGroupList',
+        'obj':{"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+        'elem':'#groupManageTable',
+        'cols':[
+            {type:'numbers'}
+            ,{field:'groupId', title:'工作组ID', align: 'center', sort: true}
+            ,{field:'groupName',title: '工作组名', align: 'center'} //width 支持：数字、百分比和不填写。
+            ,{field:'note', title: '描述', align: 'left'}
+            ,{fixed: 'right', title: '操作', width:250, align:'center', toolbar: '#barDemo'}
+        ]
+    };
+    getInitData(parm);
+    layui.use(['table','form','jquery','layer'], function() {
+        var table = layui.table;
+        var $=layui.jquery;
+        var form=layui.form;
+        var layer = layui.layer;
+        table.on('tool(groupManage)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+            var groupId=data.groupId;
+            var _obj=obj;
+            // if (layEvent === 'detail') { //查看
+            //     $('#demo1').html('');
+            //     $('#addGroupBtn-box').addClass('layui-hide');
+            //     addGroupManage('查看工作组详情');
+            //     var obj={"groupId":groupId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+            //     var url = "/XCCloud/UserGroup?action=GetUserGroup";
+            //     var parasJson = JSON.stringify(obj);
+            //     var listData=[];
+            //     $.ajax({
+            //         type: "post",
+            //         url: url,
+            //         contentType: "application/json; charset=utf-8",
+            //         data: {parasJson: parasJson},
+            //         success: function (data) {
+            //             data=JSON.parse(data);
+            //             console.log(data);
+            //             if(data.result_code==1){
+            //                 listData=data.result_data.userGroupGrants;
+            //                 $('#groupName').val(data.result_data.groupName);
+            //                 $('#note').val(data.result_data.note);
+            //                 listData= JSON.stringify(listData).replace(eval("/children/g"),"data").replace(eval("/name/g"),"title").replace(eval
+            //                 ("/functionId/g"),"value");
+            //                 listData=JSON.parse(listData);
+            //                 console.log(listData);
+            //                 layui.use('form', function () {
+            //                     var form = layui.form;
+            //                     //创建tree
+            //                     var xtree = new layuiXtreeLook({
+            //                         elem: 'demo1' //放xtree的容器（必填）
+            //                         , form: form               //layui form对象 （必填）
+            //                         , data: listData           //数据，结构请参照下面 （必填）
+            //                         , isopen: true            //初次加载时全部展开，默认true （选填）
+            //                         , color: "#000"           //图标颜色 （选填）
+            //                         , icon: {                  //图标样式 （选填）
+            //                             open: "&#xe7a0;"      //节点打开的图标
+            //                             , close: "&#xe622;"   //节点关闭的图标
+            //                             , end: "&#xe621;"     //末尾节点的图标
+            //                         }
+            //                     });
+            //                 });
+            //             }
+            //         }
+            //     });
+            //
+            // } else
+                if (layEvent === 'del') { //删除
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令,删除数据库中此条数据
+                    var   obj1={"groupId":groupId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+                    var parm={'obj':obj1,'url':'/XCCloud/UserGroup?action=DeleteUserGroup'};
+                    deleteTableList(parm);
+                });
+            } else if (layEvent === 'edit') { //编辑
+                $('#demo1').html('');
+                $('#addGroupBtn-box').removeClass('layui-hide');
+                addGroupManage('修改工作组');
+                var obj={"groupId":groupId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+                var url = "/XCCloud/UserGroup?action=GetUserGroup";
+                var parasJson = JSON.stringify(obj);
+                var listData=[];
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parasJson},
+                    success: function (data) {
+                        data=JSON.parse(data);
+                        if(data.result_code==1){
+                            listData=data.result_data.userGroupGrants;
+                            $('#groupName').val(data.result_data.groupName);
+                            $('#note').val(data.result_data.note);
+                            listData= JSON.stringify(listData).replace(eval("/children/g"),"data").replace(eval("/name/g"),"title").replace(eval
+                            ("/functionId/g"),"value");
+                            listData=JSON.parse(listData);
+                            layui.use('form', function () {
+                                var form = layui.form;
+                                //创建tree
+                                var xtree = new layuiXtreeLook({
+                                    elem: 'demo1' //放xtree的容器（必填）
+                                    , form: form               //layui form对象 （必填）
+                                    , data: listData           //数据，结构请参照下面 （必填）
+                                    , isopen: true            //初次加载时全部展开，默认true （选填）
+                                    , color: "#000"           //图标颜色 （选填）
+                                    , icon: {                  //图标样式 （选填）
+                                        open: "&#xe7a0;"      //节点打开的图标
+                                        , close: "&#xe622;"   //节点关闭的图标
+                                        , end: "&#xe621;"     //末尾节点的图标
+                                    }
+                                });
+                                $('#addGroupBtn') .click(function () {
+                                    $(this).off('click');
+                                    var groupName=$('#groupName').val(),note=$('#note').val();
+                                    var url = "/XCCloud/UserGroup?action=EditUserGroup";
+                                    var userGroupGrants=[];
+                                    var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+                                    for (var i = 0; i < oCks.length; i++) {
+
+                                        userGroupGrants.push({'functionId':oCks[i].value,'isAllow':1});
+                                    }
+                                    var obj=
+                                        {"groupId":groupId,'groupName':groupName,'note':note,'userGroupGrants':userGroupGrants,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'
+                                        };
+                                    var parasJson = JSON.stringify(obj);
+                                    $.ajax({
+                                        type: "post",
+                                        url: url,
+                                        contentType: "application/json; charset=utf-8",
+                                        data: {parasJson: parasJson},
+                                        success: function (data) {
+                                            data = JSON.parse(data);
+                                            if(data.result_code==1){
+                                                layer.msg("修改工作组成功！");
+
+                                                //同步更新缓存对应的值
+                                                _obj.update({
+                                                    GroupName: groupName
+                                                    , Note: note
+                                                });
+                                                closePage();
+                                            }else {
+                                                alert(data.result_msg);
+                                            }
+                                        }
+                                    })
+                                })
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+    function getAddMerchInfo() {
+        addGroupManage('新增工作组');
+        $('#demo1').html('');
+        $('#addGroupBtn-box').removeClass('layui-hide');
+        var obj={"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+        var url = "/XCCloud/UserGroup?action=GetUserGroup";
+        var parasJson = JSON.stringify(obj);
+        var listData=[];
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: parasJson},
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.result_code==1){
+                    listData=data.result_data.userGroupGrants;
+                    listData= JSON.stringify(listData).replace(eval("/children/g"),"data").replace(eval("/name/g"),"title").replace(eval("/functionId/g"),"value");
+                    listData=JSON.parse(listData);
+                    console.log(listData);
+                    layui.use(['form','jquery'], function () {
+                        var form = layui.form;
+                        var $=layui.jquery;
+                        //创建tree
+                        var xtree = new layuiXtree({
+                            elem: 'demo1' //放xtree的容器（必填）
+                            , form: form               //layui form对象 （必填）
+                            , data: listData           //数据，结构请参照下面 （必填）
+                            , isopen: true            //初次加载时全部展开，默认true （选填）
+                            , color: "#000"           //图标颜色 （选填）
+                            , icon: {                  //图标样式 （选填）
+                                open: "&#xe7a0;"      //节点打开的图标
+                                , close: "&#xe622;"   //节点关闭的图标
+                                , end: "&#xe621;"     //末尾节点的图标
+                            }
+                        });
+                        document.getElementById('addGroupBtn').onclick = function () {
+                            $(this).off('click');
+                            var  groupName= $('#groupName').val();
+                            var note=$('#note').val();
+                            var userGroupGrants=[];
+                            var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+                            for (var i = 0; i < oCks.length; i++) {
+                                userGroupGrants.push({'functionId':oCks[i].value,'isAllow':1});
+                            }
+                            var obj=
+                                {'groupName':groupName,'note':note,'userGroupGrants':userGroupGrants,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'
+                                };
+                            var url='/XCCloud/UserGroup?action=AddUserGroup';
+                            var parasJson = JSON.stringify(obj);
+                            $.ajax({
+                                type: "post",
+                                url: url,
+                                contentType: "application/json; charset=utf-8",
+                                data: {parasJson: parasJson},
+                                success: function (data) {
+                                    data = JSON.parse(data);
+                                    if(data.result_code==1){
+                                        alert("添加工作组成功！");
+                                        closePage();
+                                    }else {
+                                        alert(data.result_msg);
+                                    }
+                                }
+                            })
+                        }
+                    });
+                }
+            }
+        });
+    }
+    function addGroupManage(title) {
+        layui.use('layer',function () {
+            var layer=layui.layer;
+            layer.open({
+                type:1,
+                title:title,
+                area:'1000px;',
+                content:$('.groupManage'),
+                shadeClose:true
+            })
+        })
+    }
+</script>
+<script type="text/html" id="barDemo">
+	<!--<a class="layui-btn layui-btn-mini" lay-event="detail" href="#">查看</a>-->
+	<a class="layui-btn layui-btn-mini" lay-event="edit" href="#">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+</body>
+</html>

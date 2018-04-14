@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/WebSite/js/jquery-1.8.3-min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //初始化注册雷达参数
+            $("#txt_RadarRegister_StoreId").val("100027");
+            $("#txt_RadarRegister_Segment").val("0001");
+           
+            //用户手机和密码
+            $("#txtUserMobile").val("15618920033");
+            $("#txtPassword").val("123456");
+
+            //设备状态变更
+            $("#txt_DeviceChange_MCUID").val("20171010200000");
+
+            //设备控制
+            $("#txt_DeviceControl_ICardId").val("90000024");
+            $("#txt_DeviceControl_CoinCount").val("10");
+        });
+
+        var userToken = "";
+
+        function common(url, data) {
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        //清理结果
+        function clearCallResult() {
+            $("#divResult").text("");
+        }
+
+        //设置调用结果
+        function setCallResult(result) {
+            $("#divResult").text(result);
+        }
+
+        function getApiErrMsg(data) {
+            if (data.return_code == "0") {
+                return data.return_msg;
+            }
+
+            if (data.result_code == "") {
+                return data.result_msg;
+            }
+
+            return "";
+        }
+
+        //用户登录
+        function login() {
+            var userMobile = $("#txtUserMobile").val();
+            var password = $("#txtPassword").val();
+            var data = { "userMobile": userMobile, "password": password };
+            var url = "/service/user?action=login";
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.result_code == "1") {
+                        userToken = data.result_data.token;
+                        $("#txtLoginResult").val(userToken);
+                    }
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function radarRegister() {
+            var storeId = $("#txt_RadarRegister_StoreId").val();
+            var segment = $("#txt_RadarRegister_Segment").val();
+            var data = { "userToken": $("#txtLoginResult").val(), "storeId": storeId, "segment": segment, "registtype": 0 };
+            var url = "/service/UDPService?action=radarRegister";
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.return_code == "1" && data.result_code == "1") {
+                        var html = "<div>" + "门店：" + $("#txt_RadarRegister_StoreId").val() + ";" + "段地址:" + $("#txt_RadarRegister_Segment").val() + ";" + "设备令牌:" + data.result_data.token + "</div>";
+                        $("#divResult").append(html);
+                    }
+                    else {
+                        var errMsg = getApiErrMsg(data);
+                        setCallResult(errMsg);
+                    }
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+
+        function radarHeat() {
+            var token = $("#txt_RadarRegister_Token").val();
+            var data = { "userToken": $("#txtLoginResult").val(), "token": token };
+            var url = "/service/UDPService?action=radarHeat";
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.return_code == "1" && data.result_code == "1") {
+                        var html = "<div>" + "设备令牌:" + data.result_data.token + "心跳成功" + "</div>";
+                        $("#divResult").append(html);
+                    }
+                    else {
+                        var errMsg = getApiErrMsg(data);
+                        setCallResult(errMsg);
+                    }
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+
+        function deviceChange() {
+            var token = $("#txt_DeviceChange_Token").val();
+            var mcuid = $("#sel_MCUID_DeviceChange").val();
+            var status = $("#sel_DeviceStatus_DeviceChange").val();
+            var data = { "userToken": $("#txtLoginResult").val(), "token": token, "mcuid": mcuid, "status": status };
+            var url = "/service/UDPService?action=deviceChange";
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.return_code == "1" && data.result_code == "1") {
+                        var html = "<div>" + "设备令牌:" + data.result_data.token + "心跳成功" + "</div>";
+                        $("#divResult").append(html);
+                    }
+                    else {
+                        var errMsg = getApiErrMsg(data);
+                        setCallResult(errMsg);
+                    }
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+
+    </script>
+
+    </head>
+<body>
+    <div>
+        用户名：<input id="txtUserMobile" type="text" />&nbsp;&nbsp;密码：<input id="txtPassword" type="text" /><input id="btnLogin" type="button" value="用户登录" onclick="login()" />
+        <input id="txtLoginResult" type="text" />
+    </div>
+    <div>
+        操作结果:<div id="divResult"></div>
+    </div>
+    <br />
+    <div>
+        门店Id：<input id="txt_RadarRegister_StoreId" type="text" />&nbsp;&nbsp;段地址：<input id="txt_RadarRegister_Segment" type="text" /><input id="btnRadarRegister" type="button" value="雷达注册" onclick="radarRegister()" />
+    </div>
+    <div>
+        设备Token：<input id="txt_RadarRegister_Token" type="text" /><input id="btnRadarHeat" type="button" value="雷达心跳" onclick="radarHeat()" />
+    </div>
+    <div>
+        设备Token：<input id="txt_DeviceChange_Token" type="text" />
+        设备MCUID：<select id="sel_MCUID_DeviceChange">
+                        <option selected="selected" value="20171010200000">存币机</option>
+                        <option value="20171010500001">投币机</option>
+                        <option value="20171014300000">提币机</option>
+                   </select>    		
+        设备状态： <select id="sel_DeviceStatus_DeviceChange">
+                    <option selected="selected" value="0">离线</option>
+                    <option value="1">在线</option>
+                    <option value="2">出币中</option>
+                    <option value="3">故障</option>
+                    <option value="4">锁定</option>
+                   </select>
+        <input id="btnDeviceChange" type="button" value="设备变更" onclick="deviceChange()" />
+    </div>
+
+    <div>
+        设备Token：<input id="txt_DeviceControl_Token" type="text" />
+        设备MCUID：<select id="sel_MCUID_DeviceControl">
+                        <option selected="selected" value="20171010200000">存币机</option>
+                        <option value="20171010500001">投币机</option>
+                        <option value="20171014300000">提币机</option>
+                    </select>
+        控制类别： <select id="sel_DeviceStatus_DeviceControl">
+                        <option selected="selected" value="1">出币</option>
+                        <option value="2">存币</option>
+                        <option value="3">解除报警</option>
+                        <option value="4">远程锁定</option>
+                        <option value="5">远程解锁</option>
+                        <option value="6">投币</option>
+                        <option value="7">退币</option>
+                    </select>
+        会员卡号：<input id="txt_DeviceControl_ICardId" type="text" />
+        币数：<input id="txt_DeviceControl_CoinCount" type="text" />
+        <input id="btnDeviceControl" type="button" value="设备控制" onclick="deviceControl()" />
+        <span id="spanDeviceControl"></span>
+    </div>
+
+    <script>
+        function deviceControl() {
+            var token = $("#txt_DeviceControl_Token").val();
+            var mcuid = $("#sel_MCUID_DeviceControl").val();
+            var action = $("#sel_DeviceStatus_DeviceControl").val();
+            var icCardId = $("#txt_DeviceControl_ICardId").val();
+            var coins = $("#txt_DeviceControl_CoinCount").val();
+
+            var data = { "userToken": $("#txtLoginResult").val(), "token": token, "mcuid": mcuid,"icCardId":icCardId,"controlAction":action,"coins": coins};
+            var url = "/service/UDPService?action=deviceControl";
+            $.ajax({
+                type: "get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.return_code == "1" && data.result_code == "1") {
+                        var html = "<div>" + JSON.stringify(data.result_data) + "</div>";
+                        $("#divResult").append(html);
+                    }
+                    else {
+                        var errMsg = getApiErrMsg(data);
+                        setCallResult(errMsg);
+                    }
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+    </script>
+</body>
+</html>

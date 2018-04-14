@@ -1,0 +1,49 @@
+<html lang="en">
+<meta charset="UTF-8">
+<body>
+<img id="image"src=""/>
+<br/>
+<input type="file"onchange="selectImage(this);"/>
+<br/>
+<input type="button"onclick="uploadImage();"value="提交"/>
+<script>
+    var image = '';
+    function selectImage(file){
+        if(!file.files || !file.files[0]){
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function(evt){
+            document.getElementById('image').src = evt.target.result;
+            image = evt.target.result;
+            var _index=image.indexOf(',');
+            image=image.substring(_index+1,image.length-1);
+            console.log(image)
+//            image=encodeURIComponent(image);
+        };
+        reader.readAsDataURL(file.files[0]);
+    }
+    function uploadImage(){
+        $.ajax({
+            type:'POST',
+            url: 'https://mp.4000051530.com/XCCloud/Bill?action=UploadPicture',
+            data: {image: image,token:"1",signkey:"1f626576304bf5d95b72ece2222e42c3"},
+            async: false,
+            dataType: 'json',
+            success: function(data){
+             console.log(data);
+                if(data.success){
+                    alert('上传成功');
+                }else{
+                    alert('上传失败');
+                }
+            },
+            error: function(err){
+                alert('网络故障');
+            }
+        });
+    }
+</script>
+<script src="js/jquery-1.8.3-min.js"></script>
+</body>
+</html>

@@ -1,0 +1,2297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XCGameDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_485_coin”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_485_coin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Segment" Type="varchar" MaxLength="4" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="CoinType" Type="varchar" MaxLength="1" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="SN" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_485_savecoin”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_485_savecoin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Segment" Type="varchar" MaxLength="4" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_checkdate”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_checkdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckDate" Type="date" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="OPTime" Type="datetime" />
+          <Property Name="CheckCash" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CheckCredit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="text" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_checkdate_schedule”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_checkdate_schedule">
+          <Key>
+            <PropertyRef Name="CheckID" />
+          </Key>
+          <Property Name="CheckID" Type="int" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="CheckCash" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_food_sale”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FlowType" Type="varchar" MaxLength="1" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="FoodID" Type="int" />
+          <Property Name="CoinQuantity" Type="int" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="MemberLevelID" Type="int" />
+          <Property Name="Deposit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OpenFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RenewFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreditFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="PayType" Type="varchar" MaxLength="1" />
+          <Property Name="BuyFoodType" Type="varchar" MaxLength="1" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="ExitRealTime" Type="datetime" />
+          <Property Name="ExitBalance" Type="int" />
+          <Property Name="ExitUserID" Type="int" />
+          <Property Name="ExitScheduleID" Type="int" />
+          <Property Name="ExitWorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="OrderID" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_game_free”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_game_free">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameID" Type="varchar" MaxLength="255" />
+          <Property Name="HeadID" Type="varchar" MaxLength="255" />
+          <Property Name="ICCardID" Type="varchar" MaxLength="255" />
+          <Property Name="FreeCoin" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="RuleID" Type="int" />
+          <Property Name="Balance" Type="int" />
+        </EntityType>
+        <EntityType Name="flw_lottery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkType" Type="int" />
+          <Property Name="GameID" Type="varchar" MaxLength="255" />
+          <Property Name="HeadID" Type="varchar" MaxLength="255" />
+          <Property Name="Barcode" Type="varchar" MaxLength="255" />
+          <Property Name="LotteryCount" Type="int" />
+          <Property Name="State" Type="int" />
+          <Property Name="PrintTime" Type="datetime" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="GoodsFlwID" Type="int" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_project_buy”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_project_buy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ICCardID" Type="varchar" MaxLength="20" />
+          <Property Name="ProjectRuleID" Type="int" />
+          <Property Name="ProjectRuleName" Type="varchar" MaxLength="20" />
+          <Property Name="FreeCoins" Type="int" />
+          <Property Name="PayType" Type="int" />
+          <Property Name="Cash" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Lottery" Type="int" />
+          <Property Name="CreditFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="MACAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="flw_project_buy_codelist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuyID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="Barcode" Type="varchar" MaxLength="32" />
+          <Property Name="PrintTime" Type="datetime" />
+          <Property Name="UseTime" Type="datetime" />
+          <Property Name="HeadID" Type="varchar" MaxLength="32" />
+          <Property Name="State" Type="int" />
+          <Property Name="ProjectType" Type="int" />
+          <Property Name="BuyCount" Type="int" />
+          <Property Name="RemainCount" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="CashValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CoinValue" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="flw_project_play">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuyID" Type="int" />
+          <Property Name="BarCode" Type="varchar" MaxLength="32" />
+          <Property Name="ICCardID" Type="varchar" MaxLength="32" />
+          <Property Name="CheckType" Type="int" />
+          <Property Name="InTime" Type="datetime" />
+          <Property Name="InSegment" Type="varchar" MaxLength="32" />
+          <Property Name="InHeadAddress" Type="varchar" MaxLength="32" />
+          <Property Name="OutTime" Type="datetime" />
+          <Property Name="OutSegment" Type="varchar" MaxLength="32" />
+          <Property Name="OutHeadAddress" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.flw_schedule”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="flw_schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpenTime" Type="datetime" />
+          <Property Name="Schedule" Type="varchar" MaxLength="1" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ShiftTime" Type="datetime" />
+          <Property Name="RealCash" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RealCredit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RealCoin" Type="int" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="1" />
+          <Property Name="Note" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="flw_ticket_exit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Segment" Type="varchar" MaxLength="4" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" />
+          <Property Name="Barcode" Type="varchar" MaxLength="14" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="RealTime" Type="datetime" />
+          <Property Name="CoinMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="varchar" MaxLength="5" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="AuthorID" Type="varchar" MaxLength="20" />
+          <Property Name="Note" Type="varchar" MaxLength="100" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="ChargeTime" Type="datetime" />
+          <Property Name="State" Type="int" />
+          <Property Name="PWD" Type="varchar" MaxLength="2" />
+          <Property Name="isNoAllow" Type="int" />
+          <Property Name="ICCardID" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_device”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="type" Type="varchar" MaxLength="255" />
+          <Property Name="ConnType" Type="varchar" MaxLength="255" />
+          <Property Name="segment" Type="varchar" MaxLength="255" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="MCUID" Type="varchar" MaxLength="255" />
+          <Property Name="port_name" Type="varchar" MaxLength="255" />
+          <Property Name="baute_rate" Type="int" />
+          <Property Name="parity" Type="varchar" MaxLength="255" />
+          <Property Name="ip" Type="varchar" MaxLength="255" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="255" />
+          <Property Name="state" Type="varchar" MaxLength="255" />
+          <Property Name="create_time" Type="datetime" />
+          <Property Name="update_time" Type="datetime" />
+          <Property Name="note" Type="varchar" MaxLength="255" />
+          <Property Name="AllowPrint" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_foods”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_foods">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodName" Type="varchar" MaxLength="30" />
+          <Property Name="RebateNote" Type="varchar" MaxLength="100" />
+          <Property Name="FoodType" Type="varchar" MaxLength="1" />
+          <Property Name="FoodPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CoinQuantity" Type="int" />
+          <Property Name="SuitCoinType" Type="varchar" MaxLength="1" />
+          <Property Name="IsQuickFood" Type="int" />
+          <Property Name="FoodState" Type="varchar" MaxLength="1" />
+          <Property Name="BeginDate" Type="varchar" MaxLength="20" />
+          <Property Name="EndDate" Type="varchar" MaxLength="20" />
+          <Property Name="BackColor" Type="varchar" MaxLength="11" />
+          <Property Name="ForeColor" Type="varchar" MaxLength="11" />
+          <Property Name="Icon" Type="image" />
+          <Property Name="ForeAuthorize" Type="int" />
+          <Property Name="day_sale_count" Type="int" />
+          <Property Name="member_day_sale_count" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_game”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_game">
+          <Key>
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="GameName" />
+          </Key>
+          <Property Name="GameID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="GameName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="1" />
+          <Property Name="PushReduceFromCard" Type="int" />
+          <Property Name="PushAddToGame" Type="int" />
+          <Property Name="OutReduceFromGame" Type="int" />
+          <Property Name="OutAddToCard" Type="int" />
+          <Property Name="AllowDecuplePush" Type="int" />
+          <Property Name="InsertCardOutCoin" Type="int" />
+          <Property Name="AllowRealPush" Type="int" />
+          <Property Name="AllowElecPush" Type="int" />
+          <Property Name="AllowRealOut" Type="int" />
+          <Property Name="AllowElecOut" Type="int" />
+          <Property Name="PushControl" Type="int" />
+          <Property Name="UseSecondPush" Type="int" />
+          <Property Name="SecondReduceFromCard" Type="int" />
+          <Property Name="SecondAddToGame" Type="int" />
+          <Property Name="AllowMemberOut" Type="int" />
+          <Property Name="DefaultPush" Type="int" />
+          <Property Name="OnceOutLimit" Type="int" />
+          <Property Name="OncePureOutLimit" Type="int" />
+          <Property Name="OnceOutValue" Type="int" />
+          <Property Name="OnceOutMaxLimit" Type="int" />
+          <Property Name="GuardConvertCard" Type="int" />
+          <Property Name="StrongGuardConvertCard" Type="int" />
+          <Property Name="GameType" Type="varchar" MaxLength="50" />
+          <Property Name="OutsideAlertCheck" Type="int" />
+          <Property Name="ReturnCheck" Type="int" />
+          <Property Name="BanOccupy" Type="int" />
+          <Property Name="ICTicketOperation" Type="int" />
+          <Property Name="SSRTimeOut" Type="int" />
+          <Property Name="NotGiveBack" Type="int" />
+          <Property Name="OnlyExitLottery" Type="int" />
+          <Property Name="LotteryMode" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_game_free_rule”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_game_free_rule">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="MemberLevelID" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="EndTime" />
+            <PropertyRef Name="NeedCoin" />
+            <PropertyRef Name="FreeCoin" />
+            <PropertyRef Name="ExitCoin" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberLevelID" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="NeedCoin" Type="int" Nullable="false" />
+          <Property Name="FreeCoin" Type="int" Nullable="false" />
+          <Property Name="ExitCoin" Type="int" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_goods”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_goods">
+          <Key>
+            <PropertyRef Name="Barcode" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Units" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="AllowPointFee" />
+            <PropertyRef Name="Point" />
+            <PropertyRef Name="AllowCoinFee" />
+            <PropertyRef Name="Coin" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UpdateTime" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AllowLottery" />
+            <PropertyRef Name="Lottery" />
+            <PropertyRef Name="WindowID" />
+            <PropertyRef Name="AllowCashFee" />
+          </Key>
+          <Property Name="Barcode" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="GoodsName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Units" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="AllowPointFee" Type="int" Nullable="false" />
+          <Property Name="Point" Type="int" Nullable="false" />
+          <Property Name="AllowCoinFee" Type="int" Nullable="false" />
+          <Property Name="Coin" Type="int" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="AllowLottery" Type="int" Nullable="false" />
+          <Property Name="Lottery" Type="int" Nullable="false" />
+          <Property Name="WindowID" Type="int" Nullable="false" />
+          <Property Name="AllowCashFee" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_head”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_head">
+          <Key>
+            <PropertyRef Name="HeadID" />
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="Segment" />
+            <PropertyRef Name="HeadAddress" />
+            <PropertyRef Name="State" />
+          </Key>
+          <Property Name="HeadID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GameID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Segment" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="HeadAddress" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="PushStartInterval" Type="int" />
+          <Property Name="PushSpeed" Type="int" />
+          <Property Name="PushPulse" Type="int" />
+          <Property Name="PushLevel" Type="int" />
+          <Property Name="OutSpeed" Type="int" />
+          <Property Name="OutPulse" Type="int" />
+          <Property Name="CountLevel" Type="int" />
+          <Property Name="OutLevel" Type="int" />
+          <Property Name="BOPulse" Type="int" />
+          <Property Name="ExceptOutTest" Type="int" />
+          <Property Name="ExceptOutSpeed" Type="int" />
+          <Property Name="Frequency" Type="int" />
+          <Property Name="SecondSpeed" Type="int" />
+          <Property Name="SecondPulse" Type="int" />
+          <Property Name="SecondLevel" Type="int" />
+          <Property Name="SecondStartInterval" Type="int" />
+          <Property Name="MCUID" Type="varchar" MaxLength="14" />
+          <Property Name="Lock" Type="int" />
+          <Property Name="PrinterGray" Type="int" />
+          <Property Name="OnceOutLimit" Type="int" />
+          <Property Name="OneDayPureOutLimit" Type="int" />
+          <Property Name="BOKeep" Type="int" />
+          <Property Name="BOLock" Type="int" />
+          <Property Name="now_exit" Type="int" />
+          <Property Name="ExitMaxCheck" Type="int" />
+          <Property Name="ReadCat" Type="int" />
+          <Property Name="QRCode" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="t_member">
+          <Key>
+            <PropertyRef Name="ICCardID" />
+          </Key>
+          <Property Name="ICCardID" Type="int" Nullable="false" />
+          <Property Name="RootICCardID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="varchar" MaxLength="10" />
+          <Property Name="MemberName" Type="varchar" MaxLength="20" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="Birthday" Type="varchar" MaxLength="10" />
+          <Property Name="CertificalID" Type="varchar" MaxLength="18" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Point" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="JoinTime" Type="datetime" />
+          <Property Name="ModTime" Type="datetime" />
+          <Property Name="RenewTime" Type="datetime" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="MemberLevelID" Type="int" />
+          <Property Name="HasUpDownCoin" Type="int" />
+          <Property Name="HasExitMoney" Type="int" />
+          <Property Name="HasSaleCoin" Type="int" />
+          <Property Name="HasSaveCoin" Type="int" />
+          <Property Name="HasFreeCoin" Type="int" />
+          <Property Name="HasRenew" Type="int" />
+          <Property Name="Deposit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MemberPassword" Type="varchar" MaxLength="50" />
+          <Property Name="LeftCode" Type="varchar" MaxLength="500" />
+          <Property Name="RightCode" Type="varchar" MaxLength="500" />
+          <Property Name="MemberState" Type="varchar" MaxLength="1" />
+          <Property Name="RepeatCode" Type="int" />
+          <Property Name="ActiveCode" Type="varchar" MaxLength="5" />
+          <Property Name="Note" Type="varchar" MaxLength="500" />
+          <Property Name="MemberPhoto" Type="varchar" MaxLength="50" />
+          <Property Name="Lock" Type="int" />
+          <Property Name="LockDate" Type="varchar" MaxLength="8" />
+          <Property Name="Uid" Type="bigint" />
+          <Property Name="Type" Type="int" />
+          <Property Name="RepeatCodeOld" Type="int" />
+          <Property Name="TempCard" Type="int" />
+          <Property Name="LeftHandCode" Type="varchar(max)" />
+          <Property Name="RightHandCode" Type="varchar(max)" />
+          <Property Name="Lottery" Type="int" />
+          <Property Name="HandCode" Type="text" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_memberlevel”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_memberlevel">
+          <Key>
+            <PropertyRef Name="MemberLevelID" />
+            <PropertyRef Name="MemberLevelName" />
+            <PropertyRef Name="Deposit" />
+            <PropertyRef Name="ExitMoney" />
+            <PropertyRef Name="ExitCoin" />
+            <PropertyRef Name="ExitPrice" />
+            <PropertyRef Name="ICColor" />
+            <PropertyRef Name="Validday" />
+            <PropertyRef Name="OpenFee" />
+            <PropertyRef Name="RenewFee" />
+            <PropertyRef Name="ChangeFee" />
+            <PropertyRef Name="EarlyRenew" />
+            <PropertyRef Name="DelayRenew" />
+            <PropertyRef Name="FreeRate" />
+            <PropertyRef Name="FreeCoin" />
+            <PropertyRef Name="BirthdayFree" />
+            <PropertyRef Name="BirthdayFreeCoin" />
+            <PropertyRef Name="MustInput" />
+            <PropertyRef Name="AllowExitCard" />
+            <PropertyRef Name="AllowExitMoney" />
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="AllowExitCoinToCard" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="LockHead" />
+            <PropertyRef Name="type" />
+            <PropertyRef Name="MinExitCoin" />
+            <PropertyRef Name="FreeType" />
+            <PropertyRef Name="FreeNeedWin" />
+          </Key>
+          <Property Name="MemberLevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberLevelName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Deposit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExitMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ExitCoin" Type="int" Nullable="false" />
+          <Property Name="ExitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ICColor" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Validday" Type="int" Nullable="false" />
+          <Property Name="OpenFee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RenewFee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ChangeFee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EarlyRenew" Type="int" Nullable="false" />
+          <Property Name="DelayRenew" Type="int" Nullable="false" />
+          <Property Name="FreeRate" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="FreeCoin" Type="int" Nullable="false" />
+          <Property Name="BirthdayFree" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="BirthdayFreeCoin" Type="int" Nullable="false" />
+          <Property Name="MustInput" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="AllowExitCard" Type="int" Nullable="false" />
+          <Property Name="AllowExitMoney" Type="int" Nullable="false" />
+          <Property Name="FoodID" Type="int" Nullable="false" />
+          <Property Name="AllowExitCoinToCard" Type="int" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="LockHead" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MinExitCoin" Type="int" Nullable="false" />
+          <Property Name="FreeType" Type="int" Nullable="false" />
+          <Property Name="FreeNeedWin" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_parameters”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_parameters">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="System" />
+            <PropertyRef Name="ParameterName" />
+            <PropertyRef Name="IsAllow" />
+            <PropertyRef Name="ParameterValue" />
+            <PropertyRef Name="Note" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="System" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ParameterName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAllow" Type="int" Nullable="false" />
+          <Property Name="ParameterValue" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_project”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_project">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="ProjectType" />
+            <PropertyRef Name="MemberCoin" />
+            <PropertyRef Name="TempCoin" />
+            <PropertyRef Name="IntervalTime" />
+            <PropertyRef Name="RegretTime" />
+            <PropertyRef Name="Deposit" />
+            <PropertyRef Name="DeviceID" />
+            <PropertyRef Name="PulseCount" />
+            <PropertyRef Name="Checkout" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProjectType" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MemberCoin" Type="int" Nullable="false" />
+          <Property Name="TempCoin" Type="int" Nullable="false" />
+          <Property Name="IntervalTime" Type="int" Nullable="false" />
+          <Property Name="RegretTime" Type="int" Nullable="false" />
+          <Property Name="Deposit" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="PulseCount" Type="int" Nullable="false" />
+          <Property Name="Checkout" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_push_rule”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_push_rule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="4" />
+          <Property Name="member_level_id" Type="int" />
+          <Property Name="member_level_name" Type="varchar" MaxLength="255" />
+          <Property Name="allow_out" Type="varchar" MaxLength="255" />
+          <Property Name="week" Type="int" />
+          <Property Name="coin" Type="int" />
+          <Property Name="level" Type="int" />
+          <Property Name="begin_time" Type="datetime" />
+          <Property Name="end_time" Type="datetime" />
+          <Property Name="allow_in" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.t_workstation”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="t_workstation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="50" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DiskID" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="1" />
+          <Property Name="BossAccount" Type="varchar" MaxLength="50" />
+          <Property Name="GameAccount" Type="varchar" MaxLength="50" />
+          <Property Name="game_online" Type="int" />
+          <Property Name="sender" Type="int" />
+          <Property Name="guid" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“xcgamedb.dbo.u_users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="u_users">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RealName" Type="varchar" MaxLength="20" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="UserPwd" Type="varchar" MaxLength="20" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" />
+          <Property Name="CertificalID" Type="varchar" MaxLength="18" />
+          <Property Name="Note" Type="varchar" MaxLength="50" />
+          <Property Name="LeftCode" Type="text" />
+          <Property Name="RightCode" Type="text" />
+          <Property Name="ICCardID" Type="int" />
+          <Property Name="HasUnlock" Type="int" />
+          <Property Name="CreateCardTime" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="1" />
+          <Property Name="JoinTime" Type="varchar" MaxLength="20" />
+          <Property Name="HasExitUnlock" Type="int" />
+        </EntityType>
+        <EntityContainer Name="XCGameDBModelStoreContainer">
+          <EntitySet Name="flw_lottery" EntityType="Self.flw_lottery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_project_buy_codelist" EntityType="Self.flw_project_buy_codelist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_project_play" EntityType="Self.flw_project_play" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_ticket_exit" EntityType="Self.flw_ticket_exit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_member" EntityType="Self.t_member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flw_485_coin" EntityType="Self.flw_485_coin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_485_coin].[ID] AS [ID], 
+    [flw_485_coin].[Segment] AS [Segment], 
+    [flw_485_coin].[HeadAddress] AS [HeadAddress], 
+    [flw_485_coin].[ICCardID] AS [ICCardID], 
+    [flw_485_coin].[Coins] AS [Coins], 
+    [flw_485_coin].[CoinType] AS [CoinType], 
+    [flw_485_coin].[Balance] AS [Balance], 
+    [flw_485_coin].[RealTime] AS [RealTime], 
+    [flw_485_coin].[SN] AS [SN]
+    FROM [dbo].[flw_485_coin] AS [flw_485_coin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_485_savecoin" EntityType="Self.flw_485_savecoin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_485_savecoin].[ID] AS [ID], 
+    [flw_485_savecoin].[Segment] AS [Segment], 
+    [flw_485_savecoin].[HeadAddress] AS [HeadAddress], 
+    [flw_485_savecoin].[ICCardID] AS [ICCardID], 
+    [flw_485_savecoin].[Coins] AS [Coins], 
+    [flw_485_savecoin].[Balance] AS [Balance], 
+    [flw_485_savecoin].[RealTime] AS [RealTime]
+    FROM [dbo].[flw_485_savecoin] AS [flw_485_savecoin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_checkdate" EntityType="Self.flw_checkdate" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_checkdate].[ID] AS [ID], 
+    [flw_checkdate].[CheckDate] AS [CheckDate], 
+    [flw_checkdate].[StartTime] AS [StartTime], 
+    [flw_checkdate].[EndTime] AS [EndTime], 
+    [flw_checkdate].[OPTime] AS [OPTime], 
+    [flw_checkdate].[CheckCash] AS [CheckCash], 
+    [flw_checkdate].[CheckCredit] AS [CheckCredit], 
+    [flw_checkdate].[AuthorID] AS [AuthorID], 
+    [flw_checkdate].[DiskID] AS [DiskID], 
+    [flw_checkdate].[WorkStation] AS [WorkStation], 
+    [flw_checkdate].[Note] AS [Note]
+    FROM [dbo].[flw_checkdate] AS [flw_checkdate]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_checkdate_schedule" EntityType="Self.flw_checkdate_schedule" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_checkdate_schedule].[CheckID] AS [CheckID], 
+    [flw_checkdate_schedule].[ScheduleID] AS [ScheduleID], 
+    [flw_checkdate_schedule].[CheckCash] AS [CheckCash]
+    FROM [dbo].[flw_checkdate_schedule] AS [flw_checkdate_schedule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_food_sale" EntityType="Self.flw_food_sale" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_food_sale].[ID] AS [ID], 
+    [flw_food_sale].[FlowType] AS [FlowType], 
+    [flw_food_sale].[ICCardID] AS [ICCardID], 
+    [flw_food_sale].[FoodID] AS [FoodID], 
+    [flw_food_sale].[CoinQuantity] AS [CoinQuantity], 
+    [flw_food_sale].[Point] AS [Point], 
+    [flw_food_sale].[Balance] AS [Balance], 
+    [flw_food_sale].[MemberLevelID] AS [MemberLevelID], 
+    [flw_food_sale].[Deposit] AS [Deposit], 
+    [flw_food_sale].[OpenFee] AS [OpenFee], 
+    [flw_food_sale].[RenewFee] AS [RenewFee], 
+    [flw_food_sale].[ChangeFee] AS [ChangeFee], 
+    [flw_food_sale].[CreditFee] AS [CreditFee], 
+    [flw_food_sale].[TotalMoney] AS [TotalMoney], 
+    [flw_food_sale].[Note] AS [Note], 
+    [flw_food_sale].[PayType] AS [PayType], 
+    [flw_food_sale].[BuyFoodType] AS [BuyFoodType], 
+    [flw_food_sale].[UserID] AS [UserID], 
+    [flw_food_sale].[ScheduleID] AS [ScheduleID], 
+    [flw_food_sale].[AuthorID] AS [AuthorID], 
+    [flw_food_sale].[RealTime] AS [RealTime], 
+    [flw_food_sale].[WorkStation] AS [WorkStation], 
+    [flw_food_sale].[MacAddress] AS [MacAddress], 
+    [flw_food_sale].[DiskID] AS [DiskID], 
+    [flw_food_sale].[ExitRealTime] AS [ExitRealTime], 
+    [flw_food_sale].[ExitBalance] AS [ExitBalance], 
+    [flw_food_sale].[ExitUserID] AS [ExitUserID], 
+    [flw_food_sale].[ExitScheduleID] AS [ExitScheduleID], 
+    [flw_food_sale].[ExitWorkStation] AS [ExitWorkStation], 
+    [flw_food_sale].[OrderID] AS [OrderID]
+    FROM [dbo].[flw_food_sale] AS [flw_food_sale]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_game_free" EntityType="Self.flw_game_free" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_game_free].[id] AS [id], 
+    [flw_game_free].[GameID] AS [GameID], 
+    [flw_game_free].[HeadID] AS [HeadID], 
+    [flw_game_free].[ICCardID] AS [ICCardID], 
+    [flw_game_free].[FreeCoin] AS [FreeCoin], 
+    [flw_game_free].[RealTime] AS [RealTime], 
+    [flw_game_free].[RuleID] AS [RuleID], 
+    [flw_game_free].[Balance] AS [Balance]
+    FROM [dbo].[flw_game_free] AS [flw_game_free]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_project_buy" EntityType="Self.flw_project_buy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_project_buy].[ID] AS [ID], 
+    [flw_project_buy].[ICCardID] AS [ICCardID], 
+    [flw_project_buy].[ProjectRuleID] AS [ProjectRuleID], 
+    [flw_project_buy].[ProjectRuleName] AS [ProjectRuleName], 
+    [flw_project_buy].[FreeCoins] AS [FreeCoins], 
+    [flw_project_buy].[PayType] AS [PayType], 
+    [flw_project_buy].[Cash] AS [Cash], 
+    [flw_project_buy].[Coins] AS [Coins], 
+    [flw_project_buy].[Point] AS [Point], 
+    [flw_project_buy].[Lottery] AS [Lottery], 
+    [flw_project_buy].[CreditFee] AS [CreditFee], 
+    [flw_project_buy].[Balance] AS [Balance], 
+    [flw_project_buy].[Price] AS [Price], 
+    [flw_project_buy].[RealTime] AS [RealTime], 
+    [flw_project_buy].[UserID] AS [UserID], 
+    [flw_project_buy].[ScheduleID] AS [ScheduleID], 
+    [flw_project_buy].[WorkStation] AS [WorkStation], 
+    [flw_project_buy].[MACAddress] AS [MACAddress], 
+    [flw_project_buy].[DiskID] AS [DiskID], 
+    [flw_project_buy].[Comment] AS [Comment]
+    FROM [dbo].[flw_project_buy] AS [flw_project_buy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="flw_schedule" EntityType="Self.flw_schedule" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [flw_schedule].[ID] AS [ID], 
+    [flw_schedule].[OpenTime] AS [OpenTime], 
+    [flw_schedule].[Schedule] AS [Schedule], 
+    [flw_schedule].[UserID] AS [UserID], 
+    [flw_schedule].[ShiftTime] AS [ShiftTime], 
+    [flw_schedule].[RealCash] AS [RealCash], 
+    [flw_schedule].[RealCredit] AS [RealCredit], 
+    [flw_schedule].[RealCoin] AS [RealCoin], 
+    [flw_schedule].[MacAddress] AS [MacAddress], 
+    [flw_schedule].[DiskID] AS [DiskID], 
+    [flw_schedule].[WorkStation] AS [WorkStation], 
+    [flw_schedule].[State] AS [State], 
+    [flw_schedule].[Note] AS [Note]
+    FROM [dbo].[flw_schedule] AS [flw_schedule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_device" EntityType="Self.t_device" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_device].[id] AS [id], 
+    [t_device].[name] AS [name], 
+    [t_device].[type] AS [type], 
+    [t_device].[ConnType] AS [ConnType], 
+    [t_device].[segment] AS [segment], 
+    [t_device].[address] AS [address], 
+    [t_device].[MCUID] AS [MCUID], 
+    [t_device].[port_name] AS [port_name], 
+    [t_device].[baute_rate] AS [baute_rate], 
+    [t_device].[parity] AS [parity], 
+    [t_device].[ip] AS [ip], 
+    [t_device].[WorkStation] AS [WorkStation], 
+    [t_device].[state] AS [state], 
+    [t_device].[create_time] AS [create_time], 
+    [t_device].[update_time] AS [update_time], 
+    [t_device].[note] AS [note], 
+    [t_device].[AllowPrint] AS [AllowPrint]
+    FROM [dbo].[t_device] AS [t_device]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_foods" EntityType="Self.t_foods" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_foods].[FoodID] AS [FoodID], 
+    [t_foods].[FoodName] AS [FoodName], 
+    [t_foods].[RebateNote] AS [RebateNote], 
+    [t_foods].[FoodType] AS [FoodType], 
+    [t_foods].[FoodPrice] AS [FoodPrice], 
+    [t_foods].[CoinQuantity] AS [CoinQuantity], 
+    [t_foods].[SuitCoinType] AS [SuitCoinType], 
+    [t_foods].[IsQuickFood] AS [IsQuickFood], 
+    [t_foods].[FoodState] AS [FoodState], 
+    [t_foods].[BeginDate] AS [BeginDate], 
+    [t_foods].[EndDate] AS [EndDate], 
+    [t_foods].[BackColor] AS [BackColor], 
+    [t_foods].[ForeColor] AS [ForeColor], 
+    [t_foods].[Icon] AS [Icon], 
+    [t_foods].[ForeAuthorize] AS [ForeAuthorize], 
+    [t_foods].[day_sale_count] AS [day_sale_count], 
+    [t_foods].[member_day_sale_count] AS [member_day_sale_count]
+    FROM [dbo].[t_foods] AS [t_foods]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_game" EntityType="Self.t_game" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_game].[GameID] AS [GameID], 
+    [t_game].[GameName] AS [GameName], 
+    [t_game].[State] AS [State], 
+    [t_game].[PushReduceFromCard] AS [PushReduceFromCard], 
+    [t_game].[PushAddToGame] AS [PushAddToGame], 
+    [t_game].[OutReduceFromGame] AS [OutReduceFromGame], 
+    [t_game].[OutAddToCard] AS [OutAddToCard], 
+    [t_game].[AllowDecuplePush] AS [AllowDecuplePush], 
+    [t_game].[InsertCardOutCoin] AS [InsertCardOutCoin], 
+    [t_game].[AllowRealPush] AS [AllowRealPush], 
+    [t_game].[AllowElecPush] AS [AllowElecPush], 
+    [t_game].[AllowRealOut] AS [AllowRealOut], 
+    [t_game].[AllowElecOut] AS [AllowElecOut], 
+    [t_game].[PushControl] AS [PushControl], 
+    [t_game].[UseSecondPush] AS [UseSecondPush], 
+    [t_game].[SecondReduceFromCard] AS [SecondReduceFromCard], 
+    [t_game].[SecondAddToGame] AS [SecondAddToGame], 
+    [t_game].[AllowMemberOut] AS [AllowMemberOut], 
+    [t_game].[DefaultPush] AS [DefaultPush], 
+    [t_game].[OnceOutLimit] AS [OnceOutLimit], 
+    [t_game].[OncePureOutLimit] AS [OncePureOutLimit], 
+    [t_game].[OnceOutValue] AS [OnceOutValue], 
+    [t_game].[OnceOutMaxLimit] AS [OnceOutMaxLimit], 
+    [t_game].[GuardConvertCard] AS [GuardConvertCard], 
+    [t_game].[StrongGuardConvertCard] AS [StrongGuardConvertCard], 
+    [t_game].[GameType] AS [GameType], 
+    [t_game].[OutsideAlertCheck] AS [OutsideAlertCheck], 
+    [t_game].[ReturnCheck] AS [ReturnCheck], 
+    [t_game].[BanOccupy] AS [BanOccupy], 
+    [t_game].[ICTicketOperation] AS [ICTicketOperation], 
+    [t_game].[SSRTimeOut] AS [SSRTimeOut], 
+    [t_game].[NotGiveBack] AS [NotGiveBack], 
+    [t_game].[OnlyExitLottery] AS [OnlyExitLottery], 
+    [t_game].[LotteryMode] AS [LotteryMode]
+    FROM [dbo].[t_game] AS [t_game]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_game_free_rule" EntityType="Self.t_game_free_rule" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_game_free_rule].[ID] AS [ID], 
+    [t_game_free_rule].[GameID] AS [GameID], 
+    [t_game_free_rule].[MemberLevelID] AS [MemberLevelID], 
+    [t_game_free_rule].[StartTime] AS [StartTime], 
+    [t_game_free_rule].[EndTime] AS [EndTime], 
+    [t_game_free_rule].[NeedCoin] AS [NeedCoin], 
+    [t_game_free_rule].[FreeCoin] AS [FreeCoin], 
+    [t_game_free_rule].[ExitCoin] AS [ExitCoin], 
+    [t_game_free_rule].[State] AS [State], 
+    [t_game_free_rule].[CreateTime] AS [CreateTime]
+    FROM [dbo].[t_game_free_rule] AS [t_game_free_rule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_goods" EntityType="Self.t_goods" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_goods].[Barcode] AS [Barcode], 
+    [t_goods].[GoodsName] AS [GoodsName], 
+    [t_goods].[Price] AS [Price], 
+    [t_goods].[Cost] AS [Cost], 
+    [t_goods].[Units] AS [Units], 
+    [t_goods].[Quantity] AS [Quantity], 
+    [t_goods].[AllowPointFee] AS [AllowPointFee], 
+    [t_goods].[Point] AS [Point], 
+    [t_goods].[AllowCoinFee] AS [AllowCoinFee], 
+    [t_goods].[Coin] AS [Coin], 
+    [t_goods].[Note] AS [Note], 
+    [t_goods].[UserID] AS [UserID], 
+    [t_goods].[UpdateTime] AS [UpdateTime], 
+    [t_goods].[State] AS [State], 
+    [t_goods].[AllowLottery] AS [AllowLottery], 
+    [t_goods].[Lottery] AS [Lottery], 
+    [t_goods].[WindowID] AS [WindowID], 
+    [t_goods].[AllowCashFee] AS [AllowCashFee], 
+    [t_goods].[Picture] AS [Picture]
+    FROM [dbo].[t_goods] AS [t_goods]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_head" EntityType="Self.t_head" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_head].[HeadID] AS [HeadID], 
+    [t_head].[GameID] AS [GameID], 
+    [t_head].[Segment] AS [Segment], 
+    [t_head].[HeadAddress] AS [HeadAddress], 
+    [t_head].[State] AS [State], 
+    [t_head].[PushStartInterval] AS [PushStartInterval], 
+    [t_head].[PushSpeed] AS [PushSpeed], 
+    [t_head].[PushPulse] AS [PushPulse], 
+    [t_head].[PushLevel] AS [PushLevel], 
+    [t_head].[OutSpeed] AS [OutSpeed], 
+    [t_head].[OutPulse] AS [OutPulse], 
+    [t_head].[CountLevel] AS [CountLevel], 
+    [t_head].[OutLevel] AS [OutLevel], 
+    [t_head].[BOPulse] AS [BOPulse], 
+    [t_head].[ExceptOutTest] AS [ExceptOutTest], 
+    [t_head].[ExceptOutSpeed] AS [ExceptOutSpeed], 
+    [t_head].[Frequency] AS [Frequency], 
+    [t_head].[SecondSpeed] AS [SecondSpeed], 
+    [t_head].[SecondPulse] AS [SecondPulse], 
+    [t_head].[SecondLevel] AS [SecondLevel], 
+    [t_head].[SecondStartInterval] AS [SecondStartInterval], 
+    [t_head].[MCUID] AS [MCUID], 
+    [t_head].[Lock] AS [Lock], 
+    [t_head].[PrinterGray] AS [PrinterGray], 
+    [t_head].[OnceOutLimit] AS [OnceOutLimit], 
+    [t_head].[OneDayPureOutLimit] AS [OneDayPureOutLimit], 
+    [t_head].[BOKeep] AS [BOKeep], 
+    [t_head].[BOLock] AS [BOLock], 
+    [t_head].[now_exit] AS [now_exit], 
+    [t_head].[ExitMaxCheck] AS [ExitMaxCheck], 
+    [t_head].[ReadCat] AS [ReadCat], 
+    [t_head].[QRCode] AS [QRCode]
+    FROM [dbo].[t_head] AS [t_head]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_memberlevel" EntityType="Self.t_memberlevel" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_memberlevel].[MemberLevelID] AS [MemberLevelID], 
+    [t_memberlevel].[MemberLevelName] AS [MemberLevelName], 
+    [t_memberlevel].[Deposit] AS [Deposit], 
+    [t_memberlevel].[ExitMoney] AS [ExitMoney], 
+    [t_memberlevel].[ExitCoin] AS [ExitCoin], 
+    [t_memberlevel].[ExitPrice] AS [ExitPrice], 
+    [t_memberlevel].[ICColor] AS [ICColor], 
+    [t_memberlevel].[Validday] AS [Validday], 
+    [t_memberlevel].[OpenFee] AS [OpenFee], 
+    [t_memberlevel].[RenewFee] AS [RenewFee], 
+    [t_memberlevel].[ChangeFee] AS [ChangeFee], 
+    [t_memberlevel].[EarlyRenew] AS [EarlyRenew], 
+    [t_memberlevel].[DelayRenew] AS [DelayRenew], 
+    [t_memberlevel].[FreeRate] AS [FreeRate], 
+    [t_memberlevel].[FreeCoin] AS [FreeCoin], 
+    [t_memberlevel].[BirthdayFree] AS [BirthdayFree], 
+    [t_memberlevel].[BirthdayFreeCoin] AS [BirthdayFreeCoin], 
+    [t_memberlevel].[MustInput] AS [MustInput], 
+    [t_memberlevel].[AllowExitCard] AS [AllowExitCard], 
+    [t_memberlevel].[AllowExitMoney] AS [AllowExitMoney], 
+    [t_memberlevel].[FoodID] AS [FoodID], 
+    [t_memberlevel].[AllowExitCoinToCard] AS [AllowExitCoinToCard], 
+    [t_memberlevel].[State] AS [State], 
+    [t_memberlevel].[LockHead] AS [LockHead], 
+    [t_memberlevel].[type] AS [type], 
+    [t_memberlevel].[MinExitCoin] AS [MinExitCoin], 
+    [t_memberlevel].[FreeType] AS [FreeType], 
+    [t_memberlevel].[FreeNeedWin] AS [FreeNeedWin]
+    FROM [dbo].[t_memberlevel] AS [t_memberlevel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_parameters" EntityType="Self.t_parameters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_parameters].[ID] AS [ID], 
+    [t_parameters].[System] AS [System], 
+    [t_parameters].[ParameterName] AS [ParameterName], 
+    [t_parameters].[IsAllow] AS [IsAllow], 
+    [t_parameters].[ParameterValue] AS [ParameterValue], 
+    [t_parameters].[Note] AS [Note]
+    FROM [dbo].[t_parameters] AS [t_parameters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_project" EntityType="Self.t_project" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_project].[id] AS [id], 
+    [t_project].[ProjectName] AS [ProjectName], 
+    [t_project].[ProjectType] AS [ProjectType], 
+    [t_project].[MemberCoin] AS [MemberCoin], 
+    [t_project].[TempCoin] AS [TempCoin], 
+    [t_project].[IntervalTime] AS [IntervalTime], 
+    [t_project].[RegretTime] AS [RegretTime], 
+    [t_project].[Deposit] AS [Deposit], 
+    [t_project].[DeviceID] AS [DeviceID], 
+    [t_project].[PulseCount] AS [PulseCount], 
+    [t_project].[Checkout] AS [Checkout]
+    FROM [dbo].[t_project] AS [t_project]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_push_rule" EntityType="Self.t_push_rule" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_push_rule].[id] AS [id], 
+    [t_push_rule].[game_id] AS [game_id], 
+    [t_push_rule].[member_level_id] AS [member_level_id], 
+    [t_push_rule].[member_level_name] AS [member_level_name], 
+    [t_push_rule].[allow_out] AS [allow_out], 
+    [t_push_rule].[week] AS [week], 
+    [t_push_rule].[coin] AS [coin], 
+    [t_push_rule].[level] AS [level], 
+    [t_push_rule].[begin_time] AS [begin_time], 
+    [t_push_rule].[end_time] AS [end_time], 
+    [t_push_rule].[allow_in] AS [allow_in]
+    FROM [dbo].[t_push_rule] AS [t_push_rule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_workstation" EntityType="Self.t_workstation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_workstation].[ID] AS [ID], 
+    [t_workstation].[WorkStation] AS [WorkStation], 
+    [t_workstation].[MacAddress] AS [MacAddress], 
+    [t_workstation].[DiskID] AS [DiskID], 
+    [t_workstation].[State] AS [State], 
+    [t_workstation].[BossAccount] AS [BossAccount], 
+    [t_workstation].[GameAccount] AS [GameAccount], 
+    [t_workstation].[game_online] AS [game_online], 
+    [t_workstation].[sender] AS [sender], 
+    [t_workstation].[guid] AS [guid]
+    FROM [dbo].[t_workstation] AS [t_workstation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="u_users" EntityType="Self.u_users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [u_users].[UserID] AS [UserID], 
+    [u_users].[UserName] AS [UserName], 
+    [u_users].[RealName] AS [RealName], 
+    [u_users].[Photo] AS [Photo], 
+    [u_users].[UserPwd] AS [UserPwd], 
+    [u_users].[Mobile] AS [Mobile], 
+    [u_users].[CertificalID] AS [CertificalID], 
+    [u_users].[Note] AS [Note], 
+    [u_users].[LeftCode] AS [LeftCode], 
+    [u_users].[RightCode] AS [RightCode], 
+    [u_users].[ICCardID] AS [ICCardID], 
+    [u_users].[HasUnlock] AS [HasUnlock], 
+    [u_users].[CreateCardTime] AS [CreateCardTime], 
+    [u_users].[State] AS [State], 
+    [u_users].[JoinTime] AS [JoinTime], 
+    [u_users].[HasExitUnlock] AS [HasExitUnlock]
+    FROM [dbo].[u_users] AS [u_users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XCGameDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_goods">
+          <Key>
+            <PropertyRef Name="Barcode" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Units" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="AllowPointFee" />
+            <PropertyRef Name="Point" />
+            <PropertyRef Name="AllowCoinFee" />
+            <PropertyRef Name="Coin" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UpdateTime" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AllowLottery" />
+            <PropertyRef Name="Lottery" />
+            <PropertyRef Name="WindowID" />
+            <PropertyRef Name="AllowCashFee" />
+          </Key>
+          <Property Name="Barcode" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GoodsName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Units" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="AllowPointFee" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="Int32" Nullable="false" />
+          <Property Name="AllowCoinFee" Type="Int32" Nullable="false" />
+          <Property Name="Coin" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AllowLottery" Type="Int32" Nullable="false" />
+          <Property Name="Lottery" Type="Int32" Nullable="false" />
+          <Property Name="WindowID" Type="Int32" Nullable="false" />
+          <Property Name="AllowCashFee" Type="Int32" Nullable="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="XCGameDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_goods" EntityType="Self.t_goods" />
+          <EntitySet Name="t_device" EntityType="XCGameDBModel.t_device" />
+          <EntitySet Name="t_foods" EntityType="XCGameDBModel.t_foods" />
+          <EntitySet Name="flw_food_sale" EntityType="XCGameDBModel.flw_food_sale" />
+          <EntitySet Name="flw_schedule" EntityType="XCGameDBModel.flw_schedule" />
+          <EntitySet Name="t_memberlevel" EntityType="XCGameDBModel.t_memberlevel" />
+          <EntitySet Name="u_users" EntityType="XCGameDBModel.u_users" />
+          <EntitySet Name="flw_checkdate" EntityType="XCGameDBModel.flw_checkdate" />
+          <EntitySet Name="flw_checkdate_schedule" EntityType="XCGameDBModel.flw_checkdate_schedule" />
+          <EntitySet Name="t_workstation" EntityType="XCGameDBModel.t_workstation" />
+          <EntitySet Name="flw_485_coin" EntityType="XCGameDBModel.flw_485_coin" />
+          <EntitySet Name="flw_485_savecoin" EntityType="XCGameDBModel.flw_485_savecoin" />
+          <EntitySet Name="flw_project_buy" EntityType="XCGameDBModel.flw_project_buy" />
+          <EntitySet Name="t_project" EntityType="XCGameDBModel.t_project" />
+          <EntitySet Name="t_game" EntityType="XCGameDBModel.t_game" />
+          <EntitySet Name="t_head" EntityType="XCGameDBModel.t_head" />
+          <EntitySet Name="flw_game_free" EntityType="XCGameDBModel.flw_game_free" />
+          <EntitySet Name="t_game_free_rule" EntityType="XCGameDBModel.t_game_free_rule" />
+          <EntitySet Name="t_push_rule" EntityType="XCGameDBModel.t_push_rule" />
+          <EntitySet Name="flw_project_buy_codelist" EntityType="XCGameDBModel.flw_project_buy_codelist" />
+          <EntitySet Name="flw_lottery" EntityType="XCGameDBModel.flw_lottery" />
+          <EntitySet Name="t_parameters" EntityType="XCGameDBModel.t_parameters" />
+          <EntitySet Name="t_member" EntityType="XCGameDBModel.t_member" />
+          <EntitySet Name="flw_ticket_exit" EntityType="XCGameDBModel.flw_ticket_exit" />
+          <EntitySet Name="flw_project_play" EntityType="XCGameDBModel.flw_project_play" />
+        </EntityContainer>
+        <EntityType Name="t_device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ConnType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="segment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MCUID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="port_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="baute_rate" Type="Int32" />
+          <Property Name="parity" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" Precision="3" />
+          <Property Name="update_time" Type="DateTime" Precision="3" />
+          <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AllowPrint" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_foods">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RebateNote" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FoodType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FoodPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CoinQuantity" Type="Int32" />
+          <Property Name="SuitCoinType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IsQuickFood" Type="Int32" />
+          <Property Name="FoodState" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BeginDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BackColor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ForeColor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ForeAuthorize" Type="Int32" />
+          <Property Name="day_sale_count" Type="Int32" />
+          <Property Name="member_day_sale_count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_food_sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlowType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="FoodID" Type="Int32" />
+          <Property Name="CoinQuantity" Type="Int32" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="MemberLevelID" Type="Int32" />
+          <Property Name="Deposit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OpenFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RenewFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreditFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PayType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BuyFoodType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExitRealTime" Type="DateTime" Precision="3" />
+          <Property Name="ExitBalance" Type="Int32" />
+          <Property Name="ExitUserID" Type="Int32" />
+          <Property Name="ExitScheduleID" Type="Int32" />
+          <Property Name="ExitWorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenTime" Type="DateTime" Precision="3" />
+          <Property Name="Schedule" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ShiftTime" Type="DateTime" Precision="3" />
+          <Property Name="RealCash" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RealCredit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RealCoin" Type="Int32" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_memberlevel">
+          <Key>
+            <PropertyRef Name="MemberLevelID" />
+            <PropertyRef Name="MemberLevelName" />
+            <PropertyRef Name="Deposit" />
+            <PropertyRef Name="ExitMoney" />
+            <PropertyRef Name="ExitCoin" />
+            <PropertyRef Name="ExitPrice" />
+            <PropertyRef Name="ICColor" />
+            <PropertyRef Name="Validday" />
+            <PropertyRef Name="OpenFee" />
+            <PropertyRef Name="RenewFee" />
+            <PropertyRef Name="ChangeFee" />
+            <PropertyRef Name="EarlyRenew" />
+            <PropertyRef Name="DelayRenew" />
+            <PropertyRef Name="FreeRate" />
+            <PropertyRef Name="FreeCoin" />
+            <PropertyRef Name="BirthdayFree" />
+            <PropertyRef Name="BirthdayFreeCoin" />
+            <PropertyRef Name="MustInput" />
+            <PropertyRef Name="AllowExitCard" />
+            <PropertyRef Name="AllowExitMoney" />
+            <PropertyRef Name="FoodID" />
+            <PropertyRef Name="AllowExitCoinToCard" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="LockHead" />
+            <PropertyRef Name="type" />
+            <PropertyRef Name="MinExitCoin" />
+            <PropertyRef Name="FreeType" />
+            <PropertyRef Name="FreeNeedWin" />
+          </Key>
+          <Property Name="MemberLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberLevelName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Deposit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExitMoney" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ExitCoin" Type="Int32" Nullable="false" />
+          <Property Name="ExitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ICColor" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Validday" Type="Int32" Nullable="false" />
+          <Property Name="OpenFee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RenewFee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ChangeFee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="EarlyRenew" Type="Int32" Nullable="false" />
+          <Property Name="DelayRenew" Type="Int32" Nullable="false" />
+          <Property Name="FreeRate" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FreeCoin" Type="Int32" Nullable="false" />
+          <Property Name="BirthdayFree" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BirthdayFreeCoin" Type="Int32" Nullable="false" />
+          <Property Name="MustInput" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AllowExitCard" Type="Int32" Nullable="false" />
+          <Property Name="AllowExitMoney" Type="Int32" Nullable="false" />
+          <Property Name="FoodID" Type="Int32" Nullable="false" />
+          <Property Name="AllowExitCoinToCard" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="LockHead" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MinExitCoin" Type="Int32" Nullable="false" />
+          <Property Name="FreeType" Type="Int32" Nullable="false" />
+          <Property Name="FreeNeedWin" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="u_users">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="CertificalID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeftCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RightCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="HasUnlock" Type="Int32" />
+          <Property Name="CreateCardTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="JoinTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HasExitUnlock" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_checkdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="OPTime" Type="DateTime" Precision="3" />
+          <Property Name="CheckCash" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CheckCredit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_checkdate_schedule">
+          <Key>
+            <PropertyRef Name="CheckID" />
+          </Key>
+          <Property Name="CheckID" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="CheckCash" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="t_workstation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BossAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GameAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="game_online" Type="Int32" />
+          <Property Name="sender" Type="Int32" />
+          <Property Name="guid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_485_coin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Segment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HeadAddress" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="CoinType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="SN" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_485_savecoin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Segment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HeadAddress" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="flw_project_buy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ICCardID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectRuleID" Type="Int32" />
+          <Property Name="ProjectRuleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FreeCoins" Type="Int32" />
+          <Property Name="PayType" Type="Int32" />
+          <Property Name="Cash" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="Lottery" Type="Int32" />
+          <Property Name="CreditFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MACAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_project">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="ProjectType" />
+            <PropertyRef Name="MemberCoin" />
+            <PropertyRef Name="TempCoin" />
+            <PropertyRef Name="IntervalTime" />
+            <PropertyRef Name="RegretTime" />
+            <PropertyRef Name="Deposit" />
+            <PropertyRef Name="DeviceID" />
+            <PropertyRef Name="PulseCount" />
+            <PropertyRef Name="Checkout" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MemberCoin" Type="Int32" Nullable="false" />
+          <Property Name="TempCoin" Type="Int32" Nullable="false" />
+          <Property Name="IntervalTime" Type="Int32" Nullable="false" />
+          <Property Name="RegretTime" Type="Int32" Nullable="false" />
+          <Property Name="Deposit" Type="Int32" Nullable="false" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="PulseCount" Type="Int32" Nullable="false" />
+          <Property Name="Checkout" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_game">
+          <Key>
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="GameName" />
+          </Key>
+          <Property Name="GameID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="GameName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PushReduceFromCard" Type="Int32" />
+          <Property Name="PushAddToGame" Type="Int32" />
+          <Property Name="OutReduceFromGame" Type="Int32" />
+          <Property Name="OutAddToCard" Type="Int32" />
+          <Property Name="AllowDecuplePush" Type="Int32" />
+          <Property Name="InsertCardOutCoin" Type="Int32" />
+          <Property Name="AllowRealPush" Type="Int32" />
+          <Property Name="AllowElecPush" Type="Int32" />
+          <Property Name="AllowRealOut" Type="Int32" />
+          <Property Name="AllowElecOut" Type="Int32" />
+          <Property Name="PushControl" Type="Int32" />
+          <Property Name="UseSecondPush" Type="Int32" />
+          <Property Name="SecondReduceFromCard" Type="Int32" />
+          <Property Name="SecondAddToGame" Type="Int32" />
+          <Property Name="AllowMemberOut" Type="Int32" />
+          <Property Name="DefaultPush" Type="Int32" />
+          <Property Name="OnceOutLimit" Type="Int32" />
+          <Property Name="OncePureOutLimit" Type="Int32" />
+          <Property Name="OnceOutValue" Type="Int32" />
+          <Property Name="OnceOutMaxLimit" Type="Int32" />
+          <Property Name="GuardConvertCard" Type="Int32" />
+          <Property Name="StrongGuardConvertCard" Type="Int32" />
+          <Property Name="GameType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OutsideAlertCheck" Type="Int32" />
+          <Property Name="ReturnCheck" Type="Int32" />
+          <Property Name="BanOccupy" Type="Int32" />
+          <Property Name="ICTicketOperation" Type="Int32" />
+          <Property Name="SSRTimeOut" Type="Int32" />
+          <Property Name="NotGiveBack" Type="Int32" />
+          <Property Name="OnlyExitLottery" Type="Int32" />
+          <Property Name="LotteryMode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_head">
+          <Key>
+            <PropertyRef Name="HeadID" />
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="Segment" />
+            <PropertyRef Name="HeadAddress" />
+            <PropertyRef Name="State" />
+          </Key>
+          <Property Name="HeadID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GameID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Segment" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HeadAddress" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PushStartInterval" Type="Int32" />
+          <Property Name="PushSpeed" Type="Int32" />
+          <Property Name="PushPulse" Type="Int32" />
+          <Property Name="PushLevel" Type="Int32" />
+          <Property Name="OutSpeed" Type="Int32" />
+          <Property Name="OutPulse" Type="Int32" />
+          <Property Name="CountLevel" Type="Int32" />
+          <Property Name="OutLevel" Type="Int32" />
+          <Property Name="BOPulse" Type="Int32" />
+          <Property Name="ExceptOutTest" Type="Int32" />
+          <Property Name="ExceptOutSpeed" Type="Int32" />
+          <Property Name="Frequency" Type="Int32" />
+          <Property Name="SecondSpeed" Type="Int32" />
+          <Property Name="SecondPulse" Type="Int32" />
+          <Property Name="SecondLevel" Type="Int32" />
+          <Property Name="SecondStartInterval" Type="Int32" />
+          <Property Name="MCUID" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Lock" Type="Int32" />
+          <Property Name="PrinterGray" Type="Int32" />
+          <Property Name="OnceOutLimit" Type="Int32" />
+          <Property Name="OneDayPureOutLimit" Type="Int32" />
+          <Property Name="BOKeep" Type="Int32" />
+          <Property Name="BOLock" Type="Int32" />
+          <Property Name="now_exit" Type="Int32" />
+          <Property Name="ExitMaxCheck" Type="Int32" />
+          <Property Name="ReadCat" Type="Int32" />
+          <Property Name="QRCode" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_game_free">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HeadID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FreeCoin" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="RuleID" Type="Int32" />
+          <Property Name="Balance" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_game_free_rule">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="MemberLevelID" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="EndTime" />
+            <PropertyRef Name="NeedCoin" />
+            <PropertyRef Name="FreeCoin" />
+            <PropertyRef Name="ExitCoin" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MemberLevelID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NeedCoin" Type="Int32" Nullable="false" />
+          <Property Name="FreeCoin" Type="Int32" Nullable="false" />
+          <Property Name="ExitCoin" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_push_rule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="member_level_id" Type="Int32" />
+          <Property Name="member_level_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="allow_out" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="week" Type="Int32" />
+          <Property Name="coin" Type="Int32" />
+          <Property Name="level" Type="Int32" />
+          <Property Name="begin_time" Type="DateTime" Precision="3" />
+          <Property Name="end_time" Type="DateTime" Precision="3" />
+          <Property Name="allow_in" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_project_buy_codelist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuyID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="PrintTime" Type="DateTime" Precision="3" />
+          <Property Name="UseTime" Type="DateTime" Precision="3" />
+          <Property Name="HeadID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="ProjectType" Type="Int32" />
+          <Property Name="BuyCount" Type="Int32" />
+          <Property Name="RemainCount" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="CashValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CoinValue" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="flw_lottery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkType" Type="Int32" />
+          <Property Name="GameID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HeadID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Barcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LotteryCount" Type="Int32" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="PrintTime" Type="DateTime" Precision="3" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="ICCardID" Type="Int32" />
+          <Property Name="GoodsFlwID" Type="Int32" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="WorkStation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_parameters">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="System" />
+            <PropertyRef Name="ParameterName" />
+            <PropertyRef Name="IsAllow" />
+            <PropertyRef Name="ParameterValue" />
+            <PropertyRef Name="Note" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="System" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ParameterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAllow" Type="Int32" Nullable="false" />
+          <Property Name="ParameterValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_member">
+          <Key>
+            <PropertyRef Name="ICCardID" />
+          </Key>
+          <Property Name="ICCardID" Type="Int32" Nullable="false" />
+          <Property Name="RootICCardID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MemberName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CertificalID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="JoinTime" Type="DateTime" Precision="3" />
+          <Property Name="ModTime" Type="DateTime" Precision="3" />
+          <Property Name="RenewTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="MemberLevelID" Type="Int32" />
+          <Property Name="HasUpDownCoin" Type="Int32" />
+          <Property Name="HasExitMoney" Type="Int32" />
+          <Property Name="HasSaleCoin" Type="Int32" />
+          <Property Name="HasSaveCoin" Type="Int32" />
+          <Property Name="HasFreeCoin" Type="Int32" />
+          <Property Name="HasRenew" Type="Int32" />
+          <Property Name="Deposit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MemberPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeftCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RightCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MemberState" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RepeatCode" Type="Int32" />
+          <Property Name="ActiveCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MemberPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lock" Type="Int32" />
+          <Property Name="LockDate" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Uid" Type="Int64" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="RepeatCodeOld" Type="Int32" />
+          <Property Name="TempCard" Type="Int32" />
+          <Property Name="LeftHandCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RightHandCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Lottery" Type="Int32" />
+          <Property Name="HandCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="flw_ticket_exit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Segment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HeadAddress" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Barcode" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="RealTime" Type="DateTime" Precision="3" />
+          <Property Name="CoinMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UserID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="AuthorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChargeTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="PWD" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="isNoAllow" Type="Int32" />
+          <Property Name="ICCardID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="flw_project_play">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuyID" Type="Int32" />
+          <Property Name="BarCode" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="ICCardID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CheckType" Type="Int32" />
+          <Property Name="InTime" Type="DateTime" Precision="3" />
+          <Property Name="InSegment" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="InHeadAddress" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OutTime" Type="DateTime" Precision="3" />
+          <Property Name="OutSegment" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OutHeadAddress" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XCGameDBModelStoreContainer" CdmEntityContainer="XCGameDBEntities">
+          <EntitySetMapping Name="t_goods">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_goods">
+              <MappingFragment StoreEntitySet="t_goods">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AllowPointFee" ColumnName="AllowPointFee" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="AllowCoinFee" ColumnName="AllowCoinFee" />
+                <ScalarProperty Name="Coin" ColumnName="Coin" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AllowLottery" ColumnName="AllowLottery" />
+                <ScalarProperty Name="Lottery" ColumnName="Lottery" />
+                <ScalarProperty Name="WindowID" ColumnName="WindowID" />
+                <ScalarProperty Name="AllowCashFee" ColumnName="AllowCashFee" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_device">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_device">
+              <MappingFragment StoreEntitySet="t_device">
+                <ScalarProperty Name="AllowPrint" ColumnName="AllowPrint" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="parity" ColumnName="parity" />
+                <ScalarProperty Name="baute_rate" ColumnName="baute_rate" />
+                <ScalarProperty Name="port_name" ColumnName="port_name" />
+                <ScalarProperty Name="MCUID" ColumnName="MCUID" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="segment" ColumnName="segment" />
+                <ScalarProperty Name="ConnType" ColumnName="ConnType" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_foods">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_foods">
+              <MappingFragment StoreEntitySet="t_foods">
+                <ScalarProperty Name="member_day_sale_count" ColumnName="member_day_sale_count" />
+                <ScalarProperty Name="day_sale_count" ColumnName="day_sale_count" />
+                <ScalarProperty Name="ForeAuthorize" ColumnName="ForeAuthorize" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="ForeColor" ColumnName="ForeColor" />
+                <ScalarProperty Name="BackColor" ColumnName="BackColor" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="FoodState" ColumnName="FoodState" />
+                <ScalarProperty Name="IsQuickFood" ColumnName="IsQuickFood" />
+                <ScalarProperty Name="SuitCoinType" ColumnName="SuitCoinType" />
+                <ScalarProperty Name="CoinQuantity" ColumnName="CoinQuantity" />
+                <ScalarProperty Name="FoodPrice" ColumnName="FoodPrice" />
+                <ScalarProperty Name="FoodType" ColumnName="FoodType" />
+                <ScalarProperty Name="RebateNote" ColumnName="RebateNote" />
+                <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_food_sale">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_food_sale">
+              <MappingFragment StoreEntitySet="flw_food_sale">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ExitWorkStation" ColumnName="ExitWorkStation" />
+                <ScalarProperty Name="ExitScheduleID" ColumnName="ExitScheduleID" />
+                <ScalarProperty Name="ExitUserID" ColumnName="ExitUserID" />
+                <ScalarProperty Name="ExitBalance" ColumnName="ExitBalance" />
+                <ScalarProperty Name="ExitRealTime" ColumnName="ExitRealTime" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BuyFoodType" ColumnName="BuyFoodType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="CreditFee" ColumnName="CreditFee" />
+                <ScalarProperty Name="ChangeFee" ColumnName="ChangeFee" />
+                <ScalarProperty Name="RenewFee" ColumnName="RenewFee" />
+                <ScalarProperty Name="OpenFee" ColumnName="OpenFee" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="MemberLevelID" ColumnName="MemberLevelID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="CoinQuantity" ColumnName="CoinQuantity" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="FlowType" ColumnName="FlowType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_schedule">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_schedule">
+              <MappingFragment StoreEntitySet="flw_schedule">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="RealCoin" ColumnName="RealCoin" />
+                <ScalarProperty Name="RealCredit" ColumnName="RealCredit" />
+                <ScalarProperty Name="RealCash" ColumnName="RealCash" />
+                <ScalarProperty Name="ShiftTime" ColumnName="ShiftTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+                <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_memberlevel">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_memberlevel">
+              <MappingFragment StoreEntitySet="t_memberlevel">
+                <ScalarProperty Name="FreeNeedWin" ColumnName="FreeNeedWin" />
+                <ScalarProperty Name="FreeType" ColumnName="FreeType" />
+                <ScalarProperty Name="MinExitCoin" ColumnName="MinExitCoin" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="LockHead" ColumnName="LockHead" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AllowExitCoinToCard" ColumnName="AllowExitCoinToCard" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="AllowExitMoney" ColumnName="AllowExitMoney" />
+                <ScalarProperty Name="AllowExitCard" ColumnName="AllowExitCard" />
+                <ScalarProperty Name="MustInput" ColumnName="MustInput" />
+                <ScalarProperty Name="BirthdayFreeCoin" ColumnName="BirthdayFreeCoin" />
+                <ScalarProperty Name="BirthdayFree" ColumnName="BirthdayFree" />
+                <ScalarProperty Name="FreeCoin" ColumnName="FreeCoin" />
+                <ScalarProperty Name="FreeRate" ColumnName="FreeRate" />
+                <ScalarProperty Name="DelayRenew" ColumnName="DelayRenew" />
+                <ScalarProperty Name="EarlyRenew" ColumnName="EarlyRenew" />
+                <ScalarProperty Name="ChangeFee" ColumnName="ChangeFee" />
+                <ScalarProperty Name="RenewFee" ColumnName="RenewFee" />
+                <ScalarProperty Name="OpenFee" ColumnName="OpenFee" />
+                <ScalarProperty Name="Validday" ColumnName="Validday" />
+                <ScalarProperty Name="ICColor" ColumnName="ICColor" />
+                <ScalarProperty Name="ExitPrice" ColumnName="ExitPrice" />
+                <ScalarProperty Name="ExitCoin" ColumnName="ExitCoin" />
+                <ScalarProperty Name="ExitMoney" ColumnName="ExitMoney" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="MemberLevelName" ColumnName="MemberLevelName" />
+                <ScalarProperty Name="MemberLevelID" ColumnName="MemberLevelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="u_users">
+            <EntityTypeMapping TypeName="XCGameDBModel.u_users">
+              <MappingFragment StoreEntitySet="u_users">
+                <ScalarProperty Name="HasExitUnlock" ColumnName="HasExitUnlock" />
+                <ScalarProperty Name="JoinTime" ColumnName="JoinTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateCardTime" ColumnName="CreateCardTime" />
+                <ScalarProperty Name="HasUnlock" ColumnName="HasUnlock" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="RightCode" ColumnName="RightCode" />
+                <ScalarProperty Name="LeftCode" ColumnName="LeftCode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CertificalID" ColumnName="CertificalID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_checkdate">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_checkdate">
+              <MappingFragment StoreEntitySet="flw_checkdate">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="CheckCredit" ColumnName="CheckCredit" />
+                <ScalarProperty Name="CheckCash" ColumnName="CheckCash" />
+                <ScalarProperty Name="OPTime" ColumnName="OPTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_checkdate_schedule">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_checkdate_schedule">
+              <MappingFragment StoreEntitySet="flw_checkdate_schedule">
+                <ScalarProperty Name="CheckCash" ColumnName="CheckCash" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_workstation">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_workstation">
+              <MappingFragment StoreEntitySet="t_workstation">
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="sender" ColumnName="sender" />
+                <ScalarProperty Name="game_online" ColumnName="game_online" />
+                <ScalarProperty Name="GameAccount" ColumnName="GameAccount" />
+                <ScalarProperty Name="BossAccount" ColumnName="BossAccount" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_485_coin">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_485_coin">
+              <MappingFragment StoreEntitySet="flw_485_coin">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="CoinType" ColumnName="CoinType" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_485_savecoin">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_485_savecoin">
+              <MappingFragment StoreEntitySet="flw_485_savecoin">
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_project_buy">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_project_buy">
+              <MappingFragment StoreEntitySet="flw_project_buy">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MACAddress" ColumnName="MACAddress" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="CreditFee" ColumnName="CreditFee" />
+                <ScalarProperty Name="Lottery" ColumnName="Lottery" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="FreeCoins" ColumnName="FreeCoins" />
+                <ScalarProperty Name="ProjectRuleName" ColumnName="ProjectRuleName" />
+                <ScalarProperty Name="ProjectRuleID" ColumnName="ProjectRuleID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_project">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_project">
+              <MappingFragment StoreEntitySet="t_project">
+                <ScalarProperty Name="Checkout" ColumnName="Checkout" />
+                <ScalarProperty Name="PulseCount" ColumnName="PulseCount" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RegretTime" ColumnName="RegretTime" />
+                <ScalarProperty Name="IntervalTime" ColumnName="IntervalTime" />
+                <ScalarProperty Name="TempCoin" ColumnName="TempCoin" />
+                <ScalarProperty Name="MemberCoin" ColumnName="MemberCoin" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_game">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_game">
+              <MappingFragment StoreEntitySet="t_game">
+                <ScalarProperty Name="LotteryMode" ColumnName="LotteryMode" />
+                <ScalarProperty Name="OnlyExitLottery" ColumnName="OnlyExitLottery" />
+                <ScalarProperty Name="NotGiveBack" ColumnName="NotGiveBack" />
+                <ScalarProperty Name="SSRTimeOut" ColumnName="SSRTimeOut" />
+                <ScalarProperty Name="ICTicketOperation" ColumnName="ICTicketOperation" />
+                <ScalarProperty Name="BanOccupy" ColumnName="BanOccupy" />
+                <ScalarProperty Name="ReturnCheck" ColumnName="ReturnCheck" />
+                <ScalarProperty Name="OutsideAlertCheck" ColumnName="OutsideAlertCheck" />
+                <ScalarProperty Name="GameType" ColumnName="GameType" />
+                <ScalarProperty Name="StrongGuardConvertCard" ColumnName="StrongGuardConvertCard" />
+                <ScalarProperty Name="GuardConvertCard" ColumnName="GuardConvertCard" />
+                <ScalarProperty Name="OnceOutMaxLimit" ColumnName="OnceOutMaxLimit" />
+                <ScalarProperty Name="OnceOutValue" ColumnName="OnceOutValue" />
+                <ScalarProperty Name="OncePureOutLimit" ColumnName="OncePureOutLimit" />
+                <ScalarProperty Name="OnceOutLimit" ColumnName="OnceOutLimit" />
+                <ScalarProperty Name="DefaultPush" ColumnName="DefaultPush" />
+                <ScalarProperty Name="AllowMemberOut" ColumnName="AllowMemberOut" />
+                <ScalarProperty Name="SecondAddToGame" ColumnName="SecondAddToGame" />
+                <ScalarProperty Name="SecondReduceFromCard" ColumnName="SecondReduceFromCard" />
+                <ScalarProperty Name="UseSecondPush" ColumnName="UseSecondPush" />
+                <ScalarProperty Name="PushControl" ColumnName="PushControl" />
+                <ScalarProperty Name="AllowElecOut" ColumnName="AllowElecOut" />
+                <ScalarProperty Name="AllowRealOut" ColumnName="AllowRealOut" />
+                <ScalarProperty Name="AllowElecPush" ColumnName="AllowElecPush" />
+                <ScalarProperty Name="AllowRealPush" ColumnName="AllowRealPush" />
+                <ScalarProperty Name="InsertCardOutCoin" ColumnName="InsertCardOutCoin" />
+                <ScalarProperty Name="AllowDecuplePush" ColumnName="AllowDecuplePush" />
+                <ScalarProperty Name="OutAddToCard" ColumnName="OutAddToCard" />
+                <ScalarProperty Name="OutReduceFromGame" ColumnName="OutReduceFromGame" />
+                <ScalarProperty Name="PushAddToGame" ColumnName="PushAddToGame" />
+                <ScalarProperty Name="PushReduceFromCard" ColumnName="PushReduceFromCard" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_head">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_head">
+              <MappingFragment StoreEntitySet="t_head">
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="ReadCat" ColumnName="ReadCat" />
+                <ScalarProperty Name="ExitMaxCheck" ColumnName="ExitMaxCheck" />
+                <ScalarProperty Name="now_exit" ColumnName="now_exit" />
+                <ScalarProperty Name="BOLock" ColumnName="BOLock" />
+                <ScalarProperty Name="BOKeep" ColumnName="BOKeep" />
+                <ScalarProperty Name="OneDayPureOutLimit" ColumnName="OneDayPureOutLimit" />
+                <ScalarProperty Name="OnceOutLimit" ColumnName="OnceOutLimit" />
+                <ScalarProperty Name="PrinterGray" ColumnName="PrinterGray" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="MCUID" ColumnName="MCUID" />
+                <ScalarProperty Name="SecondStartInterval" ColumnName="SecondStartInterval" />
+                <ScalarProperty Name="SecondLevel" ColumnName="SecondLevel" />
+                <ScalarProperty Name="SecondPulse" ColumnName="SecondPulse" />
+                <ScalarProperty Name="SecondSpeed" ColumnName="SecondSpeed" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="ExceptOutSpeed" ColumnName="ExceptOutSpeed" />
+                <ScalarProperty Name="ExceptOutTest" ColumnName="ExceptOutTest" />
+                <ScalarProperty Name="BOPulse" ColumnName="BOPulse" />
+                <ScalarProperty Name="OutLevel" ColumnName="OutLevel" />
+                <ScalarProperty Name="CountLevel" ColumnName="CountLevel" />
+                <ScalarProperty Name="OutPulse" ColumnName="OutPulse" />
+                <ScalarProperty Name="OutSpeed" ColumnName="OutSpeed" />
+                <ScalarProperty Name="PushLevel" ColumnName="PushLevel" />
+                <ScalarProperty Name="PushPulse" ColumnName="PushPulse" />
+                <ScalarProperty Name="PushSpeed" ColumnName="PushSpeed" />
+                <ScalarProperty Name="PushStartInterval" ColumnName="PushStartInterval" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="HeadID" ColumnName="HeadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_game_free">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_game_free">
+              <MappingFragment StoreEntitySet="flw_game_free">
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="RuleID" ColumnName="RuleID" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="FreeCoin" ColumnName="FreeCoin" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="HeadID" ColumnName="HeadID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_game_free_rule">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_game_free_rule">
+              <MappingFragment StoreEntitySet="t_game_free_rule">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ExitCoin" ColumnName="ExitCoin" />
+                <ScalarProperty Name="FreeCoin" ColumnName="FreeCoin" />
+                <ScalarProperty Name="NeedCoin" ColumnName="NeedCoin" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="MemberLevelID" ColumnName="MemberLevelID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_push_rule">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_push_rule">
+              <MappingFragment StoreEntitySet="t_push_rule">
+                <ScalarProperty Name="allow_in" ColumnName="allow_in" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="begin_time" ColumnName="begin_time" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="coin" ColumnName="coin" />
+                <ScalarProperty Name="week" ColumnName="week" />
+                <ScalarProperty Name="allow_out" ColumnName="allow_out" />
+                <ScalarProperty Name="member_level_name" ColumnName="member_level_name" />
+                <ScalarProperty Name="member_level_id" ColumnName="member_level_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_project_buy_codelist">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_project_buy_codelist">
+              <MappingFragment StoreEntitySet="flw_project_buy_codelist">
+                <ScalarProperty Name="CoinValue" ColumnName="CoinValue" />
+                <ScalarProperty Name="CashValue" ColumnName="CashValue" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="RemainCount" ColumnName="RemainCount" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HeadID" ColumnName="HeadID" />
+                <ScalarProperty Name="UseTime" ColumnName="UseTime" />
+                <ScalarProperty Name="PrintTime" ColumnName="PrintTime" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_lottery">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_lottery">
+              <MappingFragment StoreEntitySet="flw_lottery">
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="GoodsFlwID" ColumnName="GoodsFlwID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="PrintTime" ColumnName="PrintTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="LotteryCount" ColumnName="LotteryCount" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="HeadID" ColumnName="HeadID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_parameters">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_parameters">
+              <MappingFragment StoreEntitySet="t_parameters">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ParameterValue" ColumnName="ParameterValue" />
+                <ScalarProperty Name="IsAllow" ColumnName="IsAllow" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_member">
+            <EntityTypeMapping TypeName="XCGameDBModel.t_member">
+              <MappingFragment StoreEntitySet="t_member">
+                <ScalarProperty Name="HandCode" ColumnName="HandCode" />
+                <ScalarProperty Name="Lottery" ColumnName="Lottery" />
+                <ScalarProperty Name="RightHandCode" ColumnName="RightHandCode" />
+                <ScalarProperty Name="LeftHandCode" ColumnName="LeftHandCode" />
+                <ScalarProperty Name="TempCard" ColumnName="TempCard" />
+                <ScalarProperty Name="RepeatCodeOld" ColumnName="RepeatCodeOld" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="LockDate" ColumnName="LockDate" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="MemberPhoto" ColumnName="MemberPhoto" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="RepeatCode" ColumnName="RepeatCode" />
+                <ScalarProperty Name="MemberState" ColumnName="MemberState" />
+                <ScalarProperty Name="RightCode" ColumnName="RightCode" />
+                <ScalarProperty Name="LeftCode" ColumnName="LeftCode" />
+                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="HasRenew" ColumnName="HasRenew" />
+                <ScalarProperty Name="HasFreeCoin" ColumnName="HasFreeCoin" />
+                <ScalarProperty Name="HasSaveCoin" ColumnName="HasSaveCoin" />
+                <ScalarProperty Name="HasSaleCoin" ColumnName="HasSaleCoin" />
+                <ScalarProperty Name="HasExitMoney" ColumnName="HasExitMoney" />
+                <ScalarProperty Name="HasUpDownCoin" ColumnName="HasUpDownCoin" />
+                <ScalarProperty Name="MemberLevelID" ColumnName="MemberLevelID" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="RenewTime" ColumnName="RenewTime" />
+                <ScalarProperty Name="ModTime" ColumnName="ModTime" />
+                <ScalarProperty Name="JoinTime" ColumnName="JoinTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CertificalID" ColumnName="CertificalID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="RootICCardID" ColumnName="RootICCardID" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_ticket_exit">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_ticket_exit">
+              <MappingFragment StoreEntitySet="flw_ticket_exit">
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="isNoAllow" ColumnName="isNoAllow" />
+                <ScalarProperty Name="PWD" ColumnName="PWD" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ChargeTime" ColumnName="ChargeTime" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="DiskID" ColumnName="DiskID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CoinMoney" ColumnName="CoinMoney" />
+                <ScalarProperty Name="RealTime" ColumnName="RealTime" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="HeadAddress" ColumnName="HeadAddress" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flw_project_play">
+            <EntityTypeMapping TypeName="XCGameDBModel.flw_project_play">
+              <MappingFragment StoreEntitySet="flw_project_play">
+                <ScalarProperty Name="OutHeadAddress" ColumnName="OutHeadAddress" />
+                <ScalarProperty Name="OutSegment" ColumnName="OutSegment" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InHeadAddress" ColumnName="InHeadAddress" />
+                <ScalarProperty Name="InSegment" ColumnName="InSegment" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="CheckType" ColumnName="CheckType" />
+                <ScalarProperty Name="ICCardID" ColumnName="ICCardID" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

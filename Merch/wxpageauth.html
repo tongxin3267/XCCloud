@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <script type="text/javascript">
+        var href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8a76dada2e7f98a5&redirect_uri=" + encodeURIComponent("https://mp.4000051530.com/WeiXin/Register.aspx?smId=S0100011&merchId=B4201030001&scode=aaaa&mobile=13545208294&username=chfengmtcs&password=111111&realname=冯程&message=hello") + "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
+        function do_wxpageauth() {
+            window.location.href = href;
+        }
+        window.onload = do_wxpageauth;
+    </script>
+</head>
+<body>
+
+</body>
+</html>

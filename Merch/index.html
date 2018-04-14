@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+	<title>商户后台管理系统</title>
+	<link rel="stylesheet" href="layui/css/layui.css">
+	<link rel="stylesheet" href="css/manchartData.css">
+</head>
+<style>
+	.layui-nav .layui-nav-item .pageA{
+		padding-left: 40px;!important;
+	}
+</style>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+	<div class="layui-header">
+		<div class="layui-logo">莘宸商户后台布局（logo）</div>
+		<!-- 头部区域（可配合layui已有的水平导航） -->
+		<ul class="layui-nav layui-layout-right" style="margin-right: 400px;">
+			<li class="layui-nav-item">
+				<a href="javascript:;">用户类型：<span id="userTypes"></span></a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">未读消息</a>
+				<dl class="layui-nav-child">
+					<dd><a href="javascript:;">邮件管理</a></dd>
+					<dd><a href="javascript:;">消息管理</a></dd>
+					<dd><a href="javascript:;">授权管理</a></dd>
+				</dl>
+			</li>
+		</ul>
+		<ul class="layui-nav layui-layout-right">
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<img src="images/xh3.png" class="layui-nav-img">
+					<span id="_userName"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd><a href="javascript:;">基本资料</a></dd>
+					<dd><a href="javascript:;">安全设置</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item"><a href="#" onclick="reLogin()">重新登陆</a></li>
+		</ul>
+	</div>
+
+	<div class="layui-side layui-bg-black">
+		<div class="layui-side-scroll">
+			<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+			<ul class="layui-nav layui-nav-tree"  lay-filter="test" id="merchantMenu">
+			</ul>
+		</div>
+	</div>
+
+	<div class="layui-body">
+		<!-- 内容主体区域 -->
+		<div style="padding: 5px;height: 103%;">
+			<div class="titleAppend">
+				<ul>
+					<li id="hShow0" class="now" style="margin-left: 0;"><em><a href="#javascript;">系统首页</a></em></li>
+				</ul>
+			</div>
+			<div class="test2" style="width: 100%;height: 100%;overflow: hidden;">
+				<iframe id="iFrame0" src="home.html" width="100%" height="800px" frameborder="0" seamless></iframe>
+				<div class="wrapper-inner-tab-backgrounds-first"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-footer">
+		<!--<div style="height: 30px;line-height: 30px; text-align: center;">-->
+			<!--<a href="#">关于我们</a><a href="#">用户协议</a><a href="#">相关链接</a>-->
+		<!--</div>-->
+		<div style="height: 30px;line-height: 30px;text-align: center;">@2018 Xinchen <a href="#">使用前必读</a> 意见反馈 京ICP证030173号 版权所有 仿冒必纠</div>
+	</div>
+</div>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="js/jquery.sortable.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+
+
+    $('#merchantMenu').on('toggle','li',function () {
+		$(this).addClass('layui-nav-itemed').siblings().removeClass('layui-nav-itemed');
+    });
+	var token=getStorage('token');
+	//更改用户类型
+	let _userTypes=getStorage('userType');
+	if(_userTypes==0){
+	    $('#userTypes').text('莘宸用户')
+	}else if(_userTypes==1){
+        $('#userTypes').text('普通用户')
+	} else if(_userTypes==2){
+        $('#userTypes').text('大客户')
+    }else if(_userTypes==3){
+        $('#userTypes').text('代理商')
+    }else if(_userTypes==4){
+        $('#userTypes').text('门店用户')
+    }else if(_userTypes==5){
+        $('#userTypes').text('门店老板')
+    }
+//更改用户名
+	let　_username=getStorage('usernames');
+$('#_userName').text(_username);
+    var url = window.location.href;  //获取网址字符串
+    url=decodeURIComponent(url);
+    var len = url.length;
+    var offset = url.indexOf("?");
+    var str = url.substr(offset+1,len);
+    var args = str.split("&");
+    var arg = args[0].split("=");
+    var token1 = arg[1];
+	if(token1!=undefined&&token1!=null&token1!=""){
+	    token=token1;
+        setStorage('token',token1);
+        var	logType=getStorage('logType');
+        setLeftList("merchantMenu",logType);
+	}else if(token.length>0){
+        var	logType=getStorage('logType');
+        setLeftList("merchantMenu",logType)
+	}
+
+</script>
+</body>
+</html>

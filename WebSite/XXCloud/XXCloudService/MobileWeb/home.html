@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue-ydui Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/ydui.rem.css">
+    <!-- 引入rem自适应类库 -->
+    <script src="js/ydui.flexible.js"></script>
+    <style>
+        .hidden{display: none;}
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <yd-tabbar fixed=true active-color="#000000">
+        <yd-tabbar-item title="首页" link="#" active>
+            <yd-icon name="home" slot="icon" size="0.54rem"></yd-icon>
+        </yd-tabbar-item>
+        <yd-tabbar-item title="我的订单" link="#">
+            <yd-icon name="shopcart" slot="icon" size="0.54rem"></yd-icon>
+        </yd-tabbar-item>
+        <yd-tabbar-item title="个人中心" link="#">
+            <yd-icon name="ucenter-outline" slot="icon" size="0.54rem"></yd-icon>
+        </yd-tabbar-item>
+    </yd-tabbar>
+    <div style="height: 275px;">
+        <yd-slider autoplay="3000" direction="vertical">
+            <yd-slider-item v-for="item, key in banner" :key="item.ID">
+                <a href="javaScript:void(0);">
+                    <img :src="item.PicturePath"/>
+                </a>
+            </yd-slider-item>
+        </yd-slider>
+    </div>
+    <yd-list theme="4">
+        <yd-list-item v-for="item, key in newsList" :key="item.ID">
+            <img slot="img" :src="item.PicturePath">
+            <span slot="title">{{item.Title}}</span>
+            <yd-list-other slot="other">
+                <div>
+                    <span class="demo-list-price"><em></em>{{item.StoreName}}</span>
+
+                </div>
+                <div><span class="demo-list-del-price">{{item.Time}}</span></div>
+            </yd-list-other>
+        </yd-list-item>
+    </yd-list>
+</div>
+
+<!-- 引入 Vue -->
+<script src="js/vue.js"></script>
+<script src="js/jquery-1.8.3-min.js"></script>
+<!-- 引入组件库 -->
+<script src="js/ydui.rem.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    var geteway = "https://mp.4000051530.com";
+    var url_getNews = '/api/XCGameMana/Promotion.ashx?action=getPromotion';   //首页news获取
+    var htmlfnc = new Vue({
+        el: '#app',
+        data:{
+            newsList:[],
+            banner:[]
+        },
+        mounted: function () {
+            this.Load();
+        },
+        methods: {
+            toastSuccess: function() {
+                this.$dialog.toast({
+                    mes: '保存成功',
+                    timeout: 1500,
+                    icon: 'success'
+                });
+            },
+            Load: function () {
+                var obj={"sysId": "0","versionNo": "0.0.0.1"};
+                var that =this;
+                axios.post(url_getNews, obj).then(function (res) {
+                    console.log(res.data);
+                    if (res.data.result_code === '1') {
+                        console.log(res.data.result_data.length);
+                        var _newsList=[];
+                        var _banner=[];
+                        for (var i = 0; i < res.data.result_data.length; i++) {
+                            console.log(res.data.result_data[i].PublishType);
+
+                            if (res.data.result_data[i].PublishType == 0) {
+                                _newsList.push({
+                                    ID: res.data.result_data[i].ID,
+                                    PagePath: res.data.result_data[i].PagePath,
+                                    PicturePath: res.data.result_data[i].PicturePath,
+                                    PromotionType: res.data.result_data[i].PromotionType,
+                                    ReleaseTime: res.data.result_data[i].ReleaseTime,
+                                    StoreID: res.data.result_data[i].StoreID,
+                                    StoreName: res.data.result_data[i].StoreName,
+                                    Time: res.data.result_data[i].Time,
+                                    Title: res.data.result_data[i].Title
+                                });
+                                console.log(_newsList);
+                            }
+                            else {
+                                _banner.push({
+                                    ID: res.data.result_data[i].ID,
+                                    PagePath: res.data.result_data[i].PagePath,
+                                    PicturePath: res.data.result_data[i].PicturePath,
+                                    PromotionType: res.data.result_data[i].PromotionType,
+                                    ReleaseTime: res.data.result_data[i].ReleaseTime,
+                                    StoreID: res.data.result_data[i].StoreID,
+                                    StoreName: res.data.result_data[i].StoreName,
+                                    Time: res.data.result_data[i].Time,
+                                    Title: res.data.result_data[i].Title
+                                });
+                                console.log(_banner);
+                            }
+                        }
+                        that.newsList =_newsList;
+                        that.banner =_banner;
+                    }
+                }).catch(function (err) {
+                    console.log(err);
+                })
+            },
+        }
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

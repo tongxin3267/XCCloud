@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+<script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+<script>
+    function do_query_init() {
+        var parasObj = { "pagename": "index", "processname": "test", "userid": "1", "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var parasJson = JSON.stringify(parasObj); 
+        $.ajax({
+            type: "post",
+            url: '/query?action=init',
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+     }
+
+
+
+
+    function do_dashboard_gameRanking() {
+        var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+        var parasJson = JSON.stringify(parasObj);
+        $.ajax({
+            type: "post",
+            url: '/dashboard?action=todayGameRanking',
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }
+
+       
+
+</script>
+</head>
+<body>
+    <input id="Button1" type="button" value="query_init" onclick="do_query_init()"/>
+
+    <input id="Button2" type="button" value="dashboard_gameRanking" onclick="do_dashboard_gameRanking()"/>
+
+</body>
+</html>

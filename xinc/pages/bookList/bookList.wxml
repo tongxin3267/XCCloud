@@ -1,0 +1,28 @@
+<!--bookList.wxml-->
+
+<view class="container">
+  
+  <view class='member bg1 {{hidden1}}'>
+      <text class='memberText'>设备名：{{memberText1}}</text><text class='memberText'>设备状态：{{memberText2}}</text>
+      <text class='memberText'>****：{{memberText3}}</text>
+  </view> 
+  <view class='member bg2 {{hidden1}}'>
+      <text class='memberText'>{{memberText4}}</text>
+      <text class='memberText'>卡号{{memberText5}}</text>
+      <view class='clerR'><text class='memberText fl'>余额:{{memberText6}}</text><text class='memberText fr'>积分:{{memberText7}}</text></view>
+  </view>  
+  
+  <view class='{{hidden1}}'>
+    <button class='Save-money' catchtap="saveM" bindtap="setPlain">{{memberText8}}</button>
+  </view>
+  
+</view>
+
+<view>
+  <loading class="{{hidden}}">
+      请从入币口倒入实物币
+  </loading>
+</view>
+<view class='{{show}} memberTr'>
+  <text>您此次存入的币数是<text class='memberColor'>{{number}}</text></text> 
+</view>

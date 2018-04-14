@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+    <title>第三方支付流水</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+ <div style="padding: 5px;">
+     <div class="layui-row">
+         <blockquote class="demoTable layui-elem-quote" style="text-align: right;padding-right: 100px;">
+             <button class="layui-btn layui-btn_serch" data-type="reload" id="shBtn"><i class="layui-icon">&#xe615;</i>高级搜索</button>
+         </blockquote>
+         <div class="layui-col-md12" id="container">
+
+         </div>
+         <div class="layui-col-md12">
+             <table class="layui-hide" id="payLists"  lay-filter="payLists"></table>
+         </div>
+     </div>
+
+     <div id="searchModel" style="display: none">
+         <form action="" class="layui-form" style="padding: 15px">
+             <div class="layui-form-item layui-form-pane">
+                 <label class="layui-form-label">查询条件</label>
+                 <div class="layui-input-block" id="searchListUp" style="border: 1px dashed #f0ad4e">
+
+                 </div>
+             </div>
+             <div class="layui-form-item layui-form-pane">
+                 <div class="" pane id="searchListDown"  style="border: 1px dashed #f0ad4e;margin-left: 110px" lay-filter="sld">
+                 </div>
+             </div>
+             <div class="layui-form-item layui-form-pane" id="searchbox" style="margin-left: 110px">
+             </div>
+             <div class="layui-col-md-offset9" id="submitBtn">
+                 <button type="reset" class="layui-btn layui-btn-normal" id="searchReset">重置</button>
+                 <button type="button" class="layui-btn layui-btn-danger" id="searchCAncle" onclick="closePage()">取消</button>
+                 <button type="button" class="layui-btn layui-btn-normal" id="searchBtn">查询</button>
+             </div>
+         </form>
+     </div>
+ </div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="js/heightCharts.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var token=getStorage('token'),arr=[],arrList=[];
+    var parm={'url':'/XCCloud/Order?action=GetOrders',
+        'obj':{"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+        'elem':'#payLists',
+        cols:[{type:'numbers'}
+            ,{field:'ID', title: '订单ID', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            ,{field:'CreateTime', title: '交易日期',width:140, align: 'center'}
+            ,{field:'OrderID', title: '订单编号', align: 'center'}
+            ,{field:'StoreName', title: '门店名称', align: 'center'} //单元格内容水平居中
+            ,{field:'FoodName', title: '商品描述', align: 'center'} //单元格内容水平居中
+            ,{field:'PayTypeStr', title: '支付通道', align: 'center'}
+            ,{field:'OrderSourceStr', title: '来源',  align: 'center'}
+            ,{field:'OrderStatusStr', title: '支付状态',  align: 'center'}
+            ,{field:'FoodCount', title: '套餐数',  align: 'center'}
+            ,{fixed: 'right', title: '操作', width:280, align:'center', toolbar: '#barDemo'}
+        ]};
+    // getInitData(parm);
+
+
+     layui.use(['form','table','layer'],function () {
+         var form=layui.form, table=layui.table, layer=layui.layer;
+         table.render({
+             elem: '#payLists'
+             ,height: 315
+             ,data: [{
+                 "ID": "10001"
+                 ,"CreateTime": "杜甫"
+                 ,"OrderID": "xianxin@layui.com"
+                 ,"StoreName": "男"
+                 ,"FoodName": "浙江杭州"
+                 ,"PayTypeStr": "人生恰似一场修行"
+                 ,"OrderSourceStr": "116"
+                 ,"OrderStatusStr": "192.168.0.8"
+                 ,"FoodCount": "108"
+             }] //数据接口
+             ,page: true //开启分页
+             ,cols: [[ //表头
+                 {type:'numbers'}
+                 ,{field:'ID', title: '订单ID', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                 ,{field:'CreateTime', title: '交易日期',width:140, align: 'center'}
+                 ,{field:'OrderID', title: '订单编号', align: 'center'}
+                 ,{field:'StoreName', title: '门店名称', align: 'center'} //单元格内容水平居中
+                 ,{field:'FoodName', title: '商品描述', align: 'center'} //单元格内容水平居中
+                 ,{field:'PayTypeStr', title: '支付通道', align: 'center'}
+                 ,{field:'OrderSourceStr', title: '来源',  align: 'center'}
+                 ,{field:'OrderStatusStr', title: '支付状态',  align: 'center'}
+                 ,{field:'FoodCount', title: '套餐数',  align: 'center'}
+                 ,{fixed: 'right', title: '操作', width:280, align:'center', toolbar: '#barDemo'}
+             ]]
+         });
+         table.on('tool(payLists)', function(obj){
+             var data = obj.data; //获得当前行数据
+             var id=data.ID;
+             var layEvent = obj.event;
+             var tr = obj.tr;
+             if(layEvent === 'detail'){ //查看
+                 var _obj={'id':id,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                 var url='/XCCloud/Order?action= GetOrdersDetails';
+                 var  parasJson = JSON.stringify(_obj);
+                 $.ajax({
+                     type: "post",
+                     url: url,
+                     contentType: "application/json; charset=utf-8",
+                     data: parasJson,
+                     success: function (data) {
+                         data = JSON.parse(data);
+                         if (data.result_code == '1') {
+
+                         }
+                     }
+                 });
+                layui.use('layer', function() {
+                     var layer = layui.layer;
+                     layer.open({
+                         type: 1,
+                         title:'<button class="layui-btn">商户:'+data.MerchID+'门店列表<span class="layui-badge-dot layui-bg-orange"></span></button>',
+                         content: $('#lookStoreList'),
+                         shadeClose:true,
+                         area: ['1400px','500px']
+                     })
+                 });
+             }
+         });
+         $('#shBtn').on('click',function () {
+             arr=[];arrList=[];
+             $('#searchListUp').html("");
+             $('#searchbox').html("");
+             var token=getStorage('token');
+             var obj={"sysId": "0", "versionNo": "0.0.0.1",'pagename':'orderSearch','processname':'orderSearch'
+                 ,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+             var url='/XCCloud/Query?action=init';
+             var  parasJson = JSON.stringify(obj);
+             $.ajax({
+                 type: "post",
+                 url: url,
+                 contentType: "application/json; charset=utf-8",
+                 data:parasJson,
+                 success: function (data) {
+                     data=JSON.parse(data);
+                     console.log(data)
+                     if(data.result_code=='1'){
+                         arr=data.result_data;
+                         for(var i=0;i<arr.length;i++){
+                             arrList.push(arr[i])
+                         }
+                         layer.open({
+                             type: 1,
+                             title:'高级查询',
+                             area:['1000px','400px'],
+                             content:$('#searchModel'),
+                             shadeClose:true
+                         });
+                         addCheckbox('searchListDown',arr);
+                         renderDiv(arr);
+                         form.render();
+                     }
+                     layui.use(['layer','form','laydate'],function () {
+                         var layer=layui.layer;
+                         var laydate=layui.laydate;
+                         laydate.render({
+                             elem: '#datetime',type: 'datetime'
+                         });
+                         laydate.render({
+                             elem: '#datetimes',type: 'datetime',range: true
+                         });
+                         laydate.render({
+                             elem: '#date',type: 'date'
+                         });
+                         laydate.render({
+                             elem: '#dates',type: 'date',range: true
+                         });
+                     });
+                     form.on('checkbox(aaaaa)', function(data5){
+                         if(data5.elem.checked==true){
+                             for(var i=0;i<arr.length;i++){
+                                 if(arr[i].title==data5.value){
+                                     $('#searchbox').find('div[name="'+arr[i].title+'"]').removeClass('layui-hide');
+                                     $('#searchListUp').append('<a href="#" class="layui-btn layui-btn-normal layui-btn-sm" style="margin: 5px 1px" name="'+arr[i].field+'" >' +
+                                         '<span name="'+arr[i].width+'">'+arr[i].title+'</span>' +
+                                         '<i class="layui-icon layBtn" name="'+arr[i].type+'"data-id="'+arr[i].id+'"' +
+                                         'style="color: #F00;margin-left: 15px">&#xe640;</i></a >');
+                                     arr.splice(i,1);
+                                     addCheckbox('searchListDown',arr);
+                                 }
+                             }
+                         }
+
+                     });
+
+                     $('#searchListUp').on('click','a i',function (e) {
+                         e.stopPropagation();
+                         var text=$(this).parent().children('span').text();
+                         $('#searchListDown').append(' <input type="checkbox" name="like" value="'+text+'" title="'+text+'" lay-filter="aaaaa">');
+                         arr.push({'field':$(this).parent().attr('name'),'id':$(this).attr('data-id'),'iscloune':1,
+                             'issearch':1,'title':text,'type':$(this).attr('name'),'width':$(this).parent().children('span').attr('name')});
+                         form.render();
+                         $('#searchbox').find('div[name="'+text+'"]').addClass('layui-hide');
+                         $(this).parent().remove();
+                     });
+                 }
+             });
+         });
+         $('#searchBtn').on('click',function () {
+             var conditions=[];
+             getValues(arrList,conditions);
+             var parm={'url':'/XCCloud/Order?action=GetOrders',
+                 'obj':{'conditions':conditions,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+                 'elem':'#merchantListTable',
+                 cols:[{type:'numbers'}
+                     ,{field:'ID', title: '订单ID', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                     ,{field:'CreateTime', title: '交易日期',width:140, align: 'center'}
+                     ,{field:'OrderID', title: '订单编号', align: 'center'}
+                     ,{field:'StoreName', title: '门店名称', align: 'center'} //单元格内容水平居中
+                     ,{field:'FoodName', title: '商品描述', align: 'center'} //单元格内容水平居中
+                     ,{field:'PayTypeStr', title: '支付通道', align: 'center'}
+                     ,{field:'OrderSourceStr', title: '来源',  align: 'center'}
+                     ,{field:'OrderStatusStr', title: '支付状态',  align: 'center'}
+                     ,{field:'FoodCount', title: '套餐数',  align: 'center'}
+                     ,{fixed: 'right', title: '操作', width:280, align:'center', toolbar: '#barDemo'}
+                 ]};
+             getInitData(parm);
+             layer.closeAll()
+         })
+
+     });
+
+  var drawDoubleLineChart=  function (xAxis_categories,data1,data2) {
+      $('#container').highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: '支付流水单'
+          },
+          xAxis: {
+              categories: ['苹果', '橘子', '梨', '葡萄', '香蕉']
+          },
+          credits: {
+              enabled: false
+          },
+          series: [{
+              name: '微信',
+              data: [5, 3, 4, 7, 2]
+          }, {
+              name: '支付宝',
+              data: [3, 4, 4, -2, 5]
+          }]
+      });
+     };
+
+  var urlChart='/XCCloud/Order?action=GetOrdersChart';
+  var  parasJsonChart = JSON.stringify({'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'});
+    $.ajax({
+        type: "post",
+        url: urlChart,
+        contentType: "application/json; charset=utf-8",
+        data: parasJsonChart,
+        success: function (data) {
+            data = JSON.parse(data);
+            console.log(data);
+            if (data.result_code == '1') {
+                drawDoubleLineChart();
+            }
+        }
+    })
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-sm" lay-event="detail" ><i class="layui-icon">&#xe642;</i>明细</a>
+</script>
+</html>

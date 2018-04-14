@@ -1,0 +1,69 @@
+[{
+    "id": 0,
+    "title": "编号",
+    "field":"ID",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 1,
+    "title": "商品条码",
+    "field":"ProductCode",
+    "type": "time",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 2,
+    "title": "商品类别",
+    "field":"ProductKind",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 3,
+    "title": "商品名称",
+    "field":"ProductName",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 4,
+    "title": "零售价格",
+    "field":"Price",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 5,
+    "title": "零售积分",
+    "field":"Point",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+}
+,{
+    "id": 6,
+    "title":"备注",
+    "field":"Note",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+}]

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+<script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+
+<script type="text/javascript">
+
+    function common(url, parasJson) {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            error: function (error) {
+                alert(1);  //这个地方也用到了
+            }
+        });
+    }
+
+    //工作组权限
+    function do_usergroup() {
+        var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "workId": "1" };
+        var url = '/wx/Users?action=GetUserGroup';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //授权功能
+    function do_user_grant() {
+        var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "workId": "1" };
+        var url = '/wx/Users?action=GetUserGrant';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //审核提交
+    function do_auth_submit() {
+        var parasObj = {
+            "userGroup": { "ID": 1, "MerchID": "B4201030001", GroupName: "员工组1", "Note": "第一个权限模板" },
+            "userGrant": [
+                { "ID": 1, "PID": 0, "DictKey": "SystemGrand", "DictValue": "", "GrantEN": 1 },
+                { "ID": 2, "PID": 1, "DictKey": "Grand1", "DictValue": "授权功能1", "GrantEN": 1 },
+                { "ID": 3, "PID": 1, "DictKey": "Grand2", "DictValue": "授权功能2", "GrantEN": 1 },
+                { "ID": 4, "PID": 1, "DictKey": "Grand3", "DictValue": "授权功能3", "GrantEN": 1 },
+                { "ID": 5, "PID": 1, "DictKey": "Grand4", "DictValue": "授权功能4", "GrantEN": 1 }
+            ],
+            "state": "1", "reason": "", "workId": 1, "sysId": "0", "versionNo": "0.0.0.1"
+        };
+        var url = '/wx/Users?action=SaveUserInfo';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+    //用户查询
+    function do_userinfo() {
+        var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "nextOpenId": "" };
+        var url = '/wx/Users?action=GetWxUserList';
+        var parasJson = JSON.stringify(parasObj);
+        common(url, parasJson);
+    }
+
+</script>
+
+</head>
+<body>    
+    <pre id="incomming"></pre>
+
+    <div title = "微信用户查询" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>工作组查询</div>
+        <input id="Button1" type="button" value="usergroup_grant" onclick="do_usergroup()" />
+        <div>授权功能查询</div>
+        <input id="Button1" type="button" value="user_grant" onclick="do_user_grant()" />
+        <div>审核提交</div>
+        <input id="Button1" type="button" value="auth_submit" onclick="do_auth_submit()" />
+        <div>用户查询</div>
+        <input id="Button1" type="button" value="do_userinfo" onclick="do_userinfo()" />
+    </div>
+    <br />
+</body>
+</html>

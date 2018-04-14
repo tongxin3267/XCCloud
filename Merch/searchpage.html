@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/manchartData.css">
+    <style>
+        .layui-form-pane .layui-form-checkbox {width: 300px;}
+        .layui-form-pane .layui-form-checkbox span{width:240px;}
+        #searchbox{max-height: 320px;overflow-y: scroll;margin-left: 110px}
+        /*#submitBtn{position: absolute;}*/
+    </style>
+</head>
+<body>
+<div class="layui-main">
+    <div style="text-align: right;padding: 15px;">
+        <button type="button" class="layui-btn layui-btn-normal" id="shBtn"><i class="layui-icon">&#xe615;</i>高级查询</button>
+    </div>
+</div>
+<div id="searchModel" style="display: none">
+    <form action="" class="layui-form" style="padding: 15px">
+        <div class="layui-form-item layui-form-pane">
+            <label class="layui-form-label">查询条件</label>
+            <div class="layui-input-block" id="searchListUp" style="border: 1px dashed #f0ad4e">
+
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-pane">
+            <!--<label class="layui-form-label"></label>-->
+            <div class="" pane id="searchListDown"  style="border: 1px dashed #f0ad4e;display: none;margin-left: 110px" lay-filter="sld">
+
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-pane" id="searchbox" style="margin-left: 110px">
+
+        </div>
+        <div class="layui-col-md-offset10" id="submitBtn">
+            <button type="button" class="layui-btn layui-btn-normal" id="searchBtn">查询</button>
+        </div>
+    </form>
+</div>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var arr=[]; var  arrList=[];
+    layui.use(['element','layer','form','jquery','table'],function () {
+        var element=layui.element,layer=layui.layer,form=layui.form,$=layui.jquery,table=layui.table;
+    $('#searchListUp').on('click',function () {
+        $('#searchListDown').slideToggle();
+    });
+
+    $('#shBtn').on('click',function () {
+        arr=[];arrList=[];
+        $('#searchListUp').html("");
+        $('#searchbox').html("");
+        var token=getStorage('token');
+        var url='/Query?action=init',
+            obj={"sysId": "0", "versionNo": "0.0.0.1",
+                'pagename':'storeSearch','processname':'storeSearch',"token": token, "signkey": "1f626576304bf5d95b72ece2222e42c3"};
+        var  parasJson = JSON.stringify(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data:parasJson,
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.result_code=='1'){
+                  // var  arrList=data.result_data;
+                        arr=data.result_data;
+
+                       for(var i=0;i<arr.length;i++){
+                           arrList.push(arr[i])
+                       }
+
+                        layer.open({
+                            type: 1,
+                            maxmin: true,
+                            title:'高级查询',
+                            area:['1000px','600px'],
+                            content:$('#searchModel'),
+                            shadeClose:true
+                        });
+
+                        addCheckbox('searchListDown',arr);
+                    renderDiv(arr)
+                        // for(var i=0;i<arr.length;i++){
+                        //     if(arr[i].issearch==1){
+                        //         if(arr[i].type=='string'||arr[i].type=='number'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><input type="text" id="'+arr[i].field+'" class="layui-input"></div></div>');
+                        //         }else if(arr[i].type=='numbers'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label><div class="layui-input-inline" style="width: 100px;">' +
+                        //                 '      <input type="text" name="price_min" placeholder="start" autocomplete="off" class="layui-input" id="'+arr[i].field+'1">' +
+                        //                 '    </div>' +
+                        //                 '    <div class="layui-form-mid">-</div>' +
+                        //                 '    <div class="layui-input-inline" style="width: 100px;">' +
+                        //                 '      <input type="text" name="price_max" placeholder="end" autocomplete="off" class="layui-input" id="'+arr[i].field+'2">' +
+                        //                 '    </div></div>')
+                        //         }else if(arr[i].type=='datetime'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><input type="text" id="datetime" class="layui-input" name="'+arr[i].field+'"></div></div>')
+                        //
+                        //         }else if(arr[i].type=='datetimes'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><input type="text" id="datetimes" class="layui-input" name="'+arr[i].field+'"></div></div>')
+                        //         }else if(arr[i].type=='date'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><input type="text" id="date" class="layui-input" name="'+arr[i].field+'"></div></div>')
+                        //         }else if(arr[i].type=='dates'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><input type="text" id="dates" class="layui-input" name="'+arr[i].field+'"></div></div>')
+                        //         }else if(arr[i].type=='literals'){
+                        //             $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                        //                 '<div class="layui-input-inline"><select id="'+arr[i].field+'" class="layui-input" lay-ignore></select></div></div>')
+                        //         }
+                        //     }
+                        // }
+                        form.render();
+                    $('#searchBtn').on('click',function () {
+                        var conditions=[];
+                        // for(var i=0;i<arrList.length;i++){
+                        //     if(arrList[i].type=='string'||arrList[i].type=='number'){
+                        //         console.log($('#'+arrList[i].field));
+                        //         console.log($('#'+arrList[i].field).val());
+                        //         conditions.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('#'+arrList[i].field).val()})
+                        //     }else  if(arrList[i].type=='numbers'){
+                        //         conditions.push({'id':arrList[i].id,'field':arrList[i].field,'values':[$('#'+arrList[i].field+'1').val(),$('#'+arrList[i].field+'1').val()]})
+                        //     }else if(arrList[i].type=='datetime'||arrList[i].type=='date'){
+                        //         conditions.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('input[name="'+arrList[i].field+'"]').val()})
+                        //     }else if(arrList[i].type=='datetimes'||arrList[i].type=='dates'){
+                        //         conditions.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('input[name="'+arrList[i].field+'"]').val().split(' - ')})
+                        //     }else if(arrList[i].type=='literals'){
+                        //         conditions.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('#'+arrList[i].field).find('option selected').text()})
+                        //     }
+                        // }
+                        getValues(arrList,conditions);
+                        console.log(conditions);
+                        var obj={'merchId':"",'conditions':conditions,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                        url='/XCCloud/StoreInfo?action=GetStoreList';
+                        var  parasJson = JSON.stringify(obj);
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            contentType: "application/json; charset=utf-8",
+                            data:parasJson,
+                            success: function (data) {
+                                data = JSON.parse(data);
+                                console.log(data);
+                                 if(data.result_code==1){
+                                     // table.re
+                                 }
+                            }
+
+                        })
+                    })
+
+                }
+
+                layui.use(['layer','form','laydate'],function () {
+                    var layer=layui.layer;
+                    var laydate=layui.laydate;
+                    laydate.render({
+                        elem: '#datetime',type: 'datetime'
+                    });
+                    laydate.render({
+                        elem: '#datetimes',type: 'datetime',range: true
+                    });
+                    laydate.render({
+                        elem: '#date',type: 'date'
+                    });
+                    laydate.render({
+                        elem: '#dates',type: 'date',range: true
+                    });
+                });
+                form.on('checkbox(aaaaa)', function(data5){
+                    if(data5.elem.checked==true){
+                        for(var i=0;i<arr.length;i++){
+                            if(arr[i].title==data5.value){
+                                $('#searchbox').find('div[name="'+arr[i].title+'"]').removeClass('layui-hide');
+                                $('#searchListUp').append('<a href="#" class="layui-btn layui-btn-normal layui-btn-sm" style="margin: 5px 1px" name="'+arr[i].field+'" >' +
+                                    '<span name="'+arr[i].width+'">'+arr[i].title+'</span>' +
+                                    '<i class="layui-icon layBtn" name="'+arr[i].type+'"data-id="'+arr[i].id+'"' +
+                                    'style="color: #F00;margin-left: 15px">&#xe640;</i></a >');
+                                arr.splice(i,1);
+                                console.log(arrList===arr);
+                                addCheckbox('searchListDown',arr);
+                            }
+                        }
+                    }
+
+                });
+
+                $('#searchListUp').on('click','a i',function (e) {
+                    e.stopPropagation();
+                    var text=$(this).parent().children('span').text();
+                    console.log(text);
+                    $('#searchListDown').append(' <input type="checkbox" name="like" value="'+text+'" title="'+text+'" lay-filter="aaaaa">');
+                    console.log(arr);
+                    arr.push({'field':$(this).parent().attr('name'),'id':$(this).attr('data-id'),'iscloune':1,
+                        'issearch':1,'title':text,'type':$(this).attr('name'),'width':$(this).parent().children('span').attr('name')});
+                    console.log(arr);
+                    form.render();
+                    $('#searchbox').find('div[name="'+text+'"]').addClass('layui-hide');
+                    $(this).parent().remove();
+                });
+            }
+        });
+
+
+
+
+        });
+
+    });
+function renderDiv(arr) {
+    for(var i=0;i<arr.length;i++){
+        if(arr[i].issearch==1){
+            if(arr[i].type=='string'||arr[i].type=='number'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><input type="text" id="'+arr[i].field+'" class="layui-input"></div></div>');
+            }else if(arr[i].type=='numbers'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label><div class="layui-input-inline" style="width: 100px;">' +
+                    '      <input type="text" name="price_min" placeholder="start" autocomplete="off" class="layui-input" id="'+arr[i].field+'1">' +
+                    '    </div>' +
+                    '    <div class="layui-form-mid">-</div>' +
+                    '    <div class="layui-input-inline" style="width: 100px;">' +
+                    '      <input type="text" name="price_max" placeholder="end" autocomplete="off" class="layui-input" id="'+arr[i].field+'2">' +
+                    '    </div></div>')
+            }else if(arr[i].type=='datetime'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><input type="text" id="datetime" class="layui-input" name="'+arr[i].field+'"></div></div>')
+
+            }else if(arr[i].type=='datetimes'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><input type="text" id="datetimes" class="layui-input" name="'+arr[i].field+'"></div></div>')
+            }else if(arr[i].type=='date'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><input type="text" id="date" class="layui-input" name="'+arr[i].field+'"></div></div>')
+            }else if(arr[i].type=='dates'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><input type="text" id="dates" class="layui-input" name="'+arr[i].field+'"></div></div>')
+            }else if(arr[i].type=='literals'){
+                $('#searchbox').append('<div class="layui-inline layui-hide" style="width: 410px" name="'+arr[i].title+'"><label class="layui-form-label">'+arr[i].title+'</label>' +
+                    '<div class="layui-input-inline"><select id="'+arr[i].field+'" class="layui-input" lay-ignore></select></div></div>')
+            }
+        }
+    }
+}
+    function addCheckbox(id,arr) {
+        layui.use(['form','jquery'],function () {
+            var form=layui.form;var $=layui.jquery;
+            $('#'+id).html("");
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].issearch==1){
+                    $('#'+id).append(' <input type="checkbox" name="like" value="'+arr[i].title+'" title="'+arr[i].title+'" lay-filter="aaaaa">');
+                   }
+            }
+            form.render();
+        })
+    }
+    function getValues(arrList,arrResult) {
+        for(var i=0;i<arrList.length;i++){
+            if(arrList[i].type=='string'||arrList[i].type=='number'){
+                console.log($('#'+arrList[i].field));
+                console.log($('#'+arrList[i].field).val());
+                arrResult.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('#'+arrList[i].field).val()})
+            }else  if(arrList[i].type=='numbers'){
+                arrResult.push({'id':arrList[i].id,'field':arrList[i].field,'values':[$('#'+arrList[i].field+'1').val(),$('#'+arrList[i].field+'1').val()]})
+            }else if(arrList[i].type=='datetime'||arrList[i].type=='date'){
+                arrResult.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('input[name="'+arrList[i].field+'"]').val()})
+            }else if(arrList[i].type=='datetimes'||arrList[i].type=='dates'){
+                arrResult.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('input[name="'+arrList[i].field+'"]').val().split(' - ')})
+            }else if(arrList[i].type=='literals'){
+                arrResult.push({'id':arrList[i].id,'field':arrList[i].field,'values':$('#'+arrList[i].field).find('option selected').text()})
+            }
+        }
+        return arrResult;
+    }
+</script>
+</body>
+</html>

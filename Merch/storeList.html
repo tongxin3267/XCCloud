@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+	<link rel="stylesheet" href="css/manchartData.css">
+	<link rel="stylesheet" href="layui/css/layui.css">
+	<link rel="stylesheet" href="css/magicsuggest-1.2.2.css">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rKXLFp7Q5LaRdax2dtrxkLzzQLrbGG4T"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script> 
+	<title>门店列表</title>
+</head>
+<style>
+	 .layui-table-cell .layui-btn{height: 28px;line-height: 28px;}
+	.thumb {margin-left:5px; margin-top:15px; height:128px}
+	#prevModal {width:100%; height:100%; text-align:center; display:none;}
+	#img_prev {max-width:98%; max-height:98%; margin: 10px auto}
+	.deme2 .edtimg{display: inline-block;position: relative;border: 1px solid #f2dede;}
+	.edtimg{display: inline-block;position: relative;border: 1px solid #f2dede;}
+	.edtimg .imgs{position: relative;}
+	.demo-delete{position: absolute;top: -2px;right: -2px;background-color: #bce8f1;color: red;}
+	.edtimg .imgs>img{width: 200px;height: 160px;}
+
+	.imgBox button{position: absolute;top: 3px;right: 3px;}
+     .imgBox img[class='layui-upload-img_md']{
+	display: block; width: 400px;height: 300px;margin-left: 300px;}
+	 #lookStoreDetils input{cursor: pointer!important;}
+	#storeIdModify .layui-form-label{
+		text-align: left;
+	}
+</style>
+<body>
+	<div class="" style="padding: 10px">
+		<blockquote class="layui-elem-quote" style="text-align: right;padding-right: 100px;">
+			 <button type="button" class="layui-btn layui-btn_serch" data-type="reload" id="shBtn"><i class="layui-icon">&#xe615;</i>高级搜索</button>
+			 <button type="button" class="layui-btn layui-btn-normal addbtn" id="addNewStore">新增</button>
+		</blockquote>
+		<div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+			<table class="layui-hide" id="storeListTable"  lay-filter="storeList"></table>
+		</div>
+	</div>
+
+	<form action="" class="formStore layui-form" style="display: none;padding: 15px;">
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">常规设置</li>
+				<li>门店地址</li>
+				<li>实名认证</li>
+				<li>结算设置</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="layui-form-item">
+						<label class="layui-form-label">门店归属</label>
+						<div class="layui-input-inline"style="width: 300px;">
+							<select name="" id="parentId" lay-search>
+								<option value="">-请选择-</option>
+							</select>
+						</div>
+						<div class="layui-form-mid layui-word-aux">直属门店或单门店不填</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">门头名称</label>
+						<div class="layui-input-inline" style="width: 300px;">
+							<input type="text" name="title" id="storeName" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux" style="padding: 0!important;"><input type="text" placeholder="消费密码" class="layui-input" id="lookPassword"></div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">到期日期</label>
+						<div class="layui-input-inline" style="width: 450px;">
+							<input type="text" class="layui-input" id="authorExpireDate" placeholder="yyyy-MM-dd HH:mm:ss(授权到期日期)">
+						</div>
+					</div>
+					<div class="layui-form-item">
+
+						<div class="layui-upload">
+							<button type="button" class="layui-btn" id="test2">门头照片上传</button>
+							<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+								预览图：
+								<div class="layui-upload-list" id="demo2">
+									<input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+								</div>
+							</blockquote>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 120px; padding: 9px  8px">点击地图获取地址:</label>
+							<div class="layui-input-inline"style="width: 300px;">
+								<input type="text" name="title" id="Address" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" onclick="getLocationMsg()">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 32px;padding: 9px  8px">经度:</label>
+							<div class="layui-input-inline" style="width: 170px;">
+								<input type="text" name="title" id="lng" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" disabled>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label"style="width: 32px;padding: 9px 8px">纬度:</label>
+							<div class="layui-input-inline" style="width: 170px;">
+								<input type="text" name="title" id="lat" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" disabled>
+							</div>
+						</div>
+					</div>
+					<div id="allmap" class="layui-col-md12" style="height: 500px;margin-bottom: 20px;" ></div>
+				</div>
+				<div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+					<div class="ident identName layui-row">
+						<div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">姓名</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="contracts" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">身份号码</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="idCard" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label" id="idExpireDate-1">有效期限</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="idExpireDate" lay-verify="required" placeholder="yyyy-MM-dd"  class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">联系电话</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="mobile" lay-verify="required" placeholder="找回密码,请正确填写" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="layui-bg-blue">
+					<div class="ident identLicense layui-row">
+						<div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">营业执照</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="licenceId" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label" id="licenceExpireDate-1">营业日期</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="licenceExpireDate" lay-verify="required" placeholder="yyyy-MM-dd " autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item" style="text-align: center">
+								<button type="button" class="layui-btn" id="test3">银业执照上传</button>
+								<button type="button" class="layui-btn layui-btn-normal" id="subupID">提交</button>
+							</div>
+						</div>
+						<div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+							<div class="layui-upload">
+								<blockquote class="layui-elem-quote layui-quote-nm" style="padding: 0;">
+									<p>请分别上传营业执照正反两面</p>
+									<div class="layui-upload-list demo-license" id="demo3" style="padding: 0;">
+										<input id="nameImage1" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+									</div>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<hr class="layui-bg-blue">
+					<div class="ident identBank layui-row">
+						<div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">银行类型</label>
+									<div class="layui-input-inline">
+										<select name="bankKind" id="bankType" lay-filter="bankType" style="width: 300px;height: 38px;">
+											<option value="">-请选择银行-</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">银行账号</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="bankCode" lay-verify="required" placeholder="银行卡号" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">银行户名</label>
+									<div class="layui-input-inline"style="width: 300px;">
+										<input type="text" name="title" required id="bankAccount" lay-verify="required" placeholder="开卡人姓名" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<div class="layui-form-item">
+						<label class="layui-form-label">启用个人支付通道</label>
+						<div class="layui-input-inline"style="width: 300px;">
+							<select name="" id="selttleType" lay-filter="selttleType" style="height: 38px;width: 190px;">
+								<option value="">-请选择-</option>
+							</select>
+							<span class="checkTips">暂时不支持个人支付通道</span>	</div>
+					</div>
+
+					<ul class="payWayNeed">
+
+
+					</ul>
+				</div>
+			</div>
+			<div style="text-align: right;padding-right: 50px;">
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				<button type="button" class="layui-btn layui-btn-danger" onclick="closePage()">取消</button>
+				<button type="button" class="layui-btn layui-btn-normal" onclick="addStore()">确定</button></div>
+		</div>
+	</form>
+
+	<div id="lookStoreDetils" style="display: none;">
+		<form action="" class="layui-form">
+			<div class="layui-tab">
+				<ul class="layui-tab-title">
+					<li class="layui-this">常规设置</li>
+					<li>门店地址</li>
+					<li>实名认证</li>
+					<li>结算设置</li>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">门店归属</label>
+								<div class="layui-input-inline"style="width: 300px;">
+									<input type="text" name="title"  id="parentIdLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+								</div>
+								<div class="layui-form-mid layui-word-aux">直属门店或单门店不填</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">门头名称</label>
+								<div class="layui-input-inline" style="width: 300px;">
+									<input type="text" name="title" id="storeNameLookDetils" required  lay-verify="required" readonly autocomplete="off" class="layui-input">
+								</div>
+								<div class="layui-form-mid layui-word-aux" style="padding: 0!important;"><input type="text" readonly placeholder="消费密码" class="layui-input" id="lookPasswordLookDetils"></div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">到期日期</label>
+							<div class="layui-input-block" style="width: 450px;">
+								<input type="text" class="layui-input" id="authorExpireDateLookDetils" readonly>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label"><button type="button" class="layui-btn layui-btn-disabled">门头照片预览</button></label>
+							<div class="layui-upload">
+								<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+									<div class="layui-upload-list" id="demo2LookDetils">
+										<input id="nameImageLookDetils" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+									</div>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label" style="width: 120px; padding: 9px  8px">地理位置：</label>
+								<div class="layui-input-inline"style="width: 300px;">
+									<input type="text" name="title" id="AddressLookDetils" required  lay-verify="required" readonly autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label" style="width: 32px;padding: 9px  8px">经度:</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" id="lngLookDetils" required  lay-verify="required" readonly autocomplete="off" class="layui-input" disabled>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label"style="width: 32px;padding: 9px 8px">纬度:</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" id="latLookDetils" required  lay-verify="required" readonly autocomplete="off" class="layui-input" disabled>
+								</div>
+							</div>
+						</div>
+						<div id="allmapLookDetils" class="layui-col-md12" style="height: 500px;margin-bottom: 20px;" ></div>
+					</div>
+					<div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+						<div class="ident identName layui-row">
+							<div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">姓名</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="contractsLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">身份号码</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="idCardLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">有效期限</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="idExpireDateLookDetils" lay-verify="required" readonly  class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">联系电话</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="mobileLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr class="layui-bg-blue">
+						<div class="ident identLicense layui-row">
+							<div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">营业执照</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="licenceIdLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">营业日期</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" required id="licenceExpireDateLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+								<div class="layui-upload">
+									<blockquote class="layui-elem-quote layui-quote-nm" style="padding: 0;">
+										<p>请分别上传营业执照正反两面</p>
+										<div class="layui-upload-list demo-license" id="demo3LookDetils" style="padding: 0;">
+											<input id="nameImage1LookDetils" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+										</div>
+									</blockquote>
+								</div>
+							</div>
+						</div>
+						<hr class="layui-bg-blue">
+						<div class="ident identBank layui-row">
+							<div class="layui-col-md12 layui-col-sm12 layui-col-lg12">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">银行类型</label>
+										<div class="layui-input-inline" style="width: 260px;height: 38px;">
+											<input type="text" name="title"  id="bankTypeLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">银行账号</label>
+										<div class="layui-input-inline"style="width: 260px;">
+											<input type="text" name="title" required id="bankCodeLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">银行户名</label>
+										<div class="layui-input-inline"style="width: 260px;">
+											<input type="text" name="title" required id="bankAccountLookDetils" lay-verify="required" readonly autocomplete="off" class="layui-input">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-tab-item">
+						<div class="layui-form-item">
+							<label class="layui-form-label" style="width: 120px">选择三方支付通道</label>
+							<div class="layui-input-block" style="margin-left: 165px">
+								<input type="text" class="layui-input" readonly id="selttleTypeLookDetils">
+							</div>
+						</div>
+
+						<ul class="payWayNeed">
+							<li class="layui-hide">
+								<input type="text" class="layui-input" readonly value="启用个人支付通道(当前暂不支持)">
+							</li>
+							<li class="layui-hide">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">微信OPENID</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="WXPayOpenIDLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">微信实名</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="WXNameLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">支付宝账号</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="AliPayLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">支付宝实名</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="AliPayNameLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">手续费(%)</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="SettleFee1LookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">结算周期(天)</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="SettleCycleLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">单周期结算次数</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="SettleCountLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+
+								</div>
+							</li>
+							<li class="layui-hide">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">商户号</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="MerchNoLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">终端号</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="TerminalNoLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">令牌</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="TokenLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">机构号</label>
+										<div class="layui-input-inline"style="width: 300px;">
+											<input type="text" name="title" id="InstNoLookDetils" readonly class="layui-input">
+										</div>
+									</div>
+									<div class="layui-inline">
+										<label class="layui-form-label">手续费(%)</label>
+										<div class="layui-input-inline" style="width: 300px;">
+											<input type="text" name="title" id="SettleFee2LookDetils" readonly  class="layui-input">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="text-align: right;padding: 15px">
+				<button class="layui-btn layui-btn-normal backHistory">返回上一层</button>
+				<button class="layui-btn layui-btn-normal backHome">返回主页面</button>
+			</div>
+		</form>
+	</div>
+
+    <div id="storeModify" style="display: none;padding: 15px 90px;">
+		<form action="" class="layui-form layui-form-pane">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">门店编号</label>
+					<div class="layui-input-inline"style="width: 300px;">
+						<input type="text" name="title"  id="storeIdModify" lay-verify="required" disabled autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">归属商户</label>
+					<div class="layui-input-inline"style="width: 300px;">
+						<input type="text" name="title"  id="parentIdModify" lay-verify="required" disabled autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline" pane>
+					<label class="layui-form-label">门店状态</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<!--<input type="text" name="title" id="settleTypeModify" required  lay-verify="required" autocomplete="off" class="layui-input">-->
+						<select name="" id="storeStatusModify" lay-filter="storeStatusModify"></select>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">门头名称</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<input type="text" name="title" id="storeNameModify" required  lay-verify="required"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">消费密码</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<input type="text" name="title" id="passwordModify" required  lay-verify="required"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label" style="width: 117px">授权到期日期</label>
+					<div class="layui-input-inline" style="width: 293px;">
+						<input type="text" name="title" id="authDataModify"   autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">地址</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<input type="text" name="title" id="adressModify" required  lay-verify="required"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">负责人</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<input type="text" name="title" id="nameModify" required  lay-verify="required"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">手机号</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<input type="text" name="title" id="mobileModify" required  lay-verify="required"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline" pane>
+					<label class="layui-form-label">结算类型</label>
+					<div class="layui-input-inline" style="width: 300px;">
+						<select name="" id="settleTypeModify" lay-filter="settleTypeModify"></select>
+					</div>
+				</div>
+			</div>
+			<div style="text-align: right;padding: 15px">
+				<button type="button" class="layui-btn layui-btn-normal" onclick="cancleModify()">取消</button>
+				<button type="button" class="layui-btn layui-btn-danger" onclick="modifyStore()">确定</button>
+			</div>
+		</form>
+	</div>
+
+	<div id="searchModel" style="display: none">
+		<form action="" class="layui-form" style="padding: 15px">
+			<div class="layui-form-item layui-form-pane">
+				<label class="layui-form-label">查询条件</label>
+				<div class="layui-input-block" id="searchListUp" style="border: 1px dashed #f0ad4e">
+
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-pane">
+				<div class="" pane id="searchListDown"  style="border: 1px dashed #f0ad4e;margin-left: 110px" lay-filter="sld">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-pane" id="searchbox" style="margin-left: 110px">
+			</div>
+			<div class="layui-col-md-offset9" id="submitBtn">
+				<button type="reset" class="layui-btn layui-btn-normal" id="searchReset">重置</button>
+				<button type="button" class="layui-btn layui-btn-danger" id="searchCAncle" onclick="closePage()">取消</button>
+				<button type="button" class="layui-btn layui-btn-normal" id="searchBtn">查询</button>
+			</div>
+		</form>
+	</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/magicsuggest-1.2.2.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+        var token=getStorage('token'),logType=getStorage('logType'),bankTypes='',selttleTypes='',storeStatusModify='',settleTypeModify='';
+        layui.use(['form', 'layedit'], function() {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+            form.on('select(bankType)', function(data){
+                bankTypes=data.value;
+            });
+            form.on('select(storeStatusModify)', function(data){
+                storeStatusModify=data.value;
+            });
+            form.on('select(settleTypeModify)', function(data){
+                settleTypeModify=data.value;
+            });
+            form.on('select(selttleType)', function(data){
+                selttleTypes=data.value;
+                console.log(selttleTypes);
+                if(selttleTypes==0){
+                    $('.payWayNeed').find('li').eq(0).removeClass('layui-hide');
+                }else {
+                    $('.payWayNeed').find('li').eq(0).addClass('layui-hide');
+                }
+            });
+
+        });
+        var parm={'url':'/XCCloud/StoreInfo?action=GetStoreList',
+        'obj':{"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+        'elem':'#storeListTable',
+        'cols':[
+            {type:'checkbox'}
+            ,{field:'StoreID', title: '门店编号', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            ,{field:'MerchID', title: '归属商户', sort: true}
+            ,{field:'StoreName', title: '门头', align: 'center'}
+            ,{field:'Password', title: '消费密码', align: 'center'} //单元格内容水平居中
+            ,{field:'AuthorExpireDate', title: '授权到期日期', align: 'center',templet: '#changeTime'} //单元格内容水平居中
+            ,{field:'AreaCode', title: '邮政编号', align: 'center'}
+            ,{field:'Address', title: '地址',  align: 'center'}
+            ,{field:'Contacts', title: '负责人',  align: 'center'}
+            ,{field:'Mobile', title: '手机号',  align: 'center'}
+            ,{field:'SelttleTypeStr', title: '结算类型',  align: 'center'}
+            ,{field:'StoreStateStr', title: '门店状态',  align: 'center'}
+            ,{fixed: 'right', title: '操作', width:370, align:'center', toolbar: '#barDemo'}
+        ]};
+        getInitData(parm);
+        layui.use(['upload','form','layer','table','laydate'], function(){
+            var $ = layui.jquery,upload = layui.upload,form=layui.form,layer=layui.layer,table=layui.table,laydate=layui.laydate;
+            table.on('tool(storeList)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                var data = obj.data; //获得当前行数据
+                var storeId=data.StoreID;
+                setStorage('storeId_merch',storeId);
+                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                if (layEvent === 'detail') { //查看
+                    var obj={"storeId":storeId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+                    var url = "/XCCloud/StoreInfo?action=GetStoreInfo";
+                    var parasJson = JSON.stringify(obj);
+                    var selttleTypes="";
+                    var listData=[];
+                    $.ajax({
+                        type: "post",url: url,contentType: "application/json; charset=utf-8",
+                        data: {parasJson: parasJson},
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            console.log(data);
+                            var arr=data.result_data;
+                            if(data.result_code==1){
+                                var   index1=layer.open({
+                                    type: 1,maxmin:true,title:'门店信息详情',
+                                    content: $('#lookStoreDetils'),shadeClose:true, area: ['1060px','666px']
+                                });
+                                if(arr.ParentID=='undefined'){
+                                    $('#parentIdLookDetils').val('');
+                                }else {
+                                    $('#parentIdLookDetils').val(arr.ParentID);
+                                }
+                                $('#storeNameLookDetils').val(arr.StoreName);
+                                $('#lookPasswordLookDetils').val(arr.Password);
+                                $('#authorExpireDateLookDetils').val(timeStamp2String(arr.AuthorExpireDate));
+                                $('#demo2LookDetils').html("").append(' <img src="'+arr.ShopSignPhoto+'" style="display: block;width: 200px;height: 160px;margin: 0 auto">');
+                                $('#AddressLookDetils').val(arr.Address);
+                                $('#lngLookDetils').val(arr.Lng);
+                                $('#latLookDetils').val(arr.Lat);
+                                $('#contractsLookDetils').val(arr.Contacts);
+                                $('#idCardLookDetils').val(arr.IDCard);
+                                $('#idExpireDateLookDetils').val(timeStamp2String(arr.IDExpireDate));
+                                $('#mobileLookDetils').val(arr.Mobile);
+                                $('#licenceIdLookDetils').val(arr.LicenceID);
+                                $('#demo3LookDetils').html("").append(' <img src="'+arr.LicencePhoto+'" style="display: block;width: 200px;height: 160px;margin: 0 auto">');
+                                $('#licenceExpireDateLookDetils').val(timeStamp2String(arr.LicenceExpireDate));
+                                //银行类型
+                                $('#bankTypeLookDetils').val(arr.BankTypeStr);
+                                $('#bankCodeLookDetils').val(arr.BankCode);
+                                $('#bankAccountLookDetils').val(arr.BankAccount);
+
+                                //支付通道类型
+                                $('#selttleTypeLookDetils').val(arr.SelttleTypeStr);
+                                selttleTypes=arr.SelttleType;
+                                if(arr.SelttleType==1){
+                                    $('.payWayNeed').find('li').eq(1).removeClass('layui-hide').siblings().addClass('layui-hide');
+									 $('#WXPayOpenIDLookDetils').val(arr.SettleFields[1].Value);
+                                    $('#WXNameLookDetils').val(arr.SettleFields[2].Value);
+                                    $('#AliPayLookDetils').val(arr.SettleFields[3].Value);
+                                    $('#AliPayNameLookDetils').val(arr.SettleFields[4].Value);
+                                    $('#SettleFee1LookDetils').val(arr.SettleFields[5].Value);
+                                    $('#SettleCycleLookDetils').val(arr.SettleFields[6].Value);
+                                    $('#SettleCountLookDetils').val(arr.SettleFields[7].Value);
+
+                                }else if(arr.SelttleType==2){
+                                    $('.payWayNeed').find('li').eq(2).removeClass('layui-hide').siblings().addClass('layui-hide');
+                                    $('#MerchNoLookDetils').val(arr.SettleFields[1].Value);
+                                    $('#TerminalNoLookDetils').val(arr.SettleFields[2].Value);
+                                    $('#TokenLookDetils').val(arr.SettleFields[3].Value);
+                                    $('#InstNoLookDetils').val(arr.SettleFields[4].Value);
+                                    $('#SettleFee2LookDetils').val(arr.SettleFields[5].Value);
+
+                                }else if(arr.SelttleType==0){
+                                    $('.payWayNeed').find('li').eq(0).removeClass('layui-hide').siblings().addClass('layui-hide');
+
+                                }
+                                setSign(arr.Lng,arr.Lat,arr.Address,arr.Mobile,'allmapLookDetils');
+                                $('.backHistory').on('click',function () {
+                                    layer.close(index1);
+                                });
+                                $('.backHome').on('click',function () {
+                                    layer.closeAll();
+                                });
+                            }
+                        }
+                    });
+
+                }else if(layEvent === 'del'){
+                    layer.confirm('是否确认删除？', {
+                        btn: ['点错了', '确定'] //可以无限个按钮
+                    }, function(index, layero){
+                        layer.close(index);
+                    }, function(index){
+                        var _obj={'storeId':storeId,'userTOken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                        var url='/XCCloud/StoreInfo?action=DeleteStoreInfo';
+                        var parasJson = JSON.stringify(_obj);
+                        $.ajax({
+                            type: "post", url: url, contentType: "application/json; charset=utf-8",
+                            data: {parasJson: parasJson},
+                            success: function (data) {
+                                data = JSON.parse(data);
+                                console.log(data)
+                                if(data.result_code==1){
+                                    layer.msg('门店删除成功')
+                                }else {
+                                    layer.msg('操作失败！')
+                                }
+                            }
+                        });
+                    });
+
+				}else if(layEvent === 'edit'){
+                    let _obj={'storeId':storeId,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                    $.ajax({
+                        type: "post",
+						url: '/XCCloud/StoreInfo?action=GetStoreInfo',
+                        contentType: "application/json; charset=utf-8",
+                        data: { parasJson: JSON.stringify(_obj) },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            console.log(data);
+                                    if(data.result_code==1){
+                                        setSelect("门店状态","storeStatusModify",data.result_data.StoreState);
+                                        setSelect("结算类型","settleTypeModify",data.result_data.SelttleType);
+                                        $('#storeIdModify').val(data.result_data.StoreID);
+                                        $('#parentIdModify').val(data.result_data.MerchID);
+                                        $('#storeNameModify').val(data.result_data.StoreName);
+                                        $('#passwordModify').val(data.result_data.Password);
+                                        $('#storeStatusModify').val(data.result_data.StoreStateStr);
+                                        $('#adressModify').val(data.result_data.Address);
+                                        $('#nameModify').val(data.result_data.Contacts);
+                                        $('#mobileModify').val(data.result_data.Mobile);
+                                        $('#settleTypeModify').val(data.result_data.SelttleTypeStr);
+                                        laydate.render({
+                                            elem: '#authDataModify'
+                                            ,value: dateStamp(data.result_data.AuthorExpireDate) //必须遵循format参数设定的格式
+                                        });
+                                         storeStatusModify=data.result_data.StoreState;
+                                         settleTypeModify=data.result_data.SelttleType;
+                                        layer.open({
+                                            type: 1,
+                                            closeBtn:1,
+                                            title:'修改门店信息',
+                                            shadeClose:true,
+                                            area:'1060px',
+                                            minMax:true,
+                                            content: $('#storeModify') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                                        });
+									}
+                        }
+					});
+
+
+				}else if(layEvent === 'check'){
+
+                    layer.open({
+                        title:'<legend>系统参数配置</legend>',
+                        type:2,
+                        shade:0.6,
+                        content:['parameterSetting.html','no'],
+                        area:['1200px','600px']
+                    })
+                }
+            });
+
+            document.getElementById('addNewStore').onclick=function () {
+                 setSelect("银行类别","bankType"); setSelect("启用个人支付通道","selttleType");
+                 layer.open({
+                     type: 1,
+                     closeBtn:1,
+					 title:'新增门店',
+					 shadeClose:true,
+					 area:'1060px',
+                     content: $('.formStore') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                 });
+			 };
+            var demoListViewStore=$('#demo2')
+                ,uploadListInsStore=upload.render({
+                elem: '#test2'
+                ,url: '/XCCloud/StoreInfo?action=UploadShopPhoto'
+				,data:{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+                ,multiple: true
+                ,accept:"images"
+                ,size:1000
+                ,auto:true
+                ,done: function(res,index,upload){
+                    //上传完毕
+					console.log(res);
+                    if(res.result_code==1){
+                        $('#demo2').children('div[class="imgBox"]').remove();
+                        $('#demo2 .loadTips').addClass('layui-hide');
+                        $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                            '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                            '<img src="'+ res.result_data[0].Value +'" alt="'+ res.result_data[0].Value +'" class="layui-upload-img_md"></div>');
+                        layer.msg("图片上传成功！");
+                        $('.imgBox button').click(function () {
+                            $(this).parent('div').remove();
+                        });
+                        $('.imgBox img').click(function () {
+                            layer.open({
+                                title:  res.result_data.ID,
+                                type: 1,
+                                area: ['1000px'], //宽高
+                                content: '<div><img src="'+res.result_data[0].Value+'" alt=""></div>'
+                            });
+                        });
+                    }else{
+                        layer.msg(res.return_msg);
+                    }
+                }
+                ,error:function(index,upload){
+                    layer.msg("服务器返回错误！");
+                    layer.closeAll('loading');
+                }
+            });
+
+            $('#shBtn').on('click',function () {
+                let arr=[]; let arrList=[];
+                arr.splice(0,arr.length);arrList.splice(0,arrList.length);
+                $('#searchListUp').html("");
+                $('#searchbox').html("");
+                var url='/Query?action=init',
+                    obj={"sysId": "0", "versionNo": "0.0.0.1",
+                        'pagename':'storeSearch','processname':'storeSearch',"token": token, "signkey": "1f626576304bf5d95b72ece2222e42c3"};
+                var  parasJson = JSON.stringify(obj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data:parasJson,
+                    success: function (data) {
+                        data=JSON.parse(data);
+                        if(data.result_code=='1'){
+                            arr=data.result_data;
+                            for(var i=0;i<arr.length;i++){
+                                arrList.push(arr[i])
+                            }
+                            console.log(arrList)
+                            layer.open({
+                                type: 1,
+                                title:'高级查询',
+                                area:['1000px','500px'],
+                                content:$('#searchModel'),
+                                shadeClose:true
+                            });
+                            addCheckbox('searchListDown',arr);
+                            renderDiv(arr);
+                            form.render();
+                        }
+                        layui.use(['layer','form','laydate'],function () {
+                            var layer=layui.layer;
+                            var laydate=layui.laydate;
+                            laydate.render({
+                                elem: '#datetime',type: 'datetime'
+                            });
+                            laydate.render({
+                                elem: '#datetimes',type: 'datetime',range: true
+                            });
+                            laydate.render({
+                                elem: '#date',type: 'date'
+                            });
+                            laydate.render({
+                                elem: '#dates',type: 'date',range: true
+                            });
+                        });
+                        form.on('checkbox(aaaaa)', function(data5){
+                            if(data5.elem.checked==true){
+                                for(var i=0;i<arr.length;i++){
+                                    if(arr[i].title==data5.value){
+                                        $('#searchbox').find('div[name="'+arr[i].title+'"]').removeClass('layui-hide');
+                                        $('#searchListUp').append('<a href="#" class="layui-btn layui-btn-normal layui-btn-sm" style="margin: 5px 1px" name="'+arr[i].field+'" >' +
+                                            '<span name="'+arr[i].width+'">'+arr[i].title+'</span>' +
+                                            '<i class="layui-icon layBtn" name="'+arr[i].type+'"data-id="'+arr[i].id+'"' +
+                                            'style="color: #F00;margin-left: 15px">&#xe640;</i></a >');
+                                        arr.splice(i,1);
+                                        addCheckbox('searchListDown',arr);
+                                    }
+                                }
+                            }
+
+                        });
+
+                        $('#searchListUp').on('click','a i',function (e) {
+                            e.stopPropagation();
+                            var text=$(this).parent().children('span').text();
+                            $('#searchListDown').append(' <input type="checkbox" name="like" value="'+text+'" title="'+text+'" lay-filter="aaaaa">');
+                            arr.push({'field':$(this).parent().attr('name'),'id':$(this).attr('data-id'),'iscloune':1,
+                                'issearch':1,'title':text,'type':$(this).attr('name'),'width':$(this).parent().children('span').attr('name')});
+                            form.render();
+                            $('#searchbox').find('div[name="'+text+'"]').addClass('layui-hide');
+                            $(this).parent().remove();
+                        });
+                    }
+                });
+            });
+            $('#searchBtn').on('click',function () {
+                var conditions=[];
+                getValues(arrList,conditions);
+                console.log(conditions);
+                var parm={'url':'/XCCloud/StoreInfo?action=GetStoreList',
+                    'obj':{'conditions':conditions,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+                    'elem':'#storeListTable',
+                    'cols':[
+                        {type:'checkbox'}
+                        ,{field:'StoreID', title: '门店编号', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        ,{field:'MerchID', title: '归属商户', sort: true}
+                        ,{field:'StoreName', title: '门头', align: 'center'}
+                        ,{field:'Password', title: '消费密码', align: 'center'} //单元格内容水平居中
+                        ,{field:'AuthorExpireDate', title: '授权到期日期', align: 'center',templet: '#changeTime'} //单元格内容水平居中
+                        ,{field:'AreaCode', title: '邮政编号', align: 'center'}
+                        ,{field:'Address', title: '地址',  align: 'center'}
+                        ,{field:'Contacts', title: '负责人',  align: 'center'}
+                        ,{field:'Mobile', title: '手机号',  align: 'center'}
+                        ,{field:'SelttleTypeStr', title: '结算类型',  align: 'center'}
+                        ,{field:'StoreStateStr', title: '门店状态',  align: 'center'}
+                        ,{fixed: 'right', title: '操作', width:370, align:'center', toolbar: '#barDemo'}
+                    ]};
+                getInitData(parm);
+                layer.closeAll()
+            })
+        });
+        function modifyStore() {
+			var storeId=$('#storeIdModify').val();
+			var parentId=$('#parentIdModify').val();
+            var storeState=storeStatusModify;
+            var storeName=$('#storeNameModify').val();
+            var password=$('#passwordModify').val();
+            var authorExpireDate=$('#authDataModify').val();
+            var Address=$('#adressModify').val();
+            var contracts=$('#nameModify').val();
+            var mobile=$('#mobileModify').val();
+            var selttleType=settleTypeModify;
+            var obj={'storeId':storeId,'parentId':parentId,'storeState':storeState,'storeName':storeName,'password':password,'authorExpireDate':authorExpireDate,
+			'Address':Address,'contracts':contracts,'mobile':mobile,'selttleType':selttleType,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'
+			};
+            var url='/XCCloud/StoreInfo?action=EditStoreInfo';
+            var parasJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post", url: url, contentType: "application/json; charset=utf-8",
+                data: {parasJson: parasJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data)
+                    if(data.result_code==1){
+                        layer.msg('门店修改成功')
+						layer.closeAll();
+                    }else {
+                        layer.msg('操作失败！')
+                    }
+                }
+            });
+        }
+        function cancleModify() {
+			layui.use('layer',function () {
+				var layer=layui.layer;
+                layer.closeAll();
+            })
+        }
+        function js_strto_time(str_time){
+            var new_str = str_time.replace(/:/g,'-');
+            new_str = new_str.replace(/ /g,'-');
+            var arr = new_str.split("-");
+            var datum = new Date(Date.UTC(arr[0],arr[1]-1,arr[2]));
+            return strtotime = datum.getTime()/1000;
+        }
+        layui.use(['upload','form','layer'], function(){
+            var $ = layui.jquery
+                ,upload = layui.upload,form=layui.form,layer=layui.layer;
+            var demoListViewStore=$('#demo3')
+                ,uploadListInsStore=upload.render({
+                elem: '#test3'
+                ,url: '/XCCloud/StoreInfo?action=UploadLicencePhoto'
+                ,data:{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+                ,multiple: true
+                ,accept:"images"
+                ,size:300
+                ,auto:false
+                ,bindAction:"#subupID"//手动提交的按钮
+                ,choose: function(obj){
+                    //将每次选择的文件追加到文件队列
+                    var files=obj.pushFile();
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $("#nameImage1").val($("#nameImage1").val()+file.name+":");
+                        //$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" width="90px" height="90px">');
+                        var tr=$(['<tr id="upload-'+index+'" class="edtimg">'
+                            ,'<td>'
+                            ,'<div class="imgs">'
+                            ,'<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img layui-upload-img1" width="90px" height="90px" id='+index+'>'
+                            ,'<a class="close-link demo-delete"> <i class="layui-icon">&#xe640</i></a>'
+                            ,'</div>'
+                            ,'</td>'
+                            ,'</tr>'].join(''));
+                        //删除
+                        tr.find('.demo-delete').on('click', function(){
+                            $("#nameImage1").val($("#nameImage1").val().replace(files[index].name+":",''));
+                            delete files[index]; //删除对应的文件
+                            tr.remove();
+                        });
+//张数限制
+                        var count = parseInt(index.split("-")[1])+1; //得到文件索引
+                        if(count>2){
+                            $("#nameImage1").val($("#nameImage1").val().replace(files[index].name+":",''));
+                            //但是layUI的before方法，不管返回什么，还是会进行上传
+                            delete files[index];
+                            layer.msg("最多上传2张图片！");
+                            return false;
+                        }else{
+                            demoListViewStore.append(tr);
+                        }
+                    });
+                }
+                ,done: function(res,index,upload){
+                    console.log(index);
+                    console.log(res);
+                    $('#'+index).attr('src',res.result_data[0].Value);
+
+                    //上传完毕
+                    if(res.result_code==1){
+                        layer.msg('图片上传成功！');
+                    }else{
+                        layer.msg(res.result_msg);
+                    }
+                }
+                ,error:function(index,upload){
+                    layer.msg("服务器返回错误！");
+                    layer.closeAll('loading');
+                }
+            });
+        });
+        //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+        layui.use(['element','laydate'], function(){
+            var element = layui.element;
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#authorExpireDate'
+                ,type: 'date'
+                ,eventElem: '#authorExpireDate-1'
+                ,trigger: 'click'
+                ,showBottom: false
+            });
+            laydate.render({
+                elem: '#idExpireDate'
+                ,type: 'date'
+                ,eventElem: '#idExpireDate-1'
+                ,trigger: 'click'
+                ,showBottom: false
+            });
+            laydate.render({
+                elem: '#licenceExpireDate'
+                ,type: 'date'
+                ,eventElem: '#licenceExpireDate-1'
+                ,trigger: 'click'
+                ,showBottom: false
+            });
+        });
+        
+        function showParentId(){
+            $('#parentId option[value!=""]').remove();
+            var obj={'userToken':token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+            var url="/XCCloud/StoreInfo?action=GetParentStoreList";
+            var parasJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parasJson},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    var arr=data.result_data;
+                   if(arr.length){
+                       for(var i=0;i<arr.length;i++){
+                           $('#parentId').append('<option value="'+arr[i].Key+'">'+arr[i].Value+'</option>');
+                       }
+				   }
+                    layui.use(['form', 'layedit', 'laydate'], function() {
+                        var form = layui.form;
+                        form.render('select');
+                    });
+                }
+            })
+        }
+        showParentId();
+ // 百度地图API功能
+	   var address=document.getElementById("Address");
+       var map = new BMap.Map("allmap");
+       var point = new BMap.Point(116.331398,39.897445); //默认中心点北京
+       map.centerAndZoom(point,11);
+    //缩放地图
+    setTimeout(function(){
+        map.setZoom(14);   
+    }, 2000);  //2秒后放大到14级
+    map.enableScrollWheelZoom(true);
+    //根据ip地址定位当前城市
+    function myFun(result){
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+    
+    var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+    var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+    var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //  
+    //添加控件和比例尺
+        map.addControl(top_left_control);        
+        map.addControl(top_left_navigation);     
+        map.addControl(top_right_navigation);  
+
+    var geoc = new BMap.Geocoder();    
+
+    map.addEventListener("click", getLocationMsg,false);
+
+      //获取点击点的地址，录入到输入框！
+      //字段为空  则不显示
+        function getLocationMsg(e){
+
+            var markers=$('span[class="BMap_Marker BMap_noprint"]');
+            var markers1=$('span[class="BMap_Marker"]');
+            if(markers){
+                for(var i=0;i<markers.length;i++){
+                    markers[i].remove();
+				}
+			}
+            if(markers1){
+                for(var i=0;i<markers1.length;i++){
+                    markers1[i].remove();
+                }
+            }
+
+            // map.removeOverlay();
+            var pt = e.point;
+            map.centerAndZoom(pt, 15);
+            var marker = new BMap.Marker(pt);  // 创建标注
+            map.addOverlay(marker);
+            $('#lng').val(e.point.lng);
+            $('#lat').val(e.point.lat);
+            geoc.getLocation(pt, function(rs){
+                    var addComp = rs.addressComponents;
+                    var  thisprovince=addComp.province;
+                    var  thiscity=addComp.city;
+                    var  thisdistrict=addComp.district;
+                    var  thisstreet=addComp.street;
+                    var  thisstreetNumber=addComp.streetNumber;
+
+                    if(thisstreetNumber==""){
+                        address.value=addComp.province + "-" + addComp.city + "-" + addComp.district;
+                           }else if(thisstreetNumber=="" && thisstreet==""){
+                            address.value=addComp.province + "-" + addComp.city + "-" + addComp.district;
+ 						} else if(thisprovince!=""&&thiscity!=""&&thisdistrict!=""&&thisstreet!=""&&thisstreetNumber!=""){
+                                address.value=addComp.province + "-" + addComp.city + "-" + addComp.district + "-" + addComp.street + "-" + addComp.streetNumber;
+ 							}
+                });        
+            }
+
+
+	</script>
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-sm" lay-event="check"><i class="layui-icon">&#xe614;</i>参数</a>
+	<a class="layui-btn layui-sm" lay-event="detail"><i class="layui-icon">&#xe60a;</i>明细</a>
+	<a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+	<a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="edit"><i class="layui-icon">&#xe642;</i>修改</a>
+</script>
+<script type="text/html" id="changeTime">
+	{{# if(d.AuthorExpireDate!=null&&d.AuthorExpireDate!=''){ }}
+	{{dateStamp(d.AuthorExpireDate)}}
+	    {{# }else{ }}
+	{{d.AuthorExpireDate}}
+	{{#  } }}
+</script>
+
+</html>

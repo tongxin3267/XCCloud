@@ -1,0 +1,44 @@
+//读取
+
+[
+	{"ID":1, "StoreID":"S0100011", "System":"txtCoinPrice", "ParameterName":"兑币单价", "IsAllow":1, "ParameterValue":0.5, "Note":"1币0.5元"}
+]
+
+
+//提交
+
+{
+	"submitData":[{"storeId":"S0100011", "system":"txtCoinPrice", "isAllow":1, "pValue":1, "note":"1币1元"}] 
+}
+
+//原始数据
+ID	StoreID		System				ParameterName			IsAllow	ParameterValue	Note
+
+1	S0100011	txtCoinPrice			兑币单价			1	1	
+2	S0100011	coinChargeScale			彩票兑换比例			1	10	
+3	S0100011	txtGivePoint			赠送售币积分			1	1		1表示1元1分、2表示1元2分
+4	S0100011	chkPrintBarcode			一寸小票是否打印非加密二维码	1	1		一寸小票是否打印非加密二维码
+5	S0100011	chkBarSendCoinAuthorize		吧台送币时是否授权		0	0		NULL
+6	S0100011	cmbMemberBalance		条码退款方式			1	0		对应字典表DictKey：显示退款和退到会员卡
+7	S0100011	txtBusinessClass		营业日期内班次个数		1	2		设定后，下个营业日期生效
+8	S0100011	chkShift			换班时需要输入实点数		0	0		包括：现金、信用卡小票、实物币数量
+9	S0100011	txtOnceSellCoinMin		每次售币最小币数		1	1		NULL
+10	S0100011	txtOnceSellCoinMax		每次售币最大币数		1	100000		NULL
+11	S0100011	txtOnceRefundMin		每次最小退币数			1	1		NULL
+12	S0100011	txtDayWithoutRightWinCoinMax	每天免授权赢币上限		1	20000		NULL
+13	S0100011	txtWithoutRightWinCoinTimes	每天免授权赢币倍数		1	30		NULL
+14	S0100011	txtOnceWithoutRightRefundMax	每次免授权退币上限		1	20000		NULL
+15	S0100011	txtDayWithoutRightRefundMax	每天免授权退币上限		1	300000		NULL
+16	S0100011	txtPerMemberCoinMax		单个会员余额上限		1	100000	
+17	S0100011	cmbBirthdaySendSms		会员生日提醒			1	2		对应字典表DictKey:提前1天提醒
+18	S0100011	chkPhotograph			会员入会时必须抓拍照片		0	0		NULL
+19	S0100011	chkExitCardCatch		吧台退卡时必须抓拍照片		0	0		NULL
+20	S0100011	chkExitFoodCatch		退餐时必须抓拍相片		0	0		NULL
+21	S0100011	chkExitMoneyCatch		吧台退款时必须抓拍照片		0	0		NULL
+22	S0100011	chkAllowMemberSmsCode		入会是否验证短信码		0	0		NULL
+23	S0100011	chkTempShowPhone		临时开卡是否显示手机号输入框	1	0		NULL
+24	S0100011	chkTempAllowFirstMemberSmsCode	临时卡首次入会验证短信码	0	0		NULL
+25	S0100011	chkTempGiveback			临时卡是否允许返还		0	1		临时卡是否允许返还
+26	S0100011	txtGiveBackMax			返还时卡里余额不能超过		1	100		NULL
+27	S0100011	txtExitMoneyGiveBackTime	退款后禁止拿返还时间		1	30		单位：分
+28	S0100011	chkGiveBackAllowSmsCode		拿返还时是否验证短信码		1	0		NULL

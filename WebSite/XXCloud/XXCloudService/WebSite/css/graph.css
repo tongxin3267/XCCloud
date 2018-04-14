@@ -1,0 +1,639 @@
+/*********************
+ * Graph Holder styles *
+ *********************/
+
+/** Graph Holder container **/
+
+@import url('normalize.css');
+/* General Demo Style */
+body{
+    font-family: 'Open Sans Condensed','Arial Narrow', serif;
+    /*background: #ddd url(../img/bg.png) repeat top left;*/
+    font-weight: 400;
+    font-size: 15px;
+    color: #333;
+    overflow-y: scroll;
+}
+a{
+    color: #555;
+    text-decoration: none;
+}
+.container{
+    width: 100%;
+    padding-left:0;
+    padding-right:0;
+    position: relative;
+}
+.main{
+    text-align: center;
+    width: 100%;
+    background: rgba(0,0,0,0.03);
+    padding: 10px;
+    margin: 20px auto 15px auto;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+}
+.clr{
+    clear: both;
+    padding: 0;
+    height: 0;
+    margin: 0;
+}
+.container > header{
+    margin: 10px;
+    padding: 20px 10px 10px 10px;
+    position: relative;
+    display: block;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.container > header h1{
+    font-size: 36px;
+    line-height: 40px;
+    margin: 0;
+    position: relative;
+    font-weight: 300;
+    color: #888;
+    padding: 5px 0px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+.container > header h1 span{
+    font-weight: 700;
+}
+.container > header p{
+    font-style: italic;
+    color: #aaa;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+/* Header Style */
+.codrops-top{
+    line-height: 24px;
+    font-size: 11px;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    z-index: 9999;
+    position: relative;
+    font-family: Cambria, Georgia, serif;
+    box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+}
+.codrops-top a{
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    color: #333;
+    display: inline-block;
+}
+.codrops-top a:hover{
+    background: rgba(255,255,255,0.9);
+}
+.codrops-top span.right{
+    float: right;
+}
+.codrops-top span.right a{
+    float: left;
+    display: block;
+}
+.ie-note{
+    color: #ac375d;
+    display: none;
+    font-size: 15px;
+}
+/*新添加的部分*/
+.graph-container {
+    position: relative; /* required Y axis stuff, Graph Holder's left and bottom sides to be positions properly */
+    display: inline-block; /* display: table may also work.. */
+    padding: 0; /* let the bars position themselves */
+    list-style: none; /* we don't want to see any default <ul> markers */
+	margin: 20px 0 0 20px;
+	font-size: 0.8em;
+    /* Graph Holder's Background */
+    background-image: -webkit-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -moz-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -o-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -ms-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-repeat: no-repeat;
+    background-position: 0 -2.5em;
+}
+
+/* Graph Holder bottom side */
+.graph-container:before {
+    position: absolute;
+    content: "";
+
+    bottom: 0;
+    left: -1.25em; /* skew pushes it left, so we move it a bit in opposite direction */
+
+    width: 100%; /* make sure it is as wide as the whole graph */
+
+    height: 2.5em;
+    background-color: rgba(183, 183, 183, 1);
+
+    /* Make it look perspective */
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+
+/* Graph Holder left side */
+.graph-container:after {
+    position: absolute;
+    content: "";
+
+    top: 1.25em; /* skew pushes it up so we move it down a bit */
+    left: -2.5em;
+
+    width: 2.5em;
+    background-color: rgba(129, 129, 129, 0.4);
+
+    /* Make it look perspective */
+    -webkit-transform: skew(0deg, -45deg);
+    -moz-transform: skew(0deg, -45deg);
+    -o-transform: skew(0deg, -45deg);
+    -ms-transform: skew(0deg, -45deg);
+    transform: skew(0deg, -45deg);
+}
+
+/* Bars and X-axis labels holder */
+.graph-container > li {
+    float: left; /* Make sure bars are aligned one next to another */
+    position: relative; /* Make sure X-axis labels are positioned relative to this element */
+}
+/* A small hack to make Graph Holder's background side be wide enough
+   ..because our bottom side is skewed and pushed to the right, we have to compensate it in Graph Holder's background */
+.graph-container > li:nth-last-child(2) {
+    margin-right: 2.5em;
+}
+/* X-axis labels */
+.graph-container > li > span {
+    position: absolute;
+    left: 0;
+    bottom: -2em;
+    width: 80%; /* play with this one if you change perspective depth */
+    text-align: center;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+	color: #777;
+    font-size: 1em;
+}
+
+/*******************************
+ * Graph Y-axis Markers styles *
+ *******************************/
+
+/* Markers container */
+.graph-container > li:last-child {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/* Y-axis Markers list */
+.graph-marker-container > li {
+    position: absolute;
+    left: -2.5em;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 2.5em;
+    list-style: none;
+}
+
+/* Y-axis lines general styles */
+.graph-marker-container > li:before,
+.graph-marker-container > li:after {
+    content: "";
+    position: absolute;
+    border-style: none none dotted;
+    border-color: rgba(100, 100, 100, .15);
+    border-width: 0 0 .15em;
+    background: rgba(133, 133, 133, .15);
+}
+
+/* Y-axis Side line */
+.graph-marker-container > li:before {
+    width: 3.55em;
+    height: 0;
+    bottom: -1.22em;
+    left: -.55em;
+    z-index: 2; /* be above .graph-container:after */
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+/* Y-axis Background line */
+.graph-marker-container li:after {
+    width: 100%;
+    bottom: 0;
+    left: 2.5em;
+}
+
+/* Y-axis text Label */
+.graph-marker-container span {
+    position: absolute;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+    top: 1em;
+    left: -3.5em; /* just to push it away from the graph.. */
+    width: 3.5em; /* give it absolute value of left offset */
+
+    font-size: 1.5em;
+}
+
+/*********************
+ * Graph Bars styles *
+ *********************/
+
+/* Bar wrapper - hides the inner bar when it goes below the bar, required */
+.bar-wrapper {
+    overflow: hidden;
+}
+/* Bar container - this guy is a real parent of a bar's parts - they all are positioned relative to him */
+.bar-container {
+    position: relative;
+    margin-top: 2.5em; /* should be at least equal to the top offset of background casing */
+    /* because back casing is positioned higher than actual bar */
+    width: 12.5em; /* required, we have to define the width of a bar */
+}
+/* right bottom patch - make sure inner bar's right bottom corner is "cut" when it slides down */
+.bar-container:before {
+    content: "";
+    position: absolute;
+    z-index: 3; /* to be above .bar-inner */
+
+    bottom: 0;
+    right: 0;
+
+    /* Use bottom border to shape triangle */
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 2.5em 2.5em;
+    border-color: transparent transparent rgba(183,183,183,1);
+}
+
+/** BACK CASING **/
+/* Back panel */
+.bar-background {
+    width: 10em;
+    height: 100%;
+    position: absolute;
+    top: -2.5em;
+    left: 2.5em;
+    z-index: 1; /* just for reference */
+}
+
+.bar-background:before,
+.bar-background:after {
+    content: "";
+    position: absolute;
+}
+
+/* Bottom panel */
+.bar-background:before {
+    bottom: -2.5em;
+    right: 1.25em;
+    width: 10em;
+    height: 2.5em;
+	-webkit-backface-visibility: hidden;
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+
+/* Left back panel */
+.bar-background:after {
+    top: 1.25em;
+    right: 10em;
+    width: 2.5em;
+    height: 100%;
+	-webkit-backface-visibility: hidden;
+    /* skew only the Y-axis */
+    -webkit-transform: skew(0deg, -45deg);
+    -moz-transform: skew(0deg, -45deg);
+    -o-transform: skew(0deg, -45deg);
+    -ms-transform: skew(0deg, -45deg);
+    transform: skew(0deg, -45deg);
+}
+
+/** FRONT CASING **/
+/* Front panel */
+.bar-foreground {
+    z-index: 3; /* be above .bar-background and .bar-inner */
+}
+.bar-foreground,
+.bar-inner {
+    position: absolute;
+    width: 10em;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.bar-foreground:before,
+.bar-foreground:after,
+.bar-inner:before,
+.bar-inner:after {
+    content: "";
+    position: absolute;
+}
+
+/* Right front panel */
+.bar-foreground:before,
+.bar-inner:before {
+    top: -1.25em;
+    right: -2.5em;
+    width: 2.5em;
+    height: 100%;
+    background-color: rgba(160, 160, 160, .27);
+
+    -webkit-transform: skew(0deg, -45deg);
+    -moz-transform: skew(0deg, -45deg);
+    -o-transform: skew(0deg, -45deg);
+    -ms-transform: skew(0deg, -45deg);
+    transform: skew(0deg, -45deg);
+}
+
+/* Top front panel */
+.bar-foreground:after,
+.bar-inner:after {
+    top: -2.5em;
+    right: -1.25em;
+    width: 100%;
+    height: 2.5em;
+    background-color: rgba(160, 160, 160, .2);
+
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+
+/** BAR's inner block **/
+.bar-inner {
+    z-index: 2; /* to be above .bar-background */
+    top: auto; /* reset position top */
+    background-color: rgba(5, 62, 123, .6);
+    height: 0;
+    bottom: 0.3em;
+    /*color: transparent; !* hide text values *!*/
+
+    -webkit-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -moz-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -o-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -ms-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    transition: height 0.8s ease-out, bottom 0.8s ease-out;
+}
+
+/* Right panel */
+.bar-inner:before {
+    background-color: rgba(5, 62, 123, .6);
+}
+
+/* Top panel */
+.bar-inner:after {
+    background-color: rgba(47, 83, 122, .7);
+}
+
+
+.graph-container .bar-inner1:before {
+    background-color: rgba(255, 2, 3, .6);
+}
+
+/* Top panel */
+.graph-container .bar-inner1:after {
+    background-color: rgba(255, 2, 3, .6);
+}
+/******************************************************************************
+ **                                                                          **
+ ** UI Elements                                                              **
+ **                                                                          **
+ ** You don't need this stuff in general, it's just used  for the demo page  **
+ **                                                                          **
+ ******************************************************************************/
+
+
+
+
+/****************
+ * SIZE BUTTONS  *
+ ****************/
+
+/*input#graph-normal:checked ~*/
+.graph-container .bar-container,
+/*input#graph-normal:checked ~ */
+.graph-container:after,
+/*input#graph-normal:checked ~ */
+.graph-container > li:last-child  {
+    height: 30em;
+}
+
+
+/******************************************************************************
+ **                                                                          **
+ ** VARIABLES                                                                **
+ **                                                                          **
+ ******************************************************************************/
+
+/****************
+ * SPACING      *
+ ****************/
+
+/* spacing between bars */
+.graph-container > li .bar-container {
+    margin-right: 1.5em;
+}
+/* spacing before first bar */
+.graph-container > li:first-child {
+    margin-left: 1.5em;
+}
+/* spacing after last bar */
+.graph-container > li:nth-last-child(2) .bar-container {
+    margin-right: 1em;
+}
+
+/****************
+ *    Colors    *
+ ****************/
+ 
+/* Bar's Back side */
+.bar-background {
+    background-color: rgba(160, 160, 160, .1);
+}
+/* Bar's Bottom side */
+.bar-background:before {
+    background-color: rgba(160, 160, 160, .2);
+}
+/* Bar's Left Back side */
+.bar-background:after {
+    background-color: rgba(160, 160, 160, .05);
+}
+/* Bar's Front side */
+.bar-foreground {
+    background-color: rgba(160, 160, 160, .1);
+}
+
+.button-label{
+	font-weight: bold;
+	color: #aaa;
+	line-height: 40px;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	display: inline;
+	margin: 0 10px 0 20px;
+}
+.button-label:before { 
+	content: " "; 
+	white-space: wrap; 
+}
+
+.main span:first-of-type{
+	margin-left: 0px;
+}
+/******************************************************************************
+ **                                                                          **
+ ** RESPONSIVENESS                                                           **
+ **                                                                          **
+ ** Just as an example to show you the way how to resize the graph 			 **
+ **                                                                          **
+ ******************************************************************************/
+ 
+@media screen and (max-width: 1125px) {
+	.graph-container{ font-size: 1em; }
+}
+@media screen and (max-width: 1050px) {
+	.graph-container{ font-size: 0.8em; }
+}
+@media screen and (max-width: 900px) {
+	.button-label{ margin: 0 10px 0 0; }
+	.button-label:before { content:"\A"; white-space: pre;  }
+	.main { padding: 20px 20px 40px; }
+}
+@media screen and (max-width: 765px) {
+	.graph-container { font-size: 0.7em; }
+}
+@media screen and (max-width: 720px) {
+	.graph-container { font-size: 0.6em; }
+}
+@media screen and (max-width: 630px) {
+	.graph-container { font-size: 0.5em; }
+}
+@media screen and (max-width: 360px) {
+	.graph-container { font-size: 0.3em; }
+	.button-label{ margin: 0 5px 0 0;}
+}
+
+/*/////...........................*/
+.tipData p{
+    margin:0.5em 0;
+    padding-left: 8px;
+}
+.tipData a{
+    display: block;
+    /*width:100%;*/
+    text-align: center;
+    line-height:1em;
+    height: 1em;
+    font-size: 0.75em;
+    color: blue;
+}
+@media screen and (min-width: 992px) {
+    .tipData {
+        position: absolute;
+        width:7em;
+        line-height:0.75em;
+        font-size: 0.5em;
+        border:1px solid #333;
+
+        background-color: #F1f1f1;
+        top: 30%;
+        right:1em;
+        zoom: 2;
+    }
+    .bar-foreground .textBox,.bar-inner .textBox{
+        display: block;
+        width:0;
+        height:0;
+        position: relative;
+    }
+    .bar-foreground .textBox .foreTip{
+        display: block;
+        position: absolute;
+        top: 1em;
+        left:0;
+        width:10em;
+        line-height:2em;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight:bold;
+    }
+    .bar-inner .textBox .innerTip, .bar-inner .textBox .innerPercent{
+        display: block;
+        position: absolute;
+        top: 1em;
+        left:0;
+        width:10em;
+        line-height:2em;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight:bold;
+    }
+
+}
+@media screen and (min-width:640px) and (max-width: 992px) {
+    .tipData{
+        position: absolute;
+        width:10em;
+        line-height:0.75em;
+        font-size: 0.75em;
+        border:1px solid red;
+        padding:5px;
+        top: 30%;
+        right:1em;
+        zoom: 2;
+    }
+    .bar-foreground .textBox,.bar-inner .textBox{
+        display: block;
+        width:0;
+        height:0;
+        position: relative;
+    }
+    .bar-foreground .textBox .foreTip{
+        display: block;
+        position: absolute;
+        top: 1em;
+        left:0;
+        width:10em;
+        line-height:2em;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight:bold;
+    }
+    .bar-inner .textBox .innerTip, .bar-inner .textBox .innerPercent{
+        display: block;
+        position: absolute;
+        top: 1em;
+        left:0;
+        width:10em;
+        line-height:2em;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight:bold;
+    }
+
+}
+
+.pic-top{
+    background-color: cornflowerblue;
+    position: relative;
+    border: 1px solid blue;
+}
+

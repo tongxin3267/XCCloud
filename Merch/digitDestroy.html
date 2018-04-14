@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>代币销毁</title>
+</head>
+<body>
+<div style="padding: 5px">
+    <div class="layui-row">
+        <blockquote class="layui-elem-quote">
+            <div class="layui-inline">
+                <label class="layui-form-label">数字币编号</label>
+                <div class="layui-input-inline"><input type="text" class="layui-input" id="iCardIDs"></div>
+            </div>
+            <div class="layui-inline">
+                <button type="button" class="layui-btn layui-btn-normal" id="digitDestroyBtn"><i class="layui-icon">&#x1007;</i>销毁</button>
+            </div>
+        </blockquote>
+        <hr class="layui-bg-blue">
+        <div class="layui-form-item" >
+            <div class="layui-inline">
+                <label class="layui-form-label">销毁时间</label>
+                <div class="layui-input-inline"><input type="text" class="layui-input" id="destroyTime"></div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">销毁卡号</label>
+                <div class="layui-input-inline"><input type="text" class="layui-input" id="destroyCardIDs"></div>
+            </div>
+            <div class="layui-inline">
+                <button type="button" class="layui-btn layui-btn-normal" id="searchCoinBtn"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+        </div>
+        <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+            <table class="layui-hide" id="digitDestroyTb"  lay-filter="digitDestroyTb"></table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+
+    layui.use(['form','layer','laydate'],function() {
+        var layer=layui.layer, $=layui.jquery,laydate=layui.laydate;
+        var xc=xcActionSystem.prototype;
+        laydate.render({
+            elem: '#destroyTime'
+        });
+        var token=xc.getStorage('token');
+        xc.DigitDestroy($('#digitDestroyBtn'),token,layer);
+        xc.SearchDigitDestroy($('#searchCoinBtn'),token,layer);
+        $('#searchCoinBtn').trigger('click');
+    })
+
+</script>
+<script type="text/html" id="titleTpl">
+    {{# if(d.DestroyTime!=null&&d.DestroyTime!=''){ }}
+    {{xcActionSystem.prototype.timeStamp2String(d.DestroyTime)}}
+    {{# }else{ }}
+    {{d.DestroyTime}}
+    {{#  } }}
+</script>
+</html>

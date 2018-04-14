@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0cb8767483664e169690dd7b47a60f3e" Name="Diagram1">
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPRadarHeatLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPRadarRegisterLog" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPIndex" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPRadarNotifyLog" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPDeviceStateChangeLog" Width="3.875" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPSendDeviceControlLog" Width="3.125" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="XCGameManagerLogModel.t_UDPDeviceControlLog" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>支付测试</title>
+</head>
+<body>
+    <div id="app">
+        <div style="width:98%; margin-left:2%;">
+            <input type="button" value="新大陆微信支付" @click="getPposWxPay" style="width:210px; height:50px; border-radius: 15px;background-color:#66CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
+        </div>
+        <br />
+        <hr /><hr /><hr />
+        <hr /><hr /><hr />
+
+        <div style="width:98%; margin-left:2%;">
+            <div id="qr_code" style="width:98%; height:140px;">
+
+            </div>
+            <div>
+                <input type="button" value="获取二维码" @click="getQRcode" style="width:210px; height:50px; border-radius: 15px;background-color:#66CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
+            </div>
+        </div><br /><br />
+        <div style="margin-left:2%;">订单号：</div><br />
+        <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="params.orderId" value="" /><br /><br />
+        <div style="margin-left:2%;">商品描述：</div><br />
+        <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="params.subject" value="" /><br /><br />
+        <div style="margin-left:2%; width:96%;">
+            <div style="float: left; width: 30%">
+                <div>支付通道：</div><br />
+                <select v-model="params.payChannel" style="width:80%;height:35px;">
+                    <option v-for="option in channelList" v-bind:value="option.val">
+                        {{ option.name }}
+                    </option>
+                </select><br /><br />
+            </div>
+            <div style="float: left; width: 30%">
+                <template v-if="params.payChannel >= 1">
+                    <div>支付方式：</div><br />
+                    <select v-model="params.payType" style="width:80%;height:35px;">
+                        <option v-for="option in payTypeList" v-bind:value="option.val">
+                            {{ option.name }}
+                        </option>
+                    </select>
+                    <br />
+                    <br />
+                </template>
+            </div>
+        </div>
+        <div style="margin-left:2%; clear:both">授权码：</div><br />
+        <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="params.authCode" value="" /><br /><br />
+        <div align="center">
+            <input type="button" value="提交刷卡" @click="doPay" style="width:210px; height:50px; border-radius: 15px;background-color:#00CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
+            <input type="button" value="网页支付" @click="doMobilePay" style="width:210px; height:50px; border-radius: 15px;background-color:#00CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
+        </div>
+        <br />
+        <hr /><hr /><hr />
+        <div>
+
+        </div>
+        <hr /><hr /><hr />
+        <br />
+        <div >
+            <div style="margin-left:2%;">商户转账编号：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.mer_transfer_no" value="" /><br /><br />
+            <div style="margin-left:2%;">转账金额：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.tran_amount" value="" /><br /><br />
+            <div style="margin-left:2%;">银行代码：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.recv_bank_code" value="" /><br /><br />
+            <div style="margin-left:2%;">收款人银行账号：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.recv_accno" value="" /><br /><br />
+            <div style="margin-left:2%;">收款人姓名：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.recv_name" value="" /><br /><br />
+            <div style="margin-left:2%;">省份代码：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.recv_province" value="" /><br /><br />
+            <div style="margin-left:2%;">城市代码：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.recv_city" value="" /><br /><br />
+            <div style="margin-left:2%;">手续费扣费方式：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.tran_fee_type" value="" /><br /><br />
+            <div style="margin-left:2%;">转账方式：</div><br />
+            <input type="text" style="width:96%;height:35px;margin-left:2%;" v-model="TransferParams.tran_type" value="" /><br /><br />
+            <div align="center">
+                <input type="button" value="提交转账" @click="doTransferPay" style="width:210px; height:50px; border-radius: 15px;background-color:#00CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" />
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/vue.min.js"></script>
+    <script src="../assets/js/axios.min.js"></script>
+    <script src="../assets/js/qrcode.min.js"></script>
+    <script type="text/javascript">
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "H+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        var clientId = new Date().Format("yyyyMMddHHmmssS") + "" + GetRandomNum(10000, 100000);
+
+        var pubPayModel = null;
+
+        new Vue({
+            el: "#app",
+            data: function () {
+                return {
+                    params:{
+                        sysId: "1",
+                        versionNo: "1.0",
+                        orderId: "20180205055432943100",
+                        subject: "莘宸收银系统测试",
+                        payChannel: 1,
+                        payType: 1,
+                        authCode: ""
+                    },
+                    channelList: [
+                        { name: "微信-支付宝官方通道", val: 1 },
+                        { name: "新大陆", val: 2 },
+                        { name: "扫呗", val: 4 },
+                        { name: "智付", val: 5 }
+                    ],
+                    payTypeList: [
+                        { name: "微信", val: 1 },
+                        { name: "支付宝", val: 2 }
+                    ],
+                    TransferParams: {
+                        sysId: "1",
+                        versionNo: "1.0",
+                        mer_transfer_no: clientId,
+                        tran_amount: "0.01",
+                        recv_bank_code: "ICBC",
+                        recv_accno: "6222023202003738175",
+                        recv_name: "龚成涛",
+                        recv_province: "44",
+                        recv_city: "5840",
+                        tran_fee_type: "0",
+                        tran_type: "0"
+                    }
+                }
+            },
+            methods: {
+                doTransferPay: function(){
+                    var _vm = this;
+                    axios.post('/Payment?action=getTransferPay', _vm.TransferParams).then(function (d) {
+                        var data = d.data;
+                        console.log(data);
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                doPay: function () {
+                    var _vm = this;
+                    axios.post('/Payment?action=BarcodePay', _vm.params).then(function (d) {
+                        var data = d.data;
+                        console.log(data);
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                doMobilePay: function(){
+                    var _vm = this;
+                    axios.post('/Payment?action=MobilePay', _vm.params).then(function (d) {
+                        var data = d.data;
+                        console.log(data);
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                getQRcode: function () {
+                    var _vm = this;
+                    axios.post('/Payment?action=getPayQRcode', _vm.params).then(function (d) {
+                        var data = d.data;
+                        console.log(data);
+                        document.getElementById('qr_code').innerHTML = "";
+                        var qrcode = new QRCode('qr_code', {
+                            text: data.result_data.QRcode,
+                            width: 128,
+                            height: 128,
+                            colorDark: '#000000',
+                            colorLight: '#ffffff',
+                            correctLevel: QRCode.CorrectLevel.H
+                        });                       
+
+                        //qrcode.clear();
+                        //qrcode.makeCode(data.result_data.QRcode);
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                getPposWxPay: function () {
+                    var _vm = this;
+                    var _params = {
+                        sysId: "1",
+                        versionNo: "1.0",
+                        amount: "1",
+                        subject: "城市英雄0.01测试套餐",
+                        openid: "oNWocwSC_GFO8n_8mtZ0iV9tL0WI"
+                    };
+                    axios.post('/Payment?action=getPposWxPay', _params).then(function (d) {
+                        var data = d.data;
+                        
+                        if (data.result_code === "0") {
+                            alert(data.result_msg);
+                        }
+
+                        pubPayModel = data.result_data;
+                        callpay();
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                }
+            }
+        })
+
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            {
+                "appId": pubPayModel.appId,     //公众号名称，由商户传入     
+                "timeStamp": pubPayModel.timeStamp,         //时间戳，自1970年以来的秒数     
+                "nonceStr": pubPayModel.nonceStr, //随机串     
+                "package": pubPayModel.package,
+                "signType": "MD5",         //微信签名方式：     
+                "paySign": pubPayModel.paySign //微信签名 
+            },//josn串
+             function (res)
+             {
+                 //WeixinJSBridge.log(res.err_msg);
+                 if (res.err_msg == "get_brand_wcpay_request:ok") {
+
+                 }
+             }
+             );
+        }
+
+        function callpay() {
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }
+                else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }
+            else {
+                jsApiCall();
+            }
+        }
+
+        function GetRandomNum(n, m) {
+            var random = Math.floor(Math.random() * (m - n + 1) + n);
+            return random;
+        }
+    </script>
+</body>
+</html>

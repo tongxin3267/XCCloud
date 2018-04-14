@@ -1,0 +1,81 @@
+[{
+    "id": 0,
+    "title": "编号",
+    "field":"ID",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 1,
+    "title": "入库时间",
+    "field":"TokenTime",
+    "type": "time",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 2,
+    "title": "入库仓库",
+    "field":"Location",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 3,
+    "title": "上期结余",
+    "field":"lastSurplus",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 4,
+    "title": "数量",
+    "field":"TokenCount",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 5,
+    "title":"本期结余",
+    "field":"CurrentSurplus",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 6,
+    "title":"经办人",
+    "field":"Operator",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 7,
+    "title":"备注",
+    "field":"Note",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+}]

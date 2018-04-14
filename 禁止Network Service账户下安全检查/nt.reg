@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00  
+  
+[HKEY_USERS\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\WinTrust\Trust Providers\Software Publishing]  
+  
+"State"=dword:00023e00  

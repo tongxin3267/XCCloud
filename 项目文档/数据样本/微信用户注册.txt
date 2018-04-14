@@ -1,0 +1,9 @@
+{
+	"smId":"门店或商户ID",
+	"username":"用户名称",
+	"realname":"真实姓名",	
+	"password":"密码",
+	"scode":"短信验证码",
+	"mobile":"手机号",
+	"message":"留言"
+}

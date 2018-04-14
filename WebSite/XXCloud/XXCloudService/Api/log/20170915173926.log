@@ -1,0 +1,6 @@
+﻿2017-09-15 17:39:26
+数据库执行错误：
+ declare @PageName varchar(50) = 'index'  declare @ProcessName varchar(50) = 'test'  declare @UserID int = 9  if not exists (select 0 from Search_Template where UserID = @UserID )    @UserID = 0  select * from Search_Template a inner join Search_Template_Detail b on a.ID = b.TempID  
+                         where UserID = @UserID and PageName = @PageName and ProcessName = @ProcessName  select * from Dict_System 
+
+

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+    <script type="text/javascript">
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    //console.log(data);
+                    data = JSON.parse(data);                    
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+    </script>
+
+    //莘管家测试接口
+    <script type="text/javascript">
+
+        function do_datagameInfo() {           
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "6b2c15c9910446c6823d11e282357551", "routerToken": "f482d424", "groupName": "测试", "mode": "1", "groupType": "1", "pushReduceFromCard": "50", "pushLevel": "1", "lotteryMode": "1", "onlyExitLottery": "1"
+                , "readCat": "1", "chkCheckGift": "1", "returnCheck": "", "outsideAlertCheck": "", "icticketOperation": "", "notGiveBack": "", "allowElecPush": "", "allowDecuplePush": "", "guardConvertCard": "", "allowRealPush": "", "banOccupy": "", "strongGuardConvertCard": ""
+                , "pushControl": "", "allowElecOut": "", "nowExit": "", "bOLock": "", "allowRealOut": "", "bOKeep": "", "pushAddToGame": "", "pushSpeed": "", "pushPulse": "", "pushStartInterval": "", "useSecondPush": "", "secondReduceFromCard": "", "secondAddToGame": "",
+                "secondSpeed": "", "secondPulse": "", "secondLevel": "", "secondStartInterval": "", "outSpeed": "", "outPulse": "", "countLevel": "", "outLevel": "", "outReduceFromGame": "", "outAddToCard": "", "onceOutLimit": "", "oncePureOutLimit": "", "ssrtimeOut": "",
+                "exceptOutTest": "", "exceptOutSpeed": "","frequency":""};
+            var url = "/XCCloudRS232/DataGameInfo?action=addGroup";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_updatedatagameInfo() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.81", "mobileToken": "6b2c15c9910446c6823d11e282357551", "groupID": "4", "mode": "2", "groupName": "测试7", "groupType": "6", "pushReduceFromCard": "50", "pushLevel": "1", "lotteryMode": "1", "onlyExitLottery": "10", "readCat": "4", "chkCheckGift": "1", "returnCheck": "10", "outsideAlertCheck": "10", "icticketOperation": "10", "notGiveBack": "10", "allowElecPush": "10", "allowDecuplePush": "10", "guardConvertCard": "10", "allowRealPush": "10", "banOccupy": "10", "strongGuardConvertCard": "10", "allowElecOut": "10", "nowExit": "10", "bOLock": "10", "allowRealOut": "10", "bOKeep": "10", "pushAddToGame": "10", "pushSpeed": "10", "pushPulse": "10", "pushStartInterval": "10", "useSecondPush": "10", "secondReduceFromCard": "10", "secondAddToGame": "10", "secondSpeed": "10", "secondPulse": "10", "secondLevel": "10", "secondStartInterval": "10", "outSpeed": "10", "outPulse": "10", "countLevel": "10", "outLevel": "10", "outReduceFromGame": "10", "outAddToCard": "10", "onceOutLimit": "10", "oncePureOutLimit": "10", "ssrtimeOut": "10", "exceptOutTest": "10", "exceptOutSpeed": "10", "frequency": "102"
+            };
+            //var parasObj = {
+            //    "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "6b2c15c9910446c6823d11e282357551", "groupID": "3", "groupName": "测试7", "mode": "2", "groupType": "6", "pushReduceFromCard": "50", "pushLevel": "1", "lotteryMode": "1", "onlyExitLottery": "1"
+            //    , "readCat": "4", "chkCheckGift": "1", "returnCheck": "", "outsideAlertCheck": "", "icticketOperation": "", "notGiveBack": "", "allowElecPush": "", "allowDecuplePush": "", "guardConvertCard": "", "allowRealPush": "", "banOccupy": "", "strongGuardConvertCard": ""
+            //    ,  "allowElecOut": "", "nowExit": "", "bOLock": "", "allowRealOut": "", "bOKeep": "", "pushAddToGame": "", "pushSpeed": "", "pushPulse": "", "pushStartInterval": "", "useSecondPush": "", "secondReduceFromCard": "", "secondAddToGame": "",
+            //    "secondSpeed": "", "secondPulse": "", "secondLevel": "", "secondStartInterval": "", "outSpeed": "", "outPulse": "", "countLevel": "", "outLevel": "", "outReduceFromGame": "", "outAddToCard": "", "onceOutLimit": "", "oncePureOutLimit": "", "ssrtimeOut": "",
+            //    "exceptOutTest": "", "exceptOutSpeed": "", "frequency": "102"
+            //};
+            var url = "/XCCloudRS232/DataGameInfo?action=editGroup";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_deletedatagameInfo() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "6b2c15c9910446c6823d11e282357551", "groupID": "1"
+            };
+            var url = "/XCCloudRS232/DataGameInfo?action=deleteGroup";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_getdatagameInfo() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "6b2c15c9910446c6823d11e282357551", "groupID": "3"
+            };
+            var url = "/XCCloudRS232/DataGameInfo?action=getGroup";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getDeviceInfo() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "6b2c15c9910446c6823d11e282357551"
+            };
+            var url = "http://192.168.1.145/XCCloudRS232/DeviceInfo?action=getDeviceInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_AddFoods() {
+            var parasObj = { "sysId": "0", "versionNo": "0.81", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32", "deviceToken": "f482d424", "foodname": "测试11", "foodprice": "0.000001", "coinquantity": "415132", "isquickfood": "0", "foodstate": "1" };
+            //var parasObj = {
+            //    "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "23c41662", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32", "foodname": "1元2币",
+            //    "foodprice": "1", "coinquantity": "2", "isquickfood": "0", "foodstate": "1"
+            //};
+            var url = "/XCCloudRS232/Foods?action=AddFoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_UpdateFoods() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "23c41662", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32", "foodname": "测试",
+                "foodprice": "1", "coinquantity": "2", "isquickfood": "0", "foodstate": "1","foodid":"2"
+            };
+            var url = "/XCCloudRS232/Foods?action=UpdateFoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_GetFoods() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32", "foodid": "", "deviceToken":"f482d424"
+            };
+            var url = "/XCCloudRS232/Foods?action=GetFoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_DeleteFoods() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32", "foodid": "1"
+            };
+            var url = "/XCCloudRS232/Foods?action=DeleteFoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        } 
+        function do_getFoodSaleRevenue() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": "c4e0152a627e4ec881d9672b6a656d32"
+            };
+            var url = "/XCCloudRS232/Account?action=getFoodSaleRevenue";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+    </script>
+
+</head>
+<body>
+   
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_datagameInfo(添加分组)" onclick="do_datagameInfo()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_updatedatagameInfo(修改分组)" onclick="do_updatedatagameInfo()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_deletedatagameInfo(删除分组)" onclick="do_deletedatagameInfo()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_getdatagameInfo(获取分组信息)" onclick="do_getdatagameInfo()" />
+    </div>
+        
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_getDeviceInfo(获取控制器列表)" onclick="do_getDeviceInfo()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_AddFoods(添加套餐设定)" onclick="do_AddFoods()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_UpdateFoods(修改套餐设定)" onclick="do_UpdateFoods()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_GetFoods(获取套餐信息)" onclick="do_GetFoods()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_DeleteFoods(删除套餐信息)" onclick="do_DeleteFoods()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_getFoodSaleRevenue(查询商户套餐销售总金额)" onclick="do_getFoodSaleRevenue()" />
+    </div>
+</body>
+</html>

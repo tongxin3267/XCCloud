@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>退货处理</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+
+		<div class="col-md-5 col-xs-6">
+			<label class="col-md-12 col-xs-12"><input class="form-control" value="订单编号或商品名..." type="text" id="searchK" onfocus="this.value='';" onblur="if(this.value==''){this.value='订单编号或商品名..';}"/></label>
+			<ul class="searchList col-md-12 col-xs-12">
+			</ul>
+			<div class="searchMb col-md-12 col-xs-12">
+				<h4>订单编号：</h4>
+				<h5>销售时间：</h5>
+				<div class="col-md-12 col-xs-12">
+					<p class="OrderP1 col-md-8 col-xs-8">订单类别：</p>
+					<p class="OrderP2 col-md-4 col-xs-4"></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-7 col-xs-6">
+			<ul class="col-md-12 col-xs-12 kz">
+				<li class="col-md-12 col-xs-12">
+					<div class="col-md-5 col-xs-7">品名</div>
+					<div class="col-md-2 col-xs-5">数量</div>
+					<div class="col-md-3 col-xs-7">金额</div>
+					<div class="col-md-2 col-xs-5">操作</div>
+				</li>
+				<li class="first col-md-12 col-xs-12 hidden">
+					<div class="col-md-5 col-xs-7">中号小黄人（独眼）</div>
+					<div class="col-md-2 col-xs-5">1</div>
+					<div class="col-md-3 col-xs-7">代币 300</div>
+					<label class="col-md-2 col-xs-5"><button type="button" class="btn btn-primary">退货</button></label>
+					<div class="col-md-5 col-xs-7">中号美国队长盾牌</div>
+					<div class="col-md-2 col-xs-5">1</div>
+					<div class="col-md-3 col-xs-7">积分 100000</div>
+					<label class="col-md-2 col-xs-5"><button type="button" class="btn btn-primary">退货</button></label>
+				</li>
+				<li class="first col-md-12 col-xs-12 hidden">
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="wrap">
+
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/yx.js"></script>
+<script>
+    var data = {
+        "rows": [{
+            "Ordertype": "商品",
+            "Ordertypeid": "EAB845D756BE493692",
+            "Ordertime": "2017-09-16 12:11:55",
+            "Ordermoney": "￥50.00"
+        }, {
+            "Ordertype": "商品",
+            "Ordertypeid": "EAB845D756BE493692",
+            "Ordertime": "2017-09-16 12:11:55",
+            "Ordermoney": "￥50.00"
+        }, {
+            "Ordertype": "入会",
+            "Ordertypeid": "EAB845D756BE493692",
+            "Ordertime": "2017-09-16 12:11:55",
+            "Ordermoney": "￥50.00"
+        }, {
+            "Ordertype": "门票",
+            "Ordertypeid": "EAB845D756BE493692",
+            "Ordertime": "2017-09-16 12:11:55",
+            "Ordermoney": "￥50.00"
+        }]
+    };
+    jQuery(function($){	//模糊查询
+		var tempA =$(".searchMb").html();
+        $(".searchMb").remove();
+        var searchList =$(".searchList");
+        var searchK = $("#searchK");
+        $(data.rows).each(function(i,dom){
+            var searchL =$("<li></li>");
+            searchL.append(tempA);
+            searchL.find("h4").append(dom.Ordertypeid);
+            searchL.find("h5").append(dom.Ordertime);
+           	searchL.find(".OrderP1").append(dom.Ordertype);
+           	searchL.find(".OrderP2").append(dom.Ordermoney);
+            searchList.append(searchL);
+        });
+        searchK.keyup(function () {
+
+            var myInput = $(this), v = myInput.val().replace(/^\s+|\s+$/g,"");
+//            console.log(v);
+            var trs = searchList.find("li");/*:gt(0)第一行固定不变*/
+
+            if(v == ""){
+                trs.filter(":hidden").show();
+            }
+            else{
+                trs.hide().filter(":contains('"+myInput.val()+"')").show();
+            }
+        })
+
+    });
+    $(function () {
+		$(".searchList").on("click","li", function () {
+		    if($(this).hasClass("on")){
+                $(this).removeClass("on");
+                $(".first").addClass("hidden");
+			}else {
+                $(this).addClass("on");
+                $(".first").removeClass("hidden");
+			}
+		})
+    })
+</script>
+
+
+</body>
+</html>
+
+

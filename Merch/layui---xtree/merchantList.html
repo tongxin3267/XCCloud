@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="../images/xinchen.ico" media="screen"  />
+	<link rel="stylesheet" href="../layui/css/layui.css">
+	<link rel="stylesheet" href="../css/manchartData.css">
+	<title>商户信息列表</title>
+	<style> .layui-table-cell .layui-btn{height: 28px;line-height: 28px;}</style>
+</head>
+<body> 
+	<div class="layui-container">
+		<div class="layui-row">
+			<div class="" style="text-align: right">
+				<button class="layui-btn layui-btn-normal" onclick="getAddMerchInfo()">新增</button>
+			</div>
+			<div class="formtMerchant">
+				<form action="">
+					<div class="layui-col-md8 layui-col-sm8 layui-col-lg8">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">商户类别</label>
+								<div class="layui-input-inline">
+									<select name="city" lay-verify="required" id="merchKinds" style="height: 38px;width: 190px;text-align: center;">
+										<option value="">-请选择-</option>
+										<option value="0">普通账号</option>
+										<option value="1">大客户账户</option>
+										<option value="2">代理商账号</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">商户状态</label>
+								<div class="layui-input-inline">
+									<select name="city" lay-verify="required" style="height: 38px;width: 190px;text-align: center;">
+										<option value="">-请选择-</option>
+										<option value="0">停用</option>
+										<option value="1">正常</option>
+										<option value="2">质疑</option>
+										<option value="3">锁定</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">商户账号</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">是否锁定</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">负责人</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">手机号</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">创建子账号</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">账号数量</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item" style="display: none">
+								<label class="layui-form-label">授权到期</label>
+								<div class="layui-input-inline">
+									<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+								</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">邮政编码</label>
+							<div class="layui-input-inline" style="width: 500px;">
+								<select name="" id="provence" style="height: 38px;"><option value="">-请选择-</option></select>
+								<select name="" id="city" style="height: 38px;"><option value="">-请选择-</option></select>
+								<select name="" id="area" style="height: 38px;"><option value="">-请选择-</option></select>
+								<input type="text" readonly style="height: 36px;">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">授权到期</label>
+							<div class="layui-input-inline">
+								<textarea name="desc" placeholder="请输入内容" class="layui-textarea" style="width: 512px;height: 90px;line-height: 26px"></textarea>
+							</div>
+						</div>
+						<div class="layui-form-item" style="text-align: right;margin-right: 40px;">
+							<button type="button" class="layui-btn layui-btn-normal">确定</button>
+						</div>
+					</div>
+					<div class="layui-col-md4 layui-col-sm4 layui-col-lg4">
+						<div id="demo1" style="width:300px;height:400px; border:1px solid black; margin:20px;overflow:auto;float:left;"></div>
+					</div>
+				</form>
+			</div>
+			<div class="layui-col-md12">
+				<table class="layui-hide" id="merchantListTable"  lay-filter="merchList"></table>
+			</div>
+		</div>
+	</div>
+	<script src="../js/jquery-1.8.3-min.js"></script>
+	<script src="../layui/layui.js"></script>
+	<script src="layui-xtree.js"></script>
+	<script src="../js/manchartSystem.js"></script>
+	<script>
+//		getInitData();
+        var json = [
+            {
+                title: "节点1", value: "jd1", data: [
+                { title: "节点1.1", value: "jd1.1", data: [] }
+                , { title: "节点1.2", value: "jd1.2", data: [] }
+                , { title: "节点1.3", value: "jd1.3", data: [] }
+                , { title: "节点1.4", value: "jd1.4", data: [] }
+            ]
+            }
+            , {
+                title: "节点2", value: "jd2", data: [
+                    { title: "节点2.1", value: "jd2.1", data: [] }
+                    , {
+                        title: "节点2.2", value: "jd2.2", data: [
+                            { title: "节点2.2.1", value: "jd2.2.1", data: [] }
+                            , { title: "节点2.2.2", value: "jd2.2.2", data: [] }
+                            , { title: "节点2.2.3", value: "jd2.2.3", data: [] }
+                            , { title: "节点2.2.4", value: "jd2.2.4", data: [] }
+                        ]
+                    }
+                    , { title: "节点2.3", value: "jd2.3", data: [] }
+                    , { title: "节点2.4", value: "jd2.4", data: [] }
+                ]
+            }
+            , { title: "节点3", value: "jd3", data: [] }
+            , { title: "节点4", value: "jd4", data: [] }
+        ];
+        layui.use('form', function () {
+            var form = layui.form;
+
+            //创建tree
+            var xtree = new layuiXtree({
+                elem: 'demo1' //放xtree的容器（必填）
+                , form: form              //layui form对象 （必填）
+                , data: json              //数据，结构请参照下面 （必填）
+                , isopen: false            //初次加载时全部展开，默认true （选填）
+                , color: "#000"           //图标颜色 （选填）
+                , icon: {                 //图标样式 （选填）
+                    open: "&#xe7a0;"      //节点打开的图标
+                    , close: "&#xe622;"   //节点关闭的图标
+                    , end: "&#xe621;"     //末尾节点的图标
+                }
+            });
+
+            // document.getElementById('btn_getCk').onclick = function () {
+            //
+            //     var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+            //
+            //     for (var i = 0; i < oCks.length; i++) {
+            //         console.log(oCks[i].value);
+            //     }
+            // }
+
+
+        });
+        layui.use('table', function() {
+            var table = layui.table;
+            table.on('tool(merchList)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                var data = obj.data; //获得当前行数据
+                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+                if (layEvent === 'detail') { //查看
+                    //do somehing
+                } else if (layEvent === 'del') { //删除
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+                        //向服务端发送删除指令,删除数据库中此条数据
+						var merchId=data.MerchID;
+                        var   obj1={"merchId":merchId,"token":1,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+                        deleteMerch(obj1);
+                    });
+                } else if (layEvent === 'edit') { //编辑
+                    //do something
+
+                    //同步更新缓存对应的值
+                    obj.update({
+                        username: '123'
+                        , title: 'xxx'
+                    });
+                }
+            });
+        });
+        function getAddMerchInfo() {
+            // document.getElementsByClassName('formtMerchant')[0].style.display="block";
+            $('.formtMerchant').css("display","block");
+            var   obj={"merchId":"B4201030001","token":1,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+            var url = "http://mp.4000051530.com/XCCloud/Merch?action=GetMerchInfo";
+            var parasJson = JSON.stringify(obj);
+            var listData=[];
+
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: {parasJson: parasJson},
+                success: function (data) {
+                    data=JSON.parse(data);
+                    console.log(data);
+                    if(data.result_code==1){
+                        listData=data.result_data;
+                        console.log(listData);
+                        listData= JSON.stringify(listData).replace(eval("/children/g"),"data").replace(eval("/name/g"),"title").replace(eval("/functionId/g"),"value");
+                        listData=JSON.parse(listData);
+                        console.log(listData);
+                        layui.use('form', function () {
+                            var form = layui.form;
+
+                            //创建tree
+                            var xtree = new layuiXtree({
+                                elem: 'demo1' //放xtree的容器（必填）
+                                , form: form              //layui form对象 （必填）
+                                , data: json              //数据，结构请参照下面 （必填）
+                                , isopen: false            //初次加载时全部展开，默认true （选填）
+                                , color: "#000"           //图标颜色 （选填）
+                                , icon: {                 //图标样式 （选填）
+                                    open: "&#xe7a0;"      //节点打开的图标
+                                    , close: "&#xe622;"   //节点关闭的图标
+                                    , end: "&#xe621;"     //末尾节点的图标
+                                }
+                            });
+
+                            // document.getElementById('btn_getCk').onclick = function () {
+                            //
+                            //     var oCks = xtree.GetChecked(); //获取全部选中的末级节点checkbox对象
+                            //
+                            //     for (var i = 0; i < oCks.length; i++) {
+                            //         console.log(oCks[i].value);
+                            //     }
+                            // }
+
+
+                        });
+
+                    }
+                }
+            });
+        }
+	</script>
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-mini" lay-event="detail" href="../storeList.html">门店明细</a>
+
+		<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+	</script>
+</body>
+</html>

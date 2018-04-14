@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>会员入会</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<style>
+			.MemberMain{padding: 1em;}
+			.MemberMain h3{padding-left: 20px;font-size: 24px;}
+
+		</style>
+	</head>
+	<body style="background: #f0f0f0;">
+
+
+
+
+		<div class="MemberMain">
+			<h3>选择入会等级</h3>
+			<div class="Membership hidden">
+				<img src="images/logo.png">
+				<p class=""><span class="MemberJb fl"><em>级别：</em></span><span class="MemberYj fr"><em> 押金：</em></span></p>
+			</div>
+			<div class="memberList swiper-container">
+				<ul class="swiper-wrapper">
+
+				</ul>
+				<div class="swiper-scrollbar"></div>
+			</div>
+			<h3>选择充值套餐（选填）(按钮：实物币还是充值)</h3>
+			<div class="MtcList swiper-container">
+
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+					<li class="swiper-slide clearfix">
+						<img src="images/sales.png">
+						<div class="MtcListTxt">
+							<h4>50元60币</h4>
+							<p>￥50.00</p>
+							<h5>60代币</h5>
+						</div>
+					</li>
+				</ul>
+				<div class="swiper-scrollbar"></div>
+			</div>
+		</div>
+
+
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<h3 class="hStyle titleSty">用户信息</h3>
+			<div class="McText">
+				<div class="col-md-4 col-xs-12"><span class="col-md-4 col-xs-4">手机号码：</span><label class="col-md-8 col-xs-8"><input type="text" class="form-control" /></label></div>
+				<div class="col-md-4 col-xs-12"><span class="col-md-4 col-xs-4">会员姓名：</span><label class="col-md-8 col-xs-8"><input type="text" class="form-control"/></label></div>
+				<div class="col-md-3 col-xs-9"><span class="col-md-3 col-xs-6">生日：</span><label class="col-md-9 col-xs-6"><input type="text"  class="form-control"/></label></div>
+				<div class="col-md-1 col-xs-3 pad_0"><span class="col-md-6 col-xs-6 pad_0">性别：</span>
+					<div class="col-md-6 col-xs-6 text-left pad_0">
+						<select  name="select">
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+			<div class="McText">
+				<div class="col-md-4 col-xs-12" ><span class="col-md-4 col-xs-4">验证码：</span><label class="col-md-4 col-xs-4"><input type="text" class="form-control" /></label><label class="col-md-4 col-xs-4"><input class="form-control" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()"/></label></div>
+				<div class="col-md-8 col-xs-12" ><span class="col-md-2 col-xs-4 margin_5">证件号码：</span><label class="col-md-9 col-xs-7"><input type="text" class="form-control"/></label><label class="col-md-1 col-xs-1"><button type="button" class="btn btn-primary">读取</button></label></div>
+			</div>
+			<div class="col-md-12 McTarea col-xs-12">
+				<span class="col-md-1 col-xs-4">备注:</span>
+				<label class="col-md-10 col-xs-12 col-marL_2" ><textarea class="form-control"></textarea></label>
+
+			</div>
+			<div class="col-md-10 col-xs-8" ></div>
+			<div class="col-md-2 text-center col-xs-4" ><button type="button" class="btn btn-success">发卡</button></div>
+		</div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/yx.js"></script>
+	<script src="js/swiper.min.js"></script>
+
+	<script>
+        var swiper = new Swiper('.MtcList', {
+            scrollbar: '.swiper-scrollbar',
+            scrollbarHide: true,
+            slidesPerView: 'auto',
+            centeredSlides: false,
+            spaceBetween: 30,
+            grabCursor: true
+        });
+        var swiper = new Swiper('.memberList', {
+            scrollbar: '.swiper-scrollbar',
+            scrollbarHide: true,
+            slidesPerView: 'auto',
+            centeredSlides: false,
+            spaceBetween: 30,
+            grabCursor: true
+        });
+	</script>
+	<script src="js/ocheck.js"></script>
+	</body>
+</html>

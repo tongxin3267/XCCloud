@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D63076B-E662-4EB7-A9A8-CB50BC35F992}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XXCloudService.RadarServer</RootNamespace>
+    <AssemblyName>XXCloudService.RadarServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CoinType.cs" />
+    <Compile Include="CommandType.cs" />
+    <Compile Include="Command\Ask\Ask卡头进出币数据应答.cs" />
+    <Compile Include="Command\Ask\Ask机头卡片报警指令.cs" />
+    <Compile Include="Command\Ask\Ask机头地址动态分配.cs" />
+    <Compile Include="Command\Ask\Ask终端参数申请.cs" />
+    <Compile Include="Command\Ask\Ask设备参数申请.cs" />
+    <Compile Include="Command\Recv\Recv卡头进出币数据.cs" />
+    <Compile Include="Command\Recv\Recv机头卡片报警指令.cs" />
+    <Compile Include="Command\Recv\Recv机头地址动态分配.cs" />
+    <Compile Include="Command\Recv\Recv机头网络状态报告.cs" />
+    <Compile Include="Command\Recv\Recv游戏机参数申请.cs" />
+    <Compile Include="Command\Recv\Recv退币信号延时回应指令.cs" />
+    <Compile Include="CRC.cs" />
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="FrameData.cs" />
+    <Compile Include="FrameType.cs" />
+    <Compile Include="Info\CoinInfo.cs" />
+    <Compile Include="Info\GameInfo.cs" />
+    <Compile Include="Info\HeadInfo.cs" />
+    <Compile Include="Info\MemberInfo.cs" />
+    <Compile Include="Info\PushRule.cs" />
+    <Compile Include="LogHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PubLib.cs" />
+    <Compile Include="UDPServerHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.BLL\XCCloudService.BLL.csproj">
+      <Project>{bcbc3ea2-3c42-4d5f-842a-45e614bbadce}</Project>
+      <Name>XCCloudService.BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

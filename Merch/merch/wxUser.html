@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>微信用户</title>
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="viewport" media="(device-height: 568px)" content="initial-scale=1.0,user-scalable=no,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="normal.css">
+    <link rel="stylesheet" href="common.css">
+    <script src="jquery-1.8.3-min.js"></script>
+    <script src="manchartMobile.js"></script>
+
+</head>
+<body>
+     <header class="head">
+         <h2>新用户授权设置</h2>
+     </header>
+     <main class="userBox">
+         <!--<div class="userContent">-->
+         <form action="">
+             <div class="userInfo">
+                 <div>
+
+                     <div class="text">
+                         <span>用户名</span>
+                         <input type="text" placeholder="请输入用户名" class="input" >
+                     </div>
+                     <div class="text">
+                         <span>申请理由</span>
+                         <input type="text" placeholder="请输入申请理由" class="input" >
+                     </div>
+                 </div>
+             </div>
+             <div class="lineBar"></div>
+             <div class="authoritySet">
+                 <span onmousedown="openSet()">工作组 <img src="images/more.png" alt=""></span>
+                 <ul class="authorityList authList">
+                     <li> 待选条目1<input type="checkbox"> <span>checked</span></li>
+                     <li> 待选条目2<input type="checkbox"> <span>checked</span> </li>
+                     <li> 待选条目3<input type="checkbox"> <span>checked</span></li>
+                     <li> 待选条目4<input type="checkbox"> <span>checked</span> </li>
+                     <li> 待选条目5<input type="checkbox"> <span>checked</span> </li>
+                 </ul>
+             </div>
+             <div class="lineBar"></div>
+             <div class="authorizeSet authList">
+                 <span onmousedown="authorizeSet()">权限设置 <img src="images/more.png" alt="" ></span>
+                 <ul class="authorizeList">
+                     <li> 待选条目1<input type="checkbox"> <div class="styleDiv"><span class="s1">checked</span><span class="s2">no</span></div></li>
+                     <li> 待选条目2<input type="checkbox"> <div class="styleDiv"><span class="s1">checked</span><span class="s2">no</span></div></li>
+                     <li> 待选条目3<input type="checkbox"> <div class="styleDiv"><span class="s1">checked</span><span class="s2">no</span></div></li>
+                     <li> 待选条目4<input type="checkbox"> <div class="styleDiv"><span class="s1">checked</span><span class="s2">no</span></div></li>
+                     <li> 待选条目5<input type="checkbox"> <div class="styleDiv"><span class="s1">checked</span><span class="s2">no</span></div></li>
+                 </ul>
+             </div>
+             <div class="lineBar"></div>
+             <div class="">
+                 <div class="note_check_title">审核功能</div>
+                 <div class="text note_check_content">
+                     <span>拒绝理由</span>
+                     <textarea type="text" placeholder="40个字以内" class="input" ></textarea>
+                 </div>
+                 <div class="btn_content"><button type="button">审核拒绝</button> <button type="button">审核通过</button></div>
+             </div>
+         </form>
+
+         <!--</div>-->
+     </main>
+    <footer class="foot">
+    </footer>
+     <script>
+         singleSelect();
+         lotsSelect();
+     </script>
+</body>
+</html>

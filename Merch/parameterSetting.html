@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统参数配置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <!--<link rel="stylesheet" href="css/manchartData.css">-->
+</head>
+<style>
+    .layui-form-item .layui-input-inline{width: 179px;}
+    .layui-form-item .layui-form-label{width: 140px;padding: 8px 0;}
+    .layui-form-switch{width: 169px!important;}
+</style>
+<body>
+<div class="" style="padding: 5px; ">
+    <form action="" class="layui-form layui-form-pane">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item lci1">
+                <h2 class="layui-colla-title">运营参数设定</h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">兑币单价</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text"  name="price_min" placeholder="￥" value="1" class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid">币,价值</div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="txtCoinPrice" name="price_max" placeholder="￥" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">元</div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">彩票兑换比例</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="coinChargeScale" name="price_min" placeholder=""  class="layui-input" >
+                            </div>
+                            <div class="layui-form-mid">张彩票,兑换</div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text"  placeholder="1"  class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid">币</div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">赠送售币积分</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text"  value="1"  class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid">元,赠送</div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="txtGivePoint" name="price_max" placeholder="￥"  class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">积分</div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">小票是否打印二维码</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="启用|禁用" id="chkPrintBarcode" lay-filter="chkPBcode">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">吧台送币时是否授权</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="启用|禁用" id="chkBarSendCoinAuthorize" lay-filter="chkBSCAuth">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">条码退款方式</label>
+                            <div class="layui-input-inline">
+                                <select name="interest" lay-filter="cmbMemberBalance"  id="cmbMemberBalance">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="layui-bg-blue">
+                    <div class="layui-form-item  show_block_short">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业日期内班次个数</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="txtBusinessClass" name="price_min" placeholder="输入一个整数" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">个 <span>(设定后下个营业日期内生效)</span></div>
+
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">换班时需要输入实点数</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="启用|禁用" id="chkShift" lay-filter="ckbShift">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-colla-item lci2">
+                <h2 class="layui-colla-title">会员设定</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每次售币最小币数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtOnceSellCoinMin" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每次售币最大币数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtOnceSellCoinMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每次最小退币数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtOnceRefunMin" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每天免授权赢币上限</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtDayWithoutRightWinCoinMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每天免授权赢币倍数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtWithoutRightWinCoinTimes" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每次免授权退币上限</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtOnceWithoutRightRefundMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每天免授权退币上限</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtDayWithoutRightRefundMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">单个会员余额上限</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtPerMemberCoinMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">会员生日提醒</label>
+                            <div class="layui-input-inline">
+                                <select name="interest" lay-filter="birthdayTips" id="cmbBirthdaySendSms">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">会员入会时必须抓拍照片</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="chkPhotograph" lay-skin="switch" lay-text="启用|禁用" id="chkPhotograph">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">吧台退卡时必须抓拍照片</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="chkExitCardCatch" lay-skin="switch" lay-text="启用|禁用" id="chkExitCardCatch">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">退餐时必须抓拍相片</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="chkExitFoodCatch" lay-skin="switch" lay-text="启用|禁用" id="chkExitFoodCatch">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item  show_block_short">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">吧台退款时必须抓拍照片</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="chkExitMoneyCatch" lay-skin="switch" lay-text="启用|禁用" id="chkExitMoneyCatch">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">入会是否验证短信码</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="ams" lay-skin="switch" lay-text="启用|禁用" id="chkAllowMemberSmsCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">临时开卡是否显示手机号输入框</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="showPhone" lay-skin="switch" lay-text="启用|禁用" id="chkTempShowPhone">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">临时卡首次入会验证短信码</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="afmsc" lay-skin="switch" lay-text="启用|禁用" id="chkTempAllowFirstMemberSmsCode">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">临时卡是否允许返还</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="Giveback" lay-skin="switch" lay-text="启用|禁用" id="chkTempGiveback">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-colla-item lci3">
+                <h2 class="layui-colla-title">返还设定</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-form-item ">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">返还时卡里余额不能超过</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtGiveBackMax" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">退款后禁止拿返还时间(分)</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtExitMoneyGiveBackTime" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="white-space: normal;padding: 0;">拿返还时是否验证短信码</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="GiveBackAllowSmsCode" lay-skin="switch" lay-text="启用|禁用" id="chkGiveBackAllowSmsCode">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="layui-bg-blue">
+                    <div style="text-align: right">
+                       <button type="button" class="layui-btn layui-btn-normal layui-btn-primary" id="addNewBackRule"> 新增</button>
+                    </div>
+                    <div>
+                        <table class="layui-hide" id="test" lay-filter="test"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: right;margin: 20px;">
+            <button type="button" class="layui-btn layui-btn-normal">重置</button>
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-danger" id="parameterBtn">提交</button>
+            <button type="button" class="layui-btn layui-btn-normal">取消</button>
+        </div>
+    </form>
+    <div class="addReturnSetting" style="display: none">
+        <form action="" class="layui-form layui-form-pane">
+            <div class="layui-form-item item_two">
+                <div class="layui-inline">
+                    <label class="layui-form-label">会员级别</label>
+                    <div class="layui-input-inline"  >
+                        <select name=""  id="memberLvlId"  style="width: 234px; height: 38px;" lay-filter="memberLvlId">
+                            <option value="0" >普通卡</option>
+                            <option value="1">银卡</option>
+                            <option value="2">金卡</option>
+                            <option value="3">钻卡</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">返还累计天数</label>
+                    <div class="layui-input-inline"  style="width: 202px;">
+                        <input type="text" name="price_min" placeholder="(填0表示当天有效)" id="totalDays" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item item_two">
+                <div class="layui-inline">
+                    <label class="layui-form-label">返还方式</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="按自然日期|按营业日期" id="backType" lay-filter="backType">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">统计方式</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="包含当天|不包含当天" id="allowContainToday"lay-filter="allowToday">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item item_two">
+                <div class="layui-inline">
+                    <label class="layui-form-label">输币区间</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input type="text" name="price_min" placeholder="￥" id="backMin" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid">至</div>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input type="text" name="price_max" placeholder="￥" id="backMax" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">返还比例</label>
+                    <div class="layui-input-inline" style="width: 202px;">
+                        <input type="text" name="price_min" id="backScale" placeholder="percent" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-form-item item_one">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 0;white-space: normal;">兑币单价(重启生效)</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="price_min" placeholder="返还到会员卡时无效" id="exitCardMin" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid">币不能退卡</div>
+                </div>
+            </div>
+            <div class="layui-form-item  item_one">
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否扣除返还币</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="是|否" id="allowBackPrincipal" lay-filter="allowBackPrincipal">
+                    </div>
+                    <div class="layui-form-mid">返还到会员卡时无效</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <button type="reset" class="layui-btn layui-btn-normal">重置</button>
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-danger" id="submitBtn">确定</button>
+                <button type="button" class="layui-btn layui-btn-normal">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    let token=getStorage('token');
+    let _merchTag=getStorage('merchTag');
+    //判断是否博彩
+    if(_merchTag==0){
+        $('.lci3').addClass('layui-hide');
+    }else {
+        $('.lci3').removeClass('layui-hide');
+    }
+    let _storeId=getStorage('storeId_merch');
+    //新增或者修改
+    let setStatus='';      let dataTable=[];
+    //定义参数设置变量
+    let  PrintBarcode=0;let BarSendCoinAuthorize=0;let MemberBalance='';let Shift=0;
+    //定义会员设置变量
+    let BirthdaySendSms='';let Photograph=0;let ExitCardCatch=0;let ExitFoodCatch=0;
+    let ExitMoneyCatch=0; let AllowMemberSmsCode=0;let ShowPhone=0;let AllowFirstMemberSmsCode=0;
+    let Giveback=0;
+    //定义返还规则变量
+    let GiveBackAllowSmsCode=0;
+    let memberLvlId=0;let backType=1;let allowToday=1;let allowBackPrincipal=1;
+    function ifNeedSet(storeId) {
+        let obj={'storeId':storeId,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+        $.ajax({
+            type: "post",
+            url: '/XCCloud/Parameter?action=GetParamList',
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: JSON.stringify(obj)},
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                if(data.result_code==1){
+                    if(data.result_data.length>0){
+                        let paramArr=data.result_data;
+                        setStatus='modify';
+                        PrintBarcode=paramArr[3].ParameterValue;
+                        BarSendCoinAuthorize=paramArr[4].ParameterValue;
+                        Shift=paramArr[7].ParameterValue;
+                        //定义会员设置变量
+                         Photograph=paramArr[17].ParameterValue;
+                         ExitCardCatch=paramArr[18].ParameterValue;
+                         ExitFoodCatch=paramArr[19].ParameterValue;
+                         ExitMoneyCatch=paramArr[20].ParameterValue;
+                         AllowMemberSmsCode=paramArr[21].ParameterValue;
+                         ShowPhone=paramArr[22].ParameterValue;
+                         AllowFirstMemberSmsCode=paramArr[23].ParameterValue;
+                         Giveback=paramArr[24].ParameterValue;
+                        //定义返还规则变量
+                        let GiveBackAllowSmsCode=paramArr[27].ParameterValue;
+                        for(var i in paramArr){
+                            if((paramArr[i].System).substring(0,3)=='chk'){
+                                paramArr[i].IsAllow==1 ? $('#'+paramArr[i].System).attr({'checked':true}) : $('#'+paramArr[i].System).attr({'checked':false})
+                            }
+                            else if((paramArr[i].System).substring(0,3)=='cmb'){
+
+                            }
+                            else {
+                                $('#'+paramArr[i].System).val(paramArr[i].ParameterValue)
+                            }
+
+                        }
+                        console.log(paramArr[5]); console.log(paramArr[15])
+                        setSelect('退款方式','cmbMemberBalance',paramArr[5].ParameterValue)
+                        MemberBalance=paramArr[5].ParameterValue;
+                        setSelect("会员生日提醒","cmbBirthdaySendSms",paramArr[15].ParameterValue);
+                        BirthdaySendSms=paramArr[15].ParameterValue;
+
+                            layui.use('form',function () {
+                                layui.form.render();
+                            })
+                    }else {
+                        setStatus='add';
+                    }
+                }
+            }
+        })
+    }
+    ifNeedSet(_storeId);
+    layui.use(['element','form','layer','table'], function(){
+        let element = layui.element;
+        let form=layui.form;
+        let layer=layui.layer;
+        let table=layui.table;
+        //监听参数设置
+        form.on('select(cmbMemberBalance)',(data)=>{
+            MemberBalance=data.value;
+        });
+        form.on('switch(chkPBcode)',(data)=>{
+         data.elem.checked==true ?PrintBarcode=1 :PrintBarcode=0
+        });
+        form.on('switch(chkBSCAuth)',(data)=>{
+            data.elem.checked==true ?BarSendCoinAuthorize=1 :BarSendCoinAuthorize=0
+        });
+        form.on('switch(ckbShift)',(data)=>{
+            data.elem.checked==true ?Shift=1 :Shift=0
+        });
+        //监听会员设置
+        form.on('select(birthdayTips)',(data)=>{
+            BirthdaySendSms=data.value;
+        });
+        form.on('switch(chkPhotograph)',(data)=>{
+            data.elem.checked==true ?Photograph=1 :Photograph=0
+        });
+        form.on('switch(chkExitCardCatch)',(data)=>{
+            data.elem.checked==true ?ExitCardCatch=1 :ExitCardCatch=0
+        });
+        form.on('switch(chkExitFoodCatch)',(data)=>{
+            data.elem.checked==true ?ExitFoodCatch=1 :ExitFoodCatch=0
+        });
+        form.on('switch(chkExitMoneyCatch)',(data)=>{
+            data.elem.checked==true ?ExitMoneyCatch=1 :ExitMoneyCatch=0
+        });
+        form.on('switch(ams)',(data)=>{
+            data.elem.checked==true ?AllowMemberSmsCode=1 :AllowMemberSmsCode=0
+        });
+        form.on('switch(showPhone)',(data)=>{
+            data.elem.checked==true ?ShowPhone=1 :ShowPhone=0
+        });
+        form.on('switch(afmsc)',(data)=>{
+            data.elem.checked==true ?AllowFirstMemberSmsCode=1 :AllowFirstMemberSmsCode=0
+        });
+        form.on('switch(Giveback)',(data)=>{
+            data.elem.checked==true ?Giveback=1 :Giveback=0
+        });
+
+        form.on('switch(GiveBackAllowSmsCode)',(data)=>{
+            data.elem.checked==true ?GiveBackAllowSmsCode=1 :GiveBackAllowSmsCode=0
+        });
+
+        //返还规则监听
+        form.on('select(memberLvlId)',(data)=>{
+            memberLvlId=data.value;
+            console.log(memberLvlId)
+        });
+        form.on('switch(backType)',(data)=>{
+            data.elem.checked==true ?backType=1 :backType=0
+        });
+        form.on('switch(allowToday)',(data)=>{
+            data.elem.checked==true ?allowToday=1 :allowToday=0
+        });
+        form.on('switch(allowBackPrincipal)',(data)=>{
+            data.elem.checked==true ?allowBackPrincipal=1 :allowBackPrincipal=0
+        });
+        getBackRule(_storeId);
+
+    function getBackRule(storeId) {
+        let obj={"storeId":storeId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+        let url = "/XCCloud/Parameter?action=GetGivebackRules";
+        let parasJson = JSON.stringify(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.result_code=="1"){
+                    dataTable=data.result_data;
+                    console.log(dataTable);
+                    layui.use('table', function(){
+                        var table = layui.table;
+                        table.render({
+                            elem: '#test'
+                            ,data:dataTable
+                            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                            ,height:220
+                            ,size:'sm'
+                            ,cols: [[
+                                {field:'MemberLevelID', title: '会员级别', align: 'center'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                                ,{field:'BackMin', title: '最小币数', sort: true}
+                                ,{field:'BackMax', title: '最大币数', align: 'center'}
+                                ,{field:'BackScale', title: '返还比例', align: 'center'}
+                                ,{field:'ExitCardMin', title: '退卡最小余额', align: 'center'} //单元格内容水平居中
+                                ,{field:'Backtype', title: '计算方式', align: 'center'} //单元格内容水平居中
+                                ,{field:'TotalDays', title: '累计天数',  align: 'center'}
+                                ,{field:'AllowBackPrincipal', title: '是否扣除返还币', align: 'center'}
+                                ,{field:'AllowContainToday', title: '是否当天统计', align: 'center'}
+                                // ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}
+                            ]]
+                            ,page:true
+                            ,limit:10
+                        });
+                    });
+
+                }else {
+                    // alert("添加失败，请核对后再次提交！");
+                    console.log(data.result_msg);
+                }
+            }
+        });
+    }
+    $('.checkBox>span').click(function () {
+            $(this).addClass("layui-hide").siblings().removeClass("layui-hide");
+        });
+
+    function setParamList(storeIds,layer) {
+
+        var txtCoinPrice=$('#txtCoinPrice').val();//兑币单价
+        var coinChargeScale=$('#coinChargeScale').val();//彩票兑换比例
+        var txtGivePoint=$('#txtGivePoint').val();//赠送售币积分
+        var chkPrintBarcode=PrintBarcode;//小票是否打印二维码
+        var chkBarSendCoinAuthorize=BarSendCoinAuthorize;//吧台送币是否授权
+        var cmbMemberBalance=MemberBalance;//条码退款方式
+        var txtBusinessClass=$('#txtBusinessClass').val();//营业日期内班次个数
+        var chkShift=Shift;//换班时需要输入实点数
+        var txtOnceSellCoinMin=$('#txtOnceSellCoinMin').val();//每次售币最小币数
+        var txtOnceSellCoinMax=$('#txtOnceSellCoinMax').val();//每次售币最大币数
+        var txtOnceRefundMin=$('#txtOnceRefundMin').val();//每次最小退币数
+        var txtDayWithoutRightWinCoinMax=$('#txtDayWithoutRightWinCoinMax').val();//每天免授权赢币上限
+        var txtWithoutRightWinCoinTimes=$('#txtWithoutRightWinCoinTimes').val();//每天免授权赢币倍数
+        var txtOnceWithoutRightRefundMax=$('#txtOnceWithoutRightRefundMax').val();//每次免授权退币上限
+        var txtDayWithoutRightRefundMax=$('#txtDayWithoutRightRefundMax').val();//每天免授权退币上限
+        var txtPerMemberCoinMax=$('#txtPerMemberCoinMax').val();//单个会员余额上限
+        var cmbBirthdaySendSms=BirthdaySendSms;//会员生日提醒
+        var chkPhotograph=Photograph;//会员入会时必须抓拍照片
+        var chkExitCardCatch=ExitCardCatch;//吧台退卡时必须抓拍照片
+        var chkExitFoodCatch=ExitFoodCatch;//退餐时必须抓拍相片
+        var chkExitMoneyCatch=ExitMoneyCatch;//吧台退款时必须抓拍照片
+        var chkAllowMemberSmsCode=AllowMemberSmsCode;//入会是否验证短信码
+        var chkTempShowPhone=ShowPhone;//临时开卡是否显示手机号输入框
+        var chkTempAllowFirstMemberSmsCode=AllowFirstMemberSmsCode;//临时卡首次入会验证短信码
+        var chkTempGiveback=Giveback;//临时卡是否允许返还
+        var txtGiveBackMax=$('#txtGiveBackMax').val();
+        var txtExitMoneyGiveBackTime=$('#txtExitMoneyGiveBackTime').val();
+        var chkGiveBackAllowSmsCode=GiveBackAllowSmsCode;
+
+        var submitData=[{ "storeId":storeIds, "system":"txtCoinPrice", "isAllow":"1", "pValue":txtCoinPrice, "note":""}, //1
+            { "storeId":storeIds, "system":"coinChargeScale", "isAllow":"1", "pValue":coinChargeScale, "note":""},//2
+            { "storeId":storeIds, "system":"txtGivePoint", "isAllow":"1", "pValue":txtGivePoint, "note":""},      //3
+            { "storeId":storeIds, "system":"chkPrintBarcode", "isAllow":chkPrintBarcode, "pValue":"0", "note":""},//4
+            { "storeId":storeIds, "system":"chkBarSendCoinAuthorize", "isAllow":chkBarSendCoinAuthorize, "pValue":"0", "note":""},  //5
+            { "storeId":storeIds, "system":"cmbMemberBalance", "isAllow":"1", "pValue":cmbMemberBalance, "note":""},//6
+            { "storeId":storeIds, "system":"txtBusinessClass", "isAllow":"1", "pValue":txtBusinessClass, "note":""},//7
+            { "storeId":storeIds, "system":"chkShift", "isAllow":chkShift, "pValue":"0", "note":""},//8
+            { "storeId":storeIds, "system":"txtOnceSellCoinMin", "isAllow":"1", "pValue":txtOnceSellCoinMin, "note":""},//9
+            { "storeId":storeIds, "system":"txtOnceSellCoinMax", "isAllow":"1", "pValue":txtOnceSellCoinMax, "note":""},//10
+            { "storeId":storeIds, "system":"txtOnceRefundMin", "isAllow":"1", "pValue":txtOnceRefundMin, "note":""},//11
+            { "storeId":storeIds, "system":"txtDayWithoutRightWinCoinMax", "isAllow":"1", "pValue":txtDayWithoutRightWinCoinMax, "note":""},//12
+            { "storeId":storeIds, "system":"txtWithoutRightWinCoinTimes", "isAllow":"1", "pValue":txtWithoutRightWinCoinTimes, "note":""},//13
+            { "storeId":storeIds, "system":"txtOnceWithoutRightRefundMax", "isAllow":"1", "pValue":txtOnceWithoutRightRefundMax, "note":""},//14
+            { "storeId":storeIds, "system":"txtDayWithoutRightRefundMax", "isAllow":"1", "pValue":txtDayWithoutRightRefundMax, "note":""},//15
+            { "storeId":storeIds, "system":"txtPerMemberCoinMax", "isAllow":"1", "pValue":txtPerMemberCoinMax, "note":""},//16
+            { "storeId":storeIds, "system":"cmbBirthdaySendSms", "isAllow":"1", "pValue":cmbBirthdaySendSms, "note":""},
+            { "storeId":storeIds, "system":"chkPhotograph", "isAllow":chkPhotograph, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkExitCardCatch", "isAllow":chkExitCardCatch, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkExitFoodCatch", "isAllow":chkExitFoodCatch, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkExitMoneyCatch", "isAllow":chkExitMoneyCatch, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkAllowMemberSmsCode", "isAllow":chkAllowMemberSmsCode, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkTempShowPhone", "isAllow":chkTempShowPhone, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkTempAllowFirstMemberSmsCode", "isAllow":chkTempAllowFirstMemberSmsCode, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"chkTempGiveback", "isAllow":chkTempGiveback, "pValue":"0", "note":""},
+            { "storeId":storeIds, "system":"txtGiveBackMax", "isAllow":"1", "pValue":txtGiveBackMax, "note":""},
+            { "storeId":storeIds, "system":"txtExitMoneyGiveBackTime", "isAllow":"1", "pValue":txtExitMoneyGiveBackTime, "note":""},
+            { "storeId":storeIds, "system":"chkGiveBackAllowSmsCode", "isAllow":chkGiveBackAllowSmsCode, "pValue":"0", "note":""}
+        ];
+        var obj={"submitData":submitData, "userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+        var url = "/XCCloud/Parameter?action=SetParamList";
+        var parasJson = JSON.stringify(obj);
+        console.log(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data=JSON.parse(data);
+                console.log(data);
+                if(data.result_code=="1"){
+                     layer.msg('操作成功！');
+                }else {
+                    layer.msg(data.result_msg);
+                }
+            }
+        })
+    }
+    function showAddReturnRule() {
+        layui.use('layer',function () {
+            var layer=layui.layer;
+            layer.open({
+                title:'返还规则',
+                type:1,
+                content:$('.addReturnSetting'),
+                area:['860px','450px']
+            })
+        });
+
+    }
+    function addReturnRule(layer,memberLvlId1,allowBackPrincipal1,backType1,allowToday1) {
+        let storeIds=getStorage('storeId_merch');
+        let memberLvlId=memberLvlId1;
+        let allowBackPrincipal=allowBackPrincipal1;
+        let backMin=$('#backMin').val();
+        let backMax=$('#backMax').val();
+        let backScale=$('#backScale').val();
+        let exitCardMin=$('#exitCardMin').val();
+        let backType=backType1;
+        let totalDays=$('#memberLvlId').val();
+        let allowContainToday=allowToday1;
+        let obj={"storeId":storeIds,
+            "memberLvlId":memberLvlId,
+            "backMin":backMin,
+            "backMax":backMax,
+            "backScale":backScale,
+            "exitCardMin":exitCardMin,
+            "allowBackPrincipal":allowBackPrincipal,
+            "backType":backType,
+            "totalDays":totalDays,
+            "allowContainToday":allowContainToday,
+            "userToken":token,
+            "signkey":"1f626576304bf5d95b72ece2222e42c3"};
+        let url = "/XCCloud/Parameter?action=AddGivebackRule";
+        let parasJson = JSON.stringify(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.result_code=="1"){
+                    getBackRule(_storeId);
+                    layer.closeAll();
+                }else {
+                        layer.msg(data.result_msg);
+                }
+            }
+        })
+    }
+        $('#submitBtn').on('click',()=>{
+            addReturnRule(layer,memberLvlId,allowBackPrincipal,backType,allowToday);
+        });
+        $('#parameterBtn').on('click',()=>{
+            setParamList(_storeId,layer)
+        });
+        $('#addNewBackRule').on('click',()=>{
+            showAddReturnRule();
+        })
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn  layui-btn-sm layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

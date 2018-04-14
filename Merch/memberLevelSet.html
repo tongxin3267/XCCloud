@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员级别设定</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .layui-form-pane .layui-form-label{width: 160px}
+    .layui-form-item .layui-input-inline{width:196px}
+    #layModel>form{padding: 10px 10px 10px 40px;}
+    #test2{width: 300px;height: 170px;margin: 0 auto;border: 1px solid #8D8D8D;position: relative;}
+    #imgBtn{width: 60px;height: 60px;position: absolute;top: 55px;left: 130px;cursor: pointer;}
+    .imgBox button{position: absolute;top: 15px;right: 15px;}
+    .imgBox button i {font-size: 24px;color: red;}
+</style>
+<body>
+    <div class="layui-row" style="padding: 10px">
+        <blockquote class="layui-elem-quote">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">级别编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="levelID">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">级别名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="levelName">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button type="button" class="layui-btn layui-btn-normal" id="mlBtn"><i class="layui-icon">&#xe615;</i>查询</button>
+                    <button type="button" class="layui-btn layui-btn-normal" id="mlAddBtn"><i class="layui-icon">&#xe654;</i>新增</button>
+                </div>
+            </div>
+        </blockquote>
+        <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+            <table class="layui-hide" id="memberLevelTb"  lay-filter="memberLevelTb"></table>
+        </div>
+    </div>
+
+  <!--//弹出层-->
+  <div class="layui-row" id="layModel" style="display: none">
+      <form action="" class="layui-form layui-form-pane">
+          <div class="layui-col-md8">
+              <div class="layui-form-item">
+              <div class="layui-inline">
+                  <label class="layui-form-label">级别名称</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="levelNames">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">有效天数</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="validday">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">最小退币数</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="minExitCoin">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">IC卡押金</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="deposit">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">入会必填项</label>
+                  <div class="layui-input-inline">
+                      <select name="" id="mustInput" lay-filter="mustInput"></select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">兑币限额</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="ExitMoney">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">兑币上限</label>
+                  <div class="layui-input-inline">
+                      <input name="" id="ExitCoin" class="layui-input">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">兑币单价</label>
+                  <div class="layui-input-inline">
+                      <input name="" id="ExitPrice" class="layui-input">
+                  </div>
+              </div>
+          </div></div>
+          <div class="layui-col-md4">
+              <div id="test2">
+                  <div id="imgBtn"><i class="layui-icon" style="font-size: 60px;color: #9F9F9F">&#xe654;</i></div>
+                  <div class="layui-upload-list" id="demo2" style="margin: 0;">
+                      <input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+                  </div>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <div class="layui-inline">
+                  <label class="layui-form-label">送币频率</label>
+                  <div class="layui-input-inline">
+                      <select id="freeRate" lay-filter="freeRate"></select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">送币数</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="freeCoin">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">送币方式</label>
+                  <div class="layui-input-inline">
+                      <select id="freeType" lay-filter="freeType"></select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">送币需要输赢币数</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="freeNeedWin">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">生日送币方式</label>
+                  <div class="layui-input-inline">
+                      <select  id="barthdayFree" lay-filter="barthdayFree"></select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">生日送币数</label>
+                  <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="barthdayFreeCoin">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">允许退卡</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="AllowExitCard" lay-skin="switch" lay-text="允许|禁止"  id="AllowExitCard">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">允许退款</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="AllowExitMoney" lay-skin="switch" lay-text="允许|禁止"  id="AllowExitMoney">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">会员级别状态</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="State" lay-skin="switch" lay-text="启用|未启用"  id="State">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">投币后拔卡时锁机头</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="LockHead" lay-skin="switch" lay-text="允许|禁止"  id="LockHead">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">允许从游戏机下分</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="AllowExitCoinToCard" lay-skin="switch" lay-text="允许|禁止"  id="AllowExitCoinToCard">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">允许前台授权</label>
+                  <div class="layui-input-inline">
+                      <input type="checkbox" name="zzz" lay-filter="NeedAuthor" lay-skin="switch" lay-text="允许|禁止"  id="NeedAuthor">
+                  </div>
+              </div>
+          </div>
+          <div style="text-align: right;padding-right: 80px;">
+              <button type="button" class="layui-btn layui-btn-normal cancleBtn"><i class="layui-icon">&#xe603;</i>取消</button>
+              <button type="reset" class="layui-btn layui-btn-danger" id="resetBtn"><i class="layui-icon">&#x1002;</i>重置</button>
+              <button type="button" class="layui-btn layui-btn-normal" id="saveMLBtn" onclick="saveML()"><i class="layui-icon">&#xe654;</i>确定</button>
+          </div>
+      </form>
+  </div>
+
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+
+    var xc=xcActionSystem.prototype;
+    var token=xc.getStorage('token');
+        xc.setSelect('生日送币方式','barthdayFree');
+        xc.setSelect('送币频率','freeRate');
+        xc.setSelect('入会时必须输入','mustInput');
+        xc.setSelect('送币方式','freeType');
+    layui.use(['form','layer','laydate','table','upload'],function() {
+        var layer=layui.layer, $=layui.jquery,laydate=layui.laydate,table=layui.table,form=layui.form,upload=layui.upload;
+        xc.SearchMemberLevel($('#mlBtn'),token,layer);
+        $('#mlBtn').trigger('click');
+        $('.cancleBtn').on('click',function(){layer.closeAll()})
+        //新增按钮
+        $('#mlAddBtn').on('click',function(){
+            layer.open({
+                type:1,
+                area:['1200px','500px'],
+                shade:0.6,
+                content:$('#layModel')
+            })
+        });
+         //修改
+        table.on('tool(memberLevelTb)', function(obj){
+            let data = obj.data; //获得当前行数据
+            let layEvent = obj.event;
+            $('#demo2').html("");
+            let memberLevelID=data.MemberLevelID;
+            if(layEvent === 'edit'){ //查看
+                $('#mlAddBtn').trigger('click'); $('#resetBtn').trigger('click');
+                xc.setStorage('MemberLevelID',memberLevelID);
+                let _obj={'memberLevelID':memberLevelID,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                let url='/XCCloud/Member?action=GetMemberLevelInfo';
+                let parseJson=JSON.stringify(_obj);
+                $.ajax({
+                    type:'post',
+                    url:url,
+                    contentType: "application/json; charset=utf-8",
+                    data: { parasJson: parseJson },
+                    success:function(data) {
+                        data = JSON.parse(data);
+                        console.log(data)
+                        if(data.result_code==1){
+                            let arr=data.result_data;
+                            option1=arr.MustInput,option2=arr.FreeRate,option3=arr.FreeType,
+                                option4=arr.BirthdayFree,
+                           arr.State ? option5=arr.State : option5=0;
+                                radiv1=arr.AllowExitCard,
+                                radiv2=arr.AllowExitMoney,radiv3=arr.LockHead,radiv4=arr.AllowExitCoinToCard;
+                            if(arr.AllowExitCard==1){
+                                $('#AllowExitCard').attr({'checked':true});
+                                form.render();
+                            }
+                            if(arr.AllowExitMoney==1){
+                                $('#AllowExitMoney').attr({'checked':true});
+                                form.render();
+                            }
+                            if(arr.LockHead==1){
+                                $('#LockHead').attr({'checked':true});
+                                form.render();
+                            }
+                            if(arr.AllowExitCoinToCard==1){
+                                $('#AllowExitCoinToCard').attr({'checked':true});
+                                form.render();
+                            }
+                            if(arr.State==1){
+                                $('#State').attr({'checked':true});
+                                form.render();
+                            }
+                            xc.setSelect('生日送币方式','barthdayFree',arr.BirthdayFree);
+                            xc.setSelect('送币频率','freeRate',arr.FreeRate);
+                            xc.setSelect('入会时必须输入','mustInput',arr.MustInput);
+                            xc.setSelect('送币方式','freeType',arr.FreeType);
+                            $('#levelNames').val(arr.MemberLevelName);
+                            $('#deposit').val(arr.Deposit);
+                            $('#validday').val(arr.Validday);
+                            $('#ExitMoney').val(arr.ExitMoney);
+                            $('#ExitCoin').val(arr.ExitCoin);
+                            $('#ExitPrice').val(arr.ExitPrice);
+                            $('.layui-upload-img_md').attr('src',arr.CardUIURL);
+                            $('#barthdayFreeCoin').val(arr.BirthdayFreeCoin);
+                            $('#freeNeedWin').val(arr.FreeNeedWin);
+                            $('#freeCoin').val(arr.FreeCoin);
+                            $('#minExitCoin').val(arr.MinExitCoin);
+
+                            $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                                '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                                '<img src="'+ arr.CardUIURL +'" class="layui-upload-img_md" ' +
+                                'style="display: block;width: 300px;height: 170px"></div>');
+                            $('.imgBox button').click(function () {
+                                $(this).parent('div').remove();
+                            });
+                            $('.imgBox img').click(function () {
+                                layer.open({
+                                    title:'查看大图',
+                                    type: 1,
+                                    area: ['600px','400px'], //宽高
+                                    content: '<div><img src="'+arr.CardUIURL+'" alt="" style="display: block;"></div>'
+                                });
+                            });
+                        }
+
+                    }
+                })
+            }
+        })
+
+        var demoListViewStore=$('#demo2'),uploadListInsStore=upload.render({
+            elem: '#imgBtn'
+            ,url: '/XCCloud/Member?action=UploadCardCover'
+            ,data:{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+            ,multiple: true
+            ,accept:"images"
+            ,size:1000
+            ,auto:true
+            ,done: function(res,index,upload){
+                //上传完毕
+                console.log(res);
+                if(res.result_code==1){
+                    $('#demo2').children('div[class="imgBox"]').remove();
+                    $('#demo2 .loadTips').addClass('layui-hide');
+                    $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                        '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                        '<img src="'+ res.result_data[0].Value +'" alt="'+ res.result_data[0].Value +'" class="layui-upload-img_md" ' +
+                        'style="display: block;width: 300px;height: 170px"></div>');
+                    layer.msg("图片上传成功！");
+                    $('.imgBox button').click(function () {
+                        $(this).parent('div').remove();
+                    });
+                    $('.imgBox img').click(function () {
+                        layer.open({
+                            title:  res.result_data.ID,
+                            type: 1,
+                            area: ['600px','400px'], //宽高
+                            content: '<div><img src="'+res.result_data[0].Value+'" alt="" style="display: block;"></div>'
+                        });
+                    });
+                }else{
+                    layer.msg(res.return_msg);
+                }
+            }
+            ,error:function(index,upload){
+                layer.msg("服务器返回错误！");
+                layer.closeAll('loading');
+            }
+        });
+    }) ;
+    var option1='',option2='',option3='',option4='',option5='0',
+        radiv1='0',radiv2='0',radiv3='0',radiv4='0';
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(mustInput)', function(data){
+            option1=data.value;
+        });
+        form.on('select(freeRate)', function(data){
+            option2=data.value;
+            console.log(option2);
+            console.log(data.value);
+        });
+        form.on('select(freeType)', function(data){
+            option3=data.value;
+        });
+        form.on('select(barthdayFree)', function(data){
+            option4=data.value;
+        });
+        form.on('switch(AllowExitCard)', function(data){
+            data.elem.checked==true ? radiv1=1:radiv1=0;
+        });
+        form.on('switch(AllowExitMoney)', function(data){
+            data.elem.checked==true ? radiv2=1:radiv2=0;
+        });
+        form.on('switch(LockHead)', function(data){
+            data.elem.checked==true ? radiv3=1:radiv3=0;
+        });
+        form.on('switch(AllowExitCoinToCard)', function(data){
+            data.elem.checked==true ? radiv4=1:radiv4=0;
+        });
+        form.on('switch(State)', function(data){
+            data.elem.checked==true ? option5=1:option5=0;
+        });
+    });
+    var saveML=function(){
+
+        let MemberLI=xc.getStorage('MemberLevelID')||"";
+        let MemberLN=$('#levelNames').val();
+        let Deposit=$('#deposit').val();
+        let Validday=$('#validday').val();
+        let ExitMoney=$('#ExitMoney').val();
+        let ExitCoin=$('#ExitCoin').val();
+        let ExitPrice=$('#ExitPrice').val();
+        let BirthdayFreeCoin=$('#barthdayFreeCoin').val();
+        let MustInput=option1;
+        let BirthdayFree=option4;
+        let FreeType=option3;
+        let FreeNeedWin=$('#freeNeedWin').val();
+        let FreeCoin=$('#freeCoin').val();
+        let FreeRate=option2;
+        let AllowExitCard=radiv1;
+        let AllowExitMoney=radiv2;
+        let AllowExitCoinToCar=radiv4;
+        let LockHead=radiv3;
+        let States=option5;
+        let imgUrl=$('.layui-upload-img_md').attr('src');
+        let MinExitCoin=$('#minExitCoin').val();
+        let obj={
+            'MemberLevelID':MemberLI,
+            'MemberLevelName':MemberLN,'Deposit':Deposit,'Validday':Validday,'BirthdayFreeCoin':BirthdayFreeCoin,'FreeNeedWin':FreeNeedWin,
+            'ExitMoney':ExitMoney,'ExitCoin':ExitCoin,'State':States,'FreeCoin':FreeCoin,'MinExitCoin':MinExitCoin,'CardUIURL':imgUrl,
+        'ExitPrice':ExitPrice,'MustInput':MustInput,'BirthdayFree':BirthdayFree,'FreeType':FreeType,'FreeRate':FreeRate,'AllowExitCard':AllowExitCard,
+        'AllowExitMoney':AllowExitMoney,'AllowExitCoinToCard':AllowExitCoinToCar,'LockHead':LockHead,'userToken':token,
+            'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+        let url='/XCCloud/Member?action=SaveMemberLevel';
+        let  parseJson=JSON.stringify(obj);
+        console.log(parseJson);
+        $.ajax({
+            type:'post',
+            url:url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parseJson },
+            success:function(data){
+                data=JSON.parse(data);
+                if(data.result_code=="1"){
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('操作成功！');
+                        layer.closeAll();
+                        $('#mlBtn').trigger('click');
+                    });
+                }else {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg(data.result_msg);
+                    });
+                }
+            }
+        })
+    };
+
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">修改</a>
+    <!-- 这里同样支持 laytpl 语法，如： -->
+    {{#  if(d.auth > 2){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
+        {{#  } }}
+
+</script>
+</html>

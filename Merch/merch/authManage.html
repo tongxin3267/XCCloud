@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>工单查询</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="css/weui1.1.2.css">
+</head>
+<body style="overflow-y: hidden">
+        <div class="page">
+            <div class="weui-cells__title"><img src="images/barrage_fill.svg" alt=" " class="title_img">用户信息</div>
+            <div class="user_msg_box" style="display: block">
+                <div class="weui-cells weui-cells_form" style="margin: 0">
+                    <div class="weui-cell ">
+                        <div class="weui-cell__hd"><label for="username" class="weui-label" style="font-weight: bold;">用户名</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="请输入用户名" id="username" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form" style="margin: 0;">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="vertical-align: top;margin-top: -75px;"><label for="username" style="font-weight: bold;" class="weui-label">申请理由</label></div>
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" placeholder="请输入文本" id="reson" rows="3" readonly></textarea>
+                            <div>
+
+                            </div>
+                            <div class="weui-textarea-counter" style="height: 25px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--权限设置-->
+            <div class="weui-cells__title"><img src="images/setup_fill.svg" alt="" class="title_img">权限设置</div>
+            <div class="auth_set_box" style="display: block">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label  class="weui-label" style="font-weight: bold;">工作组设置</label></div>
+                    <div class="weui-cell__bd weui-cells_form addArrow addArrow1" onmousedown="openGroup()">
+                        <input class="weui-input" id="firstMenu" type="text" value="选择工作组" readonly="" style="width: 80%;text-align: right;" >
+                    </div>
+                </div>
+                <div class="grantBox grantBox_group" style="display: none">
+                    <div class="grantBox_title">设置分组<span class="hide_grantBox" style="color: red" onmousedown="endGroup()">取消</span></div>
+                    <ul class="authSelectList authSelectList_group">
+
+                    </ul>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="in" class="weui-label" style="font-weight: bold;">授权设置</label></div>
+                    <div class="weui-cell__bd addArrow addArrow2" onmousedown="openGrant()">
+                        <input class="weui-input" id="in" type="text" value="选择权限" readonly="" style="width: 80%;text-align: right;" >
+                    </div>
+                </div>
+                <div class="grantBox grantBox_grant" style="display: none">
+                    <div class="grantBox_title">设置权限 <span class="hide_grantBox" onmousedown="endGrant()">确定</span></div>
+                    <ul class="authSelectList authSelectList_grant">
+
+                    </ul>
+                </div>
+            </div>
+            <!--提交-->
+            <div class="btn_box">
+                <a href="javascript:;" class="weui-btn weui-btn_warn" onmousedown="openAddReason()">拒绝</a>
+
+                <a href="javascript:;" class="weui-btn weui-btn_primary" onmousedown="passAudit()">确定</a>
+            </div>
+        </div>
+
+        <div class="showNext refuseReason " >
+            <div class="weui-cells weui-cells_form weui-cells_form_reason" >
+                <div class="weui-cell">
+                    <div class="weui-cell__hd" style="vertical-align: top;margin-top: -215px;"><label for="username" style="font-weight: bold;color: #000;" class="weui-label">申请理由</label></div>
+                    <div class="weui-cell__bd" style="vertical-align: top;margin-top: -25px;">
+                        <textarea class="weui-textarea" placeholder="请输入拒绝原因" id="reasons" rows="3"></textarea>
+
+                        <div class="weui-textarea-counter"><span>/50</span>个字以内/</div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <a href="javascript:;" class="weui-btn weui-btn_warn weui-btn_primary reason_sure_btn" onmousedown="refused()">确定</a>
+                    <a href="javascript:;" class="weui-btn weui-btn_primary reason_cancel_btn" onmousedown="cancelRefuse()">取消</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="showNext result-success " >
+            <div class="weui-msg">
+                <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                <div class="weui-msg__text-area">
+                    <h2 class="weui-msg__title result_success_title">保存成功</h2>
+                    <p class="weui-msg__desc result_success_tips">新用户权限设置完成,请留意短信是否审核通过，谢谢使用！</p>
+                </div>
+                <!--<div class="weui-msg__opr-area">-->
+                    <!--<p class="weui-btn-area">-->
+                        <!--<a href="javascript:;" class="weui-btn weui-btn_primary">确定</a>-->
+                        <!--&lt;!&ndash;<a href="javascript:;" class="weui-btn weui-btn_default">辅助操作</a>&ndash;&gt;-->
+                    <!--</p>-->
+                <!--</div>-->
+                <div class="weui-msg__extra-area" style="position: absolute;">
+                    <div class="weui-footer">
+                        <p class="weui-footer__links">
+                            <a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+                        </p>
+                        <p class="weui-footer__text">Copyright © 2008-2016 xinchen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="showNext result-error " >
+            <div class="weui-msg">
+                <div class="weui-msg__icon-area"><i class="weui-icon-warn  weui-icon_msg"></i></div>
+                <div class="weui-msg__text-area">
+                    <h2 class="weui-msg__title result_error_title weui-cell_warn">保存失败</h2>
+                    <p class="weui-cell_warn  result_error_tips ">新用户权限设置失败,请返回重新进行审核！</p>
+                </div>
+                <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                <a href="javascript:;" class="weui-btn weui-btn_primary" onmousedown="checkAgain()">确定</a>
+                <!--<a href="javascript:;" class="weui-btn weui-btn_default">辅助操作</a>-->
+                </p>
+                </div>
+                <div class="weui-msg__extra-area" style="position: absolute;">
+                    <div class="weui-footer">
+                        <p class="weui-footer__links">
+                            <a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+                        </p>
+                        <p class="weui-footer__text">Copyright © 2008-2016 xinchen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="jquery-1.8.3-min.js"></script>
+        <script src="register.js"></script>
+        <script>
+            $('.authSelectList_group ').on('mousedown','li',function () {
+    if($(this).children("input").is(':checked')){
+        $(this).children("input").removeAttr('checked');
+        $(this).children("div").css({backgroundColor:"#c1c1c1"});
+        $('#firstMenu').val("未选择")
+    }else {
+        $(this).children("div").css({backgroundColor:"#2899f9"});
+        $(this).siblings("li").children("div").css({backgroundColor:"#c1c1c1"});
+        $(this).children("input").prop('checked','true');
+        $(this).siblings("li").children("input").removeAttr('checked');
+        $('#firstMenu').val($(this).children("span[class='selectTexts']").text());
+        $('.grantBox_group').slideUp();
+        $('.addArrow1').css("background-image","url(images/arrow-right.svg)");
+    }
+});
+            $('.authSelectList_grant').on('mousedown','li',function () {
+                if($(this).children("input").is(':checked')){
+                    $(this).children("div").css({backgroundColor:"#c1c1c1"});
+                    $(this).children("input").removeAttr('checked');
+                    $(this).children("div").children("span").stop(false, true).animate({left: '+=-35px'}, "50");
+                }else {
+                    $(this).children("div").css({backgroundColor:"#2899f9"});
+                    $(this).children("input").prop('checked','true');
+                    $(this).children("div").children("span").stop(false, true).animate({left: '+=35px'}, "50");
+                }
+            })
+        </script>
+        <script type="text/javascript">
+             addMessage();
+            do_userGroup();
+            do_userGrant();
+        </script>
+</body>
+
+</html>

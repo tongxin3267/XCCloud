@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>商品入库分析</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/stylely.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tips.css">
+    <link rel="stylesheet" href="jEasyUi/themes/default/easyui.css">
+    <link rel="stylesheet" href="jEasyUi/themes/icon.css">
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+    <script src="jEasyUi/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="lib/bootstrap.min.js"></script>
+
+<style>
+    .memberBox{width: 1500px}
+    .datagrid-wrap{width: 1400px}
+</style>
+</head>
+<body>
+
+    <!--......................................content..................................-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div >
+                    <ul class="memberNav">
+                        <li class="li_active">会员数据总览</li>
+                        <li>会员数据查询</li>
+                        <li>会员数据查询</li>
+                        <li>会员退款查询</li>
+                        <li>会员返币查询</li>
+                        <li>会员送币查询</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <ul class="memberContent">
+                    <li style="display:block;">
+                        <div style="height:200px;">
+                            <ul class="memberDetails">
+                                <li><label >当前会员总数</label><span>1w</span></li>
+                                <li><label >总代币余额</label><span>1w</span></li>
+                                <li><label >当前有效会员总数</label><span>1w</span></li>
+                                <li><label >总积分数</label><span></span>1w</li>
+                                <li><label >当前锁定会员总数</label><span>1w</span></li>
+                                <li><label >总彩票数</label><span></span>1w</li>
+                            </ul>
+
+                        </div>
+                        <div class="col-md-8" style="height: 200px">
+                            <div id="memberAll" style="width: 100%">
+                            </div>
+                        </div>
+                    </li>
+                    <li style="">
+                        <div class="col-md-12">
+                            <hr>
+                            <div class="checkModel">
+
+                            </div>
+                            <div >
+                                <div id="memberData1-line" class="showMemberData" >
+                                </div>
+                                <div class="showMemberMessage">
+                                    <table>
+                                        <tr>
+                                            <td>会员姓名：</td>
+                                            <td>张三</td>
+                                            <td>会员级别：</td>
+                                            <td>黄金卡</td>
+                                            <td>储值金：</td>
+                                            <td>1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>开卡日期：</td>
+                                            <td>2017-02-14</td>
+                                            <td>到期日期：</td>
+                                            <td>2027-02-14</td>
+                                            <td>积分：</td>
+                                            <td>2000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>会员状态：</td>
+                                            <td>正常</td>
+                                            <td>卡押金：</td>
+                                            <td>10元</td>
+                                            <td>彩票：</td>
+                                            <td>20000</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div id="memberData1-table" class="memberBox" style="width: 1600px;height: 350px"></div>
+                            </div>
+
+                        </div>
+
+                    </li>
+                    <li >
+                        <div id="memberData2" class="col-md-12">
+                            <hr>
+                            <div class="checkModel">
+
+                            </div>
+                            <div>
+                                <div id="memberData2-line"class="showMemberData" >
+                                </div>
+                                <div class="showMemberMessage" >
+                                    <table>
+                                        <tr>
+                                            <td>会员姓名：</td>
+                                            <td>张三</td>
+                                            <td>会员级别：</td>
+                                            <td>黄金卡</td>
+                                            <td>储值金：</td>
+                                            <td>1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>开卡日期：</td>
+                                            <td>2017-02-14</td>
+                                            <td>到期日期：</td>
+                                            <td>2027-02-14</td>
+                                            <td>积分：</td>
+                                            <td>2000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>会员状态：</td>
+                                            <td>正常</td>
+                                            <td>卡押金：</td>
+                                            <td>10元</td>
+                                            <td>彩票：</td>
+                                            <td>20000</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12" >
+                                <div id="memberData2-table" class="memberBox" style="width: 1600px;height: 350px"></div>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li style="">
+                        <div id="memberData3" class="col-md-12">
+                            <hr>
+                            <div class="checkModel">
+
+                            </div>
+                            <div>
+                                <div id="memberData3-line" class="showMemberData">
+                                </div>
+                                <div class="showMemberMessage" >
+                                    <table>
+                                        <tr>
+                                            <td>会员姓名：</td>
+                                            <td>张三</td>
+                                            <td>会员级别：</td>
+                                            <td>黄金卡</td>
+                                            <td>储值金：</td>
+                                            <td>1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>开卡日期：</td>
+                                            <td>2017-02-14</td>
+                                            <td>到期日期：</td>
+                                            <td>2027-02-14</td>
+                                            <td>积分：</td>
+                                            <td>2000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>会员状态：</td>
+                                            <td>正常</td>
+                                            <td>卡押金：</td>
+                                            <td>10元</td>
+                                            <td>彩票：</td>
+                                            <td>20000</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="memberData3-table" class="memberBox" style="width: 1600px;height: 350px"></div>
+                        </div>
+                    </li>
+                    <li style="">
+                        <div id="memberData4" class="col-md-12">
+                            <hr>
+                            <div class="checkModel">
+
+                            </div>
+
+                            <div>
+                                <div id="memberData4-line" class="showMemberData">
+                                </div>
+                                <div class="showMemberMessage" >
+
+                                </div>
+                            </div>
+                            <div id="memberData4-table" class="memberBox" style="width: 1600px;height: 350px"></div>
+                        </div>
+                    </li>
+                    <li style="">
+                        <div id="memberData5" class="col-md-12">
+                            <hr>
+                            <div class="checkModel">
+
+                            </div>
+                            <div>
+                                <div id="memberData5-line" class="showMemberData">
+                                </div>
+                                <div class="showMemberMessage" >
+
+                                </div>
+                            </div>
+                            <div id="memberData5-table" class="memberBox" style="width: 1600px;height: 350px"></div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/heightCharts.js"></script>
+<script src="js/member.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body ,html{min-width: 670px;}
+body{background-color: #68cce9}
+.bg-image{
+    width: 100%; height: 600px;position: absolute;left: 0;top: 50%;margin-top: -300px;
+    background: url("../images/bgImg.png")no-repeat left center;background-size: 100% 100%;
+}
+
+.registerBox,.loginBox{
+    width: 400px;margin-top:90px;border-radius: 5px;border: 1px solid #999;margin-right: 20%;  float: right;background-color: #fef2f8;
+}
+.loginBox{width: 350px;height: 350px;position: relative;}
+.tips-img{width: 52px;height: 52px;position: absolute;right: 10px;top: 10px; cursor: pointer;}
+.registerBox form,.loginBox form{width: 100%;height: 100%}
+.loginBox form{width: 300px;height: 300px;margin: 25px;}
+.loginBox form label{width: 108px;}
+.regTitle{
+    width: 100%;height: 50px;line-height: 50px;font-size: 16px;;
+}
+
+.registerBox ul li,.loginBox ul li{width: 100%;height: 40px;margin: 10px 0;padding: 0 40px;line-height: 100%;position: relative}
+.registerBox ul li input,.loginBox ul li input{display: block;width: 100%;height: 100%;line-height: 100%;border-radius: 5px;border: 1px solid #eee;
+ padding: 0 20px;font-size: 16px;}
+.registerBox ul li:nth-child(4) input,.loginBox ul li:nth-child(3) input{display: inline-block;width: 49%;}
+
+.registerBox ul li:nth-child(5) input{display: inline-block;width: 15px;height: 15px;}
+.registerBox ul li:last-child input{ display: block;width:80%;margin: 0 auto;background-color: orangered;text-align: center;color: #fff;font-weight: 600 }
+
+.loginBox ul li:nth-child(4) {display: inline-block;height: 20px; line-height:20px;text-align: right;font-size: 14px;margin: 0}
+/*.loginBox ul li:nth-child(3)  a{display: block;float: right}*/
+.loginBox ul li:last-child input{ display: block;width:80%;margin: 0 auto;background-color: orangered;
+    text-align: center;color: #fff;font-weight: 600;cursor: pointer }
+
+.glyphicon{color: gainsboro;position: absolute;top: 14px;left: 45px;display:inline-block;width: 16px;height: 16px;}
+
+.status{
+    position: absolute;top: 10px;font-size: 14px;width: 20px;left: 335px;
+    height: 20px;line-height: 20px;text-align: center;cursor: pointer;display: none;
+}
+.glyphicon-ok-circle{color: #0f0;!important;}
+.glyphicon-remove-circle{color: #f00;!important;}
+.toLogin,.toRegister{text-align: right;width: 100%;height: 40px;line-height: 40px;font-size: 12px;padding-right: 40px}
+
+.loginBox .layui-form-item{padding: 0 auto;}
+#password_login,#password_login_hide{margin-right:0;width: 150px;display: inline-block;!important;}
+.password_login_show{margin-right:0;width: 40px;display: inline-block;padding-left: 0;!important;cursor: pointer;}

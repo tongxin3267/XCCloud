@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    #test2{width: 300px;height: 170px;margin: 0 auto;border: 1px solid #8D8D8D;position: relative;}
+    #imgBtn{width: 60px;height: 60px;position: absolute;top: 55px;left: 130px;cursor: pointer;}
+    .imgBox button{position: absolute;top: 15px;right: 15px;}
+    .imgBox button i {font-size: 24px;color: red;}
+    #timeTypeSetBox .layui-input-inline,#timeTypeSetBox .layui-form-label{width: 90px;}
+
+</style>
+<body>
+<div class="layui-row" style="padding: 5px 10px">
+    <form action="" class="layui-form layui-form-pane">
+
+        <div class="first">
+            <div class="layui-col-md8">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <!--<label class="layui-form-label">有效期</label>-->
+                        <div class="layui-input-inline" style="width: 400px;">
+                            <input type="text" placeholder="输入商品条码或名称" id="searchText" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid" style="padding: 0px!important;">
+                            <button type="button" class="layui-btn layui-btn-normal searchGoods">搜索</button>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品有效期</label>
+                            <div class="layui-input-inline" style="width: 80px;">
+                                <input type="text"  id="day" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <table id="GoodsList" lay-filter="GoodsList" style="width: 900px;"></table>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div id="test2">
+                    <div id="imgBtn"><i class="layui-icon" style="font-size: 60px;color: #9F9F9F">&#xe654;</i></div>
+                    <div class="layui-upload-list" id="demo2" style="margin: 0;">
+                        <input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 8px 0">套餐是否上架</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="上架|下架" id="foodState" lay-filter="foodState">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 8px 0">是否允许第三方</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" name="zzz"  checked lay-skin="switch" lay-text="允许|禁止" id="allowInternet" lay-filter="allowInternet">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 8px 0">是否需要打印</label>
+                    <div class="layui-input-inline" >
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="需要|无需"  id="allowPrint" lay-filter="allowPrint">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="padding: 8px 0">是否允许前台授权</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="允许|禁止" id="foreAuthorize" lay-filter="foreAuthorize">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">散客售价</label>
+                    <div class="layui-input-inline">
+                        <input type="text"  id="clientPrice" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">会员售价</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="memberPrice" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: right">
+                <button type="button" class="layui-btn-normal layui-btn toNext">下一步</button>
+            </div>
+        </div>
+        <div class="second layui-hide">
+            <blockquote class="layui-elem-quote">
+                <button type="button" class="layui-btn layui-btn-normal" id="tosetTime"><i class="layui-icon">&#xe614;</i>优惠时段设定</button>
+            </blockquote>
+            <div  style="height: 300px;position: relative;">
+                <div id="timeSettingBox"  class="layui-hide" style="position: absolute;top: 0;left: 0;z-index: 9999;background-color:#fff;">
+                    <div class="layui-col-md2">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block" id="memberBox" style="margin-left: 0px;height: 170px;overflow-y: scroll;border: 1px dashed #dedede;width: 160px">
+                               </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md10" id="timeTypeSetBox">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">时段类型</label>
+                                <div class="layui-input-inline" style="width: 200px">
+                                    <select id="poriedType" lay-filter="timeType">
+                                        <option value="0" selected>工作模式</option>
+                                        <option value="1" >自定义</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline" id="typeCheckBox">
+                                <label class="layui-form-label">类型选择</label>
+                                <div class="layui-input-inline" style="width: 200px">
+                                    <select name="prioed" id="typeCheck" lay-filter="typeCheck">
+                                        <option value="0" selected>工作日</option>
+                                        <option value="1" >法定节假日</option>
+                                        <option value="2" >周末</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline" id="weekSetBox" style="display:none;">
+                                <label class="layui-form-label">优惠周天</label>
+                                <div class="layui-input-block" id="weekBox" style="width: 700px">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">生效时段</label>
+                                <div class="layui-input-inline" style="margin-right: 5px">
+                                    <input type="text" name="price_min" id="StartTime" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid" style="margin-right: 5px">至</div>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="price_max" id="EndTime" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">散客优惠价</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="price_min" id="ClientPrice" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">会员售价</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="price_min" id="VipPrice" class="layui-input">
+                                </div>
+
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">每天限购</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="price_min" id="day_sale_count" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">每人每天限购</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="price_min" id="member_day_sale_count" class="layui-input">
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline" style="width: 140px;">
+                                    <input type="checkbox" name="" title="允许代币支付" lay-skin="primary" lay-filter="allowCoin" id="allowCoin">
+                                </div>
+                                <div class="layui-input-inline" style="width: 70px;">
+                                    <input type="text" name="price_max" id="coins" class="layui-input" >
+                                </div>
+                                <div class="layui-form-mid">币</div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline" style="width: 140px;">
+                                    <input type="checkbox" name="" title="允许积分支付" lay-skin="primary" lay-filter="allowPoint" id="allowPoint">
+                                </div>
+                                <div class="layui-input-inline" style="width: 70px;">
+                                    <input type="text" name="price_max" id="points" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">积分</div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline" style="width: 140px;">
+                                    <input type="checkbox" name="" title="允许彩票支付" lay-skin="primary" lay-filter="allowLottery" id="allowLottery">
+                                </div>
+                                <div class="layui-input-inline" style="width: 70px;">
+                                    <input type="text" name="price_max" id="lottery" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">张票</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="text-align: right;padding-right: 300px;" class="layui-col-md12">
+                        <button type="button" class="layui-btn layui-btn-normal" id="saveTimeCancle"><i class="layui-icon">&#xe603;</i>取消</button>
+                        <button type="button" class="layui-btn layui-btn-normal" id="saveTimeSet"><i class="layui-icon">&#xe6af;</i>优惠时段添加</button>
+                    </div>
+                </div>
+                <div id="digitDestroyTbBox">
+                    <table class="layui-hide" id="digitDestroyTb"  lay-filter="digitDestroyTb"></table>
+                </div>
+
+            </div>
+            <div style="text-align: right;margin-right: 100px;">
+                <button type="button" class="layui-btn-normal layui-btn toLast">返回上一步</button>
+                <button type="reset" class="layui-btn layui-btn-normal saveTimeReset"><i class="layui-icon">&#x1002;</i>重置</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="psSave"><i class="layui-icon">&#xe6af;</i>确定</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    var xc=xcActionSystem.prototype;
+    var foodState=1;var allowPrint=1;var foreAuthorize=1;var allowInternet=1;
+    var allowCoin='0';var allowPoint='0';var allowLottery='0';
+    var token=xc.getStorage('token');
+    var foodLevels=[];
+    var goodInfos=[];
+    var foodId=xc.getStorage('foodId');
+    if(foodId==undefined){
+        $('.saveTimeReset').trigger('click');
+        foodLevels=[];
+    }
+    let timeType='0';let typeChecks='0';
+    var _obj={'foodId':foodId,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+    var url='/XCCloud/Promotion?action=GetFoodInfo';
+    var parasJson = JSON.stringify(_obj);
+    layui.use(['element','form','laydate','table'], function(){
+        var element = layui.element, form=layui.form,$=layui.jquery,laydate=layui.laydate,table=layui.table;
+        if(foodId){
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    console.log(data);
+                    if(data.Result_Code==1){
+                        if(data.Result_Data.Good){
+                            var arr=data.Result_Data.Good;
+                            foodState=arr.FoodState;
+                            foodLevels=arr.FoodLevels;
+                            allowInternet=arr.AllowInternet;
+                            allowPrint=arr.AllowPrint;
+                            foreAuthorize=arr.ForeAuthorize;
+                            allowCoins=arr.AllowCoin;
+                            allowPoints=arr.AllowPoint;
+                            allowLotterys=arr.AllowLottery;
+                            if(arr.FoodState==1){
+                                $('#foodState').attr({'checked':true});
+                            }else {
+                                $('#foodState').attr({'checked':false});
+                            }
+                            if(arr.AllowInternet==1){
+                                $('#allowInternet').attr({'checked':true});
+                            }else {
+                                $('#allowInternet').attr({'checked':false});
+                            }
+                            if(arr.AllowPrint==1){
+                                $('#allowPrint').attr({'checked':true});
+                            }else {
+                                $('#allowPrint').attr({'checked':false});
+                            }
+                            if(arr.ForeAuthorize==1){
+                                $('#foreAuthorize').attr({'checked':true});
+                            }else {
+                                $('#foreAuthorize').attr({'checked':false});
+                            }
+                            $('#clientPrice').val(arr.ClientPrice);
+                            $('#memberPrice').val(arr.MemberPrice);
+                            $('#day').val(arr.GoodInfos[0].Days);
+                            form.render();
+                            table.render({
+                                elem: '#digitDestroyTb'
+                                , height:'250px'
+                                , data: arr.FoodLevels
+                                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                , cols: [[{field:'MemberLevels', title:'适用级别', align: 'center'}
+                                    ,{field:'WeekStr',title: '周', align: 'center'} //width 支持：数字、百分比和不填写。
+                                    ,{field:'Time', title: '时段', align: 'center'}
+                                    ,{field:'ClientPrice', title: '散客价格', align: 'center'}
+                                    ,{field:'VIPPrice', title: '会员价格', align: 'center'}
+                                    ,{field:'day_sale_count', title: '每天限额', align: 'center'}
+                                    ,{field:'member_day_sale_count', title: '每人每天限额', align: 'center'}
+                                    ,{field:'AllowCoin', title: '允许支付代币', align: 'center'}
+                                    ,{field:'Coins', title: '支付代币数量', align: 'center'}
+                                    ,{field:'AllowPoint', title: '允许支付积分', align: 'center'}
+                                    ,{field:'Points', title: '支付积分数量', align: 'center'}
+                                    ,{field:'AllowLottery', title: '允许支付彩票', align: 'center'}
+                                    ,{field:'Lottery', title: '支付彩票数量', align: 'center'}
+                                    ,{fixed: 'right', width:180, title: '操作', align:'center', toolbar: '#barDemo1'}]]
+                                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                                , limit: 15
+                            });
+                            table.render({
+                                elem: '#GoodsList'
+                                , height:'250px'
+                                , data:arr.GoodInfos
+                                , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                , cols: [[{field:'ID', title: '商品ID', align: 'center'}
+                                    ,{field:'Barcode', title: '商品条码', align: 'center'}
+                                    ,{field:'GoodName', title: '商品名称', align: 'center'}
+                                    ,{field:'GoodTypeStr', title: '商品类别', align: 'center'}
+                                    ,{field:'Points', title: '奖励积分', align: 'center'}
+                                    ,   {type:'checkbox'}]]
+                                , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+                                , limit: 10
+                            });
+
+                            $('#digitDestroyTbBox').removeClass('layui-hide');
+                            $('#timeSettingBox').addClass('layui-hide');
+
+                            if(arr.ImageURL!=""){
+                                $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                                    '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                                    '<img src="'+ arr.ImageURL +'" class="layui-upload-img_md" ' +
+                                    'style="display: block;width: 300px;height: 170px"></div>');
+                                $('.imgBox button').click(function () {
+                                    $(this).parent('div').remove();
+                                });
+                                $('.imgBox img').click(function () {
+                                    layer.open({
+                                        title:'查看大图',
+                                        type: 1,
+                                        area: ['600px','400px'], //宽高
+                                        content: '<div><img src="'+arr.CardUIURL+'" alt="" style="display: block;"></div>'
+                                    });
+                                });
+                            }
+
+                        }
+                    }
+                }
+            })
+        }
+    })
+    function initGoodsTb() {
+        var searchText=$('#searchText').val();
+        var parm={'obj':{'goodNameOrBarcode':searchText,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+            'url':'/XCCloud/Promotion?action=GetGoodsInfoList',
+            'elem':'#GoodsList',
+            'height':'210px',
+            'cols':[ {field:'ID', title: '商品ID', align: 'center'}
+                ,{field:'Barcode', title: '商品条码', align: 'center'}
+                ,{field:'GoodName', title: '商品名称', align: 'center'}
+                ,{field:'GoodTypeStr', title: '商品类别', align: 'center'}
+                ,{field:'Points', title: '奖励积分', align: 'center'},
+                {type:'checkbox'}]};
+        xc.getInitData(parm);
+    }
+    initGoodsTb();
+    $('.searchGoods').on('click',function(){ initGoodsTb();});
+    layui.use(['form','table','laydate','upload'],function(){
+        var form=layui.form,table=layui.table,laydate=layui.laydate,upload=layui.upload;
+        xc.SearchMemberLevel1('memberBox', token, layer);
+        xc.AddWeeks('weekBox');
+        table.render({
+            elem: '#digitDestroyTb'
+            , height:'250px'
+            , data: foodLevels
+            , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'MemberLevels', title:'适用级别', align: 'center'}
+                ,{field:'WeekStr',title: '周', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'Time', title: '时段', align: 'center'}
+                ,{field:'ClientPrice', title: '散客价格', align: 'center'}
+                ,{field:'VIPPrice', title: '会员价格', align: 'center'}
+                ,{field:'day_sale_count', title: '每天限额', align: 'center'}
+                ,{field:'member_day_sale_count', title: '每人每天限额', align: 'center'}
+                ,{field:'AllowCoin', title: '允许支付代币', align: 'center'}
+                ,{field:'Coins', title: '支付代币数量', align: 'center'}
+                ,{field:'AllowPoint', title: '允许支付积分', align: 'center'}
+                ,{field:'Points', title: '支付积分数量', align: 'center'}
+                ,{field:'AllowLottery', title: '允许支付彩票', align: 'center'}
+                ,{field:'Lottery', title: '支付彩票数量', align: 'center'}
+                ,{fixed: 'right', width:180, align:'center', toolbar: '#barDemo1',title:'操作'}]]
+            , page: {page: true, limits: [10, 15, 20, 30, 50, 100]}
+            , limit: 15
+        });
+        laydate.render({
+            elem: '#StartTime',type: 'time',value: '00:00',format: 'HH:mm'
+        });
+        laydate.render({
+            elem: '#EndTime' ,type: 'time',value: '23:59',format: 'HH:mm'
+        });
+        var demoListViewStore=$('#demo2'),uploadListInsStore=upload.render({
+            elem: '#imgBtn'
+            ,url: '/XCCloud/Promotion?action=UploadFoodPhoto'
+            ,data:{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+            ,multiple: true
+            ,accept:"images"
+            ,size:1000
+            ,auto:true
+            ,done: function(res,index,upload){
+                //上传完毕
+                console.log(res);
+                if(res.result_code==1){
+                    $('#demo2').children('div[class="imgBox"]').remove();
+                    $('#demo2 .loadTips').addClass('layui-hide');
+                    $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                        '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                        '<img src="'+ res.result_data[0].Value +'" alt="'+ res.result_data[0].Value +'" class="layui-upload-img_md" ' +
+                        'style="display: block;width: 300px;height: 170px"></div>');
+                    layer.msg("图片上传成功！");
+                    $('.imgBox button').click(function () {
+                        $(this).parent('div').remove();
+                    });
+                    $('.imgBox img').click(function () {
+                        layer.open({
+                            title:  res.result_data.ID,
+                            type: 1,
+                            area: ['600px','400px'], //宽高
+                            content: '<div><img src="'+res.result_data[0].Value+'" alt="" style="display: block;"></div>'
+                        });
+                    });
+                }else{
+                    layer.msg(res.return_msg);
+                }
+            }
+            ,error:function(index,upload){
+                layer.msg("服务器返回错误！");
+                layer.closeAll('loading');
+            }
+        });
+        form.on('switch(foodState)', function(data){
+            data.elem.checked==true ? foodState=1:foodState=0;
+        });
+        form.on('switch(allowInternet)', function(data){
+            data.elem.checked==true ? allowInternet=1:allowInternet=0;
+        });
+        form.on('switch(allowPrint)', function(data){
+            data.elem.checked==true ? allowPrint=1:allowPrint=0;
+        });
+        form.on('switch(foreAuthorize)', function(data){
+            data.elem.checked==true ? foreAuthorize=1:foreAuthorize=0;
+        });
+        form.on('checkbox(allowCoin)',function(data){
+            data.elem.checked==true?allowCoin=1 : allowCoin=0
+        });
+        form.on('checkbox(allowPoint)',function(data){
+            data.elem.checked==true?allowPoint=1 : allowPoint=0
+        });
+        form.on('checkbox(allowLottery)',function(data){
+            data.elem.checked==true?allowLottery=1 : allowLottery=0
+        });
+        var mLIDs=[];var week=[];
+        table.on('checkbox(GoodsList)', function(obj){
+            if (obj.type == "all") {
+                var csss = $(".layui-table-cell.laytable-cell-checkbox");
+                csss.each(function(index, e){
+                    e.children[0].checked = false;
+                    e.children[1].className="layui-unselect layui-form-checkbox";
+                });
+            } else {
+                if(obj.checked==true){
+                    goodInfos=[{'id':obj.data.ID,'goodName':obj.data.GoodName}];
+                }else if(obj.checked==false){
+                     goodInfos=[];
+                }
+            // .laytable-cell-1-5
+                var csss = $(".layui-table-cell.laytable-cell-checkbox");
+                csss.each(function(index, e){
+                    var dataIndex = e.parentNode.parentNode.getAttribute("data-index");
+                    if (dataIndex != null) {
+                        if(dataIndex != obj.data.LAY_TABLE_INDEX){
+                            e.children[0].checked = false;
+                            e.children[1].className="layui-unselect layui-form-checkbox";
+                        }
+                    } else {
+                        e.children[0].checked = false;
+                        e.children[1].className="layui-unselect layui-form-checkbox";
+                    }
+                });
+            }
+        });
+        //监听会员级别
+        table.on('tool(digitDestroyTb)', function(obj){
+            var data = obj.data;   console.log(data);
+            var layEvent = obj.event;
+            if(layEvent === 'del'){ //删除
+                for (var i in  foodLevels) {
+                    delete foodLevels[i].LAY_TABLE_INDEX;
+                    console.log(foodLevels[i])
+                    console.log(data)
+                    if(JSON.stringify(foodLevels[i])==JSON.stringify(data)){
+                        obj.del();
+                        foodLevels.splice(i,1);
+                    }
+                }
+            }
+        });
+        getCheckBox('ml',mLIDs,form);
+        getCheckBox('weeks',week,form);
+        $('#saveTimeSet').on('click',function(){
+            xc.TimeSet(table,foodLevels,'digitDestroyTb',mLIDs,week);
+            initArr(week,mLIDs);
+            xc.SearchMemberLevel1('memberBox', token, layer);
+            xc.AddWeeks('weekBox');
+        });
+        form.on('select(typeCheck)',function(data){
+            typeChecks=data.value;
+        });
+        form.on('select(timeType)',function(data){
+            timeType=data.value;
+            if(timeType==0){
+                $('#weekSetBox').css({'display':'none'});
+                $('#typeCheckBox').css({'display':'inline-block'});
+                $('#weekBox').html('');
+                week=[]; typeChecks='0';
+            }else if(timeType==1){
+                $('#typeCheckBox').css({'display':'none'});
+                $('#weekSetBox').css({'display':'inline-block'});
+                $('#typeCheck').html('<option value="0">工作日</option><option value="1">法定节假日</option><option value="2">周末</option>');
+                form.render();
+                xc.AddWeeks('weekBox');
+                getCheckBox('weeks',week,form);
+                typeChecks='';
+
+            }
+        });
+        $('#psSave').on('click',function () {
+            let FoodId=foodId||'';
+            let FoodState=foodState;
+            let AllowInternet=allowInternet;
+            let AllowPrint=allowPrint;
+            let ForeAuthorize=foreAuthorize;
+            let ClientPrice=$('#clientPrice').val();
+            let MemberPrice=$('#memberPrice').val();
+            let _day=$('#day').val();
+            let imgUrl=$('.layui-upload-img_md').attr('src');
+            var goodInfo;
+            goodInfos.length>0 ? goodInfo=goodInfos : goodInfo=null;
+            let obj={'FoodId':FoodId,'days':_day,'ImageURL':imgUrl, 'foodState':FoodState,'allowInternet':AllowInternet,
+                'allowPrint':AllowPrint,'foreAuthorize':ForeAuthorize,'goodInfos':goodInfo,
+                'clientPrice':ClientPrice,'memberPrice':MemberPrice,'foodLevels':foodLevels,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let url='/XCCloud/Promotion?action=SaveFoodGoodsInfo';
+            console.log(obj)
+            var parasJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    console.log(data)
+                    if(data.result_code==1){
+                        let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+                            'url':'/XCCloud/Promotion?action=GetFoodInfoList',
+                            'elem':'#digitDestroyTb',
+                            'cols':[
+                                {field:'FoodID', title:'套餐编号', align: 'center', sort: true}
+                                ,{field:'FoodName',title: '套餐名称', align: 'center'} //width 支持：数字、百分比和不填写。
+                                ,{field:'FoodTypeStr', title: '套餐类别', align: 'center'}
+                                ,{field:'RechargeTypeStr', title: '充值方式', align: 'center'}
+                                ,{field:'AllowInternetStr', title: '是否允许第三方', align: 'center'}
+                                ,{field:'AllowPrintStr', title: '是否允许打印', align: 'center'}
+                                ,{field:'ForeAuthorizeStr', title: '是否允许前台授权', align: 'center'}
+                                ,{field:'StartTimeStr', title: '启用时间', align: 'center'}
+                                ,{field:'EndTimeStr', title: '停用时间', align: 'center'}
+                                ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+                        };
+                        if(xc.getStorage('dpsAdd')){
+                            window.parent.closePackage();
+                        }else {
+                            parent.layer.closeAll();
+                            parent.xc.getInitData(parm);
+                        }
+                    }else {
+                        layer.msg('操作失败')
+                    }
+                }
+
+            })
+        });
+    });
+
+    var  getCheckBox=function(filter,arr,form){
+        form.on('checkbox('+filter+')', function(data){
+            if (data.elem.checked==true){
+                arr.push({'value':data.value,'title':data.elem.title});
+            }else if(data.elem.checked==false){
+                for (var i=0;i<arr.length;i++){
+                    if(arr[i].value==data.value){
+                        arr.splice(i,1)
+                    }
+                }
+            }
+        });
+    };
+    $('#tosetTime').toggle(function(){
+        $('#timeSettingBox').removeClass('layui-hide');
+    },function(){
+        $('#timeSettingBox').addClass('layui-hide');
+    });
+    function initArr(arr1,arr2) {
+        arr1.splice(0,arr1.length);arr2.splice(0,arr2.length);
+    }
+    $('.toNext').on('click',function(){
+        $('.first').addClass('layui-hide');$('.second').removeClass('layui-hide');
+    });
+    $('.toLast').on('click',function(){
+        $('.second').addClass('layui-hide');$('.first').removeClass('layui-hide');
+    })
+</script>
+<script type="text/html" id="barDemo1">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

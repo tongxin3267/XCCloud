@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品入库</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<div class="layui-row" style="padding: 10px">
+    <blockquote class="layui-elem-quote" style="text-align:right;padding-right: 100px;">
+
+            <button type="button" class="layui-btn layui-btn-normal" id="addNew"><i class="layui-icon">&#xe654;</i>入库</button>
+            <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查询模板</button>
+
+    </blockquote>
+    <table class="layui-hide" id="productStorageTable" lay-filter="productStorageTable"></table>
+</div>
+<!--入库弹窗-->
+<div id="storageOpen" style="display: none;padding: 15px;">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商品条码</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Barcode">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">入库数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="StorageCount">
+                </div>
+            </div>
+            <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">入库时间</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" class="layui-input" id="RealTime">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">经办人</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" class="layui-input" id="RealName">-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="layui-inline">
+                <label class="layui-form-label">入库单价</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Price">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">入库总额</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="TotalPrice">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">优惠金额</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Discount">
+                </div>
+            </div>
+            <br>
+            <div class="layui-inline">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block" style="width: 513px;">
+                    <input type="text" class="layui-input" id="Note">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm-offset9 layui-col-sm3" style="margin-bottom: 15px;">
+            <button type="reset" class="layui-btn layui-hide" id="reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-danger" id="cancel">取消</button>
+            <button type="submit" class="layui-btn layui-btn-normal" id="save">保存</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    window.onload=function(){
+        let xc=xcActionSystem.prototype;
+        let token=xc.getStorage('token');
+        let id='';
+        layui.use(['layer','form','laydate'],function(){
+            let layer=layui.layer;
+            let form=layui.form;
+            let laydate=layui.laydate;
+            $('#addNew').on('click',function(){
+                id='';
+                $('#reset').trigger('click');
+                // xc.openProductAdd(layer,'商品入库','680px','storageOpen')
+                layer.open({
+                    type:1,
+                    title:'商品入库',
+                    area:'680px',
+                    content:$('#storageOpen')
+                })
+            });
+            $('#cancel').on('click',function(){
+                xc.closeAll(layer);
+            });
+            //保存新增或者修改的入库记录
+            $('#save').on('click',function(){
+                xc.addProductStorage(token,layer,id,parm);
+            });
+           // 初始化表格
+            let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+                'url':'/XCCloud/GoodsInfo?action=QueryGoodStorage',
+                'elem':'#productStorageTable',
+                'cols':[
+                    {field:'ID', title:'入库流水号', align: 'center', sort: true}
+                    ,{field:'RealTime',title: '入库时间', align: 'center', templet: '#changeTime'} //width 支持：数字、百分比和不填写。
+                    ,{field:'RealName', title: '经办人', align: 'center'}
+                    ,{field:'StorageCount', title: '入库数量', align: 'center'}
+                    ,{field:'Note', title: '备注', align: 'center'}
+                    ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+            };
+            xc.getInitData(parm);
+        });
+    }
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"> <i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+<script type="text/html" id="changeTime">
+    {{# if(d.RealTime!=null&&d.RealTime!=''){ }}
+    {{xcActionSystem.prototype.timeStamp2String(d.RealTime)}}
+    {{# }else{ }}
+    {{d.RealTime}}
+    {{#  } }}
+</script>
+</html>

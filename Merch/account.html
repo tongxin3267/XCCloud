@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>查账</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="layui/css/idangerous.swiper.css">
+    <style>
+        .layui-form{margin-top: 20px;padding: 0 1.5rem;}
+        .layui-field-title{font-size: 1.5rem;font-weight: 500;}
+        .wrap-flex{display: flex;flex-direction: row;justify-content:space-between;}
+        .flex-title{font-size: 2.2rem; font-weight:bold;line-height: 2.5rem;}
+        .flex-text{color: #8e8e8e;font-size: 1rem;margin-top: 5px;}
+        .text-style{text-align: center;}
+        .color2{color: #a3c3e2;border: none;background: none;display: block;width: 80px;border-bottom: 1px solid #a3c3e2;padding-bottom: 5px;padding-left: 5px;}
+        .input-style{border: none;border-radius: 10px;}
+        .wrap-flex1{display: flex;flex-direction: row;border-radius: 10px;border: 1px solid #e5f0fe;width: 200px;}
+        .color3{color: #f4822a;}
+        .button-style{background-color: #7db5fa;border-radius: 10px;color: #fff;font-size: 1rem;width: 80px;border: 1px solid #e5f0fe;}
+        .imgStore span{display: none;}
+        .imgStore p{font-size: 1.2rem;font-weight: 300;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;width:140px;}
+        .dataSelect{width: 86px;height: 60px;background: url("../merch/layui/images/data.png") no-repeat center top;}
+        .dataSelect input{padding-top: 40px;}
+        #AddStoreId{color: #FF1493;font-weight: 500;}
+        .swiper-wrapper{padding-left: 96px!important;}
+        .swiper-container{width: 100%;height: 160px;color: #fff;background: #77b4ff;text-align: center;border-radius: 10px;margin: 2rem 0;}
+        .swiper-slide{opacity: 0.4;-webkit-transition: 300ms;-moz-transition: 300ms;-ms-transition: 300ms;-o-transition: 300ms;transition: 300ms;-webkit-transform: scale(0);-moz-transform: scale(0);-ms-transform: scale(0);-o-transform: scale(0);transform: scale(0);}
+        .swiper-slide-visible{opacity: 0.5;-webkit-transform: scale(0.5);-moz-transform: scale(0.5);-ms-transform: scale(0.5);-o-transform: scale(0.5);transform: scale(0.5);}
+        .swiper-slide-active{top: 0;opacity: 1;-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);-o-transform: scale(1);transform: scale(1);}
+
+        .swiper-slide .title{ width:150px;height:100px;margin-top:30px;font-size: 1rem;margin-bottom: 0;line-height: 45px;position: relative;}
+        .swiper-slide .title .img{width: 100%;height: 100%;}
+        .swiper-slide .title .imgStore{position: absolute;top: 10px;width: 100%;text-align: center;font-size: 0.8rem;color: #6a859f;}
+        .imgStore img{display: inline-block;width: 60px;height: 40px;}
+        .swiper-slide .title .selectAdd{position: absolute;top: 20px;width: 100%;text-align: center;}
+        .selectAdd img{display: inline-block;width: 60px;height: 60px;}
+        .pagination{position: absolute;z-index: 20;left: 0px;width: 100%;text-align: center;bottom: 5px;}
+        .swiper-pagination-switch{display: inline-block;width: 10px;height: 10px;border-radius: 8px;background: #aaa;margin-right: 8px;cursor: pointer;-webkit-transition: 300ms;-moz-transition: 300ms;-ms-transition: 300ms;-o-transition: 300ms;transition: 300ms;opacity: 0;position: relative;top: -50px;}
+        .swiper-visible-switch{opacity: 1;top: 0;background: #aaa;}
+        .swiper-active-switch{background: #fff;}
+
+
+        .upBind{display: inline-block;height: 1rem;margin-left: 0.5rem;line-height: 1rem;color: #d81e06;}
+        .upBind-text{display:inline-block;background: url("../merch/layui/images/UpBind.png") no-repeat center 1px;width: 1rem;height: 1rem;border: none;background-size: 95% 95%;margin-left: 0.2rem;}
+    </style>
+</head>
+<body>
+<!--\\I3-SMALL\Merch/ofje-139-->
+
+
+<form class="layui-form">
+    <div class="layui-field-title">莘宸科技</div>
+    <div class="wrap-flex">
+        <div>
+            <h3 class="flex-title">hi! <span id="nameInput"></span></h3>
+            <p class="flex-text">请选择您的店铺 <a href="javascript:;" class="upBind">解绑<span href="javascript:;" class="upBind-text"></span></a></p>
+            <p class="flex-text" id="AddStoreId"></p>
+        </div>
+
+        <div class="text-style dataSelect">
+            <!--<img src="layui/images/data.png" id="">-->
+            <input class="flex-text color2" type="text" name="date" id="dataSelectVal" value="" placeholder="选择日期" autocomplete="off" class="layui-input width80" readonly>
+        </div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="addSwiper">
+            <div class="swiper-slide" id="selectAdd">
+                <div class="title">
+                    <img class="img" src="layui/images/swiperbg.png">
+                    <div class="selectAdd">
+                        <img src="layui/images/addStore.png">
+                        <span style="display: none;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination" style="display: none;"></div>
+
+    <div class="wrap-flex">
+        <div class="text-style" id="screenBtn1">
+            <img src="layui/images/summary.png">
+            <p class="flex-text">营业汇总</p>
+        </div>
+        <div class="text-style" id="screenBtn2">
+            <img src="layui/images/account.png">
+            <p class="flex-text">机台报告</p>
+        </div>
+        <div>
+            <div class="wrap-flex1">
+                <input type="number" name="title" id="inputVal" placeholder="请输入卡号" maxlength="9" autocomplete="off" class="layui-input input-style">
+                <button type="button" class="button-style" id="screenBtn3"><i class='layui-icon'>&#xe615;</i>查询</button>
+            </div>
+            <p class="flex-text color3">未输入卡号默认查询所有会员数据</p>
+        </div>
+    </div>
+
+</form>
+<!-- 你的HTML代码 -->
+<table class="layui-hide" id="test"></table>
+<script src="layui/layui.js"></script>
+<script src="jquery-1.8.3-min.js"></script>
+<script src="layui/idangerous.swiper.min.js"></script>
+
+<script>
+    //定义全局变量
+    var sysId = "0";
+    var versionNo ="0.0.0.1";
+    var url_getStores ="/xcgamemana/account?action=getStores";//获取已绑定门店列表
+    var url_GetStoreSales ="/XCGamemana/Query?action=GetStoreSales";//门店查询
+    var url_unBindStore = "/xcgamemana/account?action=unBindStore";//门店解绑
+    var openId = getParam('openId');
+    var nickName = getParam('nickName');
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+        form.on('select(selectId)', function(data){
+            console.log(data.value); //得到被选中的值
+            if(data.value === "selectEnd"){
+                window.location.href="tobind.html?openId="+openId;
+            }
+        });
+    });
+    //日期选择
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#dataSelectVal'
+        });
+    });
+    function tableFnc(tableData) {
+        layui.use('table', function(){
+            var table = layui.table;
+            table.render({
+                elem: '#test'
+                ,data:tableData
+                ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                ,cols: [[
+                    {field:'Key'}
+                    ,{field:'Value',width:"80",align:"center"}
+                ]]
+            });
+        });
+    }
+    //获取已绑定门店列表
+    function getStore() {
+
+//        alert(openId);
+        var getStoreData = {"sysId": sysId, "versionNo": versionNo, "openId": openId };
+        getStoreData =JSON.stringify(getStoreData);
+        $.ajax({
+            type:"post",
+            url: url_getStores,
+            data:getStoreData,
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+//                console.log(data.result_data.length);
+                if(data.result_code=="1"){
+                    for (var i = 0; i < data.result_data.length; i++) {
+                        console.log(i);
+//                        $("#selectAdd").before("<option value="+data.result_data[i].storeId+">"+data.result_data[i].storeId+"  </option>");
+                        $("#selectAdd").before('<div class="swiper-slide"><div class="title"><img class="img" src="layui/images/swiperbg.png"><div class="imgStore"><img src="layui/images/store.png"><p><span>'+data.result_data[i].storeId+'</span>'+' '+data.result_data[i].companyname+'</p></div></div></div>')
+
+                    }
+                    var mySwiper = new Swiper('.swiper-container',{
+                        pagination: '.pagination',
+                        paginationClickable: true,
+                        centeredSlides: true,
+                        slidesPerView: 3,
+                        watchActiveIndex: true
+                    });
+                    layui.use('form', function(){
+                        var form = layui.form;
+                        //日期
+                        form.render();
+                    });
+                }else {
+                    layer.msg(data.result_msg);
+                }
+            },
+            fail:function (err) {
+                console.log(err);
+            }
+        });
+    }
+    //加载完执行
+
+   window.onload = function () {
+        $("#addSwiper").on("click",".swiper-slide",function () {    //添加店铺
+            console.log(11);
+            var storeName =$(this).find("span").text();
+            $('#AddStoreId').text(storeName)
+        });
+       getStore();
+       $("#nameInput").text(nickName); //获取用户名
+       $(".selectAdd").click(function () {
+           window.location.href="tobind.html?openId="+openId;
+       });
+       $("#screenBtn1").click(function () {
+           var inputVal =$("#dataSelectVal").val().slice("-");
+           inputVal =inputVal.replace("-","");
+           inputVal =inputVal.replace("-","");
+           var storeId = $('#AddStoreId').text();
+          console.log(inputVal);
+          console.log(storeId);
+          if(inputVal === "" || storeId === ""){
+              layui.use('layer', function(){
+                  var layer = layui.layer;
+                  layer.msg("请先选择日期！");
+              });
+          }else {
+              var saleData ={sysId: sysId, "versionNo": versionNo, "storeId": storeId,"date":inputVal,"searchType":"0"};
+              getSales(saleData)
+          }
+
+       });
+       $("#screenBtn2").click(function () {
+           var inputVal =$("#dataSelectVal").val();
+           inputVal =inputVal.replace("-","");
+           inputVal =inputVal.replace("-","");
+           var storeId = $('#AddStoreId').text();
+          console.log(inputVal);
+           if(inputVal === "" || storeId === ""){
+               layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.msg("请先选择日期！");
+               });
+           }else {
+               var saleData ={sysId: sysId, "versionNo": versionNo, "storeId": storeId,"date":inputVal,"searchType":"1"};
+               getSales(saleData)
+           }
+
+       });
+       $("#screenBtn3").click(function () {
+           var inputVal =$("#inputVal").val();
+           var storeId = $('#AddStoreId').text();
+          console.log(inputVal);
+           if(storeId != ""){
+               if(inputVal === "" ){
+                   var saleData ={sysId: sysId, "versionNo": versionNo, "storeId": storeId,"icCardId":inputVal,"searchType":"2"};
+                   getSales(saleData)
+               }else {
+                   var saleData ={sysId: sysId, "versionNo": versionNo, "storeId": storeId,"icCardId":inputVal,"searchType":"3"};
+                   getSales(saleData)
+               }
+           }else {
+               layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.msg("请选择门店");
+               });
+           }
+       });
+        
+       //解绑
+       $('.upBind').click(function () {
+           var storeId = $('#AddStoreId').text();
+           var upBindData ={sysId: sysId, "versionNo": versionNo, "storeId": storeId};
+           console.log(storeId);
+           console.log(storeId === "");
+           if(storeId === ""){
+               layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.msg("请先选择解绑的门店！");
+               });
+           }else {
+               console.log("什么鬼");
+               $.ajax({
+                   type:"post",
+                   url: url_unBindStore,
+                   data: upBindData,
+                   dataType:"json",
+                   success:function (data) {
+                       console.log(data);
+                       if(data.result_code=="1"){
+                           location.reload(true);
+                       }else {
+                           layui.use('layer', function(){
+                               var layer = layui.layer;
+                               layer.msg(data.result_msg);
+                           });
+                       }
+                   },
+                   fail:function (err) {
+                       console.log(err.return_msg);
+                   }
+               });
+           }
+       })
+   };
+    //获取openID(可以截取url后携带参数)
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = decodeURIComponent(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+//    {sysId: sysId, "versionNo": versionNo, "openId": openId }
+    function getSales(saleData) {
+        saleData =JSON.stringify(saleData);
+        $.ajax({
+            type:"post",
+            url: url_GetStoreSales,
+            data:saleData,
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                if(data.result_code=="1"){
+                    tableFnc(data.result_data);
+                }else {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg(data.result_msg);
+                    });
+                }
+            },
+            fail:function (err) {
+                console.log(err.return_msg);
+            }
+        });
+    }
+</script>
+</body>
+</html>

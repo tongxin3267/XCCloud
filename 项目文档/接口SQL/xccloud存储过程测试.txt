@@ -1,0 +1,91 @@
+----------------------------------------------------------------------------------------------------
+declare @Return int
+declare @tmp [FoodDetailType]
+declare @StoreId varchar(15) = '100025420106001'
+declare @CustomerType int = 1
+declare @MemberLevelId int = 1
+declare @ICCardId int = 10004146
+declare @PayCount decimal = 120
+declare @RealPay decimal = 120
+declare @FreePay decimal = 0
+declare @UserID decimal = 3
+declare @WorkStation varchar(50) = 'lijunjie'
+declare @AuthorID varchar(50) = '0'
+declare @Note varchar(500) = ''
+declare @OrderSource int = 0
+declare @SaleCoinType int = 1
+declare @OrderFlwId int = 0
+declare @ErrMsg varchar(200) = ''
+declare @Mobile varchar(11) = '15619200033'
+insert into @tmp(FoodId,FoodCount,PayType,PayNum) values(133,1,0,40)
+insert into @tmp(FoodId,FoodCount,PayType,PayNum) values(135,1,2,1000)
+insert into @tmp(FoodId,FoodCount,PayType,PayNum) values(136,1,3,1000)
+insert into @tmp(FoodId,FoodCount,PayType,PayNum) values(138,1,0,80)
+exec @Return = CreateOrder @tmp,@StoreId,@CustomerType,@Mobile,
+@MemberLevelId,@ICCardId,@PayCount,@RealPay,
+@FreePay,@UserID,@WorkStation,@AuthorID,@Note,
+@OrderSource,@SaleCoinType,@OrderFlwId output,@ErrMsg output
+print @Return 
+print @ErrMsg
+print @OrderFlwId
+
+----------------------------------------------------------------------------------------------------
+declare @StoreId varchar(15) = '100025420106001'
+declare @GetFoodInfoReturn int
+declare @FoodName varchar(200)
+declare @FoodType int 
+declare @FoodSalePrice decimal(18,2)
+declare @AllowPrint int
+declare @ForeAuthorize int 
+declare @AllowInternet int
+declare @AllowCoin int
+declare @Coins decimal(18,2)
+declare @AllowPoint int
+declare @Points decimal(18,2)
+declare @AllowLottery int
+declare @Lotterys decimal(18,2)
+declare @ErrMsg varchar(200)
+exec @GetFoodInfoReturn = GetFoodInfo @StoreId,1,2,1,@FoodName output,@FoodType output,@FoodSalePrice output,@AllowPrint output,@ForeAuthorize output,@AllowInternet output,
+@AllowCoin output,@Coins output,@AllowPoint output,@Points output,@AllowLottery output,@Lotterys output,@ErrMsg output
+print @GetFoodInfoReturn
+print @FoodSalePrice
+----------------------------------------------------------------------------------------------------
+declare @StoreId varchar(15) = '100025420106001'
+exec GetFoodListInfo @StoreId,2,1,'0,2,3,4,5,6'
+----------------------------------------------------------------------------------------------------
+declare @StoreId varchar(15) = '100025420106001'
+exec dbo.GetFoodDetail @StoreId,133
+----------------------------------------------------------------------------------------------------
+select * from Data_FoodInfo where FoodID in (133,135,136,138)
+declare @FoodDetailCommonQueryType FoodDetailCommonQueryType 
+insert @FoodDetailCommonQueryType(FoodId,FoodType) values(133,0) 
+insert @FoodDetailCommonQueryType(FoodId,FoodType) values(135,2) 
+insert @FoodDetailCommonQueryType(FoodId,FoodType) values(136,3) 
+insert @FoodDetailCommonQueryType(FoodId,FoodType) values(138,4)
+exec [GetCommonFoodListInfo] @FoodDetailCommonQueryType,2,1
+----------------------------------------------------------------------------------------------------
+
+exec GetMerchOtherStoreMemberCardInfo '100025420106002','15618920033'
+----------------------------------------------------------------------------------------------------
+
+declare @Result int = 0 
+exec @Result = CheckStoreIsInAllGroupRule '100025420106001'
+print @Result
+
+----------------------------------------------------------------------------------------------------
+     declare @ResultOpenCard int 
+     declare @ErrMsg varchar(200)
+	 exec @ResultOpenCard = CheckStoreCanOpenCard '100025420106002','15618920033',@ErrMsg output
+	 print @ResultOpenCard
+-----------------------------------------------------------------------------------------------------
+declare @CurrentSchedule int = 0
+declare @OpenTime varchar(20) = ''
+declare @errMsg varchar(200) = ''
+declare @Return int = 0
+exec @Return = GetSchedule '100025420106001',3,'lijunjie',@CurrentSchedule output,@OpenTime output,@errMsg output
+print @Return
+print @CurrentSchedule
+print @errMsg
+-------------------------------------------------------------------------------------------------------
+exec [GetFoodListInfo] '100025420106001',1,1,'0,2,3,4,5,6'
+-------------------------------------------------------------------------------------------------------

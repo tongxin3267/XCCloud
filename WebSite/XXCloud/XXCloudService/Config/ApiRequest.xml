@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<reqeust>
+  <CheckImgCode>100</CheckImgCode>
+  <SendSMSCode>6</SendSMSCode>
+</reqeust>

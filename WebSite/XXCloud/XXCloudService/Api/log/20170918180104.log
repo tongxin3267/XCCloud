@@ -1,0 +1,10 @@
+﻿2017-09-18 18:01:04
+数据库执行错误：
+ select HourField as varchar(2),COUNT(0) as PassengerCount from 
+                         (
+	                        select distinct DATEPART(HOUR,RealTime) as HourField,ICCardID from flw_485_coin where datediff(dy,RealTime,'2017-08-23 19:47:47.000') = 0 and CoinType = 1
+                         ) a
+                         group by HourField
+                         order by HourField
+
+

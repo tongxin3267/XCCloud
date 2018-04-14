@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>门票出票分析</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/jquery-1.8.3-min.js"></script>
+    <script src="https://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/modules/data.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/modules/drilldown.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/themes/sand-signika.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="layui-col-md12" style="text-align:right;padding-right: 100px;">
+        <button type="button" class="layui-btn layui-btn-normal">查询</button>
+    </div>
+    <div class="layui-col-md12 layui-col-sm12 layui-col-lg12">
+        <div id="container" class="layui-col-md10 layui-col-sm10 layui-col-lg10" style="min-width: 310px;height: 400px;margin: 0 auto"></div>
+    </div>
+
+    <table class="layui-hide layui-col-md12 layui-col-sm12 layui-col-lg12" id="digitSaleTable" lay-filter="digitSaleTable"></table>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+
+    layui.use(['form','table'],()=>{
+        let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+        layui.table.render({
+            elem: '#digitSaleTable'
+            , data: arr
+            // , size:'sm'
+            , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'SaleTime', title:'销售单号', align: 'center'}
+                ,{field:'DigitNumber',title: '销售时间', align: 'center'}
+                ,{field:'DigitNumber',title: '门票', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'DigitName', title: '数量', align: 'center'}
+                ,{field:'Count', title: '销售价', align: 'center',total:true}
+                ,{field:'Money', title: '会员卡号', align: 'center'}
+                ,{field:'SaleMachine', title: '现金', align: 'center'}
+                ,{field:'SaleMachine', title: '代币', align: 'center'}
+                ,{field:'SaleMachine', title: '积分', align: 'center'}
+                ,{field:'SaleMachine', title: '彩票', align: 'center'}
+                ,{field:'SaleMachine', title: '条码', align: 'center'}
+                ,{field:'SaleMachine', title: '操作员', align: 'center'}
+                ,{field:'SaleMachine', title: '营业日期', align: 'center'}
+                ,{field:'SaleMachine', title: '工作站', align: 'center'}
+                ,{fixed: 'right',title: '操作' , align:'center', toolbar: '#barDemo'}]]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 10
+            ,total:true
+        })
+    })
+
+    $(function () {
+        // Create the chart
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '2018年3月，各套餐门票销售情况'
+            },
+            subtitle: {
+                text: '点击可查看具体的版本数据，数据来源.'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: '门票数量'
+                }
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%'
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [{
+                name: '售币机',
+                colorByPoint: true,
+                data: [{
+                    name: '摩天轮',
+                    y: 15,
+                    drilldown: '摩天轮'
+                }, {
+                    name: '海盗船',
+                    y: 25,
+                    drilldown: '海盗船'
+                }, {
+                    name: '跳楼机',
+                    y: 25,
+                    drilldown: '跳楼机'
+                }, {
+                    name: '蹦蹦床',
+                    y: 15,
+                    drilldown: '蹦蹦床'
+                }, {
+                    name: '碰碰车',
+                    y: 15,
+                    drilldown: '碰碰车'
+                }, {
+                    name: '其他',
+                    y: 5,
+                    drilldown: null
+                }]
+            }],
+            drilldown: {
+                series: [{
+                    name: '摩天轮',
+                    id: '摩天轮',
+                    data: [
+                        [
+                            '2018-3-21',
+                            200
+                        ],
+                        [
+
+                            '2018-3-22',
+                            300
+                        ],
+                        [
+
+                            '2018-3-23',
+                            400
+                        ],
+                        [
+
+                            '2018-3-24',
+                            700
+                        ]
+                        ,
+                        [
+
+                            '2018-3-25',
+                            600
+                        ]
+                        ,
+                        [
+
+                            '2018-3-26',
+                            300
+                        ]
+                        ,
+                        [
+
+                            '2018-3-27',
+                            400
+                        ]
+                        ,
+                        [
+
+                            '2018-3-28',
+                            300
+                        ]
+                    ]
+                }, {
+                    name: '海盗船',
+                    id: '海盗船',
+                    data: [
+                        [
+                            '2018-3-21',
+                            200
+                        ],
+                        [
+
+                            '2018-3-22',
+                            300
+                        ],
+                        [
+
+                            '2018-3-23',
+                            400
+                        ],
+                        [
+
+                            '2018-3-24',
+                            700
+                        ]
+                        ,
+                        [
+
+                            '2018-3-25',
+                            600
+                        ]
+                        ,
+                        [
+
+                            '2018-3-26',
+                            300
+                        ]
+                        ,
+                        [
+
+                            '2018-3-27',
+                            400
+                        ]
+                        ,
+                        [
+
+                            '2018-3-28',
+                            300
+                        ]
+                    ]
+                }, {
+                    name: '跳楼机',
+                    id: '跳楼机',
+                    data: [
+                        [
+                            '2018-3-21',
+                            200
+                        ],
+                        [
+
+                            '2018-3-22',
+                            300
+                        ],
+                        [
+
+                            '2018-3-23',
+                            400
+                        ],
+                        [
+
+                            '2018-3-24',
+                            700
+                        ]
+                        ,
+                        [
+
+                            '2018-3-25',
+                            600
+                        ]
+                        ,
+                        [
+
+                            '2018-3-26',
+                            300
+                        ]
+                        ,
+                        [
+
+                            '2018-3-27',
+                            400
+                        ]
+                        ,
+                        [
+
+                            '2018-3-28',
+                            300
+                        ]
+                    ]
+                }, {
+                    name: '蹦蹦床',
+                    id: '蹦蹦床',
+                    data: [
+                        [
+                            '2018-3-21',
+                            200
+                        ],
+                        [
+
+                            '2018-3-22',
+                            300
+                        ],
+                        [
+
+                            '2018-3-23',
+                            400
+                        ],
+                        [
+
+                            '2018-3-24',
+                            700
+                        ]
+                        ,
+                        [
+
+                            '2018-3-25',
+                            600
+                        ]
+                        ,
+                        [
+
+                            '2018-3-26',
+                            300
+                        ]
+                        ,
+                        [
+
+                            '2018-3-27',
+                            400
+                        ]
+                        ,
+                        [
+
+                            '2018-3-28',
+                            300
+                        ]
+                    ]
+                }, {
+                    name: '碰碰车',
+                    id: '碰碰车',
+                    data: [
+                        [
+                            '2018-3-21',
+                            200
+                        ],
+                        [
+
+                            '2018-3-22',
+                            300
+                        ],
+                        [
+
+                            '2018-3-23',
+                            400
+                        ],
+                        [
+
+                            '2018-3-24',
+                            700
+                        ]
+                        ,
+                        [
+
+                            '2018-3-25',
+                            600
+                        ]
+                        ,
+                        [
+
+                            '2018-3-26',
+                            300
+                        ]
+                        ,
+                        [
+
+                            '2018-3-27',
+                            400
+                        ]
+                        ,
+                        [
+
+                            '2018-3-28',
+                            300
+                        ]
+                    ]
+                }]
+            }
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

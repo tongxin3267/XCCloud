@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品档案维护</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+    <div class="layui-row" style="padding: 10px">
+
+            <blockquote class="layui-elem-quote" style="text-align:right;padding-right: 100px;">
+                <button type="button" class="layui-btn layui-btn-normal" id="addNew"><i class="layui-icon">&#xe654;</i>新增</button>
+                <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查询模板</button>
+            </blockquote>
+
+        <table class="layui-hide" id="productFileTable" lay-filter="productFileTable"></table>
+    </div>
+
+<!--新增商品弹窗-->
+<div id="addNewProduct" style="display: none;padding: 15px">
+    <form action="" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商品条码</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Barcode">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">是否有效</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" checked lay-skin="switch" lay-text="有效|无效" id="Status" lay-filter="Status">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">商品类别</label>
+                <div class="layui-input-inline">
+                    <select type="select" id="GoodType" lay-filter="GoodType" title="商品类别"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">库存警戒线</label>
+                <div class="layui-input-inline" style="width: 85px;">
+                    <input type="text" class="layui-input" id="MinValue">
+                </div>
+                <div class="layui-form-mid"> - </div>
+                <div class="layui-input-inline" style="width: 85px;">
+                    <input type="text" class="layui-input" id="MaxValue">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">商品名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="GoodName">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">零售价格</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Price">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">零售积分</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Points">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">&nbsp;备注&nbsp;</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="Note">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm-offset7 layui-col-sm5" style="margin-bottom: 15px;">
+            <button type="reset" class="layui-btn layui-hide" id="reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-danger" id="cancel"><i class="layui-icon">&#x1006;</i>取消</button>
+            <button type="button" class="layui-btn layui-btn-normal" id="save"><i class="layui-icon">&#xe605;</i>保存</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+
+<script>
+    window.onload=function(){
+        let xc=xcActionSystem.prototype;
+        let token=xc.getStorage('token');
+        let Status=1;let GoodType='';let id='';
+        layui.use(['layer','form','table'],function(){
+            let layer=layui.layer;
+            let form=layui.form;
+            let table=layui.table;
+            $('#addNew').on('click',function(){
+                 Status=1; GoodType='';id='';
+                 $('#Status').attr('disabled',true);
+                 form.render();
+                xc.setSelect('商品类别','GoodType');
+                $('#reset').trigger('click');
+                xc.openProductAdd(layer,'新增商品','680px','addNewProduct')
+            });
+            $('#cancel').on('click',function(){
+                xc.closeAll(layer);
+            });
+            $('#save').on('click',function(){
+                let _obj={ 'id':id,
+                            'Barcode':$('#Barcode').val(),
+                            'Status':Status,
+                            'GoodType':GoodType,
+                            'MinValue':$('#MinValue').val(),
+                            'MaxValue':$('#MaxValue').val(),
+                            'GoodName':$('#GoodName').val(),
+                            'Price':$('#Price').val(),
+                            'Points':$('#Points').val(),
+                            'Note':$('#Note').val(),
+                    'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                let url='/XCCloud/GoodsInfo?action=SaveGoodsInfo';
+                let parasJson = JSON.stringify(_obj);
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: { parasJson: parasJson },
+                    success: function (data) {
+                        data=JSON.parse(data);
+                        if(data.result_code==1){
+                            layer.msg('保存成功');
+                            layer.closeAll();
+                            xc.getInitData(parm);
+                        }else {
+                            layer.msg(data.result_msg)
+                        }
+                    }
+
+                })
+            });
+            //初始化表格
+            let parm={'obj':{'conditions':[],'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+                'url':'/XCCloud/GoodsInfo?action=QueryGoodsInfo',
+                'elem':'#productFileTable',
+                'cols':[
+                    {field:'ID', title:'商品ID', align: 'center', sort: true}
+                    ,{field:'GoodTypeStr',title: '商品类别', align: 'center'} //width 支持：数字、百分比和不填写。
+                    ,{field:'GoodName', title: '商品名称', align: 'center'}
+                    ,{field:'Price', title: '零售价格', align: 'center'}
+                    ,{field:'Points', title: '销售积分', align: 'center'}
+                    ,{field:'Note', title: '备注', align: 'center'}
+                    ,{fixed: 'right', title: '操作', width:140, align:'center', toolbar: '#barDemo'}]
+            };
+            xc.getInitData(parm);
+            table.on('tool(productFileTable)',function(obj){
+                let data=obj.data;
+                let event=obj.event;
+                if(event === 'edit'){ //查看
+                    id=data.ID;
+                    $('#Status').attr('disabled',false);
+                    form.render();
+                   let _obj={'id':data.ID,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                   let url='/XCCloud/GoodsInfo?action=GetGoodsInfo';
+                    let parasJson = JSON.stringify(_obj);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: { parasJson: parasJson },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if(data.result_code==1){
+                            let arr=data.result_data;
+                                for(var i in arr){
+                                    if($('body').find($('#'+arr[i].name))){
+                                        let ele=$('body').find($('#'+arr[i].name));
+                                        ele.attr('type')
+                                           if( ele.attr('type')=='text'){
+                                              if(arr[i].value!=null){
+                                                  ele.val(arr[i].value)
+                                              }
+                                           }else if(ele.attr('type')=='checkbox'){
+                                               if(arr[i].value==1){
+                                                   ele.attr('checked',true);
+                                                   Status=1;
+                                               }else {
+                                                   ele.attr('checked',false);
+                                                   Status=0;
+                                               }
+                                           }else if(ele.attr('type')=='select'){
+                                               GoodType=arr[i].value;
+                                               xc.setSelect(ele.attr('title'),ele.attr('id'),arr[i].value);
+                                           }
+                                    }
+                                }
+                                form.render();
+                                xc.openProductAdd(layer,'新增商品','680px','addNewProduct')
+                            }else {
+                                layer.msg(data.result_msg)
+                            }
+                        }
+
+                    })
+                }else if(event === 'del'){
+                    let _obj={'id':data.ID,'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+                    let url='/XCCloud/GoodsInfo?action=DelGoodsInfo';
+                    let parasJson = JSON.stringify(_obj);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: { parasJson: parasJson },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if(data.result_code==1){
+                                layer.confirm('真的删除行么', function(index){
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(index);
+                                    //向服务端发送删除指令
+                                });
+                            }else {
+                                layer.msg(data.result_msg)
+                            }
+                        }
+
+                    })
+                }
+            });
+            //事件监听
+            form.on('select(GoodType)',function(data){
+                GoodType=data.value;
+            })
+            form.on('switch(Status)',function(data){
+               if(data.elem.checked==true){
+                   Status=1;
+               }else {
+                   Status=0;
+               }
+            })
+        });
+    }
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"> <i class="layui-icon">&#xe642;</i>修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"> <i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

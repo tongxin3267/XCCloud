@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>莘宸管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <style>
+        .iframeBox{height: 100%;}
+        .iframeBox .layui-tab-item{position: absolute;top:45px;left: 0;right: 0;bottom: 0;}
+        .iframeBox iframe{border: none;min-width: 400px;}
+        .layui-nav{
+            background-color: rgba(0,0,0,0.5)!important;}
+        .layui-nav-itemed .layui-nav-child{
+            background-color: #666!important;}
+        #xcLeftMenu	.layui-nav-item>a{border-bottom: 1px solid #aaa;}
+        #today>i{display: none;}
+    </style>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <!-- 顶部 -->
+    <div class="layui-header header">
+        <div class="dayui-main">
+            <a href="#" class="logo">莘宸后台管理</a>
+            <a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
+            <ul class="layui-nav layui-layout-left fsTopMenu" id="fsTopMenu" lay-filter="fsTopMenu">
+                <span class="layui-nav-bar" style="width: 0px; left: 0px; opacity: 0;"></span>
+                <li class="layui-nav-item" datapid="1"><a href="javascript:;"><i class="fa fa-cog"></i> <cite>控制台</cite></a></li>
+                <li class="layui-nav-item layui-this" datapid="2"><a href="javascript:;"> <cite>测试</cite></a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right" style="margin-right: 100px;">
+                <li class="layui-nav-item">
+                    <a href="#">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="javascript:;"><img src="http://t.cn/RCzsdCq" class="layui-nav-img" id="_logName"><span id="_userName">我</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">	修改信息</a></dd>
+                        <dd><a href="javascript:;">安全管理</a></dd>
+                        <dd><a href="javascript:;" id="exitSystem">退出</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="#" id="reLogin">重新登录<span class="layui-badge-dot"></span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 左侧导航 -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree xcLeftMenu" lay-filter="xcLeftMenu" id="xcLeftMenu">
+                <li class="layui-nav-item"><a href="javascript:;">系统总览</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- 右侧内容 -->
+    <div class="layui-body layui-form">
+        <div class="layui-tab layui-tab-card xcTab" lay-allowClose="true" lay-filter="demo" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;overflow: hidden">
+            <ul class="layui-tab-title" id="xcTabMenu">
+                <li class="layui-this" id="today">
+                    <cite>今日营收情况分析</cite>
+                </li>
+            </ul>
+            <div class="layui-tab-content iframeBox">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="home.html" frameborder="0" style="width: 100%;height: 100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="layui-footer footer">
+        "©2017 "<a href="http://test.4000051530.com/merch/index.html">http://test.4000051530.com/merch/index.html</a>
+        <button id="donate" class="layui-btn layui-btn-sm layui-btn-danger"></button>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var token=getStorage('token');
+    //更改用户类型
+    let _userTypes=getStorage('userType');
+    if(_userTypes==0){
+        $('#userTypes').text('莘宸用户')
+    }else if(_userTypes==1){
+        $('#userTypes').text('普通用户')
+    } else if(_userTypes==2){
+        $('#userTypes').text('大客户')
+    }else if(_userTypes==3){
+        $('#userTypes').text('代理商')
+    }else if(_userTypes==4){
+        $('#userTypes').text('门店用户')
+    }else if(_userTypes==5){
+        $('#userTypes').text('门店老板')
+    }
+    //更改用户名
+    let　_username=getStorage('usernames');
+    $('#_userName').text(_username);
+    var url = window.location.href;  //获取网址字符串
+    url=decodeURIComponent(url);
+    var len = url.length;
+    var offset = url.indexOf("?");
+    var str = url.substr(offset+1,len);
+    var args = str.split("&");
+    var arg = args[0].split("=");
+    var token1 = arg[1];
+    if(token1!=undefined&&token1!=null&token1!=""){
+        token=token1;
+        setStorage('token',token1);
+        var	logType=getStorage('logType');
+        setLeftList("xcLeftMenu",logType);
+    }else if(token.length>0){
+        var	logType=getStorage('logType');
+        setLeftList("xcLeftMenu",logType)
+    }
+        let xc=xcActionSystem.prototype;
+        xc.initLeftMenu('xcLeftMenu');
+        xc.createTopMenu('aMenu');
+        $('#_logName').val(xc.getStorage('usernames'));
+
+    layui.use('element',function () {
+        let element=layui.element;
+    });
+    //只需要存在一个导航栏打开
+    $('#xcLeftMenu').on('click','li',function () {
+        $(this).addClass('layui-nav-itemed').siblings().removeClass('layui-nav-itemed');
+    });
+$("#reLogin").click(function () {
+    var storage=window.localStorage;
+    storage.clear();
+    window.location.href='http://192.168.1.73:8080/merch/login.html';
+});
+$('#exitSystem').click(function () {
+    closeWebPage();
+    var storage=window.localStorage;
+    storage.clear();
+});
+
+    function setLeftList(id) {
+        var obj={'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+        var url="/XCCloud/Main?action=GetMenus";
+        var parasJson = JSON.stringify(obj);
+        var ulBox=$('#'+id);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: { parasJson: parasJson },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.result_code=="1"){
+                    var data1=data.result_data[0].children;
+                    console.log(data1);
+                    var arr=[];
+                    for(var j in data1){
+                        if(data1[j].children.length >0){
+                            ulBox.append("<li class='layui-nav-item'>" +
+                                "<a class='' href='javascript:;'>"+data1[j].name+"</a>"+
+                                "<dl class='layui-nav-child'>"+
+                                (function(){
+                                    var arr="";
+                                    for(var i in data1[j].children){
+                                        arr+="<dd><a class='aMenu' href='javascript:;' id="+data1[j].children[i].pageName+">"+data1[j].children[i].name+"</a></dd>";
+                                    }
+                                    return arr;
+                                })() + "</dl></li>")
+                        }
+                        else
+                            {
+                            ulBox.append("<li class='layui-nav-item'>" +
+                                "<a class='aMenu' href='javascript:;'id="+data1[j].pageName+">"+data1[j].name+"</a>"+
+                                "</li>")
+                        }
+
+                    }
+                    var i=1;
+                    // $('#merchantMenu').find('a[class="pageA"]').each(function () {
+                    //     $(this).attr('id','sum'+i);
+                    //     i++;
+                    // });
+                    // addIframePage('a[class="pageA"]');
+                    layui.use('element', function(){
+                        var element = layui.element;
+                        element.render('nav');
+                    });
+
+                }else {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('操作失败');
+                    });
+                }
+            }
+        });
+
+    }
+    //关闭浏览器
+    function closeWebPage(){
+        if (navigator.userAgent.indexOf("MSIE") > 0) {//close IE
+            if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+                window.opener = null;
+                window.close();
+            } else {
+                window.open('', '_top');
+                window.top.close();
+            }
+        }
+        else if (navigator.userAgent.indexOf("Firefox") > 0) {//close firefox
+            window.location.href = 'about:blank ';
+        } else {//close chrome;It is effective when it is only one.
+            window.opener = null;
+            window.open('', '_self');
+            window.close();
+        }
+    }
+</script>
+</html>

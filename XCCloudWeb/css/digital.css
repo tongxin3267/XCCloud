@@ -1,0 +1,23 @@
+*{padding: 0px;margin: 0;}
+a,li,ul,img{
+    list-style: none; border: none; text-decoration: none;
+}
+hr{margin: 10px 0;border: 0;border-top: 1px solid #eee}
+.container-fluid{padding: 0 30px!important;}
+.menuTitle{
+    display: none; width: 200px; height: 30px;line-height: 30px; font-size: 16px;margin-top: 20px;  text-align: center;font-weight: 600  }
+.checkModel .div_check{position: absolute;right: 5%}
+.checkModel .div_check a{text-decoration: none}
+
+.big-link { display:block; margin: 10px 5% 0; text-align: center; font-size: 16px; color: #666;width: 120px;float: right;
+    border: 1px solid #9d9d9d;height: 40px;line-height: 40px;border-radius: 5px;
+}
+
+.formAction{width: 100%;margin: 0 auto;height: 100px;line-height:100px; font-size: 16px;}
+.formAction span{display: inline-block;width: 6%;height: 40px;line-height: 40px;margin-left: 10px;text-align: center;min-width: 65px}
+.formAction select{display: inline-block;width: 120px;height: 26px;line-height: 26px;font-size: 14px;padding-left: 10px}
+.formAction input{display: inline-block;width: 7%;height: 30px;line-height: 30px;margin-left: 10px;padding-left: 10px;font-size: 14px}
+.formAction button{display: inline-block;height: 40px;line-height: 40px;width: 8%;font-size: 16px; float: right;margin-right: 5%;margin-top: 30px}
+.formAction .noteWord{width: 30%}
+.formAction .recordBox{height: 40px;line-height: 40px}
+.clearfixed{  content: "";  clear: both;  width:0;height: 0;overflow: hidden;display: block;  }

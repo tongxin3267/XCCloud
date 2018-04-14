@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52F0EB44-359E-47C9-8A33-C459D43DA545}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XCCloudService.CacheService</RootNamespace>
+    <AssemblyName>XCCloudService.CacheService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CacheExpires.cs" />
+    <Compile Include="CacheType.cs" />
+    <Compile Include="DataOrderCaChe.cs" />
+    <Compile Include="DeviceStateCache.cs" />
+    <Compile Include="IconOutLockCache.cs" />
+    <Compile Include="MemberICICard.cs" />
+    <Compile Include="WorkFlowCache.cs" />
+    <Compile Include="UDPSocketCommonQueryAnswerCache.cs" />
+    <Compile Include="XCGameManaAdminUserTokenCache.cs" />
+    <Compile Include="XCCloudManaUserTokenCache.cs" />
+    <Compile Include="UnionIdTokenCache.cs" />
+    <Compile Include="MobileTokenCache.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPasswordCache.cs" />
+    <Compile Include="UDPSocketStoreQueryAnswerCache.cs" />
+    <Compile Include="WeiXin\RegisterOpenIDCache.cs" />
+    <Compile Include="RequestTotalCache.cs" />
+    <Compile Include="SMSCodeCache.cs" />
+    <Compile Include="SMSTempTokenCache.cs" />
+    <Compile Include="SocketClientCache.cs" />
+    <Compile Include="TCPAnswerSocketCache.cs" />
+    <Compile Include="TCPAnswerOrderCache.cs" />
+    <Compile Include="UDPSocketAnswerCache.cs" />
+    <Compile Include="ValidateImgCache.cs" />
+    <Compile Include="WeiXinAccessTokenCache.cs" />
+    <Compile Include="WeiXin\WeiXinSAppSessionCache.cs" />
+    <Compile Include="XCCloud\OrderPayCache.cs" />
+    <Compile Include="XCGameMana\StoreCache.cs" />
+    <Compile Include="XCGameMemberTokenCache.cs" />
+    <Compile Include="XCCloudUserTokenCache.cs" />
+    <Compile Include="XCCloudUnionIDCache.cs" />
+    <Compile Include="XCGameRouteDeviceCache.cs" />
+    <Compile Include="XCGame\UserTokenCaChe.cs" />
+    <Compile Include="XCGame\XCGameUserTokenCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCCloudService.Common\XCCloudService.Common.csproj">
+      <Project>{adce73d3-04ff-4d98-846f-c8026a3b6396}</Project>
+      <Name>XCCloudService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XXCloudService.Model\XCCloudService.Model.csproj">
+      <Project>{1e38ec5a-0a89-4d9e-9cdf-6f79c580b6a1}</Project>
+      <Name>XCCloudService.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

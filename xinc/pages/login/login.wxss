@@ -1,0 +1,53 @@
+/* login.wxss */
+
+page{
+  height: 100%;
+  width: 100%;
+}
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+  margin: 50rpx 20rpx 30rpx 20rpx;
+  background-color: #fff;
+}
+.account-password-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100rpx;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+image {
+  height: 48rpx;
+  width: 48rpx;
+}
+
+input {
+  padding-left: 10rpx;width: 100%;
+  font-size: 32rpx;
+}
+
+.Verification {
+  padding-left: 10rpx;width: 500rpx;height: 70rpx;
+  font-size: 32rpx;
+}
+
+.login-button {
+  height: 100rpx;
+  background-color: #fb7c58;
+  font-size: 34rpx;
+  margin: 20rpx 50rpx;
+  color: #fff;
+  text-align: center;
+}
+.Invisibility{font-size: 28rpx;width: 330rpx;padding-left:20rpx;}
+.Verificationimg{width: 100rpx;}

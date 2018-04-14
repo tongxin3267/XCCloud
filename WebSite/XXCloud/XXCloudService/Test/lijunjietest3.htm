@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+<script type="text/javascript">
+    //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+    //var mobileToken = "efd8971a83a549b2b14318f6aa18826c";
+    //var memberToken = "a35c8986839e4305a2a853d5f58c05e0";
+    //var websocketUrl = "wss://mp.4000051530.com/websocket";
+    //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+
+    //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+    var mobileToken = "2bed81d486aa40868eac830575bcfdef";
+    var memberToken = "a0775b7f65de4bcab5a3bb9038948adc";
+    var websocketUrl = "wss://mp.4000051530.com/websocket";
+    //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+
+    function getRegisterObj(sendStoreID, sendUserID, clientType, content) {
+
+        var sendObject = new Object();
+        sendObject.token = mobileToken;
+        //sendObject.token = "35dee209d48f4b2eb87b816b945fd27c";
+
+        var obj = new Object();
+        obj.msgType = 1;
+        obj.sObj = sendObject;
+        return obj;
+    };
+    function getPushMsgObj(sendStoreID, sendUserID, receiveStoreID, receiveUserID, clientType, content) {
+        var sendObject = new Object();
+        sendObject.storeId = "100010";
+        sendObject.token = mobileToken;
+
+        var ReceiveObject = new Object();
+        ReceiveObject.storeId = "100010";
+        ReceiveObject.mobile = "15618920033";
+
+        var obj = new Object();
+        obj.msgType = 2;
+        obj.sObj = sendObject;
+        obj.rObj = ReceiveObject;
+        obj.data = "哈哈";
+        //obj.receiveStoreID = receiveStoreID;
+        //obj.receiveUserID = receiveUserID;
+        //obj.clientType = clientType;
+        //obj.content = content;
+        //obj.rObj = 18871465971;
+        return obj;
+    };
+
+    var isshifou = 0;
+    var start = function () {
+        var inc = document.getElementById('incomming');
+        //var wsImpl = window.WebSocket || window.MozWebSocket;
+        var form = document.getElementById('sendForm');
+        var input = document.getElementById('sendText');
+
+        inc.innerHTML += "connecting to server ..<br/>";
+
+        // create a new websocket and connect
+        window.ws = new WebSocket(websocketUrl);
+
+        // when data is comming from the server, this metod is called
+        ws.onmessage = function (evt) {
+            inc.innerHTML += evt.data + '<br/>';
+        };
+
+        // when the connection is established, this method is called
+        ws.onopen = function () {
+            inc.innerHTML += '.. connection open<br/>';
+        };
+
+        // when the connection is closed, this method is called
+        ws.onclose = function () {
+            inc.innerHTML += '.. connection closed<br/>';
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var val = input.value;
+            if (isshifou == 0) {
+                var businessObj = getRegisterObj(100099, 18871465971, 100119, 5, 1, val);
+                var str = JSON.stringify(businessObj);
+                ws.send(str);
+                isshifou = 1;
+            } else
+            {
+                var businessObj = getPushMsgObj(100099, 18871465971, 100119, 5, 1, "哈哈");
+                var str = JSON.stringify(businessObj);
+                ws.send(str);
+            }
+            //获取注册对象
+            //var businessObj = getRegisterObj(100119, 5, 1, val);
+         
+       
+            input.value = "";
+        });
+    }
+    window.onload = start;
+</script>
+
+
+</head>
+<body>
+    <form id="sendForm">
+        <input id="sendText" placeholder="Text to send" />
+        <input id="Submit1" type="submit" value="submit" />
+    </form>
+    <pre id="incomming"></pre>
+</body>
+</html>

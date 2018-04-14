@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98EAC8BD-9888-4DE1-96B9-3051A18FC622}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PalletService.TCPService</RootNamespace>
+    <AssemblyName>PalletService.TCPService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\SocketService.cs" />
+    <Compile Include="CommandProcess.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\TCPClientHelper.cs" />
+    <Compile Include="Common\TcpConfig.cs" />
+    <Compile Include="Common\TcpHelper.cs" />
+    <Compile Include="Model\SocketDataModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="WebSocket.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DeviceUtility\PalletService.DeviceUtility.csproj">
+      <Project>{0a8b92d8-d414-4599-a1fb-1805b77b6a0a}</Project>
+      <Name>PalletService.DeviceUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PalletService.Common\PalletService.Common.csproj">
+      <Project>{5f8c9947-fc7c-4145-b5dc-7e40949bbb67}</Project>
+      <Name>PalletService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PalletService.Model\PalletService.Model.csproj">
+      <Project>{d1ad1804-3dff-4adc-a9e0-f0b925c357e7}</Project>
+      <Name>PalletService.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PalletService.Business\PalletService.Business.csproj">
+      <Project>{3c02b29e-8bff-4308-9f72-aabb88908383}</Project>
+      <Name>PalletService.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

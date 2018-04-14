@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+
+    <script type="text/javascript">
+
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function do_service_getholidays() {
+            var parasObj = { "date": "20180405" };
+            var url = "/service/GetHolidays?action=IsHoliday";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }        
+
+    </script>
+
+</head>
+<body>
+    <div title="网络服务" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>获取节假日</div>
+        <input type="button" value="do_service_getholidays" onclick="do_service_getholidays()" />        
+    </div>
+</body>
+</html>

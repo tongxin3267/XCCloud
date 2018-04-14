@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sms>
+  <smssuffix>【莘宸科技】</smssuffix>
+  <smstemplates>
+    <smstemplate id="1">
+      <content>欢迎入会, 快乐之旅即将出发,您的验证码:{0}。如娱乐中有任何问题,请与我们工作人员联系！</content>
+      <note>注册</note>
+      <smssuffix>1</smssuffix>
+    </smstemplate>
+    <smstemplate id="2">
+      <content>莘拍档欢迎您,您的验证码:{0},2分钟内有效。如娱乐中有任何问题,请与我们工作人员联系！</content>
+      <note>验证码</note>
+      <smssuffix>1</smssuffix>
+    </smstemplate>
+    <smstemplate id="3">
+      <content>尊敬的客户,您的商户密码:{0},2分钟内有效。如使用中有任何问题,请与我们工作人员联系！</content>
+      <note>重置密码</note>
+      <smssuffix>1</smssuffix>
+    </smstemplate>
+    <smstemplate id="4">
+      <content>您的微信查账验证码:{0},2分钟内有效。如使用中有任何问题,请与我们工作人员联系！</content>
+      <note>验证码</note>
+      <smssuffix>1</smssuffix>
+    </smstemplate>
+  </smstemplates>  
+</sms>

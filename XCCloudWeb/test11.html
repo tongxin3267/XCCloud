@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代币安装</title>
+    <link rel="stylesheet" href="css/digital.css">
+    <link rel="stylesheet" href="jEasyUi/themes/default/easyui.css">
+    <link rel="stylesheet" href="jEasyUi/themes/icon.css">
+    <link rel="stylesheet" href="css/magicsuggest-1.2.2.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+    <script src="jEasyUi/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.reveal.js"></script>
+    <script type="text/javascript" src="js/magicsuggest-1.2.2.js"></script>
+    <script type="text/javascript" src="js/yx.js"></script>
+    <script type="text/javascript" src="js/jquery-calendar.js"></script>
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="lib/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+
+        <form action="" class="checkModel">
+
+            <div class="clearfix div_check">
+                <a href="#" class="big-link" data-reveal-id="myModal">查询模板</a>
+            </div>
+            <div id="myModal" class="reveal-modal">
+                <a class="gbBtn  icon iconfont icon-cha" href="javascript:void(0)"></a>
+                <h3>查询选项</h3>
+                <div id="ms2"></div>
+                <div style="clear:both;"></div>
+
+                <div>
+                    <ul id="bbs">
+                        <div class="bbsHidden number"><label style="margin-left: 6px;"><input class="numeral1" type="text" /></label>至<label><input class="numeral2"  type="text"/></label></div>
+                        <div class="bbsHidden time1">
+                            <label><input type="text" class="numeral3" id="calendar1" maxlength="16" onfocus="$(this).calendar()" readonly/></label>至
+                            <label><input type="text" class="numeral4" id="calendar1" maxlength="16" onfocus="$(this).calendar()" readonly/></label>
+                        </div>
+                        <div class="bbsHidden literals">
+                            <div style="position:relative; display: inline-block;">
+                                <select class="optionL numeral5"  style="width:200px;padding: 5px 0" onchange="document.getElementById('inputL').value=this.value">
+                                </select>
+                                <input id="inputL" name="input" value="" style="position:absolute;width:159px;padding: 5px 10px;height:28px;left:1px;top:1px;border: none;">
+                            </div>
+                        </div>
+                        <div class="bbsHidden time2">
+                            <label><input class="numeral6" type="text" id="calendar2" maxlength="10" onfocus="$(this).calendar()" readonly style="width: 180px;"/>
+                            </label>至<label><input type="text" class="numeral7" id="calendar2" maxlength="10" onfocus="$(this).calendar()" readonly style="width: 180px;"/></label></div>
+                    </ul>
+                </div>
+                <a class="cxBtn" href="javascript:(0)">查询</a>
+                <div class="cxTable">
+                    <div class="label1" id="label">
+                        <em>表格选项</em>
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="zWrite">
+
+            </div>
+        </form>
+        <hr>
+        <form action="" class="installLocation formAction">
+            <span>安装位置</span>
+            <select name="" id="">
+                <option value="">北京路</option>
+                <option value="">万达</option>
+                <option value="">上海路</option>
+            </select>
+            <span>安装数量</span><input type="text"><span>备注</span><input type="text" class="noteWord" maxlength="101" placeholder="小于100个字">
+            <button>安装</button>
+        </form>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="height: 450px;margin-top: 50px">
+                <div id="tokenInstallTable" style="width: 100%">
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function(){
+
+        $(".noteWord").on('input propertychange',function(){
+            var str=$(this).val();
+            if(str.length>100){
+                str=str.substring(0,100);
+                alert("超出最大长度100");
+            }
+
+        })
+
+    });
+</script>
+
+
+<script>
+    //查询模板
+    $(function () {
+
+        function  getData(url){
+            $.get(
+                    url,{
+                    },function(data,state) {
+                        var jsonData = [];
+                        var arrFiled=[];
+                        for (var i = 0; i < data.length; i++) {
+                            jsonData.push({
+                                id: i,
+                                name: data[i].title,
+                                type: data[i].type,
+                                list: data[i].list,
+                                iscolume: data[i].iscolume,
+                                issearch: data[i].issearch
+                            });
+                            arrFiled.push(data[i].field);
+
+                        }
+                        console.log(arrFiled);
+                        var ms2 = $('#ms2').magicSuggest({
+                            data: jsonData,
+                            maxSelection: 100,
+                            editable: false
+                        });
+
+
+                        var temp1=$(".number").html();
+                        var temp2=$(".time1").html();
+
+                        var temp4=$(".time2").html();
+                        $(".number").remove();
+                        $(".time1").remove();
+                        $(".time2").remove();
+
+                        for (var j = 0; j<jsonData.length;j++){
+
+                            var txtL1=$('<li class="bbsHidden""><em></em></li>');
+                            var txtL2=jsonData[j].name;
+
+                            $(txtL1).find("em").append(txtL2);
+                            $("#bbs").append(txtL1);
+                            var txtLB1 =$('<li><i class="icon iconfont icon-gouSolid-copy"></i></li>');
+                            $(txtLB1).append(txtL2);
+                            $("#label").find("ul").append(txtLB1);
+                            if(jsonData[j].type == "number"){
+                                $("#bbs").find("li").eq(j).addClass("numberS").append(temp1);
+                            }
+
+                            if(jsonData[j].type == "time") {
+                                $("#bbs").find("li").eq(j).addClass("timeS").append(temp2);
+                            }
+                            if(jsonData[j].type == "literals") {
+                                var optionList = jsonData[j].list;
+
+                                for (var k = 0; k < optionList.length; k++) {
+
+                                    var optionVal = optionList[k];
+                                    var optionTxt = $('<option value=""></option>');
+                                    $(optionTxt).val(optionVal);
+                                    $(optionTxt).append(optionVal);
+                                    $(".optionL").append(optionTxt);
+                                    $("#inputL ").attr("value", optionList[0]);
+                                }
+                                var temp3 = $(".literals").html();
+
+                                $("#bbs").find("li").eq(j).addClass("literalsS").append(temp3);
+                            }
+
+                            if(jsonData[j].type == "time2"){
+                                $("#bbs").find("li").eq(j).addClass("time2S").append(temp4);
+                            }
+                            if(jsonData[j].iscolume == "1"){
+                                $(".big-link").one("click",function () {
+                                    $("#ms-input-0").trigger("click");
+                                    $(".ms-res-item").trigger("click");
+
+                                });
+
+
+                            }
+                            if(jsonData[j].issearch == "1"){
+                                $("#label").find("li").eq(j).addClass("active");
+//                                console.log(j)
+
+                            }
+
+                        }
+
+                        $(".label1 li").click(function () {
+
+                            var _index=$(this).index();
+                            if($(this).hasClass("active")){
+                                $("#tokenInstallTable").datagrid("hideColumn",arrFiled[_index]);
+                                $(this).removeClass("active");
+                            }else {
+                                $(this).addClass("active");
+                                $("#tokenInstallTable").datagrid('showColumn', arrFiled[_index]);
+
+
+                            }
+                        });
+
+                    });
+        }
+
+        getData("json/dataInstall.json")
+
+    });
+
+    $(function(){
+
+        $.get('json/dataInstall.json',{},function(data,state){
+            var columns=[];
+            for (var i = 0; i < data.length; i++) {
+                if(data[i].issearch=="1"){
+                    columns.push({
+                        field: data[i].field,
+                        title: data[i].title,
+                        width: data[i].width,
+                        hidden:false
+                    });
+                }else {
+                    columns.push({
+                        field: data[i].field,
+                        title: data[i].title,
+                        width: data[i].width,
+                        hidden:true
+                    });
+                }
+            }
+//            columns.push({
+//                field: data[data.length-1].field,
+//                title: data[data.length-1].title,
+//                width: data[data.length-1].width,
+//                hidden:true,
+//                fitColumns: true
+//            });
+//            console.log(columns);
+            createTable('json/install.json',columns);
+
+        });
+
+        function createTable(url,columns){
+        //$(function(){
+        //清空容器
+        $('#tokenInstallTable').html("");
+        $('#tokenInstallTable').datagrid({
+            title:'',
+            loadMsg:"正在加载，请稍等...",
+            striped: true,
+                fit: true,//自动大小
+            fitColumns: false,
+            url:url,//查看收件箱内容
+            columns:[columns],
+            onLoadSuccess: function(){
+                $(this).datagrid('freezeRow',0).datagrid('freezeRow',1);
+            },
+            rownumbers:false,//行号
+            singleSelect:false,//是否单选
+            showFooter:true,
+            pagination:true//分页控件
+        });
+        $(".panel-tool").css({display:'none'}); //隐藏按钮
+        //分页
+        var p = $('#tokenInstallTable').datagrid('getPager');
+        $(p).pagination({
+            pageSize: 10,//每页显示的记录条数，默认为10
+            pageList: [5,10,15,20,30,40,50],//可以设置每页记录条数的列表
+            beforePageText: '第',//页数文本框前显示的汉字
+            afterPageText: '页    共 {pages} 页',
+            displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录'
+        });
+        }
+
+    });
+</script>
+</html>

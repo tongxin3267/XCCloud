@@ -1,0 +1,30 @@
+/* pages/loginMb/loginMb.wxss */
+
+.container {
+  padding-top: 30%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+  margin: 50rpx 20rpx 30rpx 20rpx;
+  background-color: #fff;
+}
+.mb-Verification-Code{width: 100%;margin: 50rpx 0;border-bottom: 1px solid #eee;padding-left: 50rpx;}
+button{width: 60%;}
+
+
+
+
+
+
+
+
+
+
+
+

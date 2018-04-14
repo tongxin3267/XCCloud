@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字币</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    #test2{width: 300px;height: 170px;margin: 0 auto;border: 1px solid #8D8D8D;position: relative;}
+    #imgBtn{width: 60px;height: 60px;position: absolute;top: 55px;left: 130px;cursor: pointer;}
+    .imgBox button{position: absolute;top: 15px;right: 15px;}
+    .imgBox button i {font-size: 24px;color: red;}
+    /*.layui-inline .layui-input-inline{width: 255px;}*/
+</style>
+<body>
+ <div class="layui-row" style="padding: 15px;">
+     <form action="" class="layui-form layui-form-pane">
+         <div class="layui-col-md8">
+             <div class="layui-form-item">
+                 <div class="layui-inline">
+                     <label class="layui-form-label">套餐名称</label>
+                     <div class="layui-input-inline">
+                         <input type="text"class="layui-input" id="foodName">
+                     </div>
+                 </div>
+                 <div class="layui-inline"  style="margin-left: 10px">
+                     <label class="layui-form-label">套餐是否有效</label>
+                     <div class="layui-input-inline">
+                         <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="上架|下架" id="foodState" lay-filter="foodState">
+                     </div>
+                 </div>
+             </div>
+             <div class="layui-form-item">
+                 <div class="layui-inline">
+                     <label class="layui-form-label">充值币数</label>
+                     <div class="layui-input-inline">
+                         <input type="text"class="layui-input" id="coins">
+                     </div>
+                 </div>
+                 <div class="layui-inline" style="margin-left: 10px">
+                     <label class="layui-form-label">售价</label>
+                     <div class="layui-input-inline">
+                         <input type="text"class="layui-input" id="price">
+                     </div>
+                 </div>
+             </div>
+             <div class="layui-form-item">
+                 <div class="layui-inline">
+                     <label class="layui-form-label">有效期</label>
+                     <div class="layui-input-inline">
+                         <input type="text" name="price_min" id="startTime" class="layui-input">
+                     </div>
+                     <div class="layui-form-mid">至</div>
+                     <div class="layui-input-inline" style="width: 300px">
+                         <input type="text" name="price_max" id="endTime" class="layui-input">
+                     </div>
+                 </div>
+             </div>
+             <div class="layui-form-item">
+                 <div class="layui-inline">
+                     <label class="layui-form-label">币有效期</label>
+                     <div class="layui-input-inline">
+                         <input type="text" id="days" class="layui-input">
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="layui-col-md4">
+             <div id="test2">
+                 <div id="imgBtn"><i class="layui-icon" style="font-size: 60px;color: #9F9F9F">&#xe654;</i></div>
+                 <div class="layui-upload-list" id="demo2" style="margin: 0;">
+                     <input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+                 </div>
+             </div>
+         </div>
+         <div class="layui-form-item">
+             <label class="layui-form-label" style="height: 100px;">套餐说明</label>
+             <div class="layui-input-block" >
+                 <textarea type="text" name="price_min" id="note" class="layui-textarea"></textarea>
+             </div>
+         </div>
+         <div class="layui-form-item">
+             <div class="layui-inline">
+                 <label class="layui-form-label" style="width: 170px">是否允许打印</label>
+                 <div class="layui-input-inline" style="width: 200px;height: 36px;border: 1px solid rgb(230,230,230)">
+                     <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="允许|禁止" id="allowPrint" lay-filter="allowPrint">
+                 </div>
+             </div>
+             <div class="layui-inline">
+                 <label class="layui-form-label" style="width: 170px">是否允许前台授权</label>
+                 <div class="layui-input-inline" style="width: 200px;height: 36px;border: 1px solid rgb(230,230,230)">
+                     <input type="checkbox" name="zzz" checked lay-skin="switch" lay-text="允许|禁止" id="foreAuthorize" lay-filter="foreAuthorize">
+                 </div>
+             </div>
+         </div>
+         <div style="text-align: right;padding-right: 100px;" class="layui-col-md12 layui-col-xs12">
+             <button type="button" class="layui-btn layui-btn-danger" id="cancleBtn"><i class="layui-icon">&#xe603;</i>取消</button>
+             <button type="reset" class="layui-btn-danger layui-btn saveTimeReset"> <i class="layui-icon">&#x1002;</i>重置</button>
+             <button type="button" class="layui-btn layui-btn-normal" id="submitBtn"><i class="layui-icon">&#xe6af;</i>确定</button>
+         </div>
+     </form>
+ </div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script>
+    var xc=xcActionSystem.prototype;
+    var foodState='1';var allowPrint='1';var foreAuthorize='1';
+    var token=xc.getStorage('token');
+    var foodId=xc.getStorage('foodId');
+    if(foodId==undefined){
+        $('.saveTimeReset').trigger('click');
+    }
+    xc.initDiscountPage(xc,token,foodId);
+    layui.use(['form','layer','table','laydate','upload'],function () {
+    var form=layui.form,layer=layui.layer,table=layui.table,laydate=layui.laydate,upload=layui.upload;
+    laydate.render({
+        elem: '#startTime',type: 'date'
+    });
+    laydate.render({
+        elem: '#endTime' ,type: 'date'
+    });
+    form.on('switch(foodState)', function(data){
+        data.elem.checked==true ? foodState=1:foodState=0;
+    });
+    form.on('switch(allowPrint)', function(data){
+        data.elem.checked==true ? allowPrint=1:allowPrint=0;
+    });
+    form.on('switch(foreAuthorize)', function(data){
+        data.elem.checked==true ? foreAuthorize=1:foreAuthorize=0;
+    });
+
+    var demoListViewStore=$('#demo2'),uploadListInsStore=upload.render({
+        elem: '#imgBtn'
+        ,url: '/XCCloud/Promotion?action=UploadFoodPhoto'
+        ,data:{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'}
+        ,multiple: true
+        ,accept:"images"
+        ,size:1000
+        ,auto:true
+        ,done: function(res,index,upload){
+            //上传完毕
+            console.log(res);
+            if(res.result_code==1){
+                $('#demo2').children('div[class="imgBox"]').remove();
+                $('#demo2 .loadTips').addClass('layui-hide');
+                $('#demo2') .append('<div style="display: inline-block;position: relative" class="imgBox">' +
+                    '<button type="button" ><i class="layui-icon"><i class="layui-icon">&#xe640</i></i></button>' +
+                    '<img src="'+ res.result_data[0].Value +'" alt="'+ res.result_data[0].Value +'" class="layui-upload-img_md" ' +
+                    'style="display: block;width: 300px;height: 170px"></div>');
+                layer.msg("图片上传成功！");
+                $('.imgBox button').click(function () {
+                    $(this).parent('div').remove();
+                });
+                $('.imgBox img').click(function () {
+                    layer.open({
+                        title:  res.result_data.ID,
+                        type: 1,
+                        area: ['600px','400px'], //宽高
+                        content: '<div><img src="'+res.result_data[0].Value+'" alt="" style="display: block;"></div>'
+                    });
+                });
+            }else{
+                layer.msg(res.return_msg);
+            }
+        }
+        ,error:function(index,upload){
+            layer.msg("服务器返回错误！");
+            layer.closeAll('loading');
+        }
+    });
+    $('#cancleBtn').on('click',function(){
+        layer.closeAll();
+    });
+    $('#submitBtn').on('click',function(){
+            let FoodId=foodId||'';
+            let foodName=$('#foodName').val();
+            let coins=$('#coins').val();
+            let _days=$('#days').val();
+            let price=$('#price').val();
+            let startTime=$('#startTime').val();
+            let endTime=$('#endTime').val();
+            let note=$('#note').val();
+            let imgUrl=$('.layui-upload-img_md').attr('src');
+            // let foodState=foodState;
+            // let allowPrint=allowPrint;
+            // let foreAuthorize=foreAuthorize;
+            let obj={'FoodId':FoodId,'foodName':foodName,'coins':coins,'days':_days,'startTime':startTime,'price':price,'ImageURL':imgUrl,
+                'endTime':endTime,'note':note,'foodState':foodState,'allowPrint':allowPrint,'foreAuthorize':foreAuthorize,
+                'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'};
+            let url='/XCCloud/Promotion?action=SaveFoodDigitInfo';
+            var parasJson = JSON.stringify(obj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    console.log(data)
+                    if(data.result_code==1){
+                        layer.msg('保存成功');
+                        let parm={'obj':{'userToken':token,'signkey':'1f626576304bf5d95b72ece2222e42c3'},
+                            'url':'/XCCloud/Promotion?action=GetFoodInfoList',
+                            'elem':'#digitDestroyTb',
+                            'cols':[
+                                {field:'FoodID', title:'套餐编号', align: 'center', sort: true}
+                                ,{field:'FoodName',title: '套餐名称', align: 'center'} //width 支持：数字、百分比和不填写。
+                                ,{field:'FoodTypeStr', title: '套餐类别', align: 'center'}
+                                ,{field:'RechargeTypeStr', title: '充值方式', align: 'center'}
+                                ,{field:'AllowInternetStr', title: '是否允许第三方', align: 'center'}
+                                ,{field:'AllowPrintStr', title: '是否允许打印', align: 'center'}
+                                ,{field:'ForeAuthorizeStr', title: '是否允许前台授权', align: 'center'}
+                                ,{field:'StartTimeStr', title: '启用时间', align: 'center'}
+                                ,{field:'EndTimeStr', title: '停用时间', align: 'center'}
+                                ,{fixed: 'right', title: '操作', width:100, align:'center', toolbar: '#barDemo'}]
+                        };
+                        if(xc.getStorage('dpsAdd')){
+                            window.parent.closePackage();
+                        }else {
+                            parent.layer.closeAll();
+                            parent.xc.getInitData(parm);
+                        }
+                    }else {
+                        layer.msg('操作失败')
+                    }
+                }
+
+            })
+
+    })
+})
+</script>
+</html>

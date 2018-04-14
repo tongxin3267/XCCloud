@@ -1,0 +1,59 @@
+[{
+    "id": 0,
+    "title": "编号",
+    "field":"ID",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 1,
+    "title": "销售时间",
+    "field":"SellTime",
+    "type": "time",
+    "iscolume" : "1",
+    "issearch" : "0",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 2,
+    "title": "售币数量",
+    "field":"tokenSum",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 3,
+    "title": "售币方式",
+    "field":"Operator",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "0",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 4,
+    "title": "销售机器",
+    "field":"SellMachine",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "0",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 5,
+    "title":"备注",
+    "field":"Note",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+}]

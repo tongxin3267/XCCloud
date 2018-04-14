@@ -1,0 +1,13 @@
+{
+	"foodid":"1",
+	"foodname":"套餐名称",
+	"foodtype":"套餐类别",
+	"foodimgurl":"套餐封面地址",
+	"touristprice":"散客价格",
+	"vipprice":"会员价格",
+	"title":"第三行显示",
+	"usecoin":"代币兑换价值，-1表示不允许代币兑换",
+	"uselottery":"彩票兑换价值，-1表示不允许彩票兑换",
+	"usepoint":"积分兑换价值，-1表示不允许积分兑换",
+	"fooddata","套餐内容，存在多项则用json数据扩展此项"
+}

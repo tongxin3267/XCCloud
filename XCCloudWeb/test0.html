@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/stylely.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tips.css">
+    <link rel="stylesheet" href="lib/animate.min.css">
+    <link rel="stylesheet" href="css/idangerous.swiper2.7.6.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <script src="lib/idangerous.swiper2.7.6.min.js"></script>
+    <script src="lib/wow.js"></script>
+    <title>主页</title>
+    <style>
+        #carousel-example-generic{  background-color: #fff;}
+        .carousel-white{  color: #0e0e0e;!important;  }
+        .carousel-white:hover{  color: #a47e3c;!important;  }
+        .carousel-white.left,.carousel-white.right{   background-image: none;!important;}
+    </style>
+</head>
+<body>
+
+<!--......................................content..................................-->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!--<ol class="carousel-indicators">-->
+            <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active" ></li>-->
+            <!--<li data-target="#carousel-example-generic" data-slide-to="1" ></li>-->
+            <!--&lt;!&ndash;<li data-target="#carousel-example-generic" data-slide-to="2"></li>&ndash;&gt;-->
+        <!--</ol>-->
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" >
+            <div class="item active" style="background:#fff;">
+                <div class="row">
+                    <div class="col-md-6" id="loopContainer">
+                        <div id="news" >
+                            <ul>
+                                <li><span class="sellTime"></span><span class="sellValue"></span></li>
+                                <li><span class="sellTime"></span><span class="sellValue"></span></li>
+                                <li><span class="sellTime">当前已完成：</span><span class="sellValue"></span></li>
+                            </ul>
+                        </div>
+                        <div id="loop" style="min-width:400px;height:300px;" >
+
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div id="circle" style="min-width:400px;height:300px"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="histogram" style="min-width:400px;height:500px"></div>
+                    </div>
+                </div>
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <div class="item" style="background:#fff;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="homeLine" style="min-width:400px;height:350px">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="profitLoss" style="min-width:400px;height:450px"></div>
+                    </div>
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control carousel-white" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control carousel-white" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+</body>
+
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="lib/heightCharts.js"></script>
+<script src="lib/hchart-more.js"></script>
+<script src="lib/solid-gauge.js"></script>
+<script src="lib/hChart3D.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="js/home.js"></script>
+<script src="js/tips.js"></script>
+<script src="js/yx.js" type="text/javascript"></script>
+<script>
+    $(function(){
+        $('.carousel').carousel("pause");
+
+        $(".carousel-control").mouseover(function(){
+           $(this).removeClass("carousel-white")
+        });
+        $(".carousel-control").mouseout(function(){
+            $(this).addClass("carousel-white")
+        })
+    })
+
+</script>
+</html>

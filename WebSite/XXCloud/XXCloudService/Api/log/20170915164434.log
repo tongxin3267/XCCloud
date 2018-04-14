@@ -1,0 +1,6 @@
+﻿2017-09-15 16:44:34
+数据库执行错误：
+ declare @PageName varchar(50) = 'index'  declare @ProcessName varchar(50) = '1'  declare @UserID int =  select * from Search_Template a inner join Search_Template_Detail b on a.ID = b.TempID  
+                        where UserID = @UserID and PageName = @PageName and ProcessName = @ProcessName
+
+

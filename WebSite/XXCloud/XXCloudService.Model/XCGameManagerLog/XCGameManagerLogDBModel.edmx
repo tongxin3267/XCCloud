@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XCGameManagerLogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_UDPDeviceControlLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemotePointAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RemotePointPort" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="RequestJson" Type="varchar(max)" />
+          <Property Name="ResponseJson" Type="varchar(max)" />
+          <Property Name="Success" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPDeviceStateChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemotePointAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RemotePointPort" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="DeviceToken" Type="varchar" MaxLength="50" />
+          <Property Name="MCUId" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="ChangeSuccess" Type="bit" />
+          <Property Name="RequestJson" Type="varchar(max)" />
+          <Property Name="ResponseJson" Type="varchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SearchDate" Type="date" />
+          <Property Name="InsId" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="RecordId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPRadarHeatLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemotePointAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RemotePointPort" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="DeviceToken" Type="varchar" MaxLength="50" />
+          <Property Name="HeatSuccess" Type="bit" />
+          <Property Name="RequestJson" Type="varchar(max)" />
+          <Property Name="ResponseJson" Type="varchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPRadarNotifyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemotePointAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RemotePointPort" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="DeviceToken" Type="varchar" MaxLength="50" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="Result" Type="varchar" MaxLength="10" />
+          <Property Name="Action" Type="int" />
+          <Property Name="StorePassword" Type="varchar" MaxLength="50" />
+          <Property Name="Success" Type="bit" />
+          <Property Name="RequestJson" Type="varchar(max)" />
+          <Property Name="ResponseJson" Type="varchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPRadarRegisterLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemotePointAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RemotePointPort" Type="int" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="Segment" Type="varchar" MaxLength="10" />
+          <Property Name="DeviceToken" Type="varchar" MaxLength="50" />
+          <Property Name="RegisterSuccess" Type="bit" />
+          <Property Name="RequestJson" Type="varchar(max)" />
+          <Property Name="ResponseJson" Type="varchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_UDPSendDeviceControlLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StoreId" Type="varchar" MaxLength="20" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" />
+          <Property Name="Segment" Type="varchar" MaxLength="10" />
+          <Property Name="MCUId" Type="varchar" MaxLength="50" />
+          <Property Name="Action" Type="int" />
+          <Property Name="Coins" Type="int" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="StorePassword" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="XCGameManagerLogModelStoreContainer">
+          <EntitySet Name="t_UDPDeviceControlLog" EntityType="Self.t_UDPDeviceControlLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPDeviceStateChangeLog" EntityType="Self.t_UDPDeviceStateChangeLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPIndex" EntityType="Self.t_UDPIndex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPRadarHeatLog" EntityType="Self.t_UDPRadarHeatLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPRadarNotifyLog" EntityType="Self.t_UDPRadarNotifyLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPRadarRegisterLog" EntityType="Self.t_UDPRadarRegisterLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_UDPSendDeviceControlLog" EntityType="Self.t_UDPSendDeviceControlLog" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XCGameManagerLogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="XCGameManagerLogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_UDPRadarHeatLog" EntityType="XCGameManagerLogModel.t_UDPRadarHeatLog" />
+          <EntitySet Name="t_UDPRadarRegisterLog" EntityType="XCGameManagerLogModel.t_UDPRadarRegisterLog" />
+          <EntitySet Name="t_UDPIndex" EntityType="XCGameManagerLogModel.t_UDPIndex" />
+          <EntitySet Name="t_UDPRadarNotifyLog" EntityType="XCGameManagerLogModel.t_UDPRadarNotifyLog" />
+          <EntitySet Name="t_UDPDeviceStateChangeLog" EntityType="XCGameManagerLogModel.t_UDPDeviceStateChangeLog" />
+          <EntitySet Name="t_UDPSendDeviceControlLog" EntityType="XCGameManagerLogModel.t_UDPSendDeviceControlLog" />
+          <EntitySet Name="t_UDPDeviceControlLog" EntityType="XCGameManagerLogModel.t_UDPDeviceControlLog" />
+        </EntityContainer>
+        <EntityType Name="t_UDPRadarHeatLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RemotePointAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RemotePointPort" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceToken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HeatSuccess" Type="Boolean" />
+          <Property Name="RequestJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_UDPRadarRegisterLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RemotePointAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RemotePointPort" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Segment" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceToken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterSuccess" Type="Boolean" />
+          <Property Name="RequestJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_UDPIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SearchDate" Type="DateTime" Precision="0" />
+          <Property Name="InsId" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="RecordId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_UDPRadarNotifyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RemotePointAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RemotePointPort" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceToken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Result" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="Int32" />
+          <Property Name="StorePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Success" Type="Boolean" />
+          <Property Name="RequestJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_UDPDeviceStateChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RemotePointAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RemotePointPort" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceToken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MCUId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ChangeSuccess" Type="Boolean" />
+          <Property Name="RequestJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_UDPSendDeviceControlLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Segment" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MCUId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="Int32" />
+          <Property Name="Coins" Type="Int32" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StorePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_UDPDeviceControlLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RemotePointAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RemotePointPort" Type="Int32" />
+          <Property Name="StoreId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Success" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XCGameManagerLogModelStoreContainer" CdmEntityContainer="XCGameManagerLogEntities">
+          <EntitySetMapping Name="t_UDPRadarHeatLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPRadarHeatLog">
+              <MappingFragment StoreEntitySet="t_UDPRadarHeatLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="RequestJson" ColumnName="RequestJson" />
+                <ScalarProperty Name="HeatSuccess" ColumnName="HeatSuccess" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="RemotePointPort" ColumnName="RemotePointPort" />
+                <ScalarProperty Name="RemotePointAddress" ColumnName="RemotePointAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPRadarRegisterLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPRadarRegisterLog">
+              <MappingFragment StoreEntitySet="t_UDPRadarRegisterLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="RequestJson" ColumnName="RequestJson" />
+                <ScalarProperty Name="RegisterSuccess" ColumnName="RegisterSuccess" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="RemotePointPort" ColumnName="RemotePointPort" />
+                <ScalarProperty Name="RemotePointAddress" ColumnName="RemotePointAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPIndex">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPIndex">
+              <MappingFragment StoreEntitySet="t_UDPIndex">
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="InsId" ColumnName="InsId" />
+                <ScalarProperty Name="SearchDate" ColumnName="SearchDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPRadarNotifyLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPRadarNotifyLog">
+              <MappingFragment StoreEntitySet="t_UDPRadarNotifyLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="RequestJson" ColumnName="RequestJson" />
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="StorePassword" ColumnName="StorePassword" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="RemotePointPort" ColumnName="RemotePointPort" />
+                <ScalarProperty Name="RemotePointAddress" ColumnName="RemotePointAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPDeviceStateChangeLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPDeviceStateChangeLog">
+              <MappingFragment StoreEntitySet="t_UDPDeviceStateChangeLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="RequestJson" ColumnName="RequestJson" />
+                <ScalarProperty Name="ChangeSuccess" ColumnName="ChangeSuccess" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MCUId" ColumnName="MCUId" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="RemotePointPort" ColumnName="RemotePointPort" />
+                <ScalarProperty Name="RemotePointAddress" ColumnName="RemotePointAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPSendDeviceControlLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPSendDeviceControlLog">
+              <MappingFragment StoreEntitySet="t_UDPSendDeviceControlLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StorePassword" ColumnName="StorePassword" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="MCUId" ColumnName="MCUId" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UDPDeviceControlLog">
+            <EntityTypeMapping TypeName="XCGameManagerLogModel.t_UDPDeviceControlLog">
+              <MappingFragment StoreEntitySet="t_UDPDeviceControlLog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="RequestJson" ColumnName="RequestJson" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="RemotePointPort" ColumnName="RemotePointPort" />
+                <ScalarProperty Name="RemotePointAddress" ColumnName="RemotePointAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,32 @@
+<!--pages/bookList/list/list.wxml-->
+<view>
+ <loading hidden="{{hidden}}">
+  请从入币口倒入实物币
+ </loading>
+ 
+</view>
+<view class='{{show}}'>
+  <text>您存入的卡</text>
+  <view class='cardBg'>
+    <view class='clerR'><text class='cardL'>莘拍档畅玩通卡</text><text class='cardn'>****11</text></view>
+    <text class='cardH'>6513213452141463</text>
+  </view>
+    <text>您此次存入的币数是{{number}}</text>
+  <button class='cardSave' type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="primary">确认存入</button>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

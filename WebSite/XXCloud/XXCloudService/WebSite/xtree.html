@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+    <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>基本树</legend>
+    </fieldset>
+
+    <div style="padding: 10px; border: 1px solid rgb(221, 221, 221); border-image: none; width: 180px; height: 210px; overflow: auto; display: inline-block;">
+        <ul id="demo1"></ul>
+    </div>
+
+    <p>点击每一级菜单，都会执行一个回调，返回该节点的一些信息</p>-->
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>生成一个较深的树</legend>
+    </fieldset>
+
+    <ul id="demo2"></ul>
+
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="layui-xtree/layui-xtree.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        var arr = [];
+        $(function () {
+            var parasObj = { "token": "1", "signkey": "1f626576304bf5d95b72ece2222e42c3" };
+            var url = "/xccloud/Dictionary?action=GetNodes";
+            var parasJson = JSON.stringify(parasObj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    data1 = data.result_data || [];
+                    var arr = [];
+                    $(data1).each(function () {
+                        arr.push({ name: this.DictKey, id: this.ID, alias: this.DictValue });
+                    });
+                    console.log(data1);
+
+                    layui.use(['tree', 'layer'], function () {                        
+                        layui.tree({
+                            elem: '#demo2' //指定元素
+                          , nodes: data1
+                        });
+
+                    });
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        });
+      
+    </script>
+
+</body>
+</html>

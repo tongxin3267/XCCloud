@@ -1,0 +1,256 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    font-family: "Microsoft Yahei", "Calibri";
+    font-size: 14px;
+    background-color: #FFF;
+    color:#777;
+}
+a {
+    /*-webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 1s ease-in;
+    -o-transition: all 1s ease-in;*/
+}
+a {  cursor: pointer;  text-decoration: none;  color: #777;
+}
+a:hover {  color: #09C;  }
+li {  list-style: none  }
+img {  border: 0;  }
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="button"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+    border-color: rgba(82,168,236,0.8);
+    outline: 0;
+}
+　::-webkit-input-placeholder { /* WebKit browsers */
+    color: #f0ad4e;
+    }
+　　:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    　　color:#f0ad4e;
+    }
+　　::-moz-placeholder { /* Mozilla Firefox 19+ */
+    　　color:#f0ad4e;
+    }
+　　:-ms-input-placeholder { /* Internet Explorer 10+ */
+    　　color:#f0ad4e;
+    }
+
+/*头部*/
+.head {  width: 100%;  height: 50px;  background: rgba(100,207,250,1);z-index: 3;
+    /*background:#093;*/  text-align: center;  color: #fff;  line-height: 50px;  position: fixed;  top: 0;
+}
+.head_lf
+{  width:20%;  float:left;  }
+.head_lf img {  vertical-align:middle;  }
+.head_ct {  width:65%;  float:left;  }
+.head a {  color:#fff;  }
+.head_rg {  width:15%;  float:right;  }
+
+/*登录*/
+.login {  width:100%;  margin-top:100px;  }
+.text {  padding:0px 40px;  border-bottom:1px solid #ddd;  }
+.login .name {  background-position:9px  }
+.login .pwd {  background-position:9px  }
+.login .text input {
+    width:100%;
+    height:42px;
+    line-height:42px;
+    font-family:"Microsoft Yahei", "Calibri";
+    border:0;
+    color:#434343;
+}
+.tip
+{
+    width:100%;
+    margin-top:15px;
+    overflow:hidden;
+}
+.tip a
+{
+    float:right;
+    padding:0px 15px;
+    color:#09C;
+}
+.tip a input
+{
+    margin-right:5px;
+    vertical-align: -1.5px;
+}
+.btndl
+{
+    width:100%;
+    text-align:center;
+    margin-top:10px;
+}
+.btndl input
+{
+    width:88%;
+    height:42px;
+    color:#fff;
+    border:0;
+    font-family:"Microsoft Yahei", "Calibri";
+    cursor:pointer;
+    font-size:16px;
+    background:rgba(51,153,255,1);
+    border-radius:5px;
+}
+.returnMsg{display:none;margin: 15px auto;border: 1px solid red; width:88%;height: 40px;
+    line-height: 40px;font-size: 16px;border-radius: 5px;color: red;}
+/*注册*/
+.zhuce,.codeCheck,.toExample
+{
+    width:100%;
+    margin-top:100px;
+}
+
+.zhuce .text,.codeCheck .text,.userInfo .text
+{
+    line-height:42px;
+    padding:3px 10px;
+    border-bottom:1px solid #ddd;
+    display:block;
+    overflow:hidden;
+    position: relative;
+}
+.zhuce .text .errTips,.codeCheck .text .errTips{
+    position: absolute;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    width: 170px;
+    right: 0;
+    z-index: -1;
+    text-align: left;
+}
+.zhuce .text span,.codeCheck .text span,.userInfo .text span
+{
+    width:20%;
+    float:left;
+    text-align:center;
+}
+.zhuce .text .input,.codeCheck .text .input,.userInfo .text .input
+{
+    width:80%;
+    height:42px;
+    font-family:"Microsoft Yahei", "Calibri";
+    border:0;
+    float:left;
+    text-indent:20px;
+}
+.zhuce .text .yzm
+{
+    width:25%;
+    text-align:left;
+}
+.zhuce .text .yzm input,.codeCheck .text .yzm input
+{
+    border:0;
+    padding:3px;
+    font-family:"Microsoft Yahei", "Calibri";
+    background-color:rgba(255,153,0,1);
+    color:#fff;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.codeCheck .text .inputCode{text-indent: 10px;}
+.codeImg{width:25%;display: inline-block;height: 36px;float: left;margin-top: 2px;margin-right: 3px;}
+
+.toExample h2{height: 40px;line-height: 40px;text-align: center;color: green;}
+.successImg{display: block;width: 60px;margin: 40px auto;}
+.toExample .toManager{text-align: center;font-size: 16px;}
+#sendMsg{width: 100px;height: 50px;background-color: #5e5e5e;color: #00ee00;position: absolute;
+    top: 50%;left: 50%;margin-top: -25px;margin-left: -50px;line-height: 50px;font-size: 16px;border-radius: 5px;
+text-align: center;opacity: 0.7;}
+/*底部*/
+.foot {  width: 100%;  height: 50px;  background: rgba(218,218,218,1);z-index: 3;display: none;
+    /*background:#D0D0D0;*/  text-align: center;  color: #666;  position: fixed;  bottom: 0;
+}
+.foot a {
+    width: 20%;
+    text-align: center;
+    float: left;
+    display: block;
+}
+.foot a:hover{  color:#F30  }
+.now {  color: #F30;  }
+.foot span{  width:100%;  display:block;  }
+.foot span img{  width:20px;  padding-top:5px;  }
+
+/*新用户消息回执单*/
+::-webkit-scrollbar {
+    display: none;/*隐藏滚轮*/
+}
+.userBox{width: 100%;bottom: 50px;position: fixed;top: 50px;overflow:scroll}
+.userContent{}
+.userInfo {width: 94%;margin: 10px auto;}
+.userInfo .text{  line-height:34px;}
+.lineBar{width: 100%;height: 20px;background-color: #eee;margin: 3px 0;}
+.userInfo .text .input{  height:34px;line-height:34px;}
+.authoritySet,.authorizeSet{width: 94%;margin: 0px auto ;}
+.authoritySet>span,.authorizeSet>span{
+    width: 100%;display: block;text-indent: 20px;height: 40px;line-height: 40px;
+}
+.authoritySet img,.authorizeSet img{
+    display: inline-block;width: 30px;vertical-align: middle;float: right;margin-top: 5px;margin-right: 10px;
+}
+.authoritySet ul,.authorizeSet ul{display: none;text-align: center;}
+.authList li{height: 40px;line-height: 40px;border-bottom: 1px solid #e2e2e2;font-size: 16px;width: 80%;margin: 0 10%;
+    vertical-align:middle;display: block; text-align: left;position: relative;}
+.authorityList li span{position:absolute;display: none;width: 80px;border: 1px solid #333;height: 26px;border-radius: 13px;
+    right: 30px;top: 8px;line-height:26px; text-align: center; background-color: #5cb85c;color: #fff;}
+.authList li input{visibility: hidden;}
+.authorizeList li .styleDiv{ position:absolute;display: inline-block;width: 100px;border: 1px solid #333;height: 26px;border-radius: 13px;
+   right: 30px;top: 8px;}
+.authorizeList li .styleDiv span{display: inline-block;width: 75px;color: #fff;height: 24px;line-height:24px;border-radius: 12px;text-align: center;}
+.authorizeList li .styleDiv .s1{background-color: #5cb85c;float: left;display: none;}
+.authorizeList li .styleDiv .s2{float: right;background-color: orange;}
+.note_check_title{height: 40px;line-height: 40px;font-size: 18px;}
+.note_check_content span{display: inline-block;height: 40px;line-height: 20px;vertical-align: top;}
+.note_check_content textarea{display: inline-block;height: 60px;line-height: 20px;border: solid 1px red;width: 260px;}
+.btn_content{padding: 10px 0;}
+.btn_content button{width: 25%;height: 36px;line-height: 36px;text-align: center;}
+.btn_content button:first-child{ margin-left:25%;background-color: #df8505;color: #fff;}
+.btn_content button:last-child{background-color: green;color: #fff;}
+
+
+
+/*授权页面*/
+.grantBox{width: 100%;clear: both; display: none;position: relative;padding-top: 50px;}
+
+.grantBox_title{width: 100%;height: 50px;line-height: 50px;font-size: 18px;background-color: #f7f7f7;
+    text-align: center;clear: both;position: absolute;top: 0;left: 0;}
+.grantBox_title span{display: inline-block;float: right;color: #00ee00;width: 100px;}
+.authSelectList{padding:  0 15px;}
+.authSelectList_grant{max-height: 300px;overflow-y: scroll;}
+.authSelectList_li{height: 50px;line-height: 50px;font-size: 16px;border-bottom: 1px solid #e6e6e6;}
+.authSelectList_li>span,.authSelectList_li>input,.authSelectList_li>div
+{display: inline-block;vertical-align: middle;}
+.authSelectList_li>input{display: none;}
+.authSelectList .ifCheck{height: 28px;width: 64px;background-color: #c1c1c1;padding: 2px;border-radius: 14px;
+    box-sizing: border-box;position: relative;float: right;margin-right: 30px;margin-top: 11px;}
+
+.authSelectList .isCheck{height: 28px;width: 28px;background-color: #c1c1c1;padding: 2px;border-radius: 14px;
+    box-sizing: border-box;position: relative;float: right;margin-right: 30px;margin-top: 11px;}
+
+.authSelectList .ifCheck span{display: inline-block;width: 24px;height: 24px;background-color: #fff;border-radius: 50%;position: absolute;left: 2px;top: 2px;}
+.addArrow{ background: url(images/arrow-right.svg) no-repeat right center; background-size: 26px;}
+
+.auth_set_box .weui-label,.user_msg_box .weui-label{color:#000;}
+
+.btn_box{width: 100%;margin-top: 20px; text-align: center}
+.btn_box .weui-btn{width: 30%;margin: 15px auto;display: inline-block}
+.weui-cells__title{font-size: 18px;background-color: #eeeeee;color: #0e90d2;
+    height: 50px;line-height: 50px;margin:0}
+.title_img{display: inline-block;width: 28px;vertical-align: middle;background-color: #1296db;margin:  0 10px;border-radius: 50%;}
+
+/*拒绝理由*/
+.showNext{position: fixed;top: 0;left: 100%;z-index: 99;background-color: #e6e6e6;width: 100%;height: 100%;}
+.result-success,.result-error{z-index: 100;}
+.refuseReason .weui-cell{height: 250px;vertical-align: top;border: 1px solid #e1e1e8;}
+.refuseReason .weui-cell textarea{height: 200px;line-height: 40px;font-size: 18px;}
+.weui-cells_form_reason{position: absolute;top: 50%;width: 100%;height: 350px;margin-top: -175px;}
+.reason_sure_btn,.reason_cancel_btn{width: 30%;margin-top: 15px;display: inline-block;}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商户后台主页</title>
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+    <!--<link rel="stylesheet" href="layui/font">-->
+    <link rel="stylesheet" href="css/layui.css" media="all">
+    <link rel="stylesheet" href="css/xinChen.css">
+</head>
+<body>
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div class="layui-row">
+            <div class="layui-col-md6 layui-col-lg6 layui-col-sm6" id="loopContainer">
+                <div id="news" >
+                    <ul>
+                        <li><span class="sellTime"></span><span class="sellValue"></span></li>
+                        <li><span class="sellTime"></span><span class="sellValue"></span></li>
+                        <li><span class="sellTime">当前已完成：</span><span class="sellValue"></span></li>
+                    </ul>
+                </div>
+                <div id="loop" style="min-width:400px;height: 350px">
+
+                </div>
+            </div>
+            <div class="layui-col-md6 layui-col-lg6 layui-col-sm6" >
+                <div id="circle" style="min-width:400px;height: 350px"></div>
+            </div>
+            <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+                <div id="histogram" style="min-width:400px;"class="homeChart"></div>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+                <div id="homeLine" style="min-width:400px;"class="homeChart">
+                </div>
+            </div>
+            <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+                <div id="profitLoss" style="min-width:400px;"class="homeChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 条目中可以是任意内容，如：<img src=""> -->
+
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '100%' //设置容器宽度
+            ,height:'800px'
+            ,arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="js/heightCharts.js"></script>
+<script src="js/hchart-more.js"></script>
+<script src="js/solid-gauge.js"></script>
+<script src="js/hChart3D.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

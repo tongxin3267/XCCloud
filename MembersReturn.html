@@ -1,0 +1,690 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+	<title>bootstrap实现导航栏的响应式布局，当在小屏幕、手机屏幕浏览时自动折叠隐藏</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.nav-logo{
+			float: left;
+			height: 40px;
+			margin-top: 5px;
+			overflow: hidden;
+		}
+		.nav-logo a{
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+&lt;!&ndash;导航&ndash;&gt;
+<div class="navbar navbar-fixed-top navbar-inverse" >
+	<div class="container">
+		<div class="nav-logo">
+			<a class="" href="#">
+				<img class="img-responsive" src="logo.png" alt="北京市慧谷阳光科技有限公司" style="height: 100%;width: auto;" />
+			</a>
+		</div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse navbar-right" id="navBar">
+			<ul class="nav navbar-nav">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">公司介绍</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						产品中心<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">SmartCall智能呼</a></li>
+						<li><a href="#">运营管理平台ＯＭＳ</a></li>
+						<li><a href="#">客户关系管理系统</a></li>
+						<li><a href="#">电销系统</a></li>
+						<li><a href="#">知识库管理</a></li>
+						<li><a href="#">排班管理模块</a></li>
+						<li><a href="#">考试培训系统</a></li>
+						<li><a href="#">多媒体调度指挥系统</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						行业方案<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">多媒体呼叫中心</a></li>
+						<li><a href="#">保险行业</a></li>
+						<li><a href="#">制造行业</a></li>
+						<li><a href="#">政府部门</a></li>
+						<li><a href="#">教育行业</a></li>
+						<li><a href="#">酒店/旅游</a></li>
+						<li><a href="#">电子商务</a></li>
+						<li><a href="#">社区服务</a></li>
+						<li><a href="#">铁路/客运</a></li>
+						<li><a href="#">医疗卫生</a></li>
+					</ul>
+				</li>
+				<li><a href="#">公司新闻</a></li>
+				<li><a href="#">典型客户</a></li>
+				<li><a href="#">合作伙伴</a></li>
+				<li><a href="#">联系我们</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>-->
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		div{margin:5px;background:yellow;}
+		button{margin:5px;font-size:14px;}
+		p{margin:5px;color:blue;}
+		span{color:red;}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<div>A div</div>
+<button>Get "blah" from the div</button>
+<button>Set "blah" to "hello"</button>
+<button>Set "blah" to 86</button>
+<button>Remove "blah" from the div</button>
+<p>The "blah" value of this div is <span>?</span></p>
+<script>
+	$("button").click(function(e){
+	    var value;
+	    switch ($("button").index(this)){
+	    case 0 : value = $("div").data("blah");
+		break;
+		case 1 : $("div").data("blah", "hello");value = "Stored!";
+		break;
+		case 2 : $("div").data("blah", 86);value = "Stored!";
+		break;
+		case 3 : $("div").removeData("blah");value = "Removed!";
+		break;
+		}
+    	$("span").text("" + value);
+
+	});
+</script>
+</body>
+</html>
+-->
+
+
+<!--轮播图-->
+<!--<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		.banner{margin:0 auto;height:300px;width:100%;overflow:hidden;position:relative;}
+		.bannerList{position: absolute;left: 0;width: 100%}
+		.bannerList li{width: 100%;height: 300px; float: left;}
+		.bannerList li a img{width: 100%;height: 300px;}
+
+		.bannerBtn{overflow:hidden;height:30px;position:absolute;bottom:3px;left:50%;margin-left:-100px;}
+		.bannerBtn li{float:left;margin:0 10px;padding:5px;cursor:pointer;background: #fff;border:1px #900 solid;border-radius:12px;height:12px;width:12px;overflow:hidden;text-align:center;line-height:12px;opacity:0.6;}
+		.bannerBtn li.on{background: #990000;color:#FFFFFF;}
+		.prev,.next{position: absolute;top: 50%;display: block;width: 40px;height: 30px;margin-top: -15px;background-color: yellow;z-index: 3;}
+		.prev{left: 10px;}
+		.next{right: 10px;}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+	<div class="banner">
+		<ul  class="bannerList">
+			<li><a href="#"><img src="images/bodybg1.jpg"></a></li>
+			<li><a href="#"><img src="images/bodybg2.jpg"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/fbc60c3991284b6ffdb0aa11a1708c41.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/3d41450340fe053008f8437011b7bcf5.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/c9a787ef199d47bdb3529bbdecfc989c.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/2471eddde718c56879171814c8a52153.jpg" border="0"></a></li>
+		</ul>
+		<ul class="bannerBtn">
+
+		</ul>
+		<a class="next" href="javascript:(0)">5645645</a>
+		<a class="prev" href="javascript:(0)">545645</a>
+	</div>
+
+
+<script>
+	$(function () {
+		var bannerL = $(".bannerList li").length;	//获取焦点图的个数
+		var blWidth = $(".banner").width();	//获取每个焦点图的宽度
+		 $(".bannerList li").width(blWidth);	//重置li的宽度
+        var clone = $(".bannerList li").first().clone();
+        $(".bannerList").append(clone);
+
+
+		var stime = 3000;
+		var btn = '<li class="on">1</li>';
+		for (i = 2; i <= bannerL; i++) {
+            btn += '<li>' + i + '</li>';
+        }
+		if (bannerL == 1) {
+            btn = null
+        }
+		$('.bannerBtn').append(btn);
+		$(".bannerList").width(bannerL*blWidth);
+		$(".bannerBtn li").on("mouseover",function () {
+			$(this).addClass("on").siblings().removeClass("on");
+			var k =$(this).index();
+            var marginL = blWidth * k;
+            $(".bannerList").animate({"left": -marginL}, 500);
+		});
+        picTimer = setInterval(timeset, stime);//指定stime毫秒后执行一次timeset函数。
+        function timeset() {
+            var j = $(".bannerBtn li").index($(".on"));//取得 当前焦点图的位置，即class为on的序号。
+            var timew = blWidth * (j + 1);
+            if (j == bannerL - 1) {
+                $(".bannerBtn li").eq(0).addClass("on").siblings().removeClass("on");
+
+                $(".bannerList").animate({"left": 0}, 500);
+            } else {
+                $(".bannerBtn li").eq(j + 1).addClass("on").siblings().removeClass("on");
+                $(".bannerList").animate({"left": -timew}, 500);
+            }
+        }
+
+        $(".banner").mouseover(function () {
+            clearInterval(picTimer);
+        });
+        $(".banner").bind("mouseout", function () {
+            picTimer = setInterval(timeset, stime);
+        });//当鼠标指向焦点图或者是切换按钮时，定时器清除，即不在执行自动切换，鼠标离开则恢复自动切换。}
+
+        $(".next").click(function(){
+            timeset()
+		});
+       	$(".prev").click(function () {
+			var j = $(".bannerBtn li").index($(".on"));
+            var timew = blWidth * (j - 1);
+            if(j == 0){
+                $(".bannerBtn li").eq(bannerL-1).addClass("on").siblings().removeClass("on");
+                var marginL = blWidth * (bannerL-1);
+//                $(".bannerList").css("left",-blWidth);
+                $(".bannerList").stop(true,true).animate({"left": -marginL}, 500);
+			} else {
+                $(".bannerBtn li").eq(j - 1).addClass("on").siblings().removeClass("on");
+                $(".bannerList").stop(true,true).animate({"left": -timew}, 500);
+			}
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+	});
+
+
+
+
+
+
+</script>
+</body>
+</html>-->
+
+<!--无缝轮播-->
+<!--<div class="banner">
+	<ul class="img">
+		<li><img src="image/1.jpg" alt=""/></li>
+		<li><img src="image/2.jpg" alt="" /></li>
+		<li><img src="image/3.jpg" alt="" /></li>
+		<li><img src="image/4.jpg" alt="" /></li>
+	</ul>
+	<ul class="num">
+
+	</ul>
+	<div class="btn btn_l">&lt;</div>
+	<div class="btn btn_r">&gt;</div>
+</div>
+<style type="text/css">
+	*{ padding:0px; margin:0px;list-style:none;}
+	.banner { width:500px; height:300px; margin:100px auto; border:1px solid #808080; position:relative; overflow:hidden;}
+	.banner .img{width:5000px; position:absolute; left:0px;top:0px;}
+	.banner .img img{width:500px; height:300px;}
+	.banner .img li{float:left;}
+	.banner .num { position:absolute; width:100%; bottom:10px; left:0px; text-align:center; font-size:0px;}
+	.banner .num li { width:10px; height:10px; background-color:#888; border-radius:50%;display:inline-block; margin:0px 3px; cursor:pointer;}
+	.banner .num li.on {background-color: #ff6a00;}
+	.banner .btn {width: 30px;height: 50px;background-color: #808080;opacity: 0.5; filter:alpha(opacity:0.5); position:absolute;top:50%; margin-top:-25px;
+		cursor:pointer;
+		text-align:center;
+		line-height:50px;
+		font-size:40px;
+		color:#fff;
+		font-family:"宋体";
+		display:none;
+	}
+	.banner .btn_l { left:0px;}
+	.banner .btn_r { right:0px;}
+	.banner:hover .btn { display:block;}
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var i = 0;
+
+        var clone = $(".banner .img li").first().clone();//克隆第一张图片
+        $(".banner .img").append(clone);//复制到列表最后
+        var size = $(".banner .img li").size();
+
+
+        for (var j = 0; j < size-1; j++) {
+            $(".banner .num").append("<li></li>");
+        }
+
+        $(".banner .num li").first().addClass("on");
+
+        /*自动轮播*/
+
+        var t = setInterval(function () { i++; move();},2000);
+
+        /*鼠标悬停事件*/
+
+        $(".banner").hover(function () {
+            clearInterval(t);//鼠标悬停时清除定时器
+        }, function () {
+            t = setInterval(function () { i++; move(); }, 2000); //鼠标移出时清除定时器
+        });
+
+
+
+
+        /*鼠标滑入原点事件*/
+
+        $(".banner .num li").hover(function () {
+
+            var index = $(this).index();//获取当前索引值
+            i = index;
+            $(".banner .img").stop().animate({ left: -index * 500 }, 500);
+            $(this).addClass("on").siblings().removeClass("on");
+        });
+
+
+
+        /*向左按钮*/
+        $(".banner .btn_l").click(function () {
+            i++;
+            move();
+        })
+
+
+        /*向右按钮*/
+        $(".banner .btn_r").click(function () {
+            i&#45;&#45;;
+            move();
+        })
+
+        /*移动事件*/
+        function move() {
+            if (i == size) {
+                $(".banner .img").css({ left: 0 });
+                i = 1;
+            }
+            if (i == -1) {
+                $(".banner .img").css({ left: -(size - 1) * 500 });
+                i = size - 2;
+            }
+            $(".banner .img").stop().animate({ left: -i * 500 }, 500);
+
+            if (i == size - 1) {
+                $(".banner .num li").eq(0).addClass("on").siblings().removeClass("on");
+            } else {
+                $(".banner .num li").eq(i).addClass("on").siblings().removeClass("on");
+            }
+        }
+    });
+
+
+</script>-->
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>圆形进度条</title>
+
+
+
+	<script type="text/javascript">
+
+	</script>
+</head>
+
+<body>
+
+<div class="Cashtopnav" style="height:50px;">
+	<div class="swiper-container swiper-container-horizontal swiper-container-free-mode">
+		<div class="swiper-wrapper" id="classlist" style="transform: translate3d(-3782px, 0px, 0px); transition-duration: 0ms;">
+			<div class="swiper-slide" data-id="0" style="width: 216.333px; margin-right: 4px;">所有分类</div>
+			<div class="swiper-slide" data-id="149" style="width: 216.333px; margin-right: 4px;">裙装</div> <div class="swiper-slide" data-id="151" style="width: 216.333px; margin-right: 4px;">裤装</div> <div class="swiper-slide" data-id="150" style="width: 216.333px; margin-right: 4px;">衬衫</div> <div class="swiper-slide" data-id="148" style="width: 216.333px; margin-right: 4px;">运动装</div> <div class="swiper-slide" data-id="2972" style="width: 216.333px; margin-right: 4px;">产品</div> <div class="swiper-slide" data-id="1914" style="width: 216.333px; margin-right: 4px;">五码消费</div> <div class="swiper-slide" data-id="3968" style="width: 216.333px; margin-right: 4px;">面膜</div> <div class="swiper-slide" data-id="20610" style="width: 216.333px; margin-right: 4px;">奶粉</div> <div class="swiper-slide" data-id="21531" style="width: 216.333px; margin-right: 4px;">索菲尼洛扣板</div> <div class="swiper-slide" data-id="21532" style="width: 216.333px; margin-right: 4px;">索菲尼洛辅料</div> <div class="swiper-slide" data-id="7329" style="width: 216.333px; margin-right: 4px;">裙装</div> <div class="swiper-slide" data-id="21533" style="width: 216.333px; margin-right: 4px;">索菲尼洛零件</div> <div class="swiper-slide" data-id="7284" style="width: 216.333px; margin-right: 4px;">内衣</div> <div class="swiper-slide" data-id="22845" style="width: 216.333px; margin-right: 4px;">生鲜水果</div> <div class="swiper-slide" data-id="11423" style="width: 216.333px; margin-right: 4px;">裤装</div> <div class="swiper-slide swiper-slide-prev" data-id="16344" style="width: 216.333px; margin-right: 4px;">T恤</div> <div class="swiper-slide swiper-slide-active" data-id="14969" style="width: 216.333px; margin-right: 4px;">黄金耳环</div> <div class="swiper-slide swiper-slide-next" data-id="14971" style="width: 216.333px; margin-right: 4px;">黄金项链</div> <div class="swiper-slide" data-id="14972" style="width: 216.333px; margin-right: 4px;">黄金吊坠</div> <div class="swiper-slide" data-id="14973" style="width: 216.333px; margin-right: 4px;">黄金手链</div> <div class="swiper-slide" data-id="14974" style="width: 216.333px; margin-right: 4px;">钻石戒指</div> <div class="swiper-slide active" data-id="14975" style="width: 216.333px; margin-right: 4px;">钻石吊坠</div> <div class="swiper-slide" data-id="15139" style="width: 216.333px; margin-right: 4px;">西装</div> <div class="swiper-slide" data-id="14976" style="width: 216.333px; margin-right: 4px;">钻石耳钉</div> <div class="swiper-slide" data-id="14977" style="width: 216.333px; margin-right: 4px;">钻石套链</div> <div class="swiper-slide" data-id="14978" style="width: 216.333px; margin-right: 4px;">彩金戒指</div> <div class="swiper-slide" data-id="14979" style="width: 216.333px; margin-right: 4px;">彩金耳环</div> <div class="swiper-slide" data-id="14980" style="width: 216.333px; margin-right: 4px;">彩金吊坠</div> <div class="swiper-slide" data-id="14981" style="width: 216.333px; margin-right: 4px;">彩金手链</div> <div class="swiper-slide" data-id="14982" style="width: 216.333px; margin-right: 4px;">彩金项链</div> <div class="swiper-slide" data-id="14970" style="width: 216.333px; margin-right: 4px;">黄金戒指</div> <div class="swiper-slide" data-id="17683" style="width: 216.333px; margin-right: 4px;">鞋子</div> <div class="swiper-slide" data-id="18423" style="width: 216.333px; margin-right: 4px;">鞋</div> <div class="swiper-slide" data-id="17488" style="width: 216.333px; margin-right: 4px;">U形包包</div> <div class="swiper-slide" data-id="17682" style="width: 216.333px; margin-right: 4px;">裤子</div> <div class="swiper-slide" data-id="24078" style="width: 216.333px; margin-right: 4px;">工商服务</div></div>
+	</div>
+
+	<div class="swiper-button-prev"></div>
+	<div class="swiper-button-next"></div>
+
+</div>
+
+
+</body>
+</html>
+-->
+
+<!--
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>无标题文档</title>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<style type="text/css">
+		*{
+			padding:0px;
+			margin:0px;
+			border:0px;
+		}
+		li{
+			list-style-type:none;
+		}
+		a{
+			text-decoration:none;
+		}
+		#wrapper{
+			margin:0px auto;
+			border:0px;
+			padding:0px;
+		}
+		#show-area{
+			width:800px;
+			height:450px;
+			position:relative;
+			margin:0px auto;
+			overflow:hidden;
+		}
+		#show-area ul{
+			position:relative;
+			width:4800px;
+			height:450px;
+			right:0;
+		}
+		#show-area ul li{
+			float:left;
+			width:800px;
+		}
+		#controler{
+			width:120px;
+			text-align:center;
+			position:absolute;
+			top:425px;
+			left:370px;
+			z-index:1;
+		}
+		#controler div{
+			height:15px;
+			width:15px;
+			border-radius:100%;
+			background-color:#ccc;
+			float:left;
+			margin-left:5%;
+			opacity:0.9;/*透明度50%*/
+			filter:Alpha(opacity=90);/*为了适应旧的浏览器*/
+		}
+		#button-left{
+			/*display:none;*/
+			color:#fff;
+			position: absolute;
+			top: 189px;
+			left: 0px;
+			width: 60px;
+			height: 60px;
+			z-index:2;
+
+			border-radius:100%;
+			background-size:cover;
+			opacity:0.5;/*透明度50%*/
+			filter:Alpha(opacity=50);/*为了适应旧的浏览器*/
+		}
+		#button-right{
+			/*display:none;*/
+			color:#fff;
+			position: absolute;
+			top: 189px;
+			left: 740px;
+			width: 60px;
+			height: 60px;
+			z-index:2;
+
+			border-radius:100%;
+			background-size:cover;
+			opacity:0.5;/*透明度50%*/
+			filter:Alpha(opacity=50);/*为了适应旧的浏览器*/
+		}
+		.onclick{
+			background-color:#FFF !important;
+		}
+	</style>
+</head>
+
+<body>
+<div id="wrapper">
+	<div id="show-area">
+
+		<ul>
+			<li><a href="#"><img src="images/bodybg1.jpg"></a></li>
+			<li><a href="#"><img src="images/bodybg2.jpg"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/fbc60c3991284b6ffdb0aa11a1708c41.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/3d41450340fe053008f8437011b7bcf5.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/c9a787ef199d47bdb3529bbdecfc989c.jpg" border="0"></a></li>
+			<li><a href="#"><img src="http://www.boyxing.com/d/file/2471eddde718c56879171814c8a52153.jpg" border="0"></a></li>
+		</ul>
+
+		<div id="button-left" title="下一张"></div>
+		<div id="button-right" title="上一张"></div>
+
+		<div id="controler"></div>&lt;!&ndash;控制按钮,为了日后方便后台操作这里的控制按钮在js代码中控制添加&ndash;&gt;
+	</div>
+</div>
+
+
+<script>
+    $(function(){
+        var i = 0;
+        var imgWidth = $("#show-area ul li").width();
+
+        var clone = $("#show-area ul li").first().clone();
+        $("#show-area ul").append(clone);
+//复制第一张图片并且添加到最后达到无缝连接的效果
+
+        var size = $("#show-area ul li").size();//得到所有li的个数
+
+
+        /*第一步*/
+//一开始循环添加按钮
+        for(var j = 0 ; j<size - 1 ; j++){
+            $("#controler").append("<div></div>");
+
+        }
+//为什么要size - 1？因为最后一张图片只是作一个过渡效果我们显示的始终还是4张图片
+//所以添加按钮的时候我们也应该添加4个按钮
+        $("#controler div").eq(0).addClass("onclick");
+
+
+
+
+        /*第二步*/
+//左按钮
+        $("#button-left").click(function(){
+            Toleft();
+
+        })
+
+
+//右按钮
+        $("#button-right").click(function(){
+            Toright();
+
+        })
+
+
+
+
+
+
+        /*第3步*/
+//按钮移出移入事件
+        $("#controler div").hover(function(){
+            i = $(this).index();
+            clearInterval(timer);
+            $("#show-area ul").stop().animate({left:-i * imgWidth});
+            $(this).addClass("onclick").siblings().removeClass("onclick");
+           /* $("#index").html("index的值：" + index);*/
+
+
+
+        },function(){
+            timer = setInterval(function(){
+                Toleft();
+
+            },3000)
+
+        })
+
+
+//ul鼠标移出移入事件
+        $("#show-area ul").hover(function(){
+            clearInterval(timer);
+
+        },function(){
+            timer = setInterval(function(){
+                Toleft();
+
+            },3000)
+
+        })
+
+//两个方向按钮鼠标移出移入事件
+        $("#button-left,#button-right").mouseover(function(){
+            clearInterval(timer);
+
+        }).mouseout(function(){
+            timer = setInterval(function(){
+                Toleft();
+
+            },3000)
+        })
+
+
+//定时器
+        var timer = setInterval(function(){
+            Toleft();
+
+        },3000)
+
+
+
+
+        /*第2.1步*/
+//左按钮实现的函数
+        function Toleft(){
+
+            i++;
+            if(i==size){
+//当当前图片为最后一张图片的时候（我们一开始复制并且添加到ul最后面的图片）并且再点击了一次左按钮，这时候我们就利用css的快速转换效果把ul移动第一张图片的位置并且第二张图片滑入达到无缝效果（css的变换效果很快我们肉眼是很难看见的）
+                $("#show-area ul").css({left:0});
+                i = 1;
+            }
+            $("#show-area ul").stop().animate({left:-i*imgWidth},1000);
+
+            if(i == size -1){
+                $("#controler div").eq(0).addClass("onclick").siblings().removeClass("onclick");
+
+            }else{
+                $("#controler div").eq(i).addClass("onclick").siblings().removeClass("onclick");
+
+            }
+
+
+
+
+        }
+
+
+        /*第2.2步*/
+//右按钮实现的函数
+        function Toright(){
+
+//同理，如果当前图片位置是第一张图片我再按一下右按钮那么我们也利用css的快速变换使它的位置来到最后一张图片的位置（size-1），并且让倒数第二张图片滑动进来
+            i&#45;&#45;;
+            if(i==-1){
+                $("#show-area ul").css({left:-(size - 1)*imgWidth});
+                i=size-2;
+
+            }
+            $("#show-area ul").animate({left:-i*imgWidth},1000);
+            $("#controler div").eq(i).addClass("onclick").siblings().removeClass("onclick");
+
+        }
+
+
+
+    });
+
+</script>
+
+</body>
+</html>
+-->
+
+
+
+
+
+
+

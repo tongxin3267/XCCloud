@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SysConfig>
+  <ICCard>
+    <Device Model="ICCard_DeKaKeJiM3" Name="德卡科技D3型" Selected="1">
+    </Device>
+    <Device Model="ICCard_DeKaKeJiM1" Name="德卡科技D1型" Selected="0">
+    </Device>
+    <Device Model="ICCard_DeKaKeJiM2" Name="德卡科技D2型" Selected="0">
+    </Device>
+  </ICCard>
+  <PeopleCard>
+    <Device Model="PeopleCard_DeKaKeJiM3" Name="身份证D3型" Selected="1">
+    </Device>
+    <Device Model="PeopleCard_DeKaKeJiM1" Name="身份证D1型" Selected="0">
+    </Device>
+    <Device Model="PeopleCard_DeKaKeJiM2" Name="身份证D2型" Selected="0">
+    </Device>
+  </PeopleCard>
+  <EncryptDog>
+    <Device Model="EncryptDog1" Name="加密狗D3型" Selected="0">
+    </Device>
+    <Device Model="EncryptDog2" Name="加密狗D1型" Selected="0">
+    </Device>
+    <Device Model="EncryptDog3" Name="加密狗D2型" Selected="1">
+    </Device>
+  </EncryptDog>
+  <PalmPrints>
+    <Device Model="whois" Name="whois" Selected="1">
+    </Device>
+  </PalmPrints>
+  <Printer>
+    <Device Model="POS58 Printer" Name="POS58 Printer" Selected="0">
+    </Device>
+  </Printer>
+  <PrinterFilter>
+    <Device Model="发送至 OneNote 2010">
+    </Device>
+    <Device Model="Microsoft XPS Document Writer">
+    </Device>
+    <Device Model="FX DocuPrint M215 b">
+    </Device>
+    <Device Model="Fax">
+    </Device>
+  </PrinterFilter>
+</SysConfig>

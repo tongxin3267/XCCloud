@@ -1,0 +1,627 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+    <script type="text/javascript">
+
+
+        //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+        //var mobileToken = "fe1949af67f64696af524b129090461b";
+        //var memberToken = "ccd3826ce0484d2a8da8aed0c3ece6f6";
+        //var storeId = "2";
+        //var mobile = "15618920033";
+        //var deviceToken = "23c41662";
+
+
+        var mobileToken1 = "45cec6980a1843daa8af11f4ee31b2e0";
+        var memberToken1 = "5b5585523caf4791a4bf8f000573e17f";
+        var storeId1 = "100027";
+        var mobile1 = "15618920033";
+        var deviceToken1 = "000006";
+
+        var mobileToken2 = "45cec6980a1843daa8af11f4ee31b2e0";
+        var memberToken2 = "5b5585523caf4791a4bf8f000573e17f";
+        var storeId2 = "2";
+        var mobile2 = "15618920033";
+        var deviceToken2 = "23c41662";
+
+        //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+
+        //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+        //var mobileToken = "b185d3d34f15430aadfcb57316feb0fe";
+        //var memberToken = "0aa16a8e5b2b45caa47723edaeb6b99c";
+        //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+
+
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+    </script>
+
+    //会员接口
+    <script type="text/javascript">
+
+        function do_addTicket() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100027", "tickets": "ssssssss,fewfewfew,fewfewfew324" };
+            var url = "/xcgamemana/ticket?action=addTicket";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_registerDevice() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100027", "mcuId": "20171014300027" };
+            var url = "/xcgamemana/device?action=register";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_saveCoins() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": mobileToken1, "memberToken": memberToken1, "deviceToken": "000006", "coins": "10" };
+            var url = "/xcgame/coins?action=saveCoins";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_memberRegister1() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId1, "mobileToken": mobileToken1 };
+            var url = "/xcgame/member?action=register";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_memberRegister2() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId2, "mobileToken": mobileToken1 };
+            var url = "/xcgame/member?action=register";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_updatemember() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "moblietoken": mobileToken1, "membername": "赵文迪22", "gender": "0", "memberphoto": "" };
+            var url = "/xcgame/member?action=update";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getMemberToken1() {
+            var parasObj = { "sysId": "0", "versionNo": "0.89", "storeId": "100027", "mobileToken": "a1dce6949f264220beaddf3a036457b2" };
+            var url = "/xcgamemana/Token?action=getMemberToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getMemberToken2() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId2, "mobileToken": mobileToken2 };
+            var url = "/xcgamemana/Token?action=getMemberToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_sendSMSToken() {
+            var code = $("#imgcode").val();
+            var mobile = $("#mobile").val();
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobile": mobile, "code": code };
+            var url = "/xcgamemana/Token?action=checkImgCode";
+            //var url = "http://192.168.1.145:8080/xcgamemana/token?action=checkImgCode";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_sendSMS() {
+            var mobile = $("#mobile").val();
+            var code = $("#imgcode").val();
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobile": mobile, "templateId": "1", "token": code };
+            var url = "/xcgamemana/Token?action=sendSMSCode";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_storeInfoByTerminalNo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "000002" };
+            var url = "/xcgamemana/store?action=storeInfoByTerminalNo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getMobileToken() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobile": mobile1, "smsCode": "123456" };
+            var url = "/xcgamemana/Token?action=getMobileToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getrouteDeviceToken() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId, "segment": "0001", "token": "6e68feb310f07d578a18023c4c2c39f0" };
+            var url = "/xcgamemana/Token?action=getRouteToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_memberInfo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberToken": memberToken1 };
+            var url = "/xcgame/member?action=getInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_updateDeviceState() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId, "deviceId": "20171010500001", "state": "1", "token": "c8a965c70ffe8292929eb28eaa05743c" };
+            var url = "/xcgame/device?action=updateDeviceState";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_food_memberToken1() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId1, "memberToken": memberToken1 };
+            var url = "/xcgame/Foods?action=getfoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_food_memberToken2() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId2, "memberToken": memberToken2 };
+            var url = "/xcgame/Foods?action=getfoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_foods_mobileToken() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": storeId, "mobileToken": mobileToken1 };
+            var url = "/xcgame/Foods?action=getfoods";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_485_coin() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberPassword": "888888", "deviceToken": "000006", "memberToken": memberToken1, "mobileToken": mobileToken1, "coins": "5", "form_id": "1234567890" };
+            var url = "/xcgame/flw_485_coin?action=flw_485_coinSale";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_485_coinPut() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberPassword": "888888", "deviceToken": "000006", "memberToken": memberToken1, "mobileToken": mobileToken1, "coins": "5", "form_id": "1234567890", "gameRuleId": "1234" };
+            var url = "/xcgame/flw_485_coin?action=flw_485_coinPut";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_485_coinExit() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberPassword": "888888", "deviceToken": "000006", "memberToken": memberToken1, "mobileToken": mobileToken1, "coins": "5", "form_id": "1234567890" };
+            var url = "/xcgame/flw_485_coin?action=flw_485_coinExit";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_foodsale1() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "foodid": "40", "deviceToken": deviceToken1, "money": "800", "Coins": "100", "OrderID": "123455443", "membertoken": memberToken1, "mobiletoken": mobileToken1, "type": "充值", "Paymentype": "微信","form_id":"1234567890"
+            };
+            var url = "/xcgame/foods?action=foodsale";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_foodsale2() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "foodid": "40", "deviceToken": deviceToken1, "money": "800", "Coins": "100", "OrderID": "123455443", "membertoken": memberToken1, "mobiletoken": mobileToken1, "type": "购币", "Paymentype": "微信", "form_id": "1234567890"
+            };
+            var url = "/xcgame/foods?action=foodsale";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_UserRegister() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "UserName": "zhaowendi", "PassWord": "admin", "storeId": storeId, "mobile": "18871465971", "smsCode": "" };
+            var url = "/XCGameMana/UserRegister?action=getUserRegister";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_ForgetUser() {
+            var code = $("#imgcode").val();
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "UserName": "zhaowendi", "imgCode": code };
+            var url = "/XCGameMana/User?action=getUser";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_ForgetPassWord() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "UserName": "zhaowendi", "PassWord": "zhao1994619", "smsCode": "" };
+            var url = "/XCGameMana/User?action=getForgetPassWord";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_LoginUser() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "UserName": "zhaowendi", "PassWord": "admin" };
+            var url = "/XCGameMana/User?action=getLoginUser";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_UpdatePassWord() {
+            var code = $("#imgcode").val();
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "PassWord": "admin", "NewsPassWord": "zhao1994619", "UserToken": code };
+            var url = "/XCGameMana/User?action=getUpdatePassWord";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_Membercard() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": mobileToken1 };
+            var url = "/XCGameMana/Member?action=getMemberCard";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_Promotion() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1" };
+            var url = "/XCGameMana/Promotion?action=getPromotion";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        //string sysId = dicParas.ContainsKey("sysId") ? dicParas["sysId"].ToString() : string.Empty;
+        //string storeId = dicParas.ContainsKey("storeId") ? dicParas["storeId"].ToString() : string.Empty;
+        //string rechargeTypeStr = dicParas.ContainsKey("rechargeType") ? dicParas["rechargeType"].ToString() : string.Empty;
+        //string icCardID = dicParas.ContainsKey("icCardID") ? dicParas["icCardID"].ToString() : string.Empty;
+        //string amountStr = dicParas.ContainsKey("amount") ? dicParas["amount"].ToString() : string.Empty;
+        //string coinAmountStr = dicParas.ContainsKey("coinAmount") ? dicParas["coinAmount"].ToString() : string.Empty;
+        //string orderId = dicParas.ContainsKey("orderId") ? dicParas["orderId"].ToString() : string.Empty;
+        //string foodIdStr = dicParas.ContainsKey("foodId") ? dicParas["foodId"].ToString() : string.Empty;
+        //string orderTimeStr = dicParas.ContainsKey("orderTime") ? dicParas["orderTime"].ToString() : string.Empty;
+
+        function do_rechargeNotify() {
+            var parasObj = {
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "100000",
+                "icCardID": "90000011",
+                "amount": 100,
+                "coinAmount": 100,
+                "orderId": "2017000000001",
+                "foodId": "32",
+                "token": "ed4e495d4bfb417f8720f5fc549e9a2c",
+                "orderTime": "1509085920"
+            };
+            var url = "/xcgamemana/Recharge?action=rechargeNotify";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_payRequest() {
+            //var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "000001", "memberToken": "6624c80452d742c08f89bd6285a8a2f2","orderAmount":"1.00","orderTip":"销售" };
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "000001", "memberToken": "", "orderAmount": "1.00", "orderTip": "销售" };
+            var url = "/XCGameMana/WSOrder?action=payRequest";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_DataOrder() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "pageIndex": "0", "mobileToken": mobileToken1, "storename": "", "startcoins": "20", "endcoins": "", "buytype": "", "startcreatetime": "", "endcreatetime": "", "startprice": "", "endprice": "100" };
+            var url = "/XCGameMana/DataOrder?action=getDataOrder";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_memberFoodsel() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "pageIndex": "0", "memberToken": memberToken1 };
+            var url = "/XCGame/Member?action=getMemberCardBill";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_memberSaveMoney() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "mobileToken": mobileToken1, "memberToken": memberToken1, "deviceToken": "000001" };
+            var url = "/XCGameMana/Member?action=getMemberSaveMoney";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function do_memberPreservation() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "iccard": "90000033", "storeid": "100010", "coins": "100" };
+            var url = "/XCGameMana/Member?action=getMemberPreservation";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+     
+        function do_memberphoto() {         
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "moblietoken": memberToken1, "imageurl": "C:/image/", "file": "100" };
+            var url = "/XCGameMana/PhotoUpload?action=getphotoupload";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_storepass() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100010", "dogid": "139134557"};
+            var url = "/XCGameMana/Store?action=getstorepassword";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_memberInformation() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100010", "iccard": "90000031" };
+            var url = "/XCGame/Member?action=getmemberInformation";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_login() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "S0100022", "userName": "admin", "password": "88888888" };
+            var url = "http://192.168.1.145:8080/xcgame/user?action=barLogin";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_getgameinfo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "memberToken": memberToken1, "deviceToken": "5c022c26" };
+            var url = "/XCGame/Game?action=GetGameInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getDeviceStateInfo() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "deviceToken": "000006" };
+            var url = "/XCGamemana/Device?action=getDeviceState";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getStoreQuery() {
+            var parasObj = { "sysId": "0", "versionNo": "0.0.0.1", "storeId": "100027", "date": "20171213", "icCardId": "", "searchType": "0" };
+            var url = "/XCGamemana/Query?action=GetStoreSales";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+
+        function do_addStore() {
+            var parasObj = {
+                "userToken": "2eb2527666284831bced7821f9cf06fc",
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "120028",
+                "companyname": "companyname",
+                "province":"province",
+                "address":"address",
+                "boss": "boss",
+                "phone": "15618920033",
+                "telphone": "027-32432432",
+                "clienttype": "代理商",
+                "power_due_date": "2020-10-29",
+                "note": "note",
+                "developer": "developer",
+                "store_password": "13243214332",
+                "wxfee":"2"
+            };
+            var url = "/XCGamemana/store?action=addStore";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_updateStore() {
+            var parasObj = {
+                "userToken": "2eb2527666284831bced7821f9cf06fc",
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "120028",
+                "companyname": "companyname120028rr",
+                "province": "province120028",
+                "address": "address120028",
+                "boss": "boss120028",
+                "phone": "15618920038",
+                "telphone": "027-32432438",
+                "clienttype": "代理商",
+                "power_due_date": "2020-10-28",
+                "note": "note8",
+                "developer": "developer8",
+                "store_password": "13243214338",
+                "wxfee": "2"
+            };
+            var url = "/XCGamemana/store?action=updateStore";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        
+
+        function do_deleteStore() {
+            var parasObj = {
+                "userToken": "45cec6980a1843daa8af11f4ee31b2e0",
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "120027"
+            };
+            var url = "/XCGamemana/store?action=removeStore";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getStore() {
+            var parasObj = {
+                "userToken": "45cec6980a1843daa8af11f4ee31b2e0",
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "120028"
+            };
+            var url = "/XCGamemana/store?action=getStore";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_getStoreList() {
+            var parasObj = {
+                "userToken": "45cec6980a1843daa8af11f4ee31b2e0",
+                "sysId": "0",
+                "versionNo": "0.0.0.1",
+                "storeId": "12",
+                "companyname": "试",
+                "phone": "1"
+            };
+            var url = "/XCGamemana/store?action=getStoreList";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+    </script>
+
+</head>
+<body>
+    <div title="票据" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>票据</div>
+        <input id="ButtonTicket" type="button" value="do_addTicket(添加票据)" onclick="do_addTicket()" />
+    </div>
+    <div title="会员" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>会员</div>
+        <input id="Button1" type="button" value="do_memberRegister1(会员注册1)" onclick="do_memberRegister1()" />
+        <input id="Button1_1" type="button" value="do_memberRegister2(会员注册2)" onclick="do_memberRegister2()" />
+        <input id="Button1" type="button" value="do_memberInfo(获取会员信息)" onclick="do_memberInfo()" />
+        <input id="Button14" type="button" value="do_updatemember(会员更新)" onclick="do_updatemember()" />
+    </div>
+
+    <div title="Token" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>Token</div>
+        <input id="Button2_111f" type="button" value="do_getMemberToken(获取会员的token1)" onclick="do_getMemberToken1()" />
+        <input id="Button2_aaa" type="button" value="do_getMemberToken(获取会员的token2)" onclick="do_getMemberToken2()" />
+        <input id="Button2" type="button" value="do_sendSMSToken(获取发送短信的临时token)" onclick="do_sendSMSToken()" />
+
+        <input id="Button2" type="button" value="do_sendSMS(获取短信验证码)" onclick="do_sendSMS()" />
+        <input id="Button21" type="button" value="do_getMobileToken(获取手机token)" onclick="do_getMobileToken()" />
+        <input id="Button22" type="button" value="do_getrouteDeviceToken(获取路由设备token)" onclick="do_getrouteDeviceToken()" />
+    </div>
+
+    <div title="store" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>store</div>
+        <input id="Button1" type="button" value="do_storeInfoByTerminalNo(获取终端门店信息)" onclick="do_storeInfoByTerminalNo()" />
+    </div>
+
+    <div title="store" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>store</div>
+        <input id="Button1" type="button" value="do_updateDeviceState(更新设备状态信息)" onclick="do_updateDeviceState()" />
+    </div>
+    <div title="store" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>store</div>
+        <input id="Button1_A111" type="button" value="do_food_memberToken(获取套餐明细1)" onclick="do_food_memberToken1()" />
+        <input id="Button1_B111" type="button" value="do_food_memberToken(获取套餐明细2)" onclick="do_food_memberToken2()" />
+        <input id="Button132" type="button" value="do_foods_mobileToken(获取套餐明细)" onclick="do_foods_mobileToken()" />
+    </div>
+    <div title="store" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>store</div>
+        <input id="Button1" type="button" value="do_485_coin(提币)" onclick="do_485_coin()" />
+        <input id="Button1do_485_coinPut" type="button" value="do_485_coinPut(投币)" onclick="do_485_coinPut()" />
+        <input id="Button1flw_485_coinExit" type="button" value="do_485_coinExit(投币)" onclick="do_485_coinExit()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_rechargeNotify(获取套餐明细)" onclick="do_rechargeNotify()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Buttondo_foodsale1" type="button" value="do_foodsale1(充值)" onclick="do_foodsale1()" />
+        <input id="Buttondo_foodsale2" type="button" value="do_foodsale2(购币)" onclick="do_foodsale2()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_UserRegister(员工注册)" onclick="do_UserRegister()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_ForgetUser(忘记密码输入用户名)" onclick="do_ForgetUser()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_ForgetPassWord(忘记密码输入新密码)" onclick="do_ForgetPassWord()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_LoginUser(用户登录)" onclick="do_LoginUser()" />
+    </div>
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_UpdatePassWord(修改密码)" onclick="do_UpdatePassWord()" />
+    </div>
+
+    <div title="recharge" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>recharge</div>
+        <input id="Button11" type="button" value="do_Membercard(通过手机号码获取会员信息)" onclick="do_Membercard()" />
+    </div>
+    <input id="mobile" type="text" value="mobile" />
+    <input id="imgcode" type="text" value="imgcode" />
+
+
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_payRequest(微信小程序支付请求)" onclick="do_payRequest()" />
+    </div>
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_Promotion(获取新闻)" onclick="do_Promotion()" />
+    </div>
+
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_DataOrder(获取订单)" onclick="do_DataOrder()" />
+    </div>
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_memberFoodsel(获取会员流水)" onclick="do_memberFoodsel()" />
+    </div>
+
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_memberSaveMoney(存币)" onclick="do_memberSaveMoney()" />
+    </div>
+
+    <div title="order" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>order</div>
+        <input id="Buttonorder_1" type="button" value="do_memberPreservation(存币)" onclick="do_memberPreservation()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>do_saveCoins</div>
+        <input id="Buttonorder_12222" type="button" value="do_saveCoins2(存币2)" onclick="do_saveCoins()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>do_saveCoins</div>
+        <input id="Buttonorder_12222" type="button" value="do_memberphoto(图片上传)" onclick="do_memberphoto()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>do_saveCoins</div>
+        <input id="Buttonorder_12222" type="button" value="do_storepass(查询店密码)" onclick="do_storepass()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>do_saveCoins</div>
+        <input id="Buttonorder_12222" type="button" value="do_memberInformation(获取会员信息)" onclick="do_memberInformation()" />
+    </div>
+
+    <input id="Buttonorder_1222233" type="button"  value="do_login(获取会员信息)" onclick="do_login()" />
+
+    <input id="Buttonorder_registerdevice" type="button" value="do_registerDevice(注册设备)" onclick="do_registerDevice()" />
+
+    <input id="Buttonorder_registerdevice" type="button" value="do_getgameinfo(获取游戏机)" onclick="do_getgameinfo()" />
+    
+    <input id="Buttonorder_YYYYYYYYYYYYYY" type="button" value="do_getDeviceStateInfo(获取设备状态信息)" onclick="do_getDeviceStateInfo()" />
+
+    <input id="Buttonorder_YYYYYYYYYYYYYY22" type="button" value="do_getStoreQuery(查询门店账目)" onclick="do_getStoreQuery()" />
+    <br/>
+    <input id="Buttonorder_AddStore22" type="button" value="do_addStore(保存门店信息)" onclick="do_addStore()" />
+    <input id="Buttonorder_UpdateStore22" type="button" value="do_updateStore(修改门店信息)" onclick="do_updateStore()" />
+    <input id="Buttonorder_deleteStore22" type="button" value="do_deleteStore(删除门店信息)" onclick="do_deleteStore()" />
+    <input id="Buttonorder_getStore22" type="button" value="do_getStore(获取门店信息)" onclick="do_getStore()" />
+    <input id="Buttonorder_getStoreList22" type="button" value="do_getStoreList(获取门店信息)" onclick="do_getStoreList()" />
+</body>
+</html>

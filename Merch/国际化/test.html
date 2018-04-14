@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="di18n.min.js"></script>
+</head>
+<body>
+<div class="wrapper" i18n-class="${locale}">
+    <img i18n-img="/images/${locale}/test.png">
+    <input i18n-placeholder="你好">
+    <p i18n-content="你好"></p>
+    <p i18n-content="我们"></p>
+    <button type="button" onclick="changeEnglish()">英文</button>
+    <button type="button" onclick="changeChinese()">中文</button>
+    <button type="button" onclick="changeJapanese()">日语</button>
+</div>
+<script src="index.js"></script>
+<script>
+    var LOCALE = 'zh';
+    const di18n = new DI18n({
+        locale: LOCALE,
+        isReplace: true,   // 开启运行时
+        messages: {
+            en: {
+                你好: 'Hello',我们:'we'
+            },
+            zh: {
+                你好: '你好',我们:'我们'
+            },
+            ja:{
+                你好:'ィゥ'
+            }
+        }
+    });
+    function changeEnglish() {
+        LOCALE='en';
+        const di18n = new DI18n({
+            locale: LOCALE,
+            isReplace: true,   // 开启运行时
+            messages: {
+                en: {
+                    你好: 'Hello',我们:'we'
+                },
+                zh: {
+                    你好: '你好',我们:'我们'
+                },
+                ja:{
+                    你好:'ィゥ',我们:'waliwa'
+                }
+            }
+        });
+    }
+    function changeJapanese() {
+        LOCALE='ja';
+        const di18n = new DI18n({
+            locale: LOCALE,
+            isReplace: true,   // 开启运行时
+            messages: {
+                en: {
+                    你好: 'Hello',我们:'we'
+                },
+                zh: {
+                    你好: '你好',我们:'我们'
+                },
+                ja:{
+                    你好:'ィゥ',我们:'waliwa'
+                }
+            }
+        });
+    }
+    function changeChinese() {
+        LOCALE='zh';
+        const di18n = new DI18n({
+            locale: LOCALE,
+            isReplace: true,   // 开启运行时
+            messages: {
+                en: {
+                    你好: 'Hello',我们:'we'
+                },
+                zh: {
+                    你好: '你好',我们:'我们'
+                },
+                ja:{
+                    你好:'ィゥ',我们:'waliwa'
+                }
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

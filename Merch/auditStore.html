@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut  icon" type="image/x-icon" href="images/xinchen.ico" media="screen"  />
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/manchartData.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rKXLFp7Q5LaRdax2dtrxkLzzQLrbGG4T"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+    <title>待审核门店</title>
+</head>
+<body>
+<div class="" style="padding: 15px">
+    <div class="layui-col-md12 layui-col-lg12 layui-col-sm12">
+        <table class="layui-hide" id="auditStoreTable"  lay-filter="auditStore"></table>
+    </div>
+</div>
+<form action="" class="auditStore layui-form" style="display: none">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">常规设置</li>
+            <li>门店地址</li>
+            <li>实名认证</li>
+            <li>结算设置</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">门店归属</label>
+                    <div class="layui-input-inline"style="width: 300px;">
+                        <input type="text" name="title"  id="parentId" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">直属门店或单门店不填</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">门头名称</label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <input type="text" name="title" id="storeName" required  lay-verify="required" readonly autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux" style="padding: 0!important;"><input type="text" readonly placeholder="消费密码" class="layui-input" id="lookPassword"></div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">到期日期</label>
+                    <div class="layui-input-inline" style="width: 450px;">
+                        <input type="text" class="layui-input" id="authorExpireDate" readonly>
+                    </div>
+                </div>
+                <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">备注</label>-->
+                <!--<div class="layui-input-inline" style="width: 450px;">-->
+                <!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="layui-form-item">
+
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-disabled" id="test2">门头照片上传</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="demo2">
+                                <input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+                            </div>
+                        </blockquote>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px; padding: 9px  8px">地理位置：</label>
+                        <div class="layui-input-inline"style="width: 300px;">
+                            <input type="text" name="title" id="Address" required  lay-verify="required" readonly autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 32px;padding: 9px  8px">经度:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" id="lng" required  lay-verify="required" readonly autocomplete="off" class="layui-input" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label"style="width: 32px;padding: 9px 8px">纬度:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" id="lat" required  lay-verify="required" readonly autocomplete="off" class="layui-input" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div id="allmap" class="layui-col-md12" style="height: 500px;margin-bottom: 20px;" ></div>
+            </div>
+            <div class="layui-tab-item" style="max-height: 500px;overflow-y: scroll;">
+                <div class="ident identName layui-row">
+                    <div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="contracts" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身份号码</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="idCard" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">有效期限</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="idExpireDate" lay-verify="required" readonly  class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">联系电话</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="mobile" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="layui-bg-blue">
+                <div class="ident identLicense layui-row">
+                    <div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">营业执照</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="licenceId" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">营业日期</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="licenceExpireDate" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="text-align: center">
+                            <button type="button" class="layui-btn layui-btn-disabled" ><i class="layui-icon">&#xe62f;</i>营业执照上传</button>
+                            <button type="button" class="layui-btn layui-btn-disabled" ><i class="layui-icon">&#xe619;</i>提交</button>
+                        </div>
+                    </div>
+                    <div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">
+                        <div class="layui-upload">
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="padding: 0;">
+                                <p>请分别上传营业执照正反两面</p>
+                                <div class="layui-upload-list demo-license" id="demo3" style="padding: 0;">
+                                    <input id="nameImage1" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <hr class="layui-bg-blue">
+                <div class="ident identBank layui-row">
+                    <div class="layui-col-md6 layui-col-sm6 layui-col-lg6">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">银行类型</label>
+                                <div class="layui-input-inline" style="width: 300px;height: 38px;">
+                                    <input type="text" name="title"  id="bankType" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">银行账号</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="bankCode" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">银行户名</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" required id="bankAccount" lay-verify="required" readonly autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="layui-form-item" style="text-align: center">-->
+                            <!--<button type="button" class="layui-btn layui-btn-disabled" id="test4">银行卡上传</button>-->
+                            <!--<button type="button" class="layui-btn layui-btn-disabled" id="subupBankCard">提交</button>-->
+                        <!--</div>-->
+                    </div>
+                    <!--<div class="uploadBox layui-col-md6 layui-col-sm6 layui-col-lg6">-->
+                        <!--<div class="layui-upload">-->
+                            <!--<blockquote class="layui-elem-quote layui-quote-nm" style="padding: 0;">-->
+                                <!--<p>请分别上传银行卡正反两面</p>-->
+                                <!--<div class="layui-upload-list demo-bankCard" id="demo4 " style="padding: 0;">-->
+                                    <!--<input id="nameImage4" name="list[0]" maxlength="255" class="input-xlarge required" type="hidden">-->
+                                <!--</div>-->
+                            <!--</blockquote>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择三方支付通道</label>
+                    <div class="layui-input-inline"style="width: 300px;">
+                        <select   id="selttleType"  lay-filter="selttleType" autocomplete="off" >
+
+                        </select>
+                    </div>
+                </div>
+
+                <ul class="payWayNeed">
+                    <li class="layui-hide">
+                        <input type="text" class="layui-input" readonly value="启用个人支付通道(当前暂不支持)">
+                    </li>
+                    <li class="layui-hide">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">微信OPENID</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="WXPayOpenID" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">微信实名</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="WXName" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">支付宝账号</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="AliPay" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">支付宝实名</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="AliPayName" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">手续费(%)</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="SettleFee1" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">结算周期(天)</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="SettleCycle" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">单周期结算次数</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="SettleCount" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="layui-hide">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">商户号</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="MerchNo" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">终端号</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="TerminalNo" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">令牌</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="Token" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">机构号</label>
+                                <div class="layui-input-inline"style="width: 300px;">
+                                    <input type="text" name="title" id="InstNo" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">手续费(%)</label>
+                                <div class="layui-input-inline" style="width: 300px;">
+                                    <input type="text" name="title" id="SettleFee2" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">拒绝理由：</label>
+              <div class="layui-input-inline" style="width:450px;">
+                  <input type="text" id="refuseReason" class="layui-input">
+              </div>
+              <div class="layui-form-mid" style="padding: 0!important;">
+                  <button type="button" class="layui-btn layui-btn-danger checkRefuse" ><i class="layui-icon">&#x1006;</i>审核拒绝</button>
+                  <button type="button" class="layui-btn layui-btn-normal checkPass" ><i class="layui-icon">&#xe605;</i>审核通过</button>
+              </div>
+          </div>
+
+        </div>
+    </div>
+</form>
+
+
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="layui---xtree/layui-xtree.js"></script>
+<script src="layui---xtree/layui-xtree-look.js"></script>
+<script src="js/manchartSystem.js"></script>
+<script>
+    var token=getStorage('token'),selttleTypes1="";
+    // setSelect("选择三方支付通道","selttleType");
+
+    var parm={'url':'/XCCloud/StoreInfo?action=GetStoreUncheckList',
+        'obj':{"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"},
+        'elem':'#auditStoreTable',
+        'cols':[
+             {fixed: 'left', title: '操作', width:150, align:'center', toolbar: '#barDemo'}
+            ,{field:'StoreID', title:'门店编号', align: 'center', sort: true}
+            ,{field:'MerchID',title: '门店归属', align: 'center'} //width 支持：数字、百分比和不填写。
+            ,{field:'StoreName', title: '门头', align: 'center'}
+            ,{field:'Password', title: '消费密码', align: 'center'}
+            ,{field:'AuthorExpireDate', title: '授权到期日期', align: 'center',templet: '#changeTime'}
+            ,{field:'AreaCode', title: '邮政编号', align: 'center'}
+            ,{field:'Address', title: '地址', align: 'center'}
+            ,{field:'Contacts', title: '联系人', align: 'center'}
+            ,{field:'Mobile', title: '手机号', align: 'center'}
+            ,{field:'SelttleTypeStr', title: '结算类型', align: 'center'}
+            ,{field:'StoreStateStr', title: '门店状态', align: 'center'}
+        ]
+    };
+    getInitData(parm);
+    layui.use(['table','form','jquery','layer','element'], function() {
+        var element = layui.element;
+        var table = layui.table;
+        var $=layui.jquery;
+        var form=layui.form;
+        var layer = layui.layer;
+        table.on('tool(auditStore)', function (obj,event) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+            var storeId=data.StoreID;
+            console.log(storeId);
+            var _obj=obj;
+                if (layEvent === 'edit') { //编辑
+                var obj={"storeId":storeId,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"};
+                var url = "/XCCloud/StoreInfo?action=GetStoreInfo";
+                var parasJson = JSON.stringify(obj);
+                var selttleTypes="";
+                var listData=[];
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: {parasJson: parasJson},
+                    success: function (data) {
+                        data=JSON.parse(data);
+                        console.log(data);
+                        var arr=data.result_data;
+                        if(data.result_code==1){
+                            layer.open({
+                                type: 1,
+                                closeBtn:1,
+                                title:'审核门店，编号：'+storeId,
+                                shadeClose:true,
+                                area:'1060px',
+                                content: $('.auditStore')
+                            });
+                            if(arr.ParentID=='undefined'){
+                                $('#parentId').val('');
+                            }else {
+                                $('#parentId').val(arr.ParentID);
+                            }
+                            $('#storeName').val(arr.StoreName);
+                            $('#lookPassword').val(arr.Password);
+                            $('#authorExpireDate').val(timeStamp2String(arr.AuthorExpireDate));
+                            $('#demo2').html("").append(' <img src="'+arr.ShopSignPhoto+'" style="display: block;width: 200px;height: 160px;margin: 0 auto">');
+                            $('#Address').val(arr.Address);
+                            $('#lng').val(arr.Lng);
+                            $('#lat').val(arr.Lat);
+                            $('#contracts').val(arr.Contacts);
+                            $('#idCard').val(arr.IDCard);
+                            $('#idExpireDate').val(timeStamp2String(arr.IDExpireDate));
+                            $('#mobile').val(arr.Mobile);
+                            $('#licenceId').val(arr.LicenceID);
+                            $('#demo3').html("").append(' <img src="'+arr.LicencePhoto+'" style="display: block;width: 200px;height: 160px;margin: 0 auto">');
+                            $('#licenceExpireDate').val(timeStamp2String(arr.LicenceExpireDate));
+                            //银行类型
+                            $('#bankType').val(arr.BankTypeStr);
+                            $('#bankCode').val(arr.BankCode);
+                            $('#bankAccount').val(arr.BankAccount);
+
+                            //支付通道类型
+                            $('#selttleType').val(arr.SelttleTypeStr);
+                            selttleTypes=arr.SelttleType;
+                          if(arr.SelttleType==1){
+                            $('.payWayNeed').find('li').eq(1).removeClass('layui-hide').siblings().addClass('layui-hide');
+                              $('#selttleType').html("").append('<option selected value="1">官方通道</option>');
+                              layui.use(['form'], function() {
+                                  var form = layui.form;
+                                  form.render('select');
+                              });
+                          }else if(arr.SelttleType==2){
+                              $('.payWayNeed').find('li').eq(2).removeClass('layui-hide').siblings().addClass('layui-hide');
+                              $('#selttleType').html("").append('<option selected value="2">新大陆</option>');
+                              layui.use(['form'], function() {
+                                  var form = layui.form;
+                                  form.render('select');
+                              });
+                          }else if(arr.SelttleType==0){
+                              $('.payWayNeed').find('li').eq(0).removeClass('layui-hide').siblings().addClass('layui-hide');
+                              $('#selttleType').html("").append('<option selected value="0">个人支付通道</option>');
+                              layui.use(['form'], function() {
+                                  var form = layui.form;
+                                  form.render('select');
+                              });
+                          }
+                          setSign(arr.Lng,arr.Lat,arr.Address,arr.Mobile,'allMap');
+
+                            var parm1={'url':'/XCCloud/StoreInfo?action=CheckStoreInfo',
+                                'obj':{'storeId':storeId,'workState':0,'remark':$("#refuseReason").val(),'selttleType':selttleTypes,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"}};
+                            document.getElementsByClassName('checkRefuse')[0].addEventListener("click",function(event){
+                                checkStore(parm1);
+                                event.stopImmediatePropagation();
+                            },true);
+
+
+                            document.getElementsByClassName('checkPass')[0].addEventListener("click",function(event){
+                                var settleFields=getSettleFields(selttleTypes);
+                                console.log(settleFields);
+                                var parm2={'url':'/XCCloud/StoreInfo?action=CheckStoreInfo',
+                                    'obj':{'storeId':storeId,'workState':1,'remark':$("#refuseReason").val(),'selttleType':selttleTypes,'settleFields':settleFields,"userToken":token,"signkey":"1f626576304bf5d95b72ece2222e42c3"}}
+                                console.log(parm2);
+                                checkStore(parm2);
+                                event.stopImmediatePropagation();
+                            },true);
+                      }
+                    }
+                });
+                }
+        });
+    });
+
+
+
+    function checkStore(parm) {
+        var obj=parm.obj;
+        var url = parm.url;
+        var parasJson = JSON.stringify(obj);
+        console.log(parm);
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: {parasJson: parasJson},
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                if(data.result_code==1){
+                    layui.use('layer',function () {
+                        layer.msg('操作成功');
+                        closePage();
+                    })
+                }
+                else {
+                    layui.use('layer',function () {
+                        layer.msg('保存失败，请核查后再次提交');
+                    })
+                }
+            }
+        })
+    }
+
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-sm" lay-event="edit" href="#">审核查看</a>
+</script>
+<script type="text/html" id="changeTime">
+    {{# if(d.AuthorExpireDate!=null&&d.AuthorExpireDate!=''){ }}
+    {{timeStamp2String(d.AuthorExpireDate)}}
+    {{# }else{ }}
+    {{d.AuthorExpireDate}}
+    {{#  } }}
+</script>
+</body>
+</html>

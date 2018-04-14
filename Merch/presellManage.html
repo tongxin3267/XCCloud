@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预售管理</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<style>
+    .layui-tab-title .layui-this{
+        background-color: #1e9fff;border-radius: 7px 7px 0 0;
+    }
+</style>
+<body>
+<div class="layui-row" style="padding: 10px">
+    <blockquote class="layui-elem-quote" style="text-align:right;padding-right: 100px;">
+        <button type="button" class="layui-btn layui-btn-normal">查询</button>
+    </blockquote>
+    <div class="layui-col-md12 layui-col-sm12 layui-col-lg12">
+          <table class="layui-hide layui-col-md12 layui-col-sm12 layui-col-lg12" id="presellManage" lay-filter="presellManage"></table>
+    </div>
+
+</div>
+</body>
+<script src="js/jquery-1.8.3-min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/storeSystem.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+<script>
+    let xc=xcActionSystem.prototype;
+    let token=xc.getStorage('token');
+    layui.use(['element','table'],function(){
+        let element=layui.element;
+        let table=layui.table;
+        let arr=[{'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},
+            {'SaleTime':'2018-3-15','DigitNumber':'200','DigitName':'七号数字币','Count':40,'Money':'499','SaleMachine':'售币机'},]
+        layui.table.render({
+            elem: '#presellManage'
+            , data: arr
+            // , size:'sm'
+            , cellMinWidth: 120 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[{field:'DigitName', title:'活动名称', align: 'center'}
+                ,{field:'SaleTime',title: '开始时间', align: 'center'} //width 支持：数字、百分比和不填写。
+                ,{field:'SaleTime', title: '结束时间', align: 'center',}
+                ,{field:'Count', title: '定金', align: 'center'}
+                ,{field:'Money', title: '报名人数', align: 'center'}
+                ,{field:'Money', title: '阶段1价格', align: 'center'}
+                ,{field:'Money', title: '阶段2价格', align: 'center'}
+                ,{fixed: 'right',title: '操作' , align:'center', toolbar: '#barDemo'}]]
+            , page: {page: true, limits: [5,10, 15, 20, 30, 50, 100]}
+            , limit: 10
+        })
+    })
+
+</script>
+</html>

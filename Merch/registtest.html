@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.8.3-min.js"></script>
+
+<script type="text/javascript">
+var href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx86275e2035a8089d&redirect_uri=" + encodeURIComponent("https://mp.4000051530.com/WeiXin/Register.aspx?storeId=S0100011&merchId=B4201030001&gcode=aaaa&mobile=13545208294&username=chfengmtcs&password=111111&realname=冯程&message=hello") + "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
+    function do_wxpageauth() {
+        window.location.href=href;
+    }
+    function openPageauth(obj) {        
+	obj.href = href;
+    }
+</script>
+</head>
+<body>
+    <div title="微信网页授权" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>授权请求</div>
+        <input id="Button1" type="button" value="wxpageauth" onclick="do_wxpageauth()" />
+        <a href="####" onclick="openPageauth(this)">测试</a>
+    </div>
+</body>
+</html>

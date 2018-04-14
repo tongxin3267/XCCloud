@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/website/js/jquery-1.8.3-min.js"></script>
+    <script type="text/javascript">
+
+
+        //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+        //var mobileToken = "d61125e9e3894e7ca3aff69030322097";
+        //var memberToken = "91a689cf1d5c494ba40ef7b305e65f67";
+        //var storeId = "100025420106001";
+        //var mobile = "15618920033";
+        //var userToken = "";
+        //var icCardId = "10004143";
+        //李俊杰本地测试，请勿修改，如需要修改，请注释再重新定义变量
+
+        //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+        //var mobileToken = "b185d3d34f15430aadfcb57316feb0fe";
+        //var memberToken = "0aa16a8e5b2b45caa47723edaeb6b99c";
+        //李俊杰服务器测试，请勿修改，如需要修改，请注释再重新定义变量
+
+        $(function () {
+            $("#txtStoreId").val("100025420106001");
+            $("#txtUserToken").val("");
+            $("#txtPassword").val("100025420106001");
+            $("#txtMobile").val("15618920033");
+            $("#txtMemberCardId").val("10004143");
+            $("#txtWorkStation").val("lijunjie"); 
+            $("#txtOpenICCardId").val("10004143");
+            $("#txtMemberLevelId_do_addOrder").val(0);
+            $("#txtMemberCardId_do_addOrder").val(0);
+            selCustomerTypeInit();
+        });
+
+        function common(url, parasJson) {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+    </script>
+
+    //会员接口
+    <script type="text/javascript">
+
+        function do_userlogin() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "storeId": $("#txtStoreId").val(), "loginName": "lijunjie", "password": "123456",
+                 "workStation": "lijunjie", "dogId": "22222222"
+            };
+            var url = "/XCCloud/userinfo?action=barLogin";
+            var parasJson = JSON.stringify(parasObj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    if (data.result_code == "1") {
+                        $("#txtUserToken").val(data.result_data.userToken);
+                        userToken = $("#txtUserToken").val();
+                    }
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function do_MemberLevel() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val()
+            };
+            var url = "/XCCloud/Member?action=getMemberLevel";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_Member() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "icCardId": $("#txtMemberCardId").val(), "storeId": $("#txtStoreId").val(), "userToken": $("#txtUserToken").val()
+            };
+            var url = "/XCCloud/Member?action=getMember";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+
+        function do_GetMemberOpenCardFoodInfo() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "memberLevelId": "1,2","storeId": $("#txtStoreId").val(), "userToken": $("#txtUserToken").val()
+            };
+            var url = "/XCCloud/Foods?action=getMemberOpenCardFoodInfo";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_GetFoodListInfo() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "memberLevelId": "1", "customerType": "1", "userToken": $("#txtUserToken").val(), "foodTypeStr": "0,2,3,4,6"
+            };
+            var url = "/XCCloud/Foods?action=getFoodDetail";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_GetFoodDetail() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {"sysId": "0", "versionNo": "0.0.0.1","userToken": $("#txtUserToken").val(), "foodId": "137"};
+            var url = "/XCCloud/Foods?action=getFoodDetail";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_GetOrder() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "storeId": $("#txtStoreId").val(), "userToken": $("#txtUserToken").val()
+            };
+            var url = "/XCCloud/Order?action=getOrder";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_addOrder() {
+            var buyDetail1 = { foodId: "133", foodCount: "1", payType: "0", payNum: 40.00 }
+            var buyDetail2 = { foodId: "135", foodCount: "1", payType: "2", payNum: 1000 }
+            var buyDetail3 = { foodId: "136", foodCount: "1", payType: "3", payNum: 1000 }
+            var buyDetail4 = { foodId: "138", foodCount: "1", payType: "0", payNum: 80.00 }
+
+            var buyDetails = new Array();
+            buyDetails.push(buyDetail1);
+            buyDetails.push(buyDetail2);
+            buyDetails.push(buyDetail3);
+            buyDetails.push(buyDetail4);
+
+            var parasObj = {
+                buyDetails: JSON.stringify(buyDetails),
+                customerType: $("#selCustomerType").val(),
+                mobile: $("#txtMobile_do_addOrder").val(),
+                memberLevelId: $("#txtMemberLevelId_do_addOrder").val(),
+                storeId: $("#txtStoreId").val(),
+                icCardId: $("#txtMemberCardId_do_addOrder").val(),
+                payCount: 120,
+                realPay: 120,
+                freePay:0,
+                scheduleId:1,
+                workStation: "lijunjie",
+                authorId:"0",
+                note:"",
+                orderSource:"0",
+                saleCoinType: "1",
+                userToken: $("#txtUserToken").val()
+            };
+            var url = "/XCCloud/Order?action=addOrder";
+            var parasJson = JSON.stringify(parasObj);
+            var parasJson = JSON.stringify(parasObj);
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { parasJson: parasJson },
+                success: function (data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    if (data.result_code == "1") {
+                        $("#txtOrderId").val(data.result_data.orderFlwId);
+                    }
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(1);  //这个地方也用到了
+                }
+            });
+        }
+
+        function do_UserToken() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "storeId": $("#txtStoreId").val(), "mobile": $("#txtMobile").val(), "smsCode": "123456"
+            };
+            var url = "/XCGame/UserInfo?action=getUserToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function do_addToken() {
+            var txtUserToken = $("#txtUserToken").val();
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "userToken": $("#txtUserToken").val()
+            };
+            var url = "/XCGame/UserInfo?action=addUserToken";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function doProject() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "barcode": "a96e3c5a42964fb490370f37a5439a2d"
+            };
+            var url = "/XCGame/Project?action=getProject";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        function dodevice() {
+            var parasObj = {
+                "sysId": "0", "versionNo": "0.0.0.1", "storeId": $("#txtStoreId").val(), "mcuid": "20170518000011"
+            };
+            var url = "/XCGameMana/Device?action=addDevice";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function registerMember() {
+            var parasObj = {
+                "userToken": userToken, "storeId": $("#txtStoreId").val(), "mobile": $("#txtMobile").val(), "weChat": "", "qq": "", "imme": "", "cardShape": 1,
+                "memberName": "lijujnjie", "memberPassword": "888888", "birthday": "1976-10-10", "gender": "0", "identityCard": "420300197610102511",
+                "eMail": "", "leftHandCode": "", "rightHandCode": "", "photo": "", "memberLevelId": "1", "foodId": "1",
+                "payCount": 10.00, "realPay": 10.00, "freePay": 0, "repeatCode": "231", "icCardId": "10004144", "workStation": "lijunjie",
+                "userId": 3, "deposit": 10, "icCardUID": 0, "payType": 0,"SaleCoinType":1       
+            };
+            var url = "/XCCloud/Member?action=register";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function checkCanRegister() {
+            var parasObj = {
+                "userToken": userToken, "storeId": $("#txtStoreId").val(), "mobile": $("#txtMobile").val()
+            };
+            var url = "/XCCloud/Member?action=checkOpenCard";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+        
+        function getOrderContain() {
+            var parasObj = {
+                "userToken": userToken, "orderFlwId": $("#txtOrderId").val()
+            };
+            var url = "/XCCloud/order?action=getOrderContain";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function payOrder() {
+            var parasObj = {
+                "userToken": userToken, "orderFlwId": $("#txtOrderId").val(), "realPay": 120,
+                "workStation": $("#txtWorkStation").val(), "authorId": 3, "openICCardId": $("#txtMemberCardId_do_addOrder").val()
+            };
+            var url = "/XCCloud/order?action=payOrder";
+            var parasJson = JSON.stringify(parasObj);
+            common(url, parasJson);
+        }
+
+        function selCustomerTypeInit() {
+            $("#selCustomerType").val(0);
+
+            $("#selCustomerType").change(function () {
+                var value = $("#selCustomerType").val();
+                if (value == 0) {
+                    $("#txtMemberLevelId_do_addOrder").val(0);
+                    $("#txtMemberCardId_do_addOrder").val(0);
+                }
+                else if (value == 1) {
+
+                }
+                else if (value == 2) {
+
+                }
+            });
+        }
+
+    </script>
+        
+</head>
+<body>
+    <div title="会员" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <div>会员</div>
+        <input id="Button_userlogin" type="button" value="do_userlogin(用户信息)" onclick="do_userlogin()" />
+    </div>
+    门店Id:<input id="txtStoreId" placeholder="请输入门店Id" /></br>
+    用户token":<input id="txtUserToken" placeholder="请输入用户token" /></br>
+    密码:<input id="txtPassword" placeholder="请输入密码" /></br>
+    手机号:<input id="txtMobile" placeholder="请输入手机号" /></br>
+    会员卡号:<input id="txtMemberCardId" placeholder="请输入会员卡号" /></br>
+    订单Id:<input id="txtOrderId" placeholder="请输入订单Id" /></br>
+    工作站:<input id="txtWorkStation" placeholder="工作站" /></br>
+
+    <div title="do_MemberLevel" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_MemberLevel(获取会员等级)" onclick="do_MemberLevel()" />
+    </div>
+
+    <div title="do_Member" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_Member(获取会员信息)" onclick="do_Member()" />
+    </div>
+
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_GetMemberOpenCardFoodInfo(获取套餐接口)" onclick="do_GetMemberOpenCardFoodInfo()" />
+    </div>
+
+
+    <div title="do_GetFoodListInfo" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_GetFoodListInfo(获取套餐列表)" onclick="do_GetFoodListInfo()" />
+    </div>
+
+    <div title="do_GetFoodDetail" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_GetFoodDetail(获取套餐明细)" onclick="do_GetFoodDetail()" />
+    </div>
+
+    <div title="do_GetOrder" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_GetOrder(获取订单流水号)" onclick="do_GetOrder()" />
+    </div>
+
+    <div title="do_addOrder" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        客户类型:<select id="selCustomerType"><option value="0">散客</option><option value="1">入会</option><option value="2">会员</option></select>
+        会员级别（如果散客输入0）:<input id="txtMemberLevelId_do_addOrder" placeholder="会员级别（如果散客输入0）" />
+        会员卡号:<input id="txtMemberCardId_do_addOrder" placeholder="请输入会员卡号" />
+        会员手机号码:<input id="txtMobile_do_addOrder" placeholder="请输入会员手机号码" />
+        <input id="Buttonorder_12222" type="button" value="do_addOrder(添加订单)" onclick="do_addOrder()" />
+        <input id="Buttonorder_payOrder" type="button" value="payOrder(完成订单支付)" onclick="payOrder()" />
+    </div>
+
+    <div title="do_UserToken" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_UserToken(获取用户token)" onclick="do_UserToken()" />
+    </div>
+    <div title="do_addToken" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="do_addToken(验证token)" onclick="do_addToken()" />
+    </div>
+    <div title="doProject" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="doProject(获取门票信息)" onclick="doProject()" />
+    </div>
+    <div title="do_saveCoins" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222" type="button" value="dodevice(添加总表设备信息)" onclick="dodevice()" />
+    </div>
+    <div title="registerMember" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_12222111" type="button" value="registerMember(注册会员)" onclick="registerMember()" />
+    </div>
+    <div title="checkCanRegister" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_122221111" type="button" value="checkCanRegister(注册会员)" onclick="checkCanRegister()" />
+    </div>
+    <div title="checkCanRegister" style="font-size:14px;color:#F00;border:1px solid #ccc;">
+        <input id="Buttonorder_getOrderContain" type="button" value="getOrderContain(获取订单内容)" onclick="getOrderContain()" />
+    </div>
+
+    <br />
+
+</body>
+</html>

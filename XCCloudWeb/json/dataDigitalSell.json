@@ -1,0 +1,78 @@
+[{
+    "id": 0,
+    "title": "编号",
+    "field":"ID",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 1,
+    "title": "销毁时间",
+    "field":"SellTime",
+    "type": "time",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 2,
+    "title": "数字币编号",
+    "field":"CoinNumber",
+    "type": "number",
+    "iscolume" : "1",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+},{
+    "id": 3,
+    "title": "套餐名",
+    "field":"itemName",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 4,
+    "title": "币数",
+    "field":"CoinCount",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 5,
+    "title": "金额",
+    "field":"Sum",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+}
+,{
+    "id": 6,
+    "title": "售币设备",
+    "field":"Operator",
+    "type": "number",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+},{
+    "id": 7,
+    "title":"备注",
+    "field":"Note",
+    "type": "",
+    "iscolume" : "0",
+    "issearch" : "1",
+    "width" : 90,
+    "list" : ""
+
+
+}]
