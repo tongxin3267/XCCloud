@@ -20,13 +20,12 @@ using XXCloudService.Api.XCCloud.Common;
 
 namespace XXCloudService.Api.XCCloud
 {
-    [Authorize(Roles = "XcUser,XcAdmin,MerchUser")]
+    [Authorize(Roles = "XcAdmin,MerchUser")]
     /// <summary>
     /// UserGroup 的摘要说明
     /// </summary>
     public class UserGroup : ApiBase
-    {
-        
+    {        
         [ApiMethodAttribute(SignKeyEnum = SignKeyEnum.XCCloudUserCacheToken, SysIdAndVersionNo = false)]
         public object GetUserGroupList(Dictionary<string, object> dicParas)
         {
@@ -69,27 +68,35 @@ namespace XXCloudService.Api.XCCloud
         {
             try
             {
+                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+
                 string errMsg = string.Empty;
                 string groupId = dicParas.ContainsKey("groupId") ? dicParas["groupId"].ToString() : string.Empty;
-                string logId = string.Empty;
 
-                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+                if (string.IsNullOrEmpty(groupId))
+                {
+                    errMsg = "groupId参数不能为空";
+                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
+                }
+
+                string sql = string.Empty;
+                SqlParameter[] parameters = new SqlParameter[0];
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    logId = userTokenKeyModel.DataModel.MerchID;
+                    string merchId = userTokenKeyModel.DataModel.MerchID;
+                    sql = " exec  SelectUserGroupGrant @GroupID,@MerchID";
+                    Array.Resize(ref parameters, parameters.Length + 1);
+                    parameters[parameters.Length - 1] = new SqlParameter("@GroupID", groupId);
+                    Array.Resize(ref parameters, parameters.Length + 1);
+                    parameters[parameters.Length - 1] = new SqlParameter("@MerchID", merchId);
                 }
-
-                string sql = " exec  SelectUserGroupGrant @GroupID,@MerchID";
-                SqlParameter[] parameters = new SqlParameter[2];
-                parameters[0] = new SqlParameter("@GroupID", groupId);
-                parameters[1] = new SqlParameter("@MerchID", logId);
-                if (userTokenKeyModel.LogType == (int)RoleType.XcAdmin)
+                else if (userTokenKeyModel.LogType == (int)RoleType.XcAdmin)
                 {
                     sql = " exec  SelectFunctionForXA @GroupID";
-                    parameters = new SqlParameter[1];
-                    parameters[0] = new SqlParameter("@GroupID", groupId);
+                    Array.Resize(ref parameters, parameters.Length + 1);
+                    parameters[parameters.Length - 1] = new SqlParameter("@GroupID", groupId);
                 }
-
+                
                 //返回商户信息和功能菜单信息
                 System.Data.DataSet ds = XCCloudBLL.ExecuteQuerySentence(sql, parameters);
                 if (ds.Tables.Count != 2)
@@ -97,14 +104,12 @@ namespace XXCloudService.Api.XCCloud
                     errMsg = "获取数据异常";
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
-
-                var userGroupModel = Utils.GetModelList<UserGroupModel>(ds.Tables[0]).FirstOrDefault() ?? new UserGroupModel();
-                userGroupModel.UserGroupGrants = Utils.GetModelList<UserGroupGrantModel>(ds.Tables[1]);
-
+                
                 //实例化一个根节点
+                var userGroupModel = Utils.GetModelList<UserGroupModel>(ds.Tables[0]).FirstOrDefault() ?? new UserGroupModel();
                 UserGroupGrantModel rootRoot = new UserGroupGrantModel();
                 rootRoot.ParentID = 0;
-                TreeHelper.LoopToAppendChildren(userGroupModel.UserGroupGrants, rootRoot);
+                TreeHelper.LoopToAppendChildren(Utils.GetModelList<UserGroupGrantModel>(ds.Tables[1]), rootRoot);
                 userGroupModel.UserGroupGrants = rootRoot.Children;
 
                 return ResponseModelFactory.CreateSuccessModel(isSignKeyReturn, userGroupModel);
