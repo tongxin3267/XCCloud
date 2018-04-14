@@ -1058,12 +1058,12 @@ namespace XCCloudService.SocketService.UDP.Factory
                 //对象序列化为字节数组
                 byte[] dataByteArr = JsonHelper.DataContractJsonSerializerToByteArray(dataModel);
                 //生成发送数据包
-                byte[] requestPackages = CreateResponseProtocolData(TransmiteEnum.远程门店门票操作请求响应, dataByteArr);
+                byte[] requestPackages = CreateResponseProtocolData(TransmiteEnum.远程门店出票条码操作请求, dataByteArr);
 
                 //服务端发送数据
                 XCCloudService.SocketService.UDP.Server.Send(ip, port, requestPackages);
                 string requestJson = JsonHelper.DataContractJsonSerializer(dataModel);
-                SignalrServerToClient.BroadcastMessage(Convert.ToInt32(TransmiteEnum.远程门店门票操作请求响应), "远程门店门票操作请求响应", radarToken, requestJson);
+                SignalrServerToClient.BroadcastMessage(Convert.ToInt32(TransmiteEnum.远程门店出票条码操作请求), "远程门店出票条码操作请求", radarToken, requestJson);
                 return true;
             }
 

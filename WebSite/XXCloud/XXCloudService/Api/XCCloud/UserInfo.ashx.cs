@@ -633,7 +633,7 @@ namespace XCCloudService.Api.XCCloud
                     string errMsg = string.Empty;
                     string merchId = string.Empty;
                     XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
 
                     IBase_StoreInfoService base_StoreInfoService = BLLContainer.Resolve<IBase_StoreInfoService>();
                     var storeIds = base_StoreInfoService.GetModels(p => p.MerchID.Equals(merchId, StringComparison.OrdinalIgnoreCase)).Select(o => o.StoreID).ToList();                    
@@ -721,7 +721,8 @@ namespace XCCloudService.Api.XCCloud
                                    UserStatus = a.Status,
                                    UserStatusStr = d != null ? d.DictKey : string.Empty,
                                    UserType = a.UserType,
-                                   UserTypeStr = b != null ? b.DictKey : string.Empty
+                                   UserTypeStr = b != null ? b.DictKey : string.Empty,
+                                   Switchable = a.Switchable
                                };
 
                     return ResponseModelFactory.CreateSuccessModel(isSignKeyReturn, linq.FirstOrDefault());
@@ -744,6 +745,7 @@ namespace XCCloudService.Api.XCCloud
                 string status = dicParas.ContainsKey("status") ? (dicParas["status"] + "") : string.Empty;
                 string isAdmin = dicParas.ContainsKey("isAdmin") ? (dicParas["isAdmin"] + "") : string.Empty;
                 string userType = dicParas.ContainsKey("userType") ? (dicParas["userType"] + "") : string.Empty;
+                string switchable = dicParas.ContainsKey("switchable") ? (dicParas["switchable"] + "") : string.Empty;
                 int iUserId = Convert.ToInt32(userId);
 
                 if (string.IsNullOrEmpty(userId))
@@ -767,6 +769,18 @@ namespace XCCloudService.Api.XCCloud
                 if (string.IsNullOrEmpty(logName))
                 {
                     errMsg = "logName参数不能为空";
+                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
+                }
+
+                if (string.IsNullOrEmpty(userType))
+                {
+                    errMsg = "userType参数不能为空";
+                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
+                }
+
+                if (string.IsNullOrEmpty(switchable))
+                {
+                    errMsg = "switchable参数不能为空";
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
 
@@ -806,10 +820,11 @@ namespace XCCloudService.Api.XCCloud
                         
                         base_UserInfo.IsAdmin = !string.IsNullOrEmpty(isAdmin) ? Convert.ToInt32(isAdmin) : (int?)null;
                         base_UserInfo.Status = !string.IsNullOrEmpty(status) ? Convert.ToInt32(status) : (int?)null;
-                        base_UserInfo.UserType = !string.IsNullOrEmpty(userType) ? Convert.ToInt32(userType) : (int)UserType.Store;
+                        base_UserInfo.UserType = Convert.ToInt32(userType);
                         base_UserInfo.RealName = realName;
                         base_UserInfo.LogName = logName;
                         base_UserInfo.Mobile = mobile;
+                        base_UserInfo.Switchable = Convert.ToInt32(switchable);
 
                         string storeId = base_UserInfo.StoreID;
                         if (base_UserInfo.IsAdmin == 1 && userInfoService.Any(a => a.UserID != iUserId && a.IsAdmin == 1 && a.StoreID.Equals(storeId, StringComparison.OrdinalIgnoreCase)))
@@ -886,6 +901,7 @@ namespace XCCloudService.Api.XCCloud
                 string reason = dicParas.ContainsKey("reason") ? (dicParas["reason"] + "") : string.Empty;
                 string isAdmin = dicParas.ContainsKey("isAdmin") ? (dicParas["isAdmin"] + "") : string.Empty;
                 string userType = dicParas.ContainsKey("userType") ? (dicParas["userType"] + "") : string.Empty;
+                string switchable = dicParas.ContainsKey("switchable") ? (dicParas["switchable"] + "") : string.Empty;
                 int iUserId, iState; 
 
                 if (string.IsNullOrEmpty(userId))
@@ -897,6 +913,12 @@ namespace XCCloudService.Api.XCCloud
                 if (string.IsNullOrEmpty(state))
                 {
                     errMsg = "审核状态state参数不能为空";
+                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
+                }
+
+                if (string.IsNullOrEmpty(switchable))
+                {
+                    errMsg = "switchable参数不能为空";
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
 
@@ -946,7 +968,8 @@ namespace XCCloudService.Api.XCCloud
                             base_UserInfo.AuditorTime = DateTime.Now;
                             base_UserInfo.Status = (int)UserStatus.Pass;
                             base_UserInfo.IsAdmin = !string.IsNullOrEmpty(isAdmin) ? Convert.ToInt32(isAdmin) : (int?)null;
-                            base_UserInfo.UserType = !string.IsNullOrEmpty(userType) ? Convert.ToInt32(userType) : (int)UserType.Store;
+                            base_UserInfo.UserType = Convert.ToInt32(userType);
+                            base_UserInfo.Switchable = Convert.ToInt32(switchable);
 
                             string storeId = base_UserInfo.StoreID;
                             if (base_UserInfo.IsAdmin == 1 && userInfoService.Any(a => a.UserID != iUserId && a.IsAdmin == 1 && a.StoreID.Equals(storeId, StringComparison.OrdinalIgnoreCase)))

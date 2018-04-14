@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XCCloudService.Common;
+using XCCloudService.Common.Enum;
 using XCCloudService.Model.WeiXin.Message;
 using XCCloudService.WeiXin.Common;
 
@@ -118,14 +119,22 @@ namespace XCCloudService.WeiXin.Message
             uriParams = string.Empty;
             UserRegisterRemindConfigModel config = Utils.GetCopy<UserRegisterRemindConfigModel>(configModel);
             UserRegisterRemindDataModel data = Utils.GetCopy<UserRegisterRemindDataModel>(dataModel);
+            var userType = string.Empty;
+            switch ((UserType)data.UserType)
+            {
+                case UserType.Store: { userType = "门店"; break; }
+                case UserType.Normal: { userType = "商户"; break; }
+                case UserType.Heavy: { userType = "大客户"; break; }
+                case UserType.Agent: { userType = "代理商"; break; }
+            }
             var msgData = new
             {
                 first = new { value = config.Title, color = config.FirstColor },
                 keyword1 = new { value = data.UserName, color = config.Keynote1Color },
                 keyword2 = new { value = data.RegisterTime, color = config.Keynote2Color },
-                remark = new { value = "工单号：" + data.WorkId + "\n" + data.Message + "\n" + config.Remark, color = config.RemarkColor }
+                remark = new { value = "工单号：" + data.WorkId + "\n" + "用户类型：" + userType + "\n" + data.Message + "\n" + config.Remark, color = config.RemarkColor }
             };
-            uriParams = string.Format("workId={0}&userName={1}&message={2}", Utils.UrlEncode(data.WorkId), Utils.UrlEncode(data.UserName), Utils.UrlEncode(data.Message));            
+            uriParams = string.Format("workId={0}&userName={1}&message={2}&userType={3}", data.WorkId, Utils.UrlEncode(data.UserName), Utils.UrlEncode(data.Message), data.UserType);            
             return msgData;
         }
 

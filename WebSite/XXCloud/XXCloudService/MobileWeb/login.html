@@ -118,7 +118,7 @@
                 this.start1 = true;
                 var that=this;
                 console.log(that.account+"/"+that.password);
-                var obj={"sysId": "0","versionNo": "0.0.0.1",mobile:that.account,code:that.password};
+                var obj={"sysId": "0","versionNo": "0.0.0.1",mobile:that.account,token:that.password};
                 axios.post(url_sendSMSCode, obj).then(function (res) {
                     console.log(res.data);
                     that.$dialog.loading.close();

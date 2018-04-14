@@ -50,23 +50,24 @@ namespace XXCloudService.Api.XCCloud
                 {
                     var base_UserInfoModel = base_UserInfoService.GetModels(p => p.LogName.Equals(userName, StringComparison.OrdinalIgnoreCase) && p.LogPassword.Equals(password, StringComparison.OrdinalIgnoreCase)).FirstOrDefault<Base_UserInfo>();
                     int userId = base_UserInfoModel.UserID;
-                    int userType = (int)base_UserInfoModel.UserType;
+                    int userType = (int)base_UserInfoModel.UserType;                    
                     int logType = (int)RoleType.XcUser; //默认普通员工登录
-                    int isXcAdmin = 0; int.TryParse(Convert.ToString(base_UserInfoModel.Auditor), out isXcAdmin);
+                    int isXcAdmin = base_UserInfoModel.Auditor ?? 0;
+                    int switchable = base_UserInfoModel.Switchable ?? 0;
 
                     if (userType == (int)UserType.Xc && isXcAdmin == 0)
                     {
                         logType = (int)RoleType.XcAdmin;
                         userLogResponseModel.Token = XCCloudUserTokenBusiness.SetUserToken(userId.ToString(), logType);
                     }
-                    else if (userType == (int)UserType.Store || base_UserInfoModel.UserType == (int)UserType.StoreBoss)
+                    else if (userType == (int)UserType.Store || userType == (int)UserType.StoreBoss)
                     {
                         logType = (int)RoleType.StoreUser;
                         string storeId = base_UserInfoModel.StoreID;
                         IBase_StoreInfoService base_StoreInfoService = BLLContainer.Resolve<IBase_StoreInfoService>();
                         if (!base_StoreInfoService.Any(a => a.StoreID.Equals(storeId, StringComparison.OrdinalIgnoreCase)))
                         {
-                            errMsg = "该门店ID不存在";
+                            errMsg = "该门店不存在";
                             return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                         }
                         string merchId = base_StoreInfoService.GetModels(p => p.StoreID.Equals(storeId, StringComparison.OrdinalIgnoreCase)).FirstOrDefault().MerchID;
@@ -80,16 +81,18 @@ namespace XXCloudService.Api.XCCloud
                         IBase_MerchantInfoService base_MerchantInfoService = BLLContainer.Resolve<IBase_MerchantInfoService>();
                         if (!base_MerchantInfoService.Any(p => p.MerchID.Equals(merchId, StringComparison.OrdinalIgnoreCase)))
                         {
-                            errMsg = "该商户ID不存在";
+                            errMsg = "该商户不存在";
                             return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                         }
                         var base_MerchantInfoModel = base_MerchantInfoService.GetModels(p => p.MerchID.Equals(merchId, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-                        var dataModel = new MerchDataModel { MerchType = base_MerchantInfoModel.MerchType, CreateType = base_MerchantInfoModel.CreateType, CreateUserID = base_MerchantInfoModel.CreateUserID };
+                        var dataModel = new MerchDataModel { MerchID = merchId, MerchType = base_MerchantInfoModel.MerchType, CreateType = base_MerchantInfoModel.CreateType, CreateUserID = base_MerchantInfoModel.CreateUserID };
                         userLogResponseModel.Token = XCCloudUserTokenBusiness.SetUserToken(userId.ToString(), logType, dataModel);
+                        userLogResponseModel.MerchTag = base_MerchantInfoModel.MerchTag;
                     }
                     
                     userLogResponseModel.LogType = logType;
                     userLogResponseModel.UserType = userType;
+                    userLogResponseModel.Switchable = switchable;
                     return ResponseModelFactory.CreateSuccessModel(isSignKeyReturn, userLogResponseModel);
                 }
                 else

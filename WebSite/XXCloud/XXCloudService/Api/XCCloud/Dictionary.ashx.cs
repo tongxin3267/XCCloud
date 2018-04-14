@@ -85,10 +85,10 @@ namespace XXCloudService.Api.XCCloud
                 string errMsg = string.Empty;
                 string merchId = dicParas.ContainsKey("merchId") ? dicParas["merchId"].ToString() : string.Empty;
                 string dictKey = dicParas.ContainsKey("dictKey") ? dicParas["dictKey"].ToString() : string.Empty;
-                XCCloudUserTokenModel userTokenKeyModel = dicParas.ContainsKey(Constant.XCCloudUserTokenModel) ? (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel] : null;
-                if (userTokenKeyModel != null && userTokenKeyModel.LogType == (int)RoleType.MerchUser)
+                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+                if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
                 }
                 
                 string sql = " exec  SP_DictionaryNodes @MerchID,@DictKey,@RootID output ";
@@ -172,10 +172,10 @@ namespace XXCloudService.Api.XCCloud
                 string comment = dicParas.ContainsKey("comment") ? dicParas["comment"].ToString() : string.Empty;
                 string enabled = dicParas.ContainsKey("enabled") ? dicParas["enabled"].ToString() : string.Empty;
                 string merchId = dicParas.ContainsKey("merchId") ? dicParas["merchId"].ToString() : string.Empty;
-                XCCloudUserTokenModel userTokenKeyModel = dicParas.ContainsKey(Constant.XCCloudUserTokenModel) ? (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel] : null;
-                if (userTokenKeyModel != null && userTokenKeyModel.LogType == (int)RoleType.MerchUser)
+                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+                if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 //验证参数信息
@@ -246,10 +246,10 @@ namespace XXCloudService.Api.XCCloud
                 string comment = dicParas.ContainsKey("comment") ? dicParas["comment"].ToString() : string.Empty;
                 string enabled = dicParas.ContainsKey("enabled") ? dicParas["enabled"].ToString() : string.Empty;
                 string merchId = dicParas.ContainsKey("merchId") ? dicParas["merchId"].ToString() : string.Empty;
-                XCCloudUserTokenModel userTokenKeyModel = dicParas.ContainsKey(Constant.XCCloudUserTokenModel) ? (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel] : null;
-                if (userTokenKeyModel != null && userTokenKeyModel.LogType == (int)RoleType.MerchUser)
+                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+                if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 if (string.IsNullOrWhiteSpace(id))
@@ -333,10 +333,10 @@ namespace XXCloudService.Api.XCCloud
                 string comment = dicParas.ContainsKey("comment") ? dicParas["comment"].ToString() : string.Empty;
                 string enabled = dicParas.ContainsKey("enabled") ? dicParas["enabled"].ToString() : string.Empty;
                 string merchId = dicParas.ContainsKey("merchId") ? dicParas["merchId"].ToString() : string.Empty;
-                XCCloudUserTokenModel userTokenKeyModel = dicParas.ContainsKey(Constant.XCCloudUserTokenModel) ? (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel] : null;
-                if (userTokenKeyModel != null && userTokenKeyModel.LogType == (int)RoleType.MerchUser)
+                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
+                if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 if (string.IsNullOrWhiteSpace(id))

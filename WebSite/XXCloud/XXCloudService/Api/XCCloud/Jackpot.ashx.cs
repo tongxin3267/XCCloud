@@ -27,7 +27,7 @@ namespace XXCloudService.Api.XCCloud
             try
             {
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
                 string errMsg = string.Empty;                
                 object[] conditions = dicParas.ContainsKey("conditions") ? (object[])dicParas["conditions"] : null;
 
@@ -63,7 +63,7 @@ namespace XXCloudService.Api.XCCloud
             try
             {
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
                 
                 IData_JackpotInfoService data_JackpotInfoService = BLLContainer.Resolve<IData_JackpotInfoService>();
                 Dictionary<int, string> pJackpotList = data_JackpotInfoService.GetModels(p=>p.MerchInfo.Equals(merchId, StringComparison.OrdinalIgnoreCase))
@@ -138,7 +138,7 @@ namespace XXCloudService.Api.XCCloud
             try
             {
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 string errMsg = string.Empty;
                 string id = dicParas.ContainsKey("id") ? (dicParas["id"] + "") : string.Empty;

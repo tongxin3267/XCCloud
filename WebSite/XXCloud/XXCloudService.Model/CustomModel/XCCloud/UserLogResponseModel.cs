@@ -22,5 +22,8 @@ namespace XCCloudService.Model.CustomModel.XCCloud
 
         [DataMember(Name = "userType", Order = 4)]
         public int? UserType { get; set; }
+
+        [DataMember(Name = "switchable", Order = 4)]
+        public int? Switchable { get; set; }
     }    
 }

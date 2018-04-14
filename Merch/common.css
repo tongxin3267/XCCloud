@@ -120,7 +120,8 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     height: 40px;
     line-height: 40px;
     font-size: 12px;
-    width: 170px;
+    width: 120px;
+    /*padding-left: 50px;*/
     right: 0;
     z-index: -1;
     text-align: left;
@@ -129,8 +130,10 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 {
     width:20%;
     float:left;
-    text-align:center;
+    text-align:right;
 }
+.codeCheck .text span{
+    text-align: center!important;}
 .zhuce .text .input,.codeCheck .text .input,.userInfo .text .input
 {
     width:80%;

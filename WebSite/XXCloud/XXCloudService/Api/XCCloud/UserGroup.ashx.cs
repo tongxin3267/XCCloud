@@ -37,10 +37,9 @@ namespace XXCloudService.Api.XCCloud
                 int userId = (dicParas.ContainsKey("userId") && Utils.isNumber(dicParas["userId"])) ? Convert.ToInt32(dicParas["userId"]) : 0;
 
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    logId = userTokenKeyModel.LogId;
+                    logId = userTokenKeyModel.DataModel.MerchID;
                 }
                
                 //EF左关联
@@ -75,10 +74,9 @@ namespace XXCloudService.Api.XCCloud
                 string logId = string.Empty;
 
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    logId = userTokenKeyModel.LogId;
+                    logId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 string sql = " exec  SelectUserGroupGrant @GroupID,@MerchID";
@@ -129,7 +127,7 @@ namespace XXCloudService.Api.XCCloud
 
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    logId = userTokenKeyModel.LogId;
+                    logId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 string groupName = dicParas.ContainsKey("groupName") ? dicParas["groupName"].ToString() : string.Empty;

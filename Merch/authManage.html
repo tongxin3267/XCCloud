@@ -140,20 +140,20 @@
         <script src="register.js"></script>
         <script>
             $('.authSelectList_group ').on('mousedown','li',function () {
-    if($(this).children("input").is(':checked')){
-        $(this).children("input").removeAttr('checked');
-        $(this).children("div").css({backgroundColor:"#c1c1c1"});
-        $('#firstMenu').val("未选择")
-    }else {
-        $(this).children("div").css({backgroundColor:"#2899f9"});
-        $(this).siblings("li").children("div").css({backgroundColor:"#c1c1c1"});
-        $(this).children("input").prop('checked','true');
-        $(this).siblings("li").children("input").removeAttr('checked');
-        $('#firstMenu').val($(this).children("span[class='selectTexts']").text());
-        $('.grantBox_group').slideUp();
-        $('.addArrow1').css("background-image","url(images/arrow-right.svg)");
-    }
-});
+                    if($(this).children("input").is(':checked')){
+                        $(this).children("input").removeAttr('checked');
+                        $(this).children("div").css({backgroundColor:"#c1c1c1"});
+                        $('#firstMenu').val("未选择")
+                    }else {
+                        $(this).children("div").css({backgroundColor:"#2899f9"});
+                        $(this).siblings("li").children("div").css({backgroundColor:"#c1c1c1"});
+                        $(this).children("input").prop('checked','true');
+                        $(this).siblings("li").children("input").removeAttr('checked');
+                        $('#firstMenu').val($(this).children("span[class='selectTexts']").text());
+                        $('.grantBox_group').slideUp();
+                        $('.addArrow1').css("background-image","url(images/arrow-right.svg)");
+                    }
+                });
             $('.authSelectList_grant').on('mousedown','li',function () {
                 if($(this).children("input").is(':checked')){
                     $(this).children("div").css({backgroundColor:"#c1c1c1"});
@@ -170,6 +170,9 @@
              addMessage();
             do_userGroup();
             do_userGrant();
+            function cancelRefuse() {
+                $('.refuseReason').stop(false, true).animate({left: '+=+100%'}, "quick");
+            }
         </script>
 </body>
 

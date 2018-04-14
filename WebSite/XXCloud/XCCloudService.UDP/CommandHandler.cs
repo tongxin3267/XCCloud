@@ -441,7 +441,10 @@ namespace XCCloudService.SocketService.UDP
             //获取雷达通知请求数据模式
             LotteryOperateResultNotifyRequestModel requestDataModel = JsonHelper.DataContractJsonDeserializer<LotteryOperateResultNotifyRequestModel>(requestDataJson);
             UDPSocketCommonQueryAnswerModel asnwerModel = UDPSocketCommonQueryAnswerBusiness.GetAnswerModel(requestDataModel.SN);
-
+            if (requestDataModel.Result_Data == null)
+            {
+                requestDataModel.Result_Data = "";
+            }
             //验证MD5
             if (!SignKeyHelper.CheckSignKey(requestDataModel, asnwerModel.StorePassword))
             {
@@ -485,7 +488,10 @@ namespace XCCloudService.SocketService.UDP
             //获取雷达通知请求数据模式
             OutTicketOperateResultNotifyRequestModel requestDataModel = JsonHelper.DataContractJsonDeserializer<OutTicketOperateResultNotifyRequestModel>(requestDataJson);
             UDPSocketCommonQueryAnswerModel asnwerModel = UDPSocketCommonQueryAnswerBusiness.GetAnswerModel(requestDataModel.SN);
-
+            if (requestDataModel.Result_Data == null)
+            {
+                requestDataModel.Result_Data = "";
+            }
             //验证MD5
             if (!SignKeyHelper.CheckSignKey(requestDataModel, asnwerModel.StorePassword))
             {

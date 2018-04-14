@@ -43,8 +43,10 @@ namespace XCCloudService.Common
         public static string SAppMessagePushXmlFilePath = System.Web.HttpContext.Current.Server.MapPath("/Config/SAppMessageTemplate.xml");
 
         /// <summary>
-        /// 
+        /// 雷达超时
         /// </summary>
         public static int RadarOffLineTimeLong = int.Parse(System.Configuration.ConfigurationManager.AppSettings["radarOffLineTimeLong"] ?? "60");
+
+        public static string H5WeiXinAuthRedirectUrl = System.Configuration.ConfigurationManager.AppSettings["H5WeiXinAuthRedirectUrl"];
     }
 }

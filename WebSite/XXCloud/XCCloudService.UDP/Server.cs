@@ -169,7 +169,7 @@ namespace XCCloudService.SocketService.UDP
                 client.BeginSendTo(data, 0, data.Length, SocketFlags.None, epSender, new AsyncCallback(SendCallBack), client);
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 LogHelper.SaveLog(TxtLogType.UPDService, TxtLogContentType.Exception, TxtLogFileType.Day, "Send(string IP, int Port, byte[] data);" + e.Message);
                 //throw;
@@ -214,7 +214,8 @@ namespace XCCloudService.SocketService.UDP
                             object outModel = null;
                             int packId = 0;
                             int packNum = 0;
-                            DataFactory.GetProtocolData(item.data, out requestTransmiteEnumValue, out data, out packId,out packNum);
+                            DataFactory.GetProtocolData(item.data, out requestTransmiteEnumValue, out data, out packId, out packNum);
+                            //Console.WriteLine("接收数据 [" + ((TransmiteEnum)requestTransmiteEnumValue).ToString() + "]：" + data);
                             switch ((TransmiteEnum)requestTransmiteEnumValue)
                             {
                                 case TransmiteEnum.雷达注册授权:
@@ -236,10 +237,10 @@ namespace XCCloudService.SocketService.UDP
                                     CommandHandler.StoreQuery(data, item);
                                     break;
                                 case TransmiteEnum.远程门店账目应答通知指令:
-                                    CommandHandler.StoreQueryNotify(data,item,packId,packNum);
+                                    CommandHandler.StoreQueryNotify(data, item, packId, packNum);
                                     break;
                                 case TransmiteEnum.远程门店会员卡数据请求响应:
-                                    CommandHandler.MemberQueryNotify(data,item);
+                                    CommandHandler.MemberQueryNotify(data, item);
                                     break;
                                 case TransmiteEnum.远程门店门票数据请求响应:
                                     CommandHandler.TicketQueryNotify(data, item);

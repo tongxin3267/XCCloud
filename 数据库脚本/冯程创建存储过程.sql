@@ -9,24 +9,25 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE Proc [dbo].[SP_RegisterUserFromWx](@StoreId varchar(50),@UserType int,@Mobile varchar(16),@Username varchar(50),@Realname varchar(50),@UserPassword varchar(6),@Message varchar(500) = '',@WXOpenID varchar(100) = '',@UnionID varchar(100) = '',@WorkID int output, @Return int output)
+CREATE Proc [dbo].[SP_RegisterUserFromWx](@StoreId varchar(15),@MerchId varchar(15),@UserType int,@Mobile varchar(16),@Username varchar(50),@Realname varchar(50),@UserPassword varchar(6),@Message varchar(500) = '',@WXOpenID varchar(100) = '',@UnionID varchar(100) = '',@WorkID int output, @Return int output)
 as
 
- if exists (select 0 from Base_UserInfo where UserType = 4 and OpenID = @WXOpenID)
-	begin
-		set @Return = 0
-		return
-	end
+ --用户不能重复注册
+ if exists (select 1 from Base_UserInfo where OpenID = @WXOpenID)
+ 	begin
+ 		set @Return = 0
+ 		return
+ 	end
 
  begin transaction tran1
  begin try
 	declare @UserId int 
 	declare @AuditorId int
-	--添加莘宸用户
+	--添加门店用户
 	select @AuditorId = UserId from Base_UserInfo where OpenID = (select WXOpenID from Base_MerchantInfo where MerchID = (select MerchID from Base_StoreInfo where StoreID=@StoreId))
-	insert into Base_UserInfo(StoreID,UserType,LogName,LogPassword,OpenID,UnionID,RealName,Mobile,ICCardID,CreateTime,[Status],Auditor)
-	values(@StoreId,@UserType,@Username,@UserPassword,@WXOpenID,@UnionID,@Realname,@Mobile,'',GETDATE(),0,@AuditorId)
-	set @UserId = @@identity
+	insert into Base_UserInfo(StoreID,MerchID,UserType,LogName,LogPassword,OpenID,UnionID,RealName,Mobile,ICCardID,CreateTime,[Status],Auditor)
+	values(@StoreId,@MerchId,@UserType,@Username,@UserPassword,@WXOpenID,@UnionID,@Realname,@Mobile,'',GETDATE(),0,@AuditorId)
+	set @UserId = @@identity	
 	--添加工单	
 	insert into XC_WorkInfo(SenderID,SenderTime,WorkType,WorkState,WorkBody,AuditorID)
 	values(@UserId,GETDATE(),0,0,@Message,@AuditorId) 
@@ -103,7 +104,7 @@ as
 	declare @MerchTag int = 0
 	select @MerchTag=MerchTag from Base_MerchantInfo where MerchID=@MerchID
 	select distinct a.ParentID, a.FunctionID, a.FunctionName, (case when c.FunctionEN is null then (case when b.FunctionEN is null then null else b.FunctionEN end) else c.FunctionEN end) as FunctionEN
-	from Dict_FunctionMenu a left join (select b.MerchID,b.FunctionID,b.FunctionEN from Base_MerchantInfo a inner join Base_MerchFunction b on a.CreateUserID=b.MerchID and a.MerchType=3) b on a.FunctionID=b.FunctionID
+	from Dict_FunctionMenu a left join (select b.MerchID,c.FunctionID,c.FunctionEN from Base_MerchantInfo a inner join Base_UserInfo b on a.CreateUserID=b.UserID inner join Base_MerchFunction c on b.MerchID=c.MerchID and a.MerchType=3) b on a.FunctionID=b.FunctionID
 	left join Base_MerchFunction c on a.FunctionID=c.FunctionID and c.MerchID=@MerchID 
 	where a.MenuType in (1, case when @MerchTag=1 then 5 else 1 end)
 	order by a.ParentID, a.FunctionID
@@ -111,7 +112,7 @@ as
 
 GO
 
-CREATE Proc [dbo].[SP_GetMenus](@LogType int, @LogID varchar(15))
+CREATE Proc [dbo].[SP_GetMenus](@LogType int, @LogID int, @MerchID varchar(15))
 as
 begin
 	
@@ -119,7 +120,7 @@ begin
 	if @LogType=3 --商户用户
 	begin
 		declare @MerchType int 
-		SELECT @MerchType=MerchType FROM Base_MerchantInfo WHERE MerchID=@LogID
+		SELECT @MerchType=MerchType FROM Base_MerchantInfo WHERE MerchID=@MerchID
 		insert into #MENU
 		select FunctionID from Dict_FunctionMenu where MenuType=(case when @MerchType in (1, 2) then 3 when @MerchType=3 then 4 else null end)
 	end
@@ -132,7 +133,7 @@ begin
 	begin
 		insert into #MENU
 		select a.FunctionID from Dict_FunctionMenu a left join Base_UserGroup_Grant b on a.FunctionID=b.FunctionID
-		left join Base_UserInfo c on b.GroupID=c.UserGroupID and c.UserID=CONVERT(int, @LogID)
+		left join Base_UserInfo c on b.GroupID=c.UserGroupID and c.UserID=@LogID
 		where a.MenuType=0 and b.IsAllow=1
 	end
 	else if @LogType=2 --门店用户

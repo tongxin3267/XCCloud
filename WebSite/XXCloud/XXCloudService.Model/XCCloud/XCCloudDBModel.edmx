@@ -276,9 +276,7 @@
           <Property Name="UserGroupID" Type="int" />
           <Property Name="AuthorTempID" Type="int" />
           <Property Name="UnionID" Type="varchar" MaxLength="64" />
-          <Property Name="SwitchMerch" Type="int" />
-          <Property Name="SwitchStore" Type="int" />
-          <Property Name="SwitchWorkstation" Type="int" />
+          <Property Name="Switchable" Type="int" />
         </EntityType>
         <EntityType Name="Data_BalanceType_StoreList">
           <Key>
@@ -3677,9 +3675,7 @@
           <Property Name="UserGroupID" Type="Int32" />
           <Property Name="AuthorTempID" Type="Int32" />
           <Property Name="UnionID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="SwitchMerch" Type="Int32" />
-          <Property Name="SwitchStore" Type="Int32" />
-          <Property Name="SwitchWorkstation" Type="Int32" />
+          <Property Name="Switchable" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5397,9 +5393,7 @@
           <EntitySetMapping Name="Base_UserInfo">
             <EntityTypeMapping TypeName="XCCloudDBModel.Base_UserInfo">
               <MappingFragment StoreEntitySet="Base_UserInfo">
-                <ScalarProperty Name="SwitchWorkstation" ColumnName="SwitchWorkstation" />
-                <ScalarProperty Name="SwitchStore" ColumnName="SwitchStore" />
-                <ScalarProperty Name="SwitchMerch" ColumnName="SwitchMerch" />
+                <ScalarProperty Name="Switchable" ColumnName="Switchable" />
                 <ScalarProperty Name="UnionID" ColumnName="UnionID" />
                 <ScalarProperty Name="AuthorTempID" ColumnName="AuthorTempID" />
                 <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />

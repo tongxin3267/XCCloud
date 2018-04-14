@@ -149,6 +149,7 @@ namespace XXCloudService.WeiXin.Api
             int userId, authorId;
             string workId = dicParas.ContainsKey("workId") ? dicParas["workId"].ToString() : string.Empty;
             string state = dicParas.ContainsKey("state") ? dicParas["state"].ToString() : string.Empty;
+            string switchable = dicParas.ContainsKey("switchable") ? dicParas["switchable"].ToString() : string.Empty;
             string userType = dicParas.ContainsKey("userType") ? dicParas["userType"].ToString() : string.Empty;
             string reason = dicParas.ContainsKey("reason") ? dicParas["reason"].ToString() : string.Empty;
             string isAdmin = dicParas.ContainsKey("isAdmin") ? dicParas["isAdmin"].ToString() : string.Empty;
@@ -158,7 +159,14 @@ namespace XXCloudService.WeiXin.Api
                 errMsg = "审核状态state参数不能为空";
                 return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
             }
+            
+            if (string.IsNullOrEmpty(userType))
+            {
+                errMsg = "用户类型userType参数不能为空";
+                return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
+            }
 
+            int iUserType = Convert.ToInt32(userType);
             if (state == ((int)WorkState.Pass).ToString()) //审核通过
             {
                 if (!dicParas.ContainsKey("userGroup") || dicParas["userGroup"] == null)
@@ -204,7 +212,8 @@ namespace XXCloudService.WeiXin.Api
                         base_UserInfo.AuditorTime = DateTime.Now;
                         base_UserInfo.Status = (int)UserStatus.Pass;
                         base_UserInfo.IsAdmin = !string.IsNullOrEmpty(isAdmin) ? Convert.ToInt32(isAdmin) : (int?)null;
-                        base_UserInfo.UserType = !string.IsNullOrEmpty(userType) ? Convert.ToInt32(userType) : (int)UserType.Store;
+                        base_UserInfo.UserType = Convert.ToInt32(userType);
+                        base_UserInfo.Switchable = !string.IsNullOrEmpty(switchable) ? Convert.ToInt32(switchable) : (int?)null;
 
                         string storeId = base_UserInfo.StoreID;
                         if (base_UserInfo.IsAdmin == 1 && userInfoService.Any(a => a.UserID != userId && a.IsAdmin == 1 && a.StoreID.Equals(storeId, StringComparison.OrdinalIgnoreCase)))

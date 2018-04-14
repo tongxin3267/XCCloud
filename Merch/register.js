@@ -74,17 +74,6 @@ function checkPassword() {
         return false;
     }
 }
-// function checkRePassword() {
-//     var str=$('#password').val();
-//     var str2=$('#rePassword').val();
-//     if(checkPassword() && str==str2){
-//         $('.rePasswordTips').html("tips:确认密码成功").css({color:"green"});
-//         return true;
-//     }else {
-//         $('.rePasswordTips').html("tips:两次输入不同，重新输入").css({color:"red"});
-//         return false;
-//     }
-// }
 
 function getNewUl(id) {
     var imgUl="/ServicePage/ValidateImg.aspx";
@@ -126,11 +115,12 @@ function getMessage() {
         data:{sysId: "0", "versionNo": "0.0.0.1", "mobile": mobile, "token":token },
         dataType:"json",
         success:function (data) {
+            console.log(data);
             if(data.result_code=="1"){
                 $('.registerCode').attr('disabled','true');
-                $(".registerCode").val("剩余60秒");
+                $(".registerCode").val("剩余120秒");
                 var timer=setInterval(fn,1000);
-                var i=59;
+                var i=119;
                 function fn(){
                     $(".registerCode").val("剩余"+i+"秒");
                     i--;
@@ -139,10 +129,14 @@ function getMessage() {
                         $(".registerCode").val("重新发送").removeAttr('disabled');
                     }
                 }
-                $('#sendMsg').fadeIn(2000).fadeOut(1000);
+                layui.use('layer',function () {
+                    layui.layer.msg( '<span style="color: #FFB800">消息已发送</span>',{offset:'auto'})
+                })
 
             }else {
-
+               layui.use('layer',function () {
+                   layui.layer.msg( '<span style="color: #FF5722">您已达到今日注册次数上限,请联系管理员！</span>',{offset:'auto'})
+               })
             }
         }
     });
@@ -182,7 +176,7 @@ function contactWeiChat() {
   var scode=$('.registerInputCode').val();
 
 
-  var href="httpss://open.weixin.qq.com/connect/oauth2/authorize?appid=wx86275e2035a8089d&redirect_uri=";
+  var href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx86275e2035a8089d&redirect_uri=";
     var href2= "https://mp.4000051530.com/WeiXin/Register.aspx?" +
       "smId="+storeId+
       "&scode=" +scode+
@@ -269,7 +263,8 @@ function do_userGroup() {
             data = JSON.parse(data);
             console.log(data);
             var arr=data.result_data;
-            if(arr.length!=0){
+            console.log(arr)
+            if(arr){
                 for(var i=0;i<arr.length;i++){
                     if(arr[i].GroupName!=""){
                         $('.authSelectList_group') .append("<li class='authSelectList_li'><span class='selectTexts'>"
@@ -306,9 +301,9 @@ function do_userGrant() {
         data: { parasJson: parasJson },
         success: function (data) {
             data = JSON.parse(data);
-            console.log(data);
             var arr=data.result_data;
-            if(arr.length!=0){
+            console.log(arr)
+            if(arr){
                 for(var i=0;i<arr.length;i++){
                     if(arr[i].DictValue!=""){
                         $('.authSelectList_grant') .append("<li class='authSelectList_li'><span class='selectTexts'>"

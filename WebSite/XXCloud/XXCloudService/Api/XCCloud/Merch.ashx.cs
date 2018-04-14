@@ -141,7 +141,6 @@ namespace XXCloudService.Api.XCCloud
                 string errMsg = string.Empty;
                 object[] conditions = dicParas.ContainsKey("conditions") ? (object[])dicParas["conditions"] : null;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string logId = userTokenKeyModel.LogId;
 
                 //代理商仅能查所属商户，普通商户或大客户只能查自己，莘宸管理员可以查所有商户
                 SqlParameter[] parameters = new SqlParameter[0];
@@ -149,21 +148,16 @@ namespace XXCloudService.Api.XCCloud
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
                     var merchIdDataModel = userTokenKeyModel.DataModel as MerchDataModel;
-                    if (merchIdDataModel == null)
-                    {
-                        errMsg = "数据对象为空";
-                        return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
-                    }
-
-                    Array.Resize(ref parameters, parameters.Length + 1);
-                    parameters[parameters.Length - 1] = new SqlParameter("@logId", logId);
+                    Array.Resize(ref parameters, parameters.Length + 1);                    
                     if (merchIdDataModel.MerchType == (int)MerchType.Agent)
                     {
+                        parameters[parameters.Length - 1] = new SqlParameter("@logId", userTokenKeyModel.LogId);
                         sqlWhere = sqlWhere + " and a.CreateUserID=@logId";
                     }
                     else
                     {
-                        sqlWhere = sqlWhere + " and a.MerchID=@logId";
+                        parameters[parameters.Length - 1] = new SqlParameter("@merchId", merchIdDataModel.MerchID);
+                        sqlWhere = sqlWhere + " and a.MerchID=@merchId";
                     }
                 }
 
@@ -216,9 +210,9 @@ namespace XXCloudService.Api.XCCloud
                 
                 #region 验证参数
                 
-                if (!string.IsNullOrEmpty(merchId) && merchId.Length > 11)
+                if (!string.IsNullOrEmpty(merchId) && merchId.Length > 6)
                 {
-                    errMsg = "商户编号不能超过11个字符";
+                    errMsg = "商户编号不能超过6个字符";
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
 
@@ -370,8 +364,10 @@ namespace XXCloudService.Api.XCCloud
                         if (base_UserInfo == null)
                         {
                             base_UserInfo = new Base_UserInfo();
+                            base_UserInfo.MerchID = merchId;
                             base_UserInfo.OpenID = openId;
                             base_UserInfo.UserType = Convert.ToInt32(merchType);
+                            base_UserInfo.RealName = merchName;
                             if (!base_UserInfoService.Add(base_UserInfo))
                             {
                                 errMsg = "添加商户负责人信息失败";
@@ -497,12 +493,6 @@ namespace XXCloudService.Api.XCCloud
                 if (string.IsNullOrEmpty(merchId))
                 {
                     errMsg = "商户编号不能为空";
-                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
-                }
-
-                if (merchId.Length > 11)
-                {
-                    errMsg = "商户编号不能超过11个字符";
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
 
@@ -800,17 +790,7 @@ namespace XXCloudService.Api.XCCloud
                 string errMsg = string.Empty;
                 string merchId = dicParas.ContainsKey("merchId") ? dicParas["merchId"].ToString() : string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string createUserId = userTokenKeyModel.LogId;
-
-                #region 验证参数
-
-                if (!string.IsNullOrEmpty(merchId) && merchId.Length > 11)
-                {
-                    errMsg = "商户编号不能超过11个字符";
-                    return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
-                }
-
-                #endregion
+                string currentMerchId = userTokenKeyModel.DataModel.MerchID;
 
                 #region 商户信息和功能菜单
 
@@ -819,7 +799,8 @@ namespace XXCloudService.Api.XCCloud
                 SqlParameter[] parameters = new SqlParameter[1];
                 if (string.IsNullOrEmpty(merchId))
                 {
-                    parameters[0] = new SqlParameter("@MerchID", createUserId);
+                    
+                    parameters[0] = new SqlParameter("@MerchID", currentMerchId);
                 }
                 else
                 {
@@ -839,7 +820,7 @@ namespace XXCloudService.Api.XCCloud
                 parameters = new SqlParameter[1];
                 if (string.IsNullOrEmpty(merchId))
                 {
-                    parameters[0] = new SqlParameter("@MerchID", createUserId);
+                    parameters[0] = new SqlParameter("@MerchID", currentMerchId);
                 }
                 else
                 {
@@ -853,13 +834,12 @@ namespace XXCloudService.Api.XCCloud
                     return ResponseModelFactory.CreateFailModel(isSignKeyReturn, errMsg);
                 }
 
-                base_MerchInfoModel.MerchFunction = Utils.GetModelList<Base_MerchFunctionModel>(ds.Tables[0]);
-
                 //实例化一个根节点
                 Base_MerchFunctionModel rootRoot = new Base_MerchFunctionModel();
                 rootRoot.ParentID = 0;
-                TreeHelper.LoopToAppendChildren(base_MerchInfoModel.MerchFunction, rootRoot);
+                TreeHelper.LoopToAppendChildren(Utils.GetModelList<Base_MerchFunctionModel>(ds.Tables[0]), rootRoot);
                 base_MerchInfoModel.MerchFunction = rootRoot.Children;
+
                 #endregion
 
                 if (string.IsNullOrEmpty(merchId))
@@ -868,7 +848,7 @@ namespace XXCloudService.Api.XCCloud
 
                     sql = " exec  SP_DictionaryNodes @MerchID,@DictKey,@RootID output ";
                     parameters = new SqlParameter[3];
-                    parameters[0] = new SqlParameter("@MerchID", merchId);
+                    parameters[0] = new SqlParameter("@MerchID", string.Empty);
                     parameters[1] = new SqlParameter("@DictKey", "商户类别");
                     parameters[2] = new SqlParameter("@RootID", 0);
                     parameters[2].Direction = System.Data.ParameterDirection.Output;
@@ -882,9 +862,9 @@ namespace XXCloudService.Api.XCCloud
                     var dictionaryResponse = Utils.GetModelList<DictionaryResponseModel>(ds.Tables[0]);
 
                     //代理商不能创建代理商
-                    if (base_MerchInfoModel.MerchType.HasValue && base_MerchInfoModel.MerchType == (int)MerchType.Agent)
+                    if (base_MerchInfoModel.MerchType == (int)MerchType.Agent)
                     {
-                        dictionaryResponse = dictionaryResponse.Where(p => !p.DictValue.Equals(((int)MerchType.Agent).ToString())).ToList();
+                        dictionaryResponse = dictionaryResponse.Where(p => !p.DictValue.Equals(Convert.ToString(MerchType.Agent), StringComparison.OrdinalIgnoreCase)).ToList();
                     }
 
                     //实例化一个根节点

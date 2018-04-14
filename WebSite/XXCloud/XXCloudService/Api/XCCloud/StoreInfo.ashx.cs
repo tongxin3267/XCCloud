@@ -148,7 +148,7 @@ namespace XCCloudService.Api.XCCloud
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];               
                 if (userTokenKeyModel.LogType == (int)RoleType.MerchUser)
                 {
-                    merchId = userTokenKeyModel.LogId;
+                    merchId = userTokenKeyModel.DataModel.MerchID;
                 }
 
                 SqlParameter[] parameters = new SqlParameter[1];
@@ -188,7 +188,7 @@ namespace XCCloudService.Api.XCCloud
                 string errMsg = string.Empty;
 
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
                 
                 //从缓存获取
                 var base_StoreInfo = XCCloudStoreBusiness.StoreInfoList.Where(p => p.MerchID == merchId).ToList();          
@@ -348,7 +348,7 @@ namespace XCCloudService.Api.XCCloud
             {
                 string errMsg = string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;               
+                string merchId = userTokenKeyModel.DataModel.MerchID;               
                 string storeId = dicParas.ContainsKey("storeId") ? dicParas["storeId"].ToString() : string.Empty;
                 string storeState = dicParas.ContainsKey("storeState") ? dicParas["storeState"].ToString() : string.Empty;
                 string parentId = dicParas.ContainsKey("parentId") ? dicParas["parentId"].ToString() : string.Empty;
@@ -739,7 +739,7 @@ namespace XCCloudService.Api.XCCloud
             {
                 string errMsg = string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
                 string storeId = dicParas.ContainsKey("storeId") ? dicParas["storeId"].ToString() : string.Empty;
                 string storeState = dicParas.ContainsKey("storeState") ? dicParas["storeState"].ToString() : string.Empty;
                 string parentId = dicParas.ContainsKey("parentId") ? dicParas["parentId"].ToString() : string.Empty;
@@ -858,8 +858,6 @@ namespace XCCloudService.Api.XCCloud
             try
             {
                 string errMsg = string.Empty;
-                XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string logId = userTokenKeyModel.LogId;
                 string storeId = dicParas.ContainsKey("storeId") ? dicParas["storeId"].ToString() : string.Empty;
                 
                 if (string.IsNullOrEmpty(storeId))

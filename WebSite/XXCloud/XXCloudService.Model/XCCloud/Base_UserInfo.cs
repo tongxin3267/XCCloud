@@ -33,8 +33,6 @@ namespace XCCloudService.Model.XCCloud
         public Nullable<int> UserGroupID { get; set; }
         public Nullable<int> AuthorTempID { get; set; }
         public string UnionID { get; set; }
-        public Nullable<int> SwitchMerch { get; set; }
-        public Nullable<int> SwitchStore { get; set; }
-        public Nullable<int> SwitchWorkstation { get; set; }
+        public Nullable<int> Switchable { get; set; }
     }
 }

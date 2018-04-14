@@ -29,7 +29,7 @@ namespace XXCloudService.Api.XCCloud
             {
                 string errMsg = string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 IBase_StoreInfoService base_StoreInfoService = BLLContainer.Resolve<IBase_StoreInfoService>();
                 var result = from a in base_StoreInfoService.GetModels(p => p.MerchID.Equals(merchId, StringComparison.OrdinalIgnoreCase))
@@ -467,7 +467,7 @@ namespace XXCloudService.Api.XCCloud
                 string storeId = dicParas.ContainsKey("storeId") ? (dicParas["storeId"] + "") : string.Empty;
                 string ruleType = dicParas.ContainsKey("ruleType") ? (dicParas["ruleType"] + "") : string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 if (string.IsNullOrEmpty(storeId))
                 {
@@ -513,7 +513,7 @@ namespace XXCloudService.Api.XCCloud
                 string storeId = dicParas.ContainsKey("storeId") ? (dicParas["storeId"] + "") : string.Empty;
                 string ruleType = dicParas.ContainsKey("ruleType") ? (dicParas["ruleType"] + "") : string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 if (string.IsNullOrEmpty(storeId))
                 {
@@ -570,7 +570,7 @@ namespace XXCloudService.Api.XCCloud
                 string revStoreId = dicParas.ContainsKey("revStoreId") ? (dicParas["revStoreId"] + "") : string.Empty;
                 string ruleType = dicParas.ContainsKey("ruleType") ? (dicParas["ruleType"] + "") : string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 if (string.IsNullOrEmpty(revStoreId))
                 {

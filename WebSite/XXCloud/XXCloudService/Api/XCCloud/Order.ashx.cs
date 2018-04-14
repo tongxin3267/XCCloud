@@ -458,7 +458,7 @@ namespace XXCloudService.Api.XCCloud
                 string errMsg = string.Empty;
                 object[] conditions = dicParas.ContainsKey("conditions") ? (object[])dicParas["conditions"] : null;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 SqlParameter[] parameters = new SqlParameter[1];
                 parameters[0] = new SqlParameter("@merchId", merchId);
@@ -539,7 +539,7 @@ namespace XXCloudService.Api.XCCloud
             {
                 string errMsg = string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 DateTime now = DateTime.Now;
                 DateTime start = new DateTime(now.Year, now.Month, 1);
@@ -577,7 +577,7 @@ namespace XXCloudService.Api.XCCloud
                 string errMsg = string.Empty;
                 string checkDate = dicParas.ContainsKey("checkDate") ? dicParas["checkDate"].ToString() : string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                string merchId = userTokenKeyModel.LogId;
+                string merchId = userTokenKeyModel.DataModel.MerchID;
 
                 string sql = " exec  GetOrdersCheck @CheckDate,@MerchId ";
                 var parameters = new SqlParameter[2];
@@ -604,7 +604,7 @@ namespace XXCloudService.Api.XCCloud
                 string checkDate = dicParas.ContainsKey("checkDate") ? dicParas["checkDate"].ToString() : string.Empty;
                 string merchId = string.Empty;
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
-                merchId = userTokenKeyModel.LogId;
+                merchId = userTokenKeyModel.DataModel.MerchID;
 
                 if (string.IsNullOrEmpty(checkDate))
                 {

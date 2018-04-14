@@ -10,51 +10,80 @@
     <!-- 引入rem自适应类库 -->
     <script src="js/ydui.flexible.js"></script>
     <style>
-        body{
-            height: 100%;
-            width: 100%;
-        }
-        .itemImg{width: 0.45rem;height: 0.8rem;}
-        .codeInput{border: none;}
-        .codeImg{width: 1.4rem;margin-top: 0.1rem;}
-        .codeText{position: relative;top: -0.13rem;}
+
     </style>
 </head>
 <body>
 
 <div id="app">
-    <yd-cell-group>
-        <yd-cell-item>
-            <img class="itemImg" slot="icon" src="images/account.png">
-            <input slot="right" type="number" placeholder="请输入手机号" v-model="account" v-on:blur="inputPrompt">
-        </yd-cell-item>
-        <yd-cell-item>
-            <img class="itemImg" slot="icon" src="images/note.png">
-            <input class="codeInput" slot="left" type="text" placeholder="请输入验证码" v-model="password">
-            <div slot="right">
-                <img class="codeImg" slot="icon" :src="Verification">
-                <span class="codeText" @click="verificationChange">点击刷新</span>
+    <div>
+        <div class="page-bottom">
+            <div class='top_main'>
+                <div class='top_mc'><span>总共</span><span class='color11'>{{Count}}条</span></div>
+                <div class='top_mc'><span>购币</span><span class='color11'>{{Buycoins}}个</span></div>
+                <div class='top_mc'><span>总币数：</span><span class='color11'>{{Totalcoins}}个</span></div>
+                <div class='top_mc'><span>总金额：</span><span class='color11'>{{Totalmoney}}元</span></div>
             </div>
-        </yd-cell-item>
-        <div>
-            <yd-button size="large" type="hollow" @click.native="login">下一步</yd-button>
+            <yd-button size="large" type="danger" @click.native="show4 = true">右侧弹出</yd-button>
+            <yd-popup v-model="show4" position="right">
+                <yd-button type="danger" style="margin: 30px;" @click.native="show4 = false">Close Right Popup</yd-button>
+                <yd-cell-item>
+                    <span slot="left">金额：</span>
+                    <input slot="right" type="number" placeholder="最低金额" class='section__input'  maxlength='9' v-model="dateInput0">
+                    <input slot="right" type="number" placeholder="最高金额" class='section__input'  maxlength='9' v-model="dateInput1">
+                </yd-cell-item>
+                <yd-cell-item>
+                    <span slot="left">币数：</span>
+                    <input slot="right" type="number" placeholder="最低币数" class='section__input'  maxlength='9' v-model="dateInput2">
+                    <input slot="right" type="number" placeholder="最高币数" class='section__input'  maxlength='9' v-model="dateInput3">
+                </yd-cell-item>
+                <yd-cell-item>
+                    <span slot="left">查询日期：</span>
+                    <yd-datetime type="date" v-model="datetime4" slot="right"></yd-datetime>
+                    <yd-datetime type="date" v-model="datetime5" slot="right"></yd-datetime>
+                </yd-cell-item>
+                <yd-cell-item arrow type="label">
+                    <span slot="left">选择方式：</span>
+                    <select slot="right" v-model="dataSelected1">
+                        <option value="">请选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </yd-cell-item>
+                <yd-cell-item arrow type="label">
+                    <span slot="left">店名：</span>
+                    <select slot="right" v-model="dataSelected2">
+                        <option value="">请选择店名</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </yd-cell-item>
+                <yd-button size="large" type="primary" @click.native="confirm">primary</yd-button>
+                <yd-button size="large" type="hollow" @click.native="cancel">hollow</yd-button>
+            </yd-popup>
+            <!--<yd-list>-->
+                <!--<yd-list-item v-for="item, key in orderList" :key="item.index">-->
+                    <!--<div class='section_items {{index%2==0? "background1" : "background2"}}' data-id="{{item.storeId}}">-->
+                        <!--<div class="section_c1">-->
+                            <!--<div class='section_T'>{{item.StoreName}}</div>-->
+                            <!--<div class='section_r'>{{item.Descript}}</div>-->
+                            <!--<div>{{item.PayStatus}}</div>-->
+                        <!--</div>-->
+                        <!--<div class="section_c2">-->
+                            <!--<div>{{item.CreateTime}}</div>-->
+                        <!--</div>-->
+                        <!--<div class="section_c3">-->
+                            <!--<div class='section_c'>￥{{item.Price}}元</div>-->
+                            <!--<div class='section_c'>{{item.OrderType}}</div>-->
+                            <!--<div class='section_c'>{{item.Coins}}个</div>-->
+                            <!--<div class='section_c'>{{item.BuyType}}</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</yd-list-item>-->
+            <!--</yd-list>-->
+            <!--<div class='allover' hidden='{{allover}}'>已加载全部</div>-->
         </div>
-    </yd-cell-group>
-    <yd-cell-group>
-        <yd-cell-item>
-            <yd-icon slot="icon" name="phone3" size=".45rem"></yd-icon>
-            <input type="text" slot="right" placeholder="请输入短信验证码" v-model="smsCode">
-            <yd-sendcode slot="right"
-                         v-model="start1"
-                         second="30"
-                         @click.native="sendCode"
-                         type="warning"
-            ></yd-sendcode>
-
-
-        </yd-cell-item>
-    </yd-cell-group>
-    <yd-button size="large" type="primary" @click.native="register">注册</yd-button>
+    </div>
 </div>
 
 <!-- 引入 Vue -->
@@ -64,95 +93,153 @@
 <script src="js/ydui.rem.js"></script>
 <script src="js/axios.min.js"></script>
 <script>
-    var geteway = "https://mp.4000051530.com";
-    var url_ImgCode ="/xcgamemana/token?action=checkImgCode"; //图形码验证接口
-    var url_sendSMSCode ="/xcgamemana/token?action=sendSMSCode";//发送验证码接口
-    var url_getMobileToken = "/xcgamemana/token?action=getMobileToken";//获取手机令牌接口
+    var sysId = 0; //调用方应用Id
+    var versionNo= "0.89"; //版本号
+    var url_getDataOrder = '/XCGameMana/DataOrder?action=getDataOrder';//获取分页订单列表
     var htmlfnc = new Vue({
         el: '#app',
         data:{
-            Verification: geteway + "/ServicePage/ValidateImg.aspx? t =" + new Date().getTime(),
-            account: '',
-            password: '',
-            smsCode:"",
-            start1:false
+            orderList:[],
+            BuyTypelist:[],
+            StoreNamelist:[],
+            Count:"0",
+            Buycoins:"0",
+            Totalcoins:"0",
+            Totalmoney:"0",
+            dateInput0:"",
+            dateInput1:"",
+            dateInput2:"",
+            dateInput3:"",
+            datetime4: '2018-02-21',
+            datetime5: '2019-01-21',
+            dataSelected1:"",
+            dataSelected2:"",
+            show4: false,
+            today: "",
+            mobileToken:''
         },
         mounted: function () {
+            this.newTimes();
             this.Load();
         },
         methods: {
-            verificationChange:function(){
-                this.Verification = geteway + "/ServicePage/ValidateImg.aspx? t =" + new Date().getTime()
-            },
-            inputPrompt:function () {
-                var mobile =this.account;
-                var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
-                if (!myreg.test(mobile) || mobile.length == 0 || mobile.length != 11) {
-                    this.$dialog.toast({
-                        mes: '请输入正确手机号！',
-                        timeout: 1500,
-                        icon: 'success'
-                    });
+            newTimes:function () {
+                var myDate = new Date();
+                var yy = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+                var mm = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)         // 所以获取当前月份是myDate.getMonth()+1;
+                if(mm<10){
+                    mm = "0"+mm
                 }
+                var dd = myDate.getDate(); //获取当前日(1-31)
+                this.today =yy+"-"+mm+"-"+dd;
+                this.datetime4 =yy+"-"+mm+"-"+dd;
+                this.datetime5 =yy+"-"+mm+"-"+dd;
             },
-            login:function () {
-                var that =this;
-                var obj={"sysId": "0","versionNo": "0.0.0.1",mobile:that.account,code:that.password};
-                obj =JSON.stringify(obj);
-                that.$dialog.loading.open();
-                console.log(that.account+"/"+that.password);
-                axios.post(url_ImgCode, obj).then(function (res) {
-                    that.$dialog.loading.close();
-                    console.log(res.data);
-                    that.msgPrompt(res.data);
-                    if (res.data.result_code === '1') {
-
-                    }
-                }).catch(function (err) {
-                    that.$dialog.loading.close();
-                    console.log(err);
-                })
-            },
-            sendCode:function () {
-                this.$dialog.loading.open('发送中...');
-                this.start1 = true;
-                var that=this;
-                console.log(that.account+"/"+that.password);
-                var obj={"sysId": "0","versionNo": "0.0.0.1",mobile:that.account,code:that.password};
-                axios.post(url_sendSMSCode, obj).then(function (res) {
-                    console.log(res.data);
-                    that.$dialog.loading.close();
-                    if (res.data.result_code === '1') {
-                        that.$dialog.toast({
-                            mes: '已发送',
-                            icon: 'success',
-                            timeout: 1500
-                        });
-                    }
-                }).catch(function (err) {
-                    console.log(err);
-                    that.$dialog.loading.close();
-                    that.$dialog.toast({
-                        mes: "请求失败!",
-                        timeout: 1500,
-                        icon: 'error'
-                    });
-                });
-            },
-            register:function () {
+            confirm:function (pageIndex) {
                 var that =this;
                 this.$dialog.loading.open('');
-                var obj={"sysId": "0","versionNo": "0.0.0.1",mobile: that.account,smsCode: that.smsCode};
-                axios.post(url_getMobileToken, obj).then(function (res) {
+                if (parseInt(that.dateInput0) <= parseInt(that.dateInput1) || that.dateInput0 == "" || that.dateInput1 == ""){
+                    var startMoney = that.dateInput0;
+                    var endMoney = that.dateInput1;
+                }else{
+                    var startMoney = that.dateInput1;
+                    var endMoney = that.dateInput0;
+                }
+                if (parseInt(that.dateInput2) <= parseInt(that.dateInput3) || that.dateInput2 == "" || that.dateInput3 == ""){
+                    var startCoins = that.dateInput0;
+                    var endCoins= that.dateInput1;
+                }else{
+                    var startCoins = that.dateInput1;
+                    var endMCoins = that.dateInput0;
+                }
+                if (that.datetime4 != that.today) {
+                    var startTime = that.datetime4.split("-").join("")
+                }else{
+                    var startTime = ""
+                }
+                if (that.datetime5 != that.today) {
+                    var endTime = that.datetime4.split("-").join("")
+                }else{
+                    var endTime = ""
+                }
+                if (parseInt(startTime) <= parseInt(endTime) || startTime == "" || endTime == "") {
+                    var startcreatetime = that.datetime4;
+                    var endcreatetime = that.datetime5;
+                } else {
+                    var startcreatetime = that.datetime5;
+                    var endcreatetime = that.datetime4;
+                }
+                var obj={
+                    sysId: sysId,
+                    versionNo: versionNo,
+                    mobileToken: that.mobileToken,
+                    pageIndex: pageIndex,
+                    storename: that.data.storeName,
+                    startcoins: that.data.startcoins,
+                    buytype: that.data.buyType,
+                    startcreatetime: that.data.startcreatetime,
+                    startprice: that.data.startprice,
+                    endcreatetime: that.data.endcreatetime,
+                    endcoins: that.data.endcoins,
+                    endprice: that.data.endprice
+                };
+                axios.post(url_getDataOrder, obj).then(function (res) {
                     that.$dialog.loading.close();
+                    that.msgPrompt(res.data);
                     console.log(res.data);
                     if (res.data.result_code === '1') {
+                        var orderListData = [];
+                        for (var i = 0; i < res.data.result_data.Lists.length; i++) {
+                            if (res.data.result_data.Lists[i].OrderType == "0") {
+                                res.data.result_data.Lists[i].OrderType = "微信支付"
+                            } else {
+                                res.data.result_data.Lists[i].save_coins = "其他支付"
+                            }
+                            if (res.data.result_data.Lists[i].PayStatus == "0") {
+                                res.data.result_data.Lists[i].PayStatus = "未支付"
+                            } else {
+                                res.data.result_data.Lists[i].PayStatus = "已支付"
+                            }
+                            orderListData.push({
+                                CreateTime: res.data.result_data.Lists[i].CreateTimes,
+                                Price: res.data.result_data.Lists[i].Price,
+                                Descript: res.data.result_data.Lists[i].Descript,
+                                StoreName: res.data.result_data.Lists[i].StoreName,
+                                Coins: res.data.result_data.Lists[i].Coins,
+                                BuyType: res.data.result_data.Lists[i].BuyType,
+                                OrderType: res.data.result_data.Lists[i].OrderType,
+                                PayStatus: res.data.result_data.Lists[i].PayStatus
+                            })
+                        }
+                        that.orderList =orderListData;
+                        that.orderPage =res.data.result_data.Page;
+                        that.Count =res.data.result_data.Count;
+                        that.Buycoins =res.data.result_data.Buycoins;
+                        that.Totalcoins =res.data.result_data.Buycoins;
+                        that.Totalmoney =res.data.result_data.Totalmoney;
+                        that.BuyTypelist =res.data.result_data.BuyTypelist;
+                        that.StoreNamelist =res.data.result_data.StoreNamelist;
                     }
                 }).catch(function (err) {
                     that.$dialog.loading.close();
                     console.log(err);
                 })
 
+            },
+            cancel: function () {
+                var that =this;
+                that.Count="0";
+                that.Buycoins="0";
+                that.Totalcoins="0";
+                that.Totalmoney="0";
+                that.dateInput0="";
+                that.dateInput1="";
+                that.dateInput2="";
+                that.dateInput3="";
+                that.datetime4=that.today;
+                that.datetime5=that.today;
+                that.dataSelected1="";
+                that.dataSelected2="";
             },
             Load: function () {
 

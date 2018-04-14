@@ -946,7 +946,7 @@ namespace XXCloudService.Api.XCGame
                 }
                 else
                 {
-                    return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.T, errMsg); 
+                    return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, errMsg); 
                 }
 
                 string sn = System.Guid.NewGuid().ToString().Replace("-", "");

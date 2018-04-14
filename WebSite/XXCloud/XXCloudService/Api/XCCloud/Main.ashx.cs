@@ -24,7 +24,6 @@ namespace XXCloudService.Api.XCCloud
     public class Main : ApiBase
     {
 
-        [Authorize(Roles = "XcUser,XcAdmin,MerchUser")]
         [ApiMethodAttribute(SignKeyEnum = SignKeyEnum.XCCloudUserCacheToken, SysIdAndVersionNo = false)]
         public object GetMenus(Dictionary<string, object> dicParas)
         {
@@ -35,12 +34,14 @@ namespace XXCloudService.Api.XCCloud
                 XCCloudUserTokenModel userTokenKeyModel = (XCCloudUserTokenModel)dicParas[Constant.XCCloudUserTokenModel];
                 string logId = userTokenKeyModel.LogId;
                 int logType = (int)userTokenKeyModel.LogType;
+                string merchId = (userTokenKeyModel.DataModel != null) ? userTokenKeyModel.DataModel.MerchID : string.Empty;
 
                 //返回商户信息和功能菜单信息
-                string sql = " exec  SP_GetMenus @LogType,@LogID";
-                SqlParameter[] parameters = new SqlParameter[2];
+                string sql = " exec  SP_GetMenus @LogType,@LogID,@MerchID";
+                SqlParameter[] parameters = new SqlParameter[3];
                 parameters[0] = new SqlParameter("@LogType", logType);
-                parameters[1] = new SqlParameter("@LogID", logId);                
+                parameters[1] = new SqlParameter("@LogID", Convert.ToInt32(logId));
+                parameters[1] = new SqlParameter("@MerchID", merchId);
                 System.Data.DataSet ds = XCCloudBLL.ExecuteQuerySentence(sql, parameters);
                 if (ds.Tables.Count != 1)
                 {

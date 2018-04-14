@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using XCCloudService.Business.Common;
 using XCCloudService.Business.XCGame;
+using XCCloudService.Business.XCGameMana;
 using XCCloudService.CacheService;
 using XCCloudService.Common;
 using XCCloudService.Common.Enum;
@@ -29,50 +30,9 @@ namespace XCCloudService.Test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-        https://open.weixin.qq.com/connect/qrconnect?appid=wx86275e2035a8089d&redirect_uri=https%3a%2f%2fmp.4000051530.com%2fWeiXin%2fOAuth.aspx&response_type=code&scope=snsapi_userinfo&state=h5_Auth_Common#wechat_redirect
-
-            //string errMsg = string.Empty;
-            //string sn = "1";
-            //string storeId = "100027";
-            //string date = "20171213";
-            //string searchType = "0";
-            //string icCardId = "";
-            //string storePassword = "778852013145";
-            //UDPSocketStoreQueryAnswerBusiness.AddAnswer(sn, storeId);
-            //DataFactory.SendDataStoreQuery(storeId, date, sn, searchType, icCardId, storePassword, out errMsg);
-            //UDPLogHelper.SaveUPDRecordLog(UDPRecordType.雷达注册, "100027", "[接收：" + "requestDataJson" + "]" + "[响应：" + "Utils.SerializeObject(parmasModel)" + "]" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-
-            //string mobile = "15618920033";
-            //string key = mobile + "_" + "123456";
-            //SMSCodeCache.Add(key, mobile, CacheExpires.SMSCodeExpires);
-
-            string str = Utils.MD5("0手机号不存在c64d317823a44883939ca8190816e1f7" + "778852013145");
-
-            str = Utils.MD5("116504db5e48234aa886e93af3c4d2c665" + "778852013145");
-
-            str = Utils.MD5("16504db5e48234aa886e93af3c4d2c665" + "778852013145");
-
-            UserPhoneQueryResultNotifyRequestModel requestDataModel = new UserPhoneQueryResultNotifyRequestModel();
-            requestDataModel.Result_Code = "1";
-            requestDataModel.Result_Msg = "手机号不存在";
-            requestDataModel.Result_Data = "";
-            requestDataModel.SN = "c64d317823a44883939ca8190816e1f7";
-
-
-            
-
-            //验证MD5
-            if (!SignKeyHelper.CheckSignKey(requestDataModel, "778852013145"))
-            {
-                return;
-            }
-
-            ParamQueryResultNotifyRequestModel dsata = new ParamQueryResultNotifyRequestModel();
-
-            if (!SignKeyHelper.CheckSignKey(dsata, "778852013145"))
-            {
-                return;
-            }
+            string token = XCCloudManaUserTokenBusiness.SetToken("15307199901", "100027", "100027", 0);
+            string s = token;
+            Response.Write(token);
         }
 
 

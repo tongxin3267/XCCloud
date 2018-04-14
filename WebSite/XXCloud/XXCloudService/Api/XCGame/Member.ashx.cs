@@ -609,7 +609,7 @@ namespace XCCloudService.Api.XCGame
                     }
                     else
                     {
-                        return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, "");
+                        return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, errMsg);
                     }
 
                     answerModel = null;
@@ -720,7 +720,7 @@ namespace XCCloudService.Api.XCGame
                 }
                 else
                 {
-                    return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, "");
+                    return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, errMsg);
                 }
 
                 answerModel = null;

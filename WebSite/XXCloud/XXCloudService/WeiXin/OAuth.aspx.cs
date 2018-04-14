@@ -11,6 +11,9 @@ using XCCloudService.WeiXin.Message;
 using XCCloudService.Pay.PPosPay;
 using XCCloudService.Common.Enum;
 using XCCloudService.Business.Common;
+using XCCloudService.BLL.IBLL.XCGameManager;
+using XCCloudService.BLL.Container;
+using XCCloudService.Model.XCGameManager;
 
 namespace XXCloudService.WeiXin
 {
@@ -44,23 +47,37 @@ namespace XXCloudService.WeiXin
             string refresh_token = string.Empty;
             string openId = string.Empty;
             string errMsg = string.Empty;
-            if (TokenMana.GetTokenForScanQR(code, out accsess_token, out refresh_token, out openId, out errMsg))
+            try
             {
-                string urls = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
-                urls = string.Format(urls, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
-                string list = Utils.WebClientDownloadString(urls);
-                LogHelper.SaveLog("accsess_token:" + accsess_token);
-                LogHelper.SaveLog("refresh_token:" + refresh_token);
-                LogHelper.SaveLog("openId:" + openId);
-                string redirectUrl = string.Format("http://mp.4000051530.com/WeiXin/Test.aspx?openId={0}",openId);
-                Response.Redirect(redirectUrl);
+                if (TokenMana.GetTokenForScanQR(code, out accsess_token, out refresh_token, out openId, out errMsg))
+                {
+                    bool isReg = false;
+                    IMobileTokenService mobileTokenService = BLLContainer.Resolve<IMobileTokenService>();
+                    var mobileTokenModel = mobileTokenService.GetModels(p => p.OpenId.Equals(openId)).FirstOrDefault<t_MobileToken>();
+                    if (mobileTokenModel != null)
+                    {
+                        IMemberTokenService memberTokenService = BLLContainer.Resolve<IMemberTokenService>();
+                        var memberTokenModel = mobileTokenService.GetModels(p => p.OpenId.Equals(openId)).FirstOrDefault<t_MobileToken>();
+                        if (memberTokenModel != null)
+                        {
+                            isReg = true;
+                        }
+                    }
+                    string redirectUrl = string.Format("{0}?openId={1}&isReg={2}", CommonConfig.H5WeiXinAuthRedirectUrl, openId,Convert.ToInt32(isReg));
+                    Response.Redirect(redirectUrl);
+                }
+                else
+                {
+                    LogHelper.SaveLog(TxtLogType.WeiXin, TxtLogContentType.Common, TxtLogFileType.Day, "errMsg:" + errMsg);
+                    //重定向的错误页面                 
+                    Response.Redirect(WeiXinConfig.RedirectErrorPage);
+                }
             }
-            else
+            catch(Exception e)
             {
-                LogHelper.SaveLog(TxtLogType.WeiXin, TxtLogContentType.Common, TxtLogFileType.Day, "errMsg:" + errMsg);
-                //重定向的错误页面                 
-                Response.Redirect(WeiXinConfig.RedirectErrorPage);
+                LogHelper.SaveLog(TxtLogType.WeiXin, TxtLogContentType.Exception, TxtLogFileType.Day, "Exception:" + e.Message);
             }
+
         }
     }
 }
