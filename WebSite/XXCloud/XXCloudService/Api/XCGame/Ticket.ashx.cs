@@ -116,8 +116,7 @@ namespace XXCloudService.Api.XCGame
                     string radarToken = string.Empty;
                     if (DataFactory.SendDataTicketQuery(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, barCode,out radarToken, out errMsg))
                     {
-                        answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                        UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                     }
                     else
                     {
@@ -335,8 +334,7 @@ namespace XXCloudService.Api.XCGame
                     string radarToken = string.Empty;
                     if (DataFactory.SendDataTicketOperate(sn,storeModel.StoreID.ToString(), storeModel.StorePassword, barCode, "0", out radarToken,out errMsg))
                     {
-                        answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                        UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                     }
                     else
                     {
@@ -498,8 +496,7 @@ namespace XXCloudService.Api.XCGame
                 string radarToken = string.Empty;
                 if (DataFactory.SendDataTicketOperate(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, barCode, "2", out radarToken,out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {
@@ -630,8 +627,7 @@ namespace XXCloudService.Api.XCGame
                     string radarToken = string.Empty;
                     if (DataFactory.SendDataTicketOperate(sn,storeModel.StoreID.ToString(), storeModel.StorePassword, barCode, "1",out radarToken, out errMsg))
                     {
-                        answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                        UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                     }
                     else
                     {
@@ -803,8 +799,7 @@ namespace XXCloudService.Api.XCGame
                 string radarToken = string.Empty;
                 if (DataFactory.SendDataOutTicketOperate(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, barCode, icCardId, mobileName, userTokenModel.Mobile, money, "0", out radarToken, out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {
@@ -959,8 +954,7 @@ namespace XXCloudService.Api.XCGame
                 string radarToken = string.Empty;
                 if (DataFactory.SendDataOutTicketQuery(sn,storeModel.StoreID.ToString(), storeModel.StorePassword, barCode,out radarToken,out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {

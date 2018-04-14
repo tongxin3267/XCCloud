@@ -542,7 +542,6 @@ namespace XCCloudService.SocketService.UDP.Factory
             #endregion
 
 
-
         #region "向雷达发送出币数据包"
 
             /// <summary>
@@ -632,6 +631,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     errMsg = "未能获取雷达端地址";
                     return false;
                 }
+
+                UDPSocketStoreQueryAnswerBusiness.AddAnswer(sn, storeId, radarToken);
+
                 //向雷达发送数据
                 //RadarRequestDataModel radarModel =
                 //        new RadarRequestDataModel(radarToken, controlModel.MCUId, controlModel.Action, controlModel.Coins, controlModel.SN, controlModel.OrderId, controlModel.IcCardId, "", "");
@@ -813,6 +815,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     return false;
                 }
 
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 MemberQueryRequestDataModel dataModel = new MemberQueryRequestDataModel(sn,icCardId);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
 
@@ -848,6 +853,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     errMsg = "未能获取雷达端地址";
                     return false;
                 }
+
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
 
                 TicketQueryRequestDataModel dataModel = new TicketQueryRequestDataModel(sn,barCode);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
@@ -885,6 +893,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     return false;
                 }
 
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 TicketOperateRequestDataModel dataModel = new TicketOperateRequestDataModel(sn,barCode, operate);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
 
@@ -920,6 +931,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     errMsg = "未能获取雷达端地址";
                     return false;
                 }
+
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
 
                 LotteryQueryRequestDataModel dataModel = new LotteryQueryRequestDataModel(sn,barCode);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
@@ -957,6 +971,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     return false;
                 }
 
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 LotteryOperateRequestDataModel dataModel = new LotteryOperateRequestDataModel(sn,barCode,icCardId,operate,mobileName,phone);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
 
@@ -993,6 +1010,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     return false;
                 }
 
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 OutTicketQueryRequestDataModel dataModel = new OutTicketQueryRequestDataModel(sn,barCode);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
 
@@ -1028,6 +1048,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     errMsg = "未能获取雷达端地址";
                     return false;
                 }
+
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
 
                 OutTicketOperateRequestDataModel dataModel = new OutTicketOperateRequestDataModel(sn,barCode, icCardId, mobileName, phone, money, operate);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
@@ -1104,6 +1127,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     return false;
                 }
 
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 MemberTransOperateRequestDataModel dataModel = new MemberTransOperateRequestDataModel(sn,mobilename, phone, iniccardid,outiccardid, coins);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);
 
@@ -1178,6 +1204,9 @@ namespace XCCloudService.SocketService.UDP.Factory
                     errMsg = "未能获取雷达端地址";
                     return false;
                 }
+
+                UDPSocketCommonQueryAnswerModel answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeId, storePassword, 0, null, radarToken);
+                UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
 
                 CattleMemberCardQueryRequestDataModel dataModel = new CattleMemberCardQueryRequestDataModel(sn,requestType);
                 SignKeyHelper.SetSignKey(dataModel, storePassword);

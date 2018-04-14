@@ -38,7 +38,6 @@ namespace XXCloudService.Api.XCGameMana
             string radarToken = string.Empty;
             if (!DataFactory.SendDataStoreQuery(storeId, date, sn, searchType, icCardId, storeModel.StorePassword,out radarToken, out errMsg))
             {
-                UDPSocketStoreQueryAnswerBusiness.AddAnswer(sn, storeId, radarToken);
                 return ResponseModelFactory.CreateModel(isSignKeyReturn, Return_Code.T, "", Result_Code.F, errMsg);
             }
 

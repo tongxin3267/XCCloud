@@ -125,8 +125,7 @@ namespace XXCloudService.Api.XCGame
                 //string storeId, string storePassword, string barCode,string icCardId,string mobileName, string phone, string operate, out string errMsg
                 if (DataFactory.SendDataLotteryQuery(sn,storeModel.StoreID.ToString(), storeModel.StorePassword, barCode,out radarToken, out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {
@@ -284,8 +283,7 @@ namespace XXCloudService.Api.XCGame
                 //发送彩票操作
                 if (DataFactory.SendDataLotteryOperate(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, barCode, icCardId, "0",mobileName,userTokenModel.Mobile,out radarToken,out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {

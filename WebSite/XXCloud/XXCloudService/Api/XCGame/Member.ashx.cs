@@ -507,8 +507,7 @@ namespace XCCloudService.Api.XCGame
                 string radarToken = string.Empty;
                 if (DataFactory.SendMemberTransOperate(sn, storeModel.StoreID.ToString(),storeModel.StorePassword, mobileName, userTokenModel.Mobile, cardIdIn, cardIdOut, int.Parse(coins),out radarToken,out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {
@@ -606,8 +605,7 @@ namespace XCCloudService.Api.XCGame
                     string radarToken = string.Empty;
                     if (DataFactory.SendDataMemberQuery(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, icCardId, out radarToken, out errMsg))
                     {
-                        answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                        UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                     }
                     else
                     {
@@ -718,8 +716,7 @@ namespace XCCloudService.Api.XCGame
                 string radarToken = string.Empty;
                 if (DataFactory.SendDataCattleMemberCardQuery(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, "0", out radarToken, out errMsg))
                 {
-                    answerModel = new UDPSocketCommonQueryAnswerModel(sn, storeModel.StoreID.ToString(), storeModel.StorePassword, 0, null, radarToken);
-                    UDPSocketCommonQueryAnswerBusiness.AddAnswer(sn, answerModel);
+
                 }
                 else
                 {
